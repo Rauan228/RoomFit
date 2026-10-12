@@ -1,0 +1,338 @@
+[
+  {
+    "id": "bed-double",
+    "name": "Кровать двуспальная",
+    "category": "Кровати",
+    "width": 1600,
+    "depth": 2000,
+    "height": 600,
+    "type": "bed",
+    "color": "#e9e0d1",
+    "clearance": 0,
+    "tags": [
+      "Кровати"
+    ]
+  },
+  {
+    "id": "bed-single",
+    "name": "Кровать односпальная",
+    "category": "Кровати",
+    "width": 900,
+    "depth": 2000,
+    "height": 600,
+    "type": "bed",
+    "color": "#e9e0d1",
+    "clearance": 0,
+    "tags": [
+      "Кровати"
+    ]
+  },
+  {
+    "id": "bed-kids",
+    "name": "Детская кровать",
+    "category": "Кровати",
+    "width": 800,
+    "depth": 1600,
+    "height": 550,
+    "type": "bed",
+    "color": "#e9e0d1",
+    "clearance": 0,
+    "tags": [
+      "Кровати"
+    ]
+  },
+  {
+    "id": "sofa",
+    "name": "Диван",
+    "category": "Диваны",
+    "width": 2200,
+    "depth": 950,
+    "height": 850,
+    "type": "sofa",
+    "color": "#819986",
+    "clearance": 0,
+    "tags": [
+      "Диваны"
+    ]
+  },
+  {
+    "id": "sofa-small",
+    "name": "Компактный диван",
+    "category": "Диваны",
+    "width": 1600,
+    "depth": 900,
+    "height": 800,
+    "type": "sofa",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Диваны"
+    ]
+  },
+  {
+    "id": "armchair",
+    "name": "Кресло",
+    "category": "Кресла",
+    "width": 800,
+    "depth": 800,
+    "height": 900,
+    "type": "armchair",
+    "color": "#819986",
+    "clearance": 0,
+    "tags": [
+      "Кресла"
+    ]
+  },
+  {
+    "id": "desk",
+    "name": "Рабочий стол",
+    "category": "Столы",
+    "width": 1200,
+    "depth": 600,
+    "height": 750,
+    "type": "desk",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Столы"
+    ]
+  },
+  {
+    "id": "table",
+    "name": "Обеденный стол",
+    "category": "Столы",
+    "width": 1400,
+    "depth": 800,
+    "height": 750,
+    "type": "table",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Столы"
+    ]
+  },
+  {
+    "id": "coffee",
+    "name": "Журнальный стол",
+    "category": "Столы",
+    "width": 800,
+    "depth": 550,
+    "height": 450,
+    "type": "coffee",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Столы"
+    ]
+  },
+  {
+    "id": "chair",
+    "name": "Стул",
+    "category": "Стулья",
+    "width": 450,
+    "depth": 500,
+    "height": 850,
+    "type": "chair",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Стулья"
+    ]
+  },
+  {
+    "id": "wardrobe",
+    "name": "Шкаф",
+    "category": "Шкафы",
+    "width": 1800,
+    "depth": 600,
+    "height": 2200,
+    "type": "wardrobe",
+    "color": "#cbb99e",
+    "clearance": 600,
+    "tags": [
+      "Шкафы"
+    ]
+  },
+  {
+    "id": "dresser",
+    "name": "Комод",
+    "category": "Комоды",
+    "width": 1000,
+    "depth": 450,
+    "height": 900,
+    "type": "dresser",
+    "color": "#cbb99e",
+    "clearance": 600,
+    "tags": [
+      "Комоды"
+    ]
+  },
+  {
+    "id": "nightstand",
+    "name": "Тумба",
+    "category": "Тумбы",
+    "width": 500,
+    "depth": 400,
+    "height": 500,
+    "type": "nightstand",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Тумбы"
+    ]
+  },
+  {
+    "id": "shelf",
+    "name": "Стеллаж",
+    "category": "Стеллажи",
+    "width": 800,
+    "depth": 350,
+    "height": 1800,
+    "type": "shelf",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Стеллажи"
+    ]
+  },
+  {
+    "id": "kitchen",
+    "name": "Кухонный гарнитур",
+    "category": "Кухня",
+    "width": 2400,
+    "depth": 600,
+    "height": 900,
+    "type": "kitchen",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Кухня"
+    ]
+  },
+  {
+    "id": "sink",
+    "name": "Раковина",
+    "category": "Сантехника",
+    "width": 600,
+    "depth": 500,
+    "height": 850,
+    "type": "sink",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Сантехника"
+    ]
+  },
+  {
+    "id": "bath",
+    "name": "Ванна",
+    "category": "Сантехника",
+    "width": 1700,
+    "depth": 750,
+    "height": 600,
+    "type": "bath",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Сантехника"
+    ]
+  },
+  {
+    "id": "toilet",
+    "name": "Унитаз",
+    "category": "Сантехника",
+    "width": 400,
+    "depth": 650,
+    "height": 750,
+    "type": "toilet",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Сантехника"
+    ]
+  },
+  {
+    "id": "fridge",
+    "name": "Холодильник",
+    "category": "Техника",
+    "width": 600,
+    "depth": 650,
+    "height": 1900,
+    "type": "fridge",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Техника"
+    ]
+  },
+  {
+    "id": "washer",
+    "name": "Стиральная машина",
+    "category": "Техника",
+    "width": 600,
+    "depth": 600,
+    "height": 850,
+    "type": "washer",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Техника"
+    ]
+  },
+  {
+    "id": "stove",
+    "name": "Плита",
+    "category": "Техника",
+    "width": 600,
+    "depth": 600,
+    "height": 850,
+    "type": "stove",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Техника"
+    ]
+  },
+  {
+    "id": "lamp",
+    "name": "Торшер",
+    "category": "Освещение",
+    "width": 400,
+    "depth": 400,
+    "height": 1700,
+    "type": "lamp",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Освещение"
+    ]
+  },
+  {
+    "id": "plant",
+    "name": "Растение",
+    "category": "Декор",
+    "width": 450,
+    "depth": 450,
+    "height": 1000,
+    "type": "plant",
+    "color": "#639568",
+    "clearance": 0,
+    "tags": [
+      "Декор"
+    ]
+  },
+  {
+    "id": "rug",
+    "name": "Ковёр",
+    "category": "Декор",
+    "width": 2000,
+    "depth": 1400,
+    "height": 10,
+    "type": "rug",
+    "color": "#cbb99e",
+    "clearance": 0,
+    "tags": [
+      "Декор"
+    ]
+  }
+]

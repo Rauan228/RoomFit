@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&display=block" rel="stylesheet">
+<script src="./roomfit-kit.js"></script>
+<style>
+html,body{margin:0;background:#0B0D0D;font-family:Manrope,system-ui,sans-serif;color:#F8F7F4;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#D4AF7C;text-decoration:none}a:hover{color:#E4C595}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="max-width:1320px;margin:0 auto;padding:56px 40px 100px;display:flex;flex-direction:column;gap:72px">
+
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+  <div><div style="font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#D4AF7C">RoomFit · Дизайн-система</div><h1 style="margin:12px 0 0;font-size:56px;line-height:1.02;font-weight:800;letter-spacing:-.035em">Premium Dark /<br>Modern Interior Tech</h1></div>
+  <div style="font-size:15px;line-height:1.6;color:rgba(248,247,244,.6);max-width:420px">Тёмный атмосферный бренд, светлый рабочий холст. Золото — для бренда и главных акцентов, зелёный — для действий, сохранения и успешных проверок.</div>
+</div>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="font-size:22px;font-weight:700">Логотип</div>
+  <div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px">
+    <div style="grid-column:span 5;border-radius:24px;background:radial-gradient(circle at 40% 30%,#232320,#0B0D0D 70%);min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:24px;position:relative">
+      <img src="assets/logo-hero.png" style="width:300px;mix-blend-mode:lighten">
+      <div style="position:absolute;left:18px;bottom:14px;font-size:11px;color:rgba(248,247,244,.45);font-family:ui-monospace,Menlo,monospace">Основной · объёмный · для лендинга и сплэша</div>
+    </div>
+    <div style="grid-column:span 7;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="border-radius:24px;background:#141517;display:flex;align-items:center;justify-content:center;padding:28px;position:relative;min-height:172px"><div style="display:flex;align-items:center;gap:14px"><img src="assets/logo-mark-dark.png" style="height:64px;mix-blend-mode:lighten"><span style="font-weight:800;font-size:40px;letter-spacing:-.03em;color:#F8F7F4">Room<span style="color:#D4AF7C">Fit</span></span></div><div style="position:absolute;left:18px;bottom:12px;font-size:11px;color:rgba(248,247,244,.45);font-family:ui-monospace,Menlo,monospace">Горизонтальный · тёмный</div></div>
+      <div style="border-radius:24px;background:#F8F7F4;display:flex;align-items:center;justify-content:center;padding:28px;position:relative;min-height:172px"><img src="assets/logo-horizontal-light.png" style="width:280px;mix-blend-mode:multiply"><div style="position:absolute;left:18px;bottom:12px;font-size:11px;color:#8A8984;font-family:ui-monospace,Menlo,monospace">Горизонтальный · светлый</div></div>
+      <div style="border-radius:24px;background:#141517;display:flex;align-items:center;justify-content:center;gap:22px;padding:28px;position:relative;min-height:172px">
+        <img src="assets/app-icon.png" style="width:96px;border-radius:22px">
+        <img src="assets/icon-dark.png" style="width:64px;border-radius:15px">
+        <img src="assets/icon-light.png" style="width:64px;border-radius:15px">
+        <div style="position:absolute;left:18px;bottom:12px;font-size:11px;color:rgba(248,247,244,.45);font-family:ui-monospace,Menlo,monospace">App Icon · тёмный и светлый знак</div>
+      </div>
+      <div style="border-radius:24px;background:#141517;display:flex;align-items:center;justify-content:center;gap:26px;padding:28px;position:relative;min-height:172px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><img src="assets/icon-dark.png" style="width:32px;border-radius:7px"><span style="font-size:10px;color:rgba(248,247,244,.45)">32</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><img src="assets/icon-dark.png" style="width:16px;border-radius:4px"><span style="font-size:10px;color:rgba(248,247,244,.45)">16</span></div>
+        <div style="height:36px;padding:0 12px 0 8px;border-radius:10px 10px 0 0;background:#2A2B2F;display:flex;align-items:center;gap:8px;font-size:12px"><img src="assets/icon-dark.png" style="width:16px;border-radius:4px">RoomFit — Мои проекты</div>
+        <div style="position:absolute;left:18px;bottom:12px;font-size:11px;color:rgba(248,247,244,.45);font-family:ui-monospace,Menlo,monospace">Favicon</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+    <div style="border-radius:18px;background:#0B0D0D;border:1px solid rgba(248,247,244,.08);height:64px;display:flex;align-items:center;padding:0 18px;gap:10px"><img src="assets/logo-mark-dark.png" style="height:34px;mix-blend-mode:lighten"><span style="font-weight:800;font-size:20px;letter-spacing:-.02em">Room<span style="color:#D4AF7C">Fit</span></span><span style="flex:1"></span><span style="font-size:11px;color:rgba(248,247,244,.45)">в интерфейсе · 34 px</span></div>
+    <div style="border-radius:18px;background:#F7F7F5;height:64px;display:flex;align-items:center;padding:0 18px;gap:10px;color:#1E1E22"><img src="assets/icon-light.png" style="height:34px;border-radius:8px"><span style="font-weight:800;font-size:20px;letter-spacing:-.02em">Room<span style="color:#B8925A">Fit</span></span><span style="flex:1"></span><span style="font-size:11px;color:#8A8984">на светлом</span></div>
+    <div style="border-radius:18px;border:1px dashed rgba(248,247,244,.2);height:64px;display:flex;align-items:center;padding:0 18px;font-size:13px;color:rgba(248,247,244,.6);line-height:1.4">Охранное поле — высота буквы «R». Не перекрашивать знак и не добавлять эффекты в интерфейсе.</div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="font-size:22px;font-weight:700">Цвет</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px">
+    <sc-for list="{{ colors }}" as="c" hint-placeholder-count="7">
+      <div style="border-radius:20px;background:#141517;border:1px solid rgba(248,247,244,.07);overflow:hidden"><div style="{{ c.sw }}"></div><div style="padding:12px 14px"><div style="font-size:14px;font-weight:700">{{ c.name }}</div><div style="font-size:12px;color:rgba(248,247,244,.5);font-family:ui-monospace,Menlo,monospace;margin-top:3px">{{ c.hex }}</div><div style="font-size:12px;color:rgba(248,247,244,.6);margin-top:6px;line-height:1.4">{{ c.use }}</div></div></div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px">
+  <div style="border-radius:24px;background:#141517;padding:28px;display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:22px;font-weight:700">Типографика</div><div style="font-size:13px;color:rgba(248,247,244,.5)">Manrope · кириллица</div></div>
+    <div style="font-size:64px;font-weight:800;letter-spacing:-.035em;line-height:1">Аа Бб 160 × 200</div>
+    <sc-for list="{{ type }}" as="t" hint-placeholder-count="6"><div style="display:flex;align-items:baseline;gap:16px;border-top:1px solid rgba(248,247,244,.07);padding-top:12px"><span style="width:110px;flex:none;font-size:11px;color:rgba(248,247,244,.45);font-family:ui-monospace,Menlo,monospace">{{ t.spec }}</span><span style="{{ t.style }}">{{ t.text }}</span></div></sc-for>
+  </div>
+  <div style="border-radius:24px;background:#141517;padding:28px;display:flex;flex-direction:column;gap:18px">
+    <div style="font-size:22px;font-weight:700">Форма и глубина</div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <div style="width:90px;height:90px;border-radius:12px;background:#1E1E22;border:1px solid rgba(248,247,244,.12);display:flex;align-items:flex-end;padding:8px;font-size:11px;color:rgba(248,247,244,.6)">12 · поля</div>
+      <div style="width:90px;height:90px;border-radius:14px;background:#1E1E22;border:1px solid rgba(248,247,244,.12);display:flex;align-items:flex-end;padding:8px;font-size:11px;color:rgba(248,247,244,.6)">14 · кнопки</div>
+      <div style="width:90px;height:90px;border-radius:20px;background:#1E1E22;border:1px solid rgba(248,247,244,.12);display:flex;align-items:flex-end;padding:8px;font-size:11px;color:rgba(248,247,244,.6)">20 · карточки</div>
+      <div style="width:90px;height:90px;border-radius:999px;background:#1E1E22;border:1px solid rgba(248,247,244,.12);display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(248,247,244,.6)">pill · CTA</div>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;background:#F7F7F5;border-radius:18px;padding:22px">
+      <div style="width:110px;height:70px;border-radius:14px;background:#fff;border:1px solid #ECEAE5;font-size:11px;color:#6B6A66;display:flex;align-items:flex-end;padding:8px">Линия 1 px</div>
+      <div style="width:110px;height:70px;border-radius:14px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.06);font-size:11px;color:#6B6A66;display:flex;align-items:flex-end;padding:8px">Панель</div>
+      <div style="width:110px;height:70px;border-radius:14px;background:#fff;box-shadow:0 16px 40px rgba(0,0,0,.16);font-size:11px;color:#6B6A66;display:flex;align-items:flex-end;padding:8px">Поповер</div>
+      <div style="width:110px;height:70px;border-radius:14px;background:rgba(30,30,34,.7);backdrop-filter:blur(8px);font-size:11px;color:#F8F7F4;display:flex;align-items:flex-end;padding:8px">Стекло</div>
+    </div>
+    <div style="font-size:13px;line-height:1.55;color:rgba(248,247,244,.6)">Сетка отступов 4 px: 4 · 8 · 12 · 16 · 24 · 32 · 48 · 80. Минимальная зона касания на мобильных — 44 px.</div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="font-size:22px;font-weight:700">Компоненты</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px">
+    <div style="border-radius:24px;background:#141517;padding:26px;display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:13px;color:rgba(248,247,244,.5);font-weight:600">Кнопки · тёмный фон</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <button style="height:52px;padding:0 24px;border-radius:999px;border:none;background:#D4AF7C;color:#0B0D0D;font-size:15px;font-weight:800;cursor:pointer" style-hover="background:#E0BE8E">Начать бесплатно</button>
+        <button style="height:52px;padding:0 22px;border-radius:999px;border:1px solid rgba(248,247,244,.22);background:transparent;color:#F8F7F4;font-size:15px;font-weight:600;cursor:pointer" style-hover="background:rgba(248,247,244,.06)">Как это работает</button>
+        <button style="height:44px;padding:0 18px;border-radius:12px;border:none;background:#5FA768;color:#fff;font-size:14px;font-weight:700;cursor:pointer" style-hover="background:#56985e">Сохранить</button>
+      </div>
+      <div style="font-size:13px;color:rgba(248,247,244,.5);font-weight:600;margin-top:6px">Переключатели и состояния</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;background:#1E1E22;border-radius:12px;padding:3px"><span style="height:32px;padding:0 14px;border-radius:9px;background:#F8F7F4;color:#0B0D0D;font-weight:700;font-size:13px;display:flex;align-items:center">2D план</span><span style="height:32px;padding:0 12px;color:rgba(248,247,244,.5);font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:16px">lock</span>3D <span style="font-size:10px;color:#D4AF7C;font-weight:700">Скоро</span></span></div>
+        <span style="width:58px;height:58px;border-radius:14px;background:rgba(212,175,124,.16);color:#D4AF7C;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:22px">arrow_selector_tool</span>Выбор</span>
+        <span style="width:58px;height:58px;border-radius:14px;color:rgba(248,247,244,.62);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:22px">door_front</span>Двери</span>
+      </div>
+    </div>
+    <div style="border-radius:24px;background:#F7F7F5;color:#1E1E22;padding:26px;display:flex;flex-direction:column;gap:16px">
+      <div style="font-size:13px;color:#8A8984;font-weight:600">Рабочая область · светлый фон</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button style="height:42px;padding:0 16px;border-radius:12px;border:none;background:#5FA768;color:#fff;font-weight:700;font-size:14px;cursor:pointer">Создать проект</button>
+        <button style="height:42px;padding:0 16px;border-radius:12px;border:1px solid #E5E3DE;background:#fff;color:#1E1E22;font-weight:600;font-size:14px;cursor:pointer">Дублировать</button>
+        <button style="height:42px;padding:0 16px;border-radius:12px;border:1px solid #F1D3D3;background:#FDF6F6;color:#C94848;font-weight:600;font-size:14px;cursor:pointer">Удалить</button>
+        <button disabled style="height:42px;padding:0 16px;border-radius:12px;border:none;background:#ECEAE5;color:#A9A7A1;font-weight:600;font-size:14px">Недоступно</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <label style="min-width:0;display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#8A8984">Ширина<div style="height:42px;border-radius:12px;border:1.5px solid #5FA768;background:#fff;display:flex;align-items:center;padding:0 12px;font-size:15px;font-weight:700;color:#1E1E22;justify-content:space-between">160<span style="font-size:12px;color:#9A9993;font-weight:600">см</span></div></label>
+        <label style="min-width:0;display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#8A8984">Глубина<div style="height:42px;border-radius:12px;border:1px solid #E5E3DE;background:#fff;display:flex;align-items:center;padding:0 12px;font-size:15px;font-weight:700;color:#1E1E22;justify-content:space-between">200<span style="font-size:12px;color:#9A9993;font-weight:600">см</span></div></label>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="height:30px;padding:0 12px;border-radius:999px;background:#1E1E22;color:#F8F7F4;font-size:12px;font-weight:600;display:flex;align-items:center">Все</span><span style="height:30px;padding:0 12px;border-radius:999px;border:1px solid #E5E3DE;background:#fff;font-size:12px;font-weight:600;display:flex;align-items:center">Кровати</span><span style="height:30px;padding:0 12px;border-radius:999px;border:1px solid #E5E3DE;background:#fff;font-size:12px;font-weight:600;display:flex;align-items:center">Диваны</span><span style="height:30px;padding:0 12px;border-radius:999px;border:1px solid #E5E3DE;background:#fff;font-size:12px;font-weight:600;display:flex;align-items:center">Столы</span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span style="height:34px;padding:0 12px;border-radius:999px;background:#5FA768;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:17px">check_circle</span>Столкновений нет</span>
+        <span style="height:34px;padding:0 12px;border-radius:999px;background:#E3A43B;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:17px">warning</span>Проход 45 см</span>
+        <span style="height:34px;padding:0 12px;border-radius:999px;background:#E65A5A;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:17px">error</span>Пересечение</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px"><div style="font-size:22px;font-weight:700">Мебель вида сверху</div><div style="font-size:13px;color:rgba(248,247,244,.5)">Узнаваемо, спокойно, без лишних деталей. Тень 2 px, радиус 4 px.</div></div>
+  <div style="border-radius:24px;background:#F7F7F5;padding:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;color:#1E1E22">
+    <sc-for list="{{ furn }}" as="c" hint-placeholder-count="14"><div style="border-radius:16px;background:#fff;border:1px solid #ECEAE5;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ c.type }}" w="{{ c.w }}" h="{{ c.h }}" size="{{ 76 }}" hint-size="76px,76px"></x-import><div style="font-size:12px;font-weight:700;text-align:center">{{ c.name }}</div><div style="font-size:11px;color:#8A8984">{{ c.dims }}</div></div></sc-for>
+  </div>
+</section>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px">
+  <div style="border-radius:24px;background:#F7F7F5;padding:24px;display:flex;flex-direction:column;gap:14px;color:#1E1E22">
+    <div style="font-size:13px;color:#8A8984;font-weight:600">Элементы плана: стены 10 см, дверь с дугой, окно, размерные линии</div>
+    <div style="display:flex;justify-content:center"><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ items }}" doors="{{ doors }}" windows="{{ windows }}" floor="oak" selected-id="b1" fit-w="{{ 520 }}" fit-h="{{ 420 }}" zones="{{ true }}" hint-size="520px,420px"></x-import></div>
+  </div>
+  <div style="border-radius:24px;background:#141517;padding:24px;display:flex;flex-direction:column;gap:14px">
+    <div style="font-size:13px;color:rgba(248,247,244,.5);font-weight:600">Покрытия пола</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <sc-for list="{{ floors }}" as="f" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:8px"><div style="{{ f.sw }}"></div><span style="font-size:13px;font-weight:600">{{ f.name }}</span></div></sc-for>
+    </div>
+    <div style="font-size:13px;line-height:1.55;color:rgba(248,247,244,.6);margin-top:auto">Принцип: 2D-план — главный объект интерфейса. Панели вокруг него компактные и нейтральные, чтобы цвет оставался за мебелью и статусами проверки.</div>
+  </div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { ready: false };
+  componentDidMount() { const t = () => window.RoomFit ? this.setState({ ready: true }) : setTimeout(t, 40); t(); }
+  renderVals() {
+    const K = window.RoomFit;
+    const colors = [['Фон', '#0B0D0D', 'Лендинг, навигация, сплэш'], ['Поверхности', '#1E1E22', 'Карточки и панели на тёмном'], ['Золото', '#D4AF7C', 'Бренд, главные CTA, активные инструменты'], ['Светлый текст', '#F8F7F4', 'Текст на тёмном, светлые поля'], ['Функциональный зелёный', '#5FA768', 'Сохранить, создать, «столкновений нет»'], ['Холст редактора', '#F7F7F5', 'Рабочая область 2D-плана'], ['Ошибка / столкновение', '#E65A5A', 'Пересечения, опасные действия'], ['Предупреждение', '#E3A43B', 'Узкий проход — не ошибка']];
+    return {
+      colors: colors.map(([name, hex, use]) => ({ name, hex, use, sw: { height: 96, background: hex, borderBottom: '1px solid rgba(248,247,244,.07)' } })),
+      type: [['48 / 800 / −3.5%', 'Заголовок экрана', { fontSize: 40, fontWeight: 800, letterSpacing: '-.03em' }], ['30 / 700', 'Мои проекты', { fontSize: 30, fontWeight: 700, letterSpacing: '-.02em' }], ['20 / 700', 'Карточка, панель', { fontSize: 20, fontWeight: 700 }], ['15 / 500', 'Основной текст интерфейса и описания', { fontSize: 15, color: 'rgba(248,247,244,.75)' }], ['13 / 600', 'Подписи, поля, чипы', { fontSize: 13, fontWeight: 600 }], ['11 / 700', '160 × 200 см', { fontSize: 11, fontWeight: 700, background: '#F8F7F4', color: '#1E1E22', padding: '2px 6px', borderRadius: 6 }]].map(([spec, text, style]) => ({ spec, text, style })),
+      furn: K ? K.CATALOG.filter((c, i, a) => a.findIndex(x => x.type === c.type) === i || c.key === 'bed1').map(c => ({ ...c, dims: `${c.w} × ${c.h} см` })) : [],
+      room: { w: 400, h: 320 }, items: K ? K.ROOMS.bedroom.items : [], doors: [{ wall: 'bottom', at: 300, w: 80 }], windows: [{ wall: 'top', at: 130, w: 140 }],
+      floors: K ? [['oak', 'Дуб'], ['light', 'Светлое дерево'], ['walnut', 'Орех'], ['tile', 'Плитка']].map(([k, name]) => ({ name, sw: { height: 90, borderRadius: 14, ...K.FLOORS[k](1) } })) : [],
+    };
+  }
+}
+</script>
+</body>
+</html>

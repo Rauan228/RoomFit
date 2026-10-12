@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&display=block" rel="stylesheet">
+<script src="./roomfit-kit.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;background:#0B0D0D;font-family:Manrope,system-ui,sans-serif;color:#F8F7F4;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+*{box-sizing:border-box}
+a{color:#D4AF7C;text-decoration:none}a:hover{color:#E4C595}
+button{font-family:inherit;color:inherit}
+</style>
+</helmet>
+
+<div style="background:#0B0D0D;min-height:100vh;overflow-x:hidden">
+
+<header style="{{ headerStyle }}">
+  <div style="max-width:1320px;margin:0 auto;height:72px;display:flex;align-items:center;gap:24px;padding:0 40px">
+    <a href="#top" style="display:flex;align-items:center;gap:10px;flex:none"><img src="assets/logo-mark-dark.png" style="height:38px;mix-blend-mode:lighten"><span style="font-weight:800;font-size:21px;letter-spacing:-.02em;color:#F8F7F4">Room<span style="color:#D4AF7C">Fit</span></span></a>
+    <nav style="flex:1;display:flex;justify-content:center;gap:34px;font-size:14px;font-weight:500">
+      <a href="#features" style="color:rgba(248,247,244,.78)" style-hover="color:#F8F7F4">Возможности</a>
+      <a href="#how" style="color:rgba(248,247,244,.78)" style-hover="color:#F8F7F4">Как это работает</a>
+      <a href="#examples" style="color:rgba(248,247,244,.78)" style-hover="color:#F8F7F4">Примеры</a>
+      <a href="#faq" style="color:rgba(248,247,244,.78)" style-hover="color:#F8F7F4">FAQ</a>
+    </nav>
+    <a href="RoomFit Platform.dc.html" style="height:40px;padding:0 20px;border-radius:999px;border:1px solid rgba(248,247,244,.25);color:#F8F7F4;font-size:14px;font-weight:600;display:flex;align-items:center;flex:none" style-hover="background:rgba(248,247,244,.06);color:#F8F7F4">Войти</a>
+    <a href="RoomFit Platform.dc.html" style="height:40px;padding:0 20px;border-radius:999px;background:#D4AF7C;color:#0B0D0D;font-size:14px;font-weight:800;display:flex;align-items:center;gap:6px;flex:none" style-hover="background:#E0BE8E;color:#0B0D0D">Начать бесплатно<span style="font-family:'Material Symbols Rounded';font-size:18px">arrow_forward</span></a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" style="position:relative;margin-top:-72px;overflow:hidden">
+  <div style="position:absolute;inset:0"><image-slot id="v2-hero-bg" shape="rect" placeholder="Фон: тёмная гостиная вечером, торшер, тёплый свет" style="width:100%;height:100%"></image-slot></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,13,.96) 0%,rgba(11,13,13,.85) 38%,rgba(11,13,13,.45) 70%,rgba(11,13,13,.35) 100%);pointer-events:none"></div>
+  <div style="position:relative;max-width:1320px;margin:0 auto;padding:130px 40px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:48px;align-items:center;pointer-events:none">
+    <div style="pointer-events:auto">
+      <div style="display:inline-flex;align-items:center;gap:10px;height:32px;padding:0 16px;border-radius:999px;background:rgba(248,247,244,.06);border:1px solid rgba(248,247,244,.12);color:rgba(248,247,244,.75);font-size:13px;font-weight:600;white-space:nowrap">Планируй<span style="color:#D4AF7C">•</span>Проверяй<span style="color:#D4AF7C">•</span>Создавай уют</div>
+      <h1 style="margin:22px 0 0;font-size:clamp(42px,4.6vw,64px);line-height:1.05;font-weight:800;letter-spacing:-.035em;text-wrap:balance">Проверь, поместится ли мебель в <span style="color:#D4AF7C">твою комнату</span></h1>
+      <p style="margin:22px 0 0;font-size:18px;line-height:1.55;color:rgba(248,247,244,.75);max-width:520px;text-wrap:pretty">Создавай план комнаты, расставляй мебель в реальных размерах и убедись, что всё влезет ещё до покупки. Просто. Точно. Удобно.</p>
+      <div style="display:flex;gap:22px;margin-top:32px;flex-wrap:wrap;align-items:center">
+        <a href="RoomFit Platform.dc.html" style="height:54px;padding:0 28px;border-radius:999px;background:#D4AF7C;color:#0B0D0D;font-size:16px;font-weight:800;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(212,175,124,.25)" style-hover="background:#E0BE8E;color:#0B0D0D">Начать бесплатно<span style="font-family:'Material Symbols Rounded';font-size:20px">arrow_forward</span></a>
+        <a href="#demo" style="display:flex;align-items:center;gap:10px;color:#F8F7F4;font-size:15px;font-weight:600" style-hover="color:#D4AF7C"><span style="width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(248,247,244,.6);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:22px">play_arrow</span>Смотреть, как работает</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:48px;max-width:560px">
+        <sc-for list="{{ heroFeats }}" as="f" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.3;color:rgba(248,247,244,.72)"><span style="font-family:'Material Symbols Rounded';font-size:28px;color:#D4AF7C">{{ f.icon }}</span>{{ f.text }}</div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="pointer-events:auto;perspective:1600px;display:flex;justify-content:center">
+      <div style="width:100%;max-width:680px;border-radius:22px;background:#151618;padding:9px;box-shadow:0 50px 120px rgba(0,0,0,.6),0 0 0 1px rgba(248,247,244,.08);transform:rotateY(-9deg) rotateX(3deg)">
+        <div style="border-radius:15px;overflow:hidden;background:#F7F7F5;color:#1E1E22;display:flex;flex-direction:column">
+          <div style="height:40px;background:#0B0D0D;display:flex;align-items:center;gap:10px;padding:0 12px"><img src="assets/logo-mark-dark.png" style="height:22px;mix-blend-mode:lighten"><span style="font-size:12px;font-weight:800;color:#F8F7F4">Room<span style="color:#D4AF7C">Fit</span></span><span style="flex:1"></span><span style="height:24px;padding:0 10px;border-radius:7px;background:#5FA768;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;gap:4px"><span style="font-family:'Material Symbols Rounded';font-size:13px">save</span>Сохранить</span></div>
+          <div style="display:flex;min-height:0">
+            <div style="width:44px;flex:none;background:#fff;border-right:1px solid #ECEAE5;display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0">
+              <sc-for list="{{ miniTools }}" as="t" hint-placeholder-count="5"><span style="{{ t.st }}">{{ t.i }}</span></sc-for>
+            </div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+              <div style="height:32px;display:flex;align-items:center;gap:10px;padding:0 10px;border-bottom:1px solid #ECEAE5;background:#fff;font-size:10px;font-weight:700"><span style="padding:4px 8px;border-radius:6px;background:#F1EFEA">2D план</span><span style="color:#A9A7A1">3D (скоро)</span><span style="flex:1"></span><span style="font-family:'Material Symbols Rounded';font-size:15px;color:#8A8984">undo</span><span style="font-family:'Material Symbols Rounded';font-size:15px;color:#8A8984">redo</span><span style="color:#8A8984">100%</span></div>
+              <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:10px;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:12px 12px">
+                <x-import component-from-global-scope="RoomFit.Plan" room="{{ heroRoom }}" items="{{ heroItems }}" doors="{{ heroDoors }}" windows="{{ heroWindows }}" floor="oak" fit-w="{{ 380 }}" fit-h="{{ 310 }}" margin="{{ 26 }}" selected-id="c" hint-size="380px,310px"></x-import>
+              </div>
+            </div>
+            <div style="width:178px;flex:none;background:#fff;border-left:1px solid #ECEAE5;padding:10px;display:flex;flex-direction:column;gap:8px">
+              <div style="font-size:11px;font-weight:800">Каталог мебели</div>
+              <div style="height:24px;border-radius:7px;background:#F4F2EE;font-size:9px;color:#A9A7A1;display:flex;align-items:center;padding:0 8px">Поиск мебели…</div>
+              <div style="display:flex;gap:4px"><span style="font-size:8px;font-weight:700;padding:3px 7px;border-radius:999px;background:#1E1E22;color:#F8F7F4">Все</span><span style="font-size:8px;font-weight:600;padding:3px 7px;border-radius:999px;border:1px solid #E5E3DE">Диваны</span><span style="font-size:8px;font-weight:600;padding:3px 7px;border-radius:999px;border:1px solid #E5E3DE">Кровати</span></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px">
+                <sc-for list="{{ miniCat }}" as="c" hint-placeholder-count="6"><div style="border-radius:7px;border:1px solid #ECEAE5;padding:4px;display:flex;flex-direction:column;align-items:center;gap:2px"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ c.type }}" w="{{ c.w }}" h="{{ c.h }}" size="{{ 30 }}" hint-size="30px,30px"></x-import><span style="font-size:7px;font-weight:700">{{ c.short }}</span><span style="font-size:6px;color:#9A9993">{{ c.dims }}</span></div></sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="features" style="background:#F3F1EC;color:#1E1E22">
+  <div style="max-width:1320px;margin:0 auto;padding:80px 40px">
+    <h2 style="margin:0;text-align:center;font-size:clamp(32px,3.2vw,44px);font-weight:800;letter-spacing:-.03em">Почему RoomFit?</h2>
+    <div style="text-align:center;font-size:16px;color:#6B6A66;margin:10px 0 44px">Простой инструмент для реальных задач. Экономь время, деньги и нервы.</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px">
+      <div style="border-radius:20px;background:#FBFAF7;border:1px solid #E6E2DA;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 24px rgba(60,45,25,.05)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;height:110px">
+          <span style="width:44px;height:44px;border-radius:12px;background:rgba(212,175,124,.2);color:#9C7A45;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">home</span>
+          <div style="position:relative;width:130px;height:62px;margin-top:20px"><x-import component-from-global-scope="RoomFit.Furn" type="sofa" w="{{ 130 }}" h="{{ 62 }}" tone="#c9c4ba" hint-size="130px,62px"></x-import></div>
+        </div>
+        <div style="font-size:18px;font-weight:800">Реальные размеры</div>
+        <div style="font-size:14px;line-height:1.5;color:#6B6A66">Вся мебель и комнаты отображаются в точном масштабе.</div>
+      </div>
+      <div style="border-radius:20px;background:#FBFAF7;border:1px solid #E6E2DA;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 24px rgba(60,45,25,.05)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;height:110px">
+          <span style="width:44px;height:44px;border-radius:12px;background:rgba(212,175,124,.2);color:#9C7A45;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">open_with</span>
+          <div style="position:relative;width:110px;height:56px;margin-top:22px;margin-right:22px">
+            <x-import component-from-global-scope="RoomFit.Furn" type="sofa" w="{{ 110 }}" h="{{ 56 }}" tone="#c9c4ba" hint-size="110px,56px"></x-import>
+            <div style="position:absolute;inset:-4px;border:1.5px solid #5FA768;border-radius:5px"></div>
+            <div style="position:absolute;right:-20px;top:0;bottom:0;border-left:1px solid #1E1E22"></div><div style="position:absolute;right:-44px;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:10px;font-weight:700">95 см</div>
+          </div>
+        </div>
+        <div style="font-size:18px;font-weight:800">Удобный 2D-редактор</div>
+        <div style="font-size:14px;line-height:1.5;color:#6B6A66">Перемещай, поворачивай и изменяй размеры предметов.</div>
+      </div>
+      <div style="border-radius:20px;background:#FBFAF7;border:1px solid #E6E2DA;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 24px rgba(60,45,25,.05)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;height:110px">
+          <span style="width:44px;height:44px;border-radius:12px;background:rgba(212,175,124,.2);color:#9C7A45;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">error</span>
+          <div style="position:relative;width:140px;height:72px;margin-top:16px">
+            <div style="position:absolute;left:0;top:8px;width:100px;height:56px"><x-import component-from-global-scope="RoomFit.Furn" type="sofa" w="{{ 100 }}" h="{{ 56 }}" tone="#c9c4ba" hint-size="100px,56px"></x-import></div>
+            <div style="position:absolute;left:78px;top:0;width:52px;height:72px"><x-import component-from-global-scope="RoomFit.Furn" type="dresser" w="{{ 52 }}" h="{{ 72 }}" hint-size="52px,72px"></x-import></div>
+            <div style="position:absolute;left:74px;top:4px;width:30px;height:64px;background:rgba(230,90,90,.35);border:2px solid #E65A5A;border-radius:4px"></div>
+          </div>
+        </div>
+        <div style="font-size:18px;font-weight:800">Проверка пространства</div>
+        <div style="font-size:14px;line-height:1.5;color:#6B6A66">Узнавай, где мебель пересекается и сколько места остаётся.</div>
+      </div>
+      <div style="border-radius:20px;background:#FBFAF7;border:1px solid #E6E2DA;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 24px rgba(60,45,25,.05)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;height:110px">
+          <span style="width:44px;height:44px;border-radius:12px;background:rgba(212,175,124,.2);color:#9C7A45;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">bookmarks</span>
+          <div style="display:flex;gap:6px;margin-top:14px">
+            <div style="border-radius:8px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.08);padding:4px"><x-import component-from-global-scope="RoomFit.Plan" room="{{ bedRoom }}" items="{{ bedB }}" doors="{{ bedDoors }}" fit-w="{{ 76 }}" fit-h="{{ 66 }}" dims="{{ false }}" margin="{{ 0 }}" hint-size="76px,66px"></x-import></div>
+            <div style="border-radius:8px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.08);padding:4px;border:1.5px solid #5FA768"><x-import component-from-global-scope="RoomFit.Plan" room="{{ bedRoom }}" items="{{ bedA }}" doors="{{ bedDoors }}" fit-w="{{ 76 }}" fit-h="{{ 66 }}" dims="{{ false }}" margin="{{ 0 }}" hint-size="76px,66px"></x-import></div>
+          </div>
+        </div>
+        <div style="font-size:18px;font-weight:800">Сохраняй варианты</div>
+        <div style="font-size:14px;line-height:1.5;color:#6B6A66">Создавай несколько расстановок и сравнивай их между собой.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how" style="background:radial-gradient(ellipse at 50% 0%,#1d1c19 0%,#0B0D0D 70%)">
+  <div style="max-width:1320px;margin:0 auto;padding:80px 40px">
+    <h2 style="margin:0;text-align:center;font-size:clamp(32px,3.2vw,44px);font-weight:800;letter-spacing:-.03em">Как это работает?</h2>
+    <div style="text-align:center;font-size:16px;color:rgba(248,247,244,.6);margin:10px 0 48px">Создай свой первый план всего за несколько минут.</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:28px">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;gap:18px;position:relative">
+          <div style="display:flex;gap:14px;min-height:62px"><span style="width:34px;height:34px;flex:none;border-radius:50%;background:#D4AF7C;color:#0B0D0D;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center">{{ s.n }}</span><div><div style="font-size:17px;font-weight:800">{{ s.t }}</div><div style="font-size:13px;line-height:1.45;color:rgba(248,247,244,.6);margin-top:4px">{{ s.d }}</div></div></div>
+          <sc-if value="{{ s.arrow }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;right:-24px;top:150px;font-family:'Material Symbols Rounded';font-size:22px;color:rgba(248,247,244,.5)">arrow_forward</span></sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:28px;margin-top:-4px">
+      <div style="height:200px;border-radius:16px;background:#fff;color:#1E1E22;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 20px 50px rgba(0,0,0,.4)">
+        <div style="font-size:12px;font-weight:800">Размеры комнаты</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div style="font-size:9px;color:#8A8984;font-weight:600;margin-bottom:3px">Ширина</div><div style="height:30px;border-radius:8px;border:1px solid #E5E3DE;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:space-between;padding:0 8px">400<span style="font-size:9px;color:#9A9993">см</span></div></div><div><div style="font-size:9px;color:#8A8984;font-weight:600;margin-bottom:3px">Длина</div><div style="height:30px;border-radius:8px;border:1px solid #E5E3DE;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:space-between;padding:0 8px">320<span style="font-size:9px;color:#9A9993">см</span></div></div></div>
+        <div style="font-size:9px;color:#8A8984;font-weight:600">Единицы измерения</div>
+        <div style="display:flex;gap:6px"><span style="flex:1;height:26px;border-radius:7px;border:1.5px solid #5FA768;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#5FA768"></span>Сантиметры</span><span style="flex:1;height:26px;border-radius:7px;border:1px solid #E5E3DE;font-size:10px;color:#8A8984;display:flex;align-items:center;justify-content:center">Метры</span></div>
+        <div style="margin-top:auto;height:34px;border-radius:9px;background:#D4AF7C;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">Создать комнату</div>
+      </div>
+      <div style="height:200px;border-radius:16px;background:#fff;color:#1E1E22;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 20px 50px rgba(0,0,0,.4)">
+        <div style="font-size:12px;font-weight:800">Кровати</div>
+        <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <sc-for list="{{ howBeds }}" as="b" hint-placeholder-count="4"><div style="{{ b.st }}"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ b.type }}" w="{{ b.w }}" h="{{ b.h }}" size="{{ 46 }}" hint-size="46px,46px"></x-import><sc-if value="{{ b.on }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:-7px;bottom:-7px;width:22px;height:22px;border-radius:50%;background:#D4AF7C;color:#0B0D0D;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:16px">add</span></sc-if></div></sc-for>
+        </div>
+      </div>
+      <div style="height:200px;border-radius:16px;background:#F7F7F5;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 50px rgba(0,0,0,.4)">
+        <x-import component-from-global-scope="RoomFit.Plan" room="{{ bedRoom }}" items="{{ bedA }}" doors="{{ bedDoors }}" windows="{{ bedWindows }}" selected-id="b1" fit-w="{{ 300 }}" fit-h="{{ 240 }}" dims="{{ false }}" margin="{{ 0 }}" hint-size="300px,240px"></x-import>
+        <div style="position:absolute;top:16px;right:14px;border-radius:12px;background:#fff;color:#1E1E22;padding:8px 12px;display:flex;align-items:center;gap:8px;box-shadow:0 10px 24px rgba(0,0,0,.2)"><span style="width:26px;height:26px;border-radius:50%;background:#5FA768;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px">check</span><div><div style="font-size:13px;font-weight:800">Проход: 85 см</div><div style="font-size:10px;color:#6B6A66">Всё в порядке</div></div></div>
+      </div>
+      <div style="height:200px;border-radius:16px;background:#fff;color:#1E1E22;padding:16px;display:flex;flex-direction:column;gap:8px;box-shadow:0 20px 50px rgba(0,0,0,.4)">
+        <div style="font-size:12px;font-weight:800">Экспорт</div>
+        <div style="display:flex;align-items:center;gap:10px;border-radius:10px;border:1px solid #ECEAE5;padding:8px 10px"><span style="width:26px;height:26px;border-radius:50%;background:#1E1E22;color:#D4AF7C;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:15px">image</span><div><div style="font-size:11px;font-weight:800">PNG</div><div style="font-size:9px;color:#8A8984">Изображение высокого качества</div></div></div>
+        <div style="display:flex;align-items:center;gap:10px;border-radius:10px;border:1.5px solid #5FA768;padding:8px 10px"><span style="width:26px;height:26px;border-radius:50%;background:#1E1E22;color:#D4AF7C;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:15px">picture_as_pdf</span><div><div style="font-size:11px;font-weight:800">PDF</div><div style="font-size:9px;color:#8A8984">План с размерами и списком мебели</div></div></div>
+        <div style="margin-top:auto;height:34px;border-radius:9px;background:#D4AF7C;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center">Скачать</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo" style="background:linear-gradient(90deg,#EFEBE3 0%,#F3F1EC 40%);color:#1E1E22">
+  <div style="max-width:1320px;margin:0 auto;padding:80px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:48px;align-items:center">
+    <div style="max-width:440px">
+      <span style="display:inline-flex;height:28px;padding:0 12px;border-radius:999px;background:rgba(212,175,124,.22);color:#9C7A45;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;align-items:center">Попробуй прямо сейчас</span>
+      <h2 style="margin:18px 0 16px;font-size:clamp(32px,3.2vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.08">Интерактивное демо</h2>
+      <div style="font-size:16px;line-height:1.6;color:#55544F">Перетащи кровать, шкаф или стол и посмотри, сколько места останется. Двойной клик поворачивает предмет, а нажатие на карточку в каталоге добавляет новый. Это ограниченная версия редактора RoomFit.</div>
+      <div style="{{ demoStatus }}"><span style="font-family:'Material Symbols Rounded';font-size:20px">{{ demoIcon }}</span>{{ demoText }}</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+        <a href="RoomFit Platform.dc.html" style="height:52px;padding:0 24px;border-radius:999px;background:#D4AF7C;color:#0B0D0D;font-size:15px;font-weight:800;display:inline-flex;align-items:center;gap:10px" style-hover="background:#E0BE8E;color:#0B0D0D">Открыть полный редактор<span style="font-family:'Material Symbols Rounded';font-size:20px">arrow_forward</span></a>
+        <button onClick="{{ demoReset }}" style="height:52px;padding:0 20px;border-radius:999px;border:1px solid #D6D2C9;background:transparent;color:#1E1E22;font-size:14px;font-weight:700;cursor:pointer">Сбросить</button>
+      </div>
+    </div>
+    <div style="border-radius:22px;background:#fff;box-shadow:0 30px 80px rgba(60,45,25,.14);border:1px solid #E6E2DA;overflow:hidden;display:flex;min-width:0">
+      <div style="width:58px;flex:none;border-right:1px solid #ECEAE5;display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 0">
+        <sc-for list="{{ demoTools }}" as="t" hint-placeholder-count="6"><div style="{{ t.st }}"><span style="font-family:'Material Symbols Rounded';font-size:20px">{{ t.i }}</span><span style="font-size:8px;font-weight:700">{{ t.l }}</span></div></sc-for>
+      </div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+        <div style="height:42px;display:flex;align-items:center;gap:12px;padding:0 14px;border-bottom:1px solid #ECEAE5;font-size:12px;font-weight:700"><span style="padding:5px 10px;border-radius:8px;background:#F1EFEA">2D план</span><span style="color:#A9A7A1">3D (скоро)</span><span style="flex:1"></span><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#8A8984">undo</span><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#8A8984">redo</span><span style="color:#6B6A66">100%</span></div>
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:16px;overflow:hidden;background-color:#F7F7F5;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:14px 14px">
+          <div style="position:relative;flex:none">
+            <x-import component-from-global-scope="RoomFit.Plan" room="{{ bedRoom }}" items="{{ noItems }}" doors="{{ bedDoors }}" windows="{{ bedWindows }}" floor="oak" scale="{{ DS }}" margin="{{ 30 }}" hint-size="510px,430px"></x-import>
+            <div style="{{ demoLayer }}">
+              <sc-for list="{{ demoViews }}" as="it" hint-placeholder-count="3">
+                <div onPointerDown="{{ it.down }}" onDoubleClick="{{ it.dbl }}" style="{{ it.box }}">
+                  <div style="{{ it.inner }}"><x-import component-from-global-scope="RoomFit.Furn" type="{{ it.type }}" w="{{ it.pw }}" h="{{ it.ph }}" hint-size="40px,40px"></x-import><div style="{{ it.ring }}"></div></div>
+                  <sc-if value="{{ it.sel }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:-4px;border:1.5px solid #5FA768;border-radius:5px;pointer-events:none"></div><div style="position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);height:20px;padding:0 7px;border-radius:6px;background:#1E1E22;color:#F8F7F4;font-size:10px;font-weight:700;display:flex;align-items:center;white-space:nowrap;pointer-events:none">{{ it.dimText }}</div></sc-if>
+                </div>
+              </sc-for>
+              <sc-for list="{{ demoRays }}" as="r" hint-placeholder-count="0"><div style="{{ r.line }}"><div style="{{ r.label }}">{{ r.text }}</div></div></sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="width:190px;flex:none;border-left:1px solid #ECEAE5;padding:14px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:13px;font-weight:800">Каталог</div>
+        <div style="height:30px;border-radius:8px;background:#F4F2EE;font-size:11px;color:#A9A7A1;display:flex;align-items:center;gap:4px;padding:0 8px"><span style="font-family:'Material Symbols Rounded';font-size:15px">search</span>Поиск мебели…</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <sc-for list="{{ demoCat }}" as="c" hint-placeholder-count="6"><button onClick="{{ c.add }}" title="Добавить на план" style="border-radius:10px;border:1px solid #ECEAE5;background:#fff;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;color:#1E1E22" style-hover="border-color:#D4AF7C"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ c.type }}" w="{{ c.w }}" h="{{ c.h }}" size="{{ 40 }}" hint-size="40px,40px"></x-import><span style="font-size:10px;font-weight:700">{{ c.short }}</span></button></sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLES -->
+<section id="examples" style="background:#F3F1EC;color:#1E1E22;border-top:1px solid #E6E2DA">
+  <div style="max-width:1320px;margin:0 auto;padding:72px 40px 84px">
+    <div style="position:relative;text-align:center">
+      <h2 style="margin:0;font-size:clamp(32px,3.2vw,44px);font-weight:800;letter-spacing:-.03em">Примеры комнат</h2>
+      <div style="font-size:16px;color:#6B6A66;margin:10px 0 36px">Готовые решения для разных типов помещений. Используй как шаблон или вдохновение.</div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin:-20px 0 16px"><a href="RoomFit Platform.dc.html" style="height:36px;padding:0 16px;border-radius:999px;border:1px solid #CFCBC2;color:#1E1E22;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px" style-hover="border-color:#1E1E22;color:#1E1E22">Смотреть все примеры<span style="font-family:'Material Symbols Rounded';font-size:16px">arrow_forward</span></a></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+      <sc-for list="{{ gallery }}" as="t" hint-placeholder-count="6">
+        <a href="RoomFit Platform.dc.html" style="position:relative;height:220px;border-radius:16px;overflow:hidden;background:#2a2622;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(40,30,15,.15)" style-hover="transform:translateY(-3px)">
+          <x-import component-from-global-scope="RoomFit.Plan" room="{{ t.room }}" items="{{ t.items }}" doors="{{ t.doors }}" windows="{{ t.windows }}" floor="{{ t.floor }}" fit-w="{{ 230 }}" fit-h="{{ 230 }}" dims="{{ false }}" margin="{{ 0 }}" hint-size="230px,220px"></x-import>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(0deg,rgba(11,13,13,.92),rgba(11,13,13,0));pointer-events:none"></div>
+          <div style="position:absolute;left:14px;right:14px;bottom:12px;display:flex;align-items:flex-end;justify-content:space-between;color:#F8F7F4"><div><div style="font-size:15px;font-weight:800">{{ t.name }}</div><div style="font-size:12px;color:rgba(248,247,244,.7);margin-top:2px">{{ t.size }}</div></div><span style="width:30px;height:30px;border-radius:50%;border:1px solid rgba(248,247,244,.5);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px">arrow_forward</span></div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section style="position:relative;overflow:hidden;background:#0E0F0F">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(212,175,124,.10),rgba(11,13,13,0) 60%);pointer-events:none"></div>
+  <div style="position:relative;max-width:1320px;margin:0 auto;padding:84px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:48px;align-items:center">
+    <div style="max-width:440px">
+      <span style="display:inline-flex;height:28px;padding:0 12px;border-radius:999px;background:rgba(212,175,124,.16);color:#D4AF7C;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;align-items:center">Сравнивай и выбирай</span>
+      <h2 style="margin:18px 0 16px;font-size:clamp(32px,3.2vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.08">Несколько вариантов одной комнаты</h2>
+      <div style="font-size:16px;line-height:1.6;color:rgba(248,247,244,.68)">Создавай разные расстановки, сравнивай их и выбирай лучший вариант. Удобно для семьи, ремонта или покупки новой мебели.</div>
+      <a href="RoomFit Platform.dc.html" style="margin-top:28px;height:52px;padding:0 24px;border-radius:999px;background:#D4AF7C;color:#0B0D0D;font-size:15px;font-weight:800;display:inline-flex;align-items:center;gap:10px" style-hover="background:#E0BE8E;color:#0B0D0D">Попробовать сравнение<span style="font-family:'Material Symbols Rounded';font-size:20px">arrow_forward</span></a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px">
+      <div style="border-radius:20px;background:#1A1B1D;border:1px solid rgba(248,247,244,.08);padding:16px;display:flex;flex-direction:column;gap:14px">
+        <span style="align-self:flex-start;height:28px;padding:0 12px;border-radius:999px;background:#E65A5A;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px"><span style="font-family:'Material Symbols Rounded';font-size:16px">error</span>Неудобно</span>
+        <div style="border-radius:14px;background:#F7F7F5;display:flex;justify-content:center;padding:8px"><x-import component-from-global-scope="RoomFit.Plan" room="{{ bedRoom }}" items="{{ bedB }}" doors="{{ bedDoors }}" windows="{{ bedWindows }}" status="{{ bedBStatus }}" zones="{{ true }}" fit-w="{{ 300 }}" fit-h="{{ 250 }}" hint-size="300px,250px"></x-import></div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;color:rgba(248,247,244,.82)"><div style="display:flex;gap:8px;align-items:center"><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#E65A5A">cancel</span>Проход 40 см (слишком мало)</div><div style="display:flex;gap:8px;align-items:center"><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#E65A5A">cancel</span>Кресло мешает открыть дверь</div></div>
+      </div>
+      <div style="border-radius:20px;background:#1A1B1D;border:1px solid rgba(95,167,104,.4);padding:16px;display:flex;flex-direction:column;gap:14px">
+        <span style="align-self:flex-start;height:28px;padding:0 12px;border-radius:999px;background:#5FA768;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px"><span style="font-family:'Material Symbols Rounded';font-size:16px">check_circle</span>Оптимально</span>
+        <div style="border-radius:14px;background:#F7F7F5;display:flex;justify-content:center;padding:8px"><x-import component-from-global-scope="RoomFit.Plan" room="{{ bedRoom }}" items="{{ bedA }}" doors="{{ bedDoors }}" windows="{{ bedWindows }}" zones="{{ true }}" fit-w="{{ 300 }}" fit-h="{{ 250 }}" hint-size="300px,250px"></x-import></div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;color:rgba(248,247,244,.82)"><div style="display:flex;gap:8px;align-items:center"><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#5FA768">check_circle</span>Все проходы от 60 см</div><div style="display:flex;gap:8px;align-items:center"><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#5FA768">check_circle</span>Удобное расположение</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3D -->
+<section style="position:relative;overflow:hidden;background:linear-gradient(180deg,#0E0F0F,#15130F);border-top:1px solid rgba(248,247,244,.05)">
+  <div style="position:relative;max-width:1320px;margin:0 auto;padding:84px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:48px;align-items:center">
+    <div style="max-width:440px">
+      <span style="display:inline-flex;height:28px;padding:0 12px;border-radius:999px;background:rgba(212,175,124,.16);color:#D4AF7C;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;align-items:center">Скоро в RoomFit</span>
+      <h2 style="margin:18px 0 16px;font-size:clamp(32px,3.2vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.08">Увидь свою комнату в 3D</h2>
+      <div style="font-size:16px;line-height:1.6;color:rgba(248,247,244,.68)">Скоро ты сможешь увидеть свою комнату в 3D. RoomFit развивается от точного 2D-планирования к объёмной визуализации: прогуливайся по помещению, меняй ракурсы и оценивай интерьер ещё лучше.</div>
+      <button onClick="{{ notify }}" style="margin-top:28px;height:52px;padding:0 24px;border-radius:999px;border:none;background:#D4AF7C;color:#0B0D0D;font-size:15px;font-weight:800;display:inline-flex;align-items:center;gap:10px;cursor:pointer" style-hover="background:#E0BE8E">{{ notifyText }}<span style="font-family:'Material Symbols Rounded';font-size:20px">{{ notifyIcon }}</span></button>
+    </div>
+    <div ref="{{ splitRef }}" onPointerDown="{{ splitDown }}" style="position:relative;height:440px;border-radius:22px;overflow:hidden;border:1px solid rgba(248,247,244,.1);box-shadow:0 40px 100px rgba(0,0,0,.5);cursor:ew-resize;touch-action:none;user-select:none">
+      <div style="position:absolute;inset:0"><image-slot id="v2-3d-photo" shape="rect" src="assets/photo-bedroom.png" placeholder="3D-рендер спальни" style="width:100%;height:100%"></image-slot></div>
+      <div style="{{ splitLeft }}">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#E9E4DA">
+          <x-import component-from-global-scope="RoomFit.Plan" room="{{ bedRoom }}" items="{{ bedA }}" doors="{{ bedDoors }}" windows="{{ bedWindows }}" fit-w="{{ 640 }}" fit-h="{{ 520 }}" dims="{{ false }}" margin="{{ 0 }}" hint-size="640px,520px"></x-import>
+        </div>
+      </div>
+      <span style="position:absolute;left:14px;top:14px;height:30px;padding:0 12px;border-radius:999px;background:#fff;color:#1E1E22;font-size:12px;font-weight:800;display:flex;align-items:center;pointer-events:none">2D план</span>
+      <span style="position:absolute;right:14px;top:14px;height:30px;padding:0 12px;border-radius:999px;background:#fff;color:#1E1E22;font-size:12px;font-weight:800;display:flex;align-items:center;pointer-events:none">3D просмотр (скоро)</span>
+      <div style="{{ splitBar }}"><span style="position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#fff;color:#1E1E22;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:22px;box-shadow:0 6px 20px rgba(0,0,0,.35)">code</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F3F1EC;color:#1E1E22">
+  <div style="max-width:1320px;margin:0 auto;padding:72px 40px">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap"><h2 style="margin:0;font-size:clamp(28px,2.6vw,36px);font-weight:800;letter-spacing:-.03em">Часто задаваемые вопросы</h2><a href="#faq" style="height:36px;padding:0 16px;border-radius:999px;border:1px solid #CFCBC2;color:#1E1E22;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px">Все вопросы<span style="font-family:'Material Symbols Rounded';font-size:16px">arrow_forward</span></a></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:10px 28px;align-items:start">
+      <sc-for list="{{ faq }}" as="f" hint-placeholder-count="8">
+        <div style="border-radius:12px;background:#fff;border:1px solid #E6E2DA">
+          <button onClick="{{ f.on }}" aria-expanded="{{ f.open }}" style="width:100%;min-height:52px;display:flex;align-items:center;gap:14px;padding:0 18px;border:none;background:transparent;color:#1E1E22;font-size:15px;font-weight:600;text-align:left;cursor:pointer"><span style="flex:1">{{ f.q }}</span><span style="{{ f.icon }}">add</span></button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><div style="padding:0 18px 16px;font-size:14px;line-height:1.6;color:#6B6A66">{{ f.a }}</div></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0"><image-slot id="v2-cta-bg" shape="rect" placeholder="Фон: уютная гостиная, тёплый вечерний свет" style="width:100%;height:100%"></image-slot></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,13,13,.95) 0%,rgba(11,13,13,.8) 45%,rgba(11,13,13,.4) 100%);pointer-events:none"></div>
+  <div style="position:relative;max-width:1320px;margin:0 auto;padding:72px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:40px;align-items:center;pointer-events:none">
+    <div style="pointer-events:auto">
+      <h2 style="margin:0;font-size:clamp(32px,3.4vw,46px);line-height:1.1;font-weight:800;letter-spacing:-.03em">Твоя идеальная расстановка <span style="color:#D4AF7C">начинается с точного плана</span></h2>
+      <div style="font-size:16px;color:rgba(248,247,244,.7);margin-top:14px">Создай первую комнату бесплатно и убедись, что всё поместится.</div>
+      <a href="RoomFit Platform.dc.html" style="margin-top:26px;height:52px;padding:0 24px;border-radius:999px;background:#D4AF7C;color:#0B0D0D;font-size:15px;font-weight:800;display:inline-flex;align-items:center;gap:10px" style-hover="background:#E0BE8E;color:#0B0D0D">Создать первую комнату<span style="font-family:'Material Symbols Rounded';font-size:20px">arrow_forward</span></a>
+    </div>
+    <div style="position:relative;height:300px;pointer-events:auto">
+      <div style="position:absolute;left:12%;top:0;width:380px;border-radius:12px;background:#151618;padding:7px;box-shadow:0 30px 70px rgba(0,0,0,.55)"><div style="border-radius:7px;background:#F7F7F5;height:230px;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.Plan" room="{{ heroRoom }}" items="{{ heroItems }}" doors="{{ heroDoors }}" windows="{{ heroWindows }}" fit-w="{{ 260 }}" fit-h="{{ 210 }}" hint-size="260px,210px"></x-import></div></div>
+      <div style="position:absolute;left:12%;top:244px;width:420px;margin-left:-20px;height:12px;border-radius:0 0 12px 12px;background:#2a2b2e"></div>
+      <div style="position:absolute;left:0;top:110px;width:150px;border-radius:14px;background:#151618;padding:6px;box-shadow:0 20px 50px rgba(0,0,0,.5)"><div style="border-radius:9px;background:#F7F7F5;height:180px;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.Plan" room="{{ bedRoom }}" items="{{ bedA }}" doors="{{ bedDoors }}" fit-w="{{ 130 }}" fit-h="{{ 120 }}" dims="{{ false }}" margin="{{ 0 }}" hint-size="130px,120px"></x-import></div></div>
+      <div style="position:absolute;left:calc(12% + 340px);top:90px;width:100px;border-radius:18px;background:#151618;padding:5px;box-shadow:0 20px 50px rgba(0,0,0,.5)"><div style="border-radius:14px;background:#F7F7F5;height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px"><x-import component-from-global-scope="RoomFit.Plan" room="{{ bedRoom }}" items="{{ bedA }}" doors="{{ bedDoors }}" fit-w="{{ 84 }}" fit-h="{{ 80 }}" dims="{{ false }}" margin="{{ 0 }}" hint-size="84px,80px"></x-import><div style="width:70px;height:16px;border-radius:5px;background:#5FA768"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#0B0D0D;border-top:1px solid rgba(248,247,244,.08)">
+  <div style="max-width:1320px;margin:0 auto;padding:32px 40px;display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:4px"><div style="display:flex;align-items:center;gap:10px"><img src="assets/logo-mark-dark.png" style="height:32px;mix-blend-mode:lighten"><span style="font-weight:800;font-size:19px;color:#F8F7F4">Room<span style="color:#D4AF7C">Fit</span></span></div><div style="font-size:12px;color:rgba(248,247,244,.5)">Твой дом в правильных размерах.</div></div>
+    <div style="flex:1;display:flex;gap:28px;flex-wrap:wrap;font-size:14px;justify-content:center">
+      <a href="#" style="color:rgba(248,247,244,.7)">О проекте</a><a href="#features" style="color:rgba(248,247,244,.7)">Возможности</a><a href="#examples" style="color:rgba(248,247,244,.7)">Примеры</a><a href="#" style="color:rgba(248,247,244,.7)">Поддержка</a>
+    </div>
+    <div style="display:flex;gap:10px"><span style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(248,247,244,.16);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px;color:rgba(248,247,244,.75)">send</span><span style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(248,247,244,.16);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px;color:rgba(248,247,244,.75)">smart_display</span><span style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(248,247,244,.16);display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px;color:rgba(248,247,244,.75)">photo_camera</span></div>
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;font-size:12px;color:rgba(248,247,244,.45)"><span>© 2026 RoomFit. Все права защищены.</span><span style="display:flex;gap:14px"><a href="#" style="color:rgba(248,247,244,.55)">Политика конфиденциальности</a><a href="#" style="color:rgba(248,247,244,.55)">Условия использования</a></span></div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const DS = 1.1;
+const START = () => [
+  { id: 'b', type: 'bed', name: 'Кровать', w: 160, h: 200, x: 0, y: 160, rot: 90 },
+  { id: 'w', type: 'wardrobe', name: 'Шкаф', w: 180, h: 60, x: 0, y: 0, rot: 0 },
+  { id: 'd', type: 'desk', name: 'Рабочий стол', w: 120, h: 60, x: 260, y: 0, rot: 0 },
+  { id: 'p', type: 'plant', name: 'Растение', w: 45, h: 45, x: 351, y: 270, rot: 0 },
+];
+let uid = 1;
+class Component extends DCLogic {
+  state = { ready: false, scrolled: false, faq: 0, sel: 'b', items: START(), split: 52, notified: false };
+  splitRef = React.createRef();
+  componentDidMount() {
+    const t = () => window.RoomFit ? this.setState({ ready: true }) : setTimeout(t, 40); t();
+    this._sc = () => { const s = window.scrollY > 20; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    this._mv = e => this.onMove(e); this._up = () => { this.drag = null; this.splitDrag = false; };
+    window.addEventListener('scroll', this._sc); window.addEventListener('pointermove', this._mv); window.addEventListener('pointerup', this._up);
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this._sc); window.removeEventListener('pointermove', this._mv); window.removeEventListener('pointerup', this._up); }
+  setSplit(x) { const el = this.splitRef.current; if (!el) return; const r = el.getBoundingClientRect(); this.setState({ split: Math.max(8, Math.min(92, (x - r.left) / r.width * 100)) }); }
+  onMove(e) {
+    if (this.splitDrag) { this.setSplit(e.clientX); return; }
+    const d = this.drag; if (!d) return;
+    const x = Math.round(d.ox + (e.clientX - d.sx) / DS), y = Math.round(d.oy + (e.clientY - d.sy) / DS);
+    this.setState(s => ({ items: s.items.map(i => i.id === d.id ? { ...i, x, y } : i) }));
+  }
+  rotate(id) {
+    const K = window.RoomFit; this.setState(s => ({ items: s.items.map(it => { if (it.id !== id) return it; const b0 = K.aabb(it), nr = ((it.rot || 0) + 90) % 360, b1 = K.aabb({ ...it, rot: nr, x: 0, y: 0 }); return { ...it, rot: nr, x: Math.round(b0.x + b0.w / 2 - b1.w / 2), y: Math.round(b0.y + b0.h / 2 - b1.h / 2) }; }) }));
+  }
+  renderVals() {
+    const K = window.RoomFit, st = this.state, R = K ? K.ROOMS : null;
+    const bedRoom = { w: 400, h: 320 }, bedDoors = [{ wall: 'bottom', at: 300, w: 80 }], bedWindows = [{ wall: 'top', at: 130, w: 140 }];
+    const heroRoom = { w: 400, h: 320 }, heroDoors = [{ wall: 'bottom', at: 300, w: 80 }], heroWindows = [{ wall: 'top', at: 140, w: 140 }];
+    const heroItems = [
+      { id: 'r', type: 'rug', name: 'Ковёр', w: 200, h: 150, x: 100, y: 85, tone: '#d8d1c4' },
+      { id: 's', type: 'sofa', name: 'Диван', w: 220, h: 95, x: 0, y: 50, rot: 90, tone: '#c9c4ba' },
+      { id: 'a', type: 'armchair', name: 'Кресло', w: 80, h: 80, x: 318, y: 110, rot: 270, tone: '#c9c4ba' },
+      { id: 'c', type: 'coffee', name: 'Столик', w: 80, h: 80, x: 160, y: 120 },
+      { id: 'sh', type: 'shelf', name: 'Стеллаж', w: 120, h: 35, x: 150, y: 0 },
+      { id: 'p1', type: 'plant', name: 'Растение', w: 45, h: 45, x: 4, y: 271 },
+      { id: 'p2', type: 'plant', name: 'Растение', w: 45, h: 45, x: 351, y: 4 },
+      { id: 'p3', type: 'plant', name: 'Растение', w: 40, h: 40, x: 4, y: 4 },
+    ];
+    const an = K ? K.analyze(bedRoom, st.items, bedDoors, 60) : { st: {}, issues: [], errs: 0, warns: 0 };
+    const g = K ? K.geom(bedRoom, { scale: DS, margin: 30 }) : { off: 41 };
+    const cat = key => K ? K.CATALOG.find(c => c.key === key) : null;
+    const demoViews = K ? st.items.map(it => { const b = K.aabb(it), s = an.st[it.id];
+      return { type: it.type, pw: it.w * DS, ph: it.h * DS, sel: st.sel === it.id, dimText: `${it.name} · ${it.w} × ${it.h} см`,
+        down: e => { e.stopPropagation(); this.setState({ sel: it.id }); this.drag = { id: it.id, sx: e.clientX, sy: e.clientY, ox: it.x, oy: it.y }; }, dbl: () => this.rotate(it.id),
+        box: { position: 'absolute', left: b.x * DS, top: b.y * DS, width: b.w * DS, height: b.h * DS, cursor: 'grab', touchAction: 'none', zIndex: st.sel === it.id ? 3 : 1 },
+        inner: { position: 'absolute', left: '50%', top: '50%', width: it.w * DS, height: it.h * DS, transform: `translate(-50%,-50%) rotate(${it.rot}deg)` },
+        ring: s === 'err' ? { position: 'absolute', inset: -2, border: '2px solid #E65A5A', background: 'rgba(230,90,90,.18)', borderRadius: 5 } : s === 'warn' ? { position: 'absolute', inset: -2, border: '2px dashed #E3A43B', borderRadius: 5 } : { display: 'none' } }; }) : [];
+    const demoRays = K && st.sel && st.items.find(i => i.id === st.sel) ? K.rays(bedRoom, st.items, st.sel).filter(r => r.d > 1).map(r => { const hor = r.dir === 'l' || r.dir === 'r', warn = r.d > 8 && r.d < 60, col = warn ? '#D99528' : '#3B3B40';
+      return { text: r.d + ' см', line: hor ? { position: 'absolute', left: r.x1 * DS, top: r.y * DS, width: (r.x2 - r.x1) * DS, borderTop: `1.5px dashed ${col}`, pointerEvents: 'none', zIndex: 4 } : { position: 'absolute', left: r.x * DS, top: r.y1 * DS, height: (r.y2 - r.y1) * DS, borderLeft: `1.5px dashed ${col}`, pointerEvents: 'none', zIndex: 4 },
+        label: { position: 'absolute', left: hor ? '50%' : 0, top: hor ? 0 : '50%', transform: 'translate(-50%,-50%)', background: warn ? '#E3A43B' : '#fff', color: warn ? '#fff' : '#1E1E22', border: warn ? 'none' : '1px solid #DAD7D0', fontSize: 10, fontWeight: 700, padding: '2px 5px', borderRadius: 6, whiteSpace: 'nowrap' } }; }) : [];
+    const faqData = [
+      ['Нужно ли устанавливать программу?', 'Нет. RoomFit работает в браузере на компьютере и телефоне. Мобильное приложение для iOS и Android — по желанию.'],
+      ['Можно ли пользоваться с телефона?', 'Да. У мобильной версии отдельный редактор: каталог в нижней панели, перемещение одним пальцем, масштаб — двумя.'],
+      ['Можно ли пользоваться бесплатно?', 'Да. Создание комнат, каталог мебели, проверка столкновений и экспорт в PNG и PDF доступны бесплатно.'],
+      ['Можно ли загрузить план квартиры?', 'Загрузка и калибровка плана сейчас в разработке. Пока комнату создают по ширине и длине — это занимает меньше минуты.'],
+      ['Насколько точные размеры?', 'Размеры задаются с точностью до сантиметра, мебель отображается в масштабе комнаты. Итоговая точность зависит от ваших замеров.'],
+      ['Когда появится 3D-режим?', '3D-режим — следующий этап развития RoomFit. Точной даты пока нет; все созданные 2D-планы откроются в 3D автоматически.'],
+      ['Можно ли добавить свою мебель?', 'Да. Нажмите «Свои размеры», укажите название, ширину и глубину — предмет появится на плане и в разделе «Моя мебель».'],
+      ['Подходит ли RoomFit для профессионалов?', 'RoomFit создан для обычных людей, но дизайнеры и риелторы используют его для быстрых проверок расстановки и отправки планов клиентам.'],
+    ];
+    const tpl = [['bedroom', 'Спальня'], ['living', 'Гостиная'], ['kids', 'Детская'], ['office', 'Домашний кабинет'], ['kitchen', 'Кухня'], ['studio', 'Студия']];
+    const m = v => (v / 100).toFixed(1).replace('.', ',');
+    const bedB = R ? R.bedroomB.items : [];
+    const ico = (on) => ({ width: 32, height: 32, borderRadius: 9, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Material Symbols Rounded'", fontSize: 17, background: on ? '#1E1E22' : 'transparent', color: on ? '#F8F7F4' : '#8A8984' });
+    return {
+      headerStyle: { position: 'sticky', top: 0, zIndex: 50, transition: 'background .25s, border-color .25s', background: st.scrolled ? 'rgba(11,13,13,.78)' : 'rgba(11,13,13,0)', backdropFilter: st.scrolled ? 'blur(16px)' : 'none', WebkitBackdropFilter: st.scrolled ? 'blur(16px)' : 'none', borderBottom: st.scrolled ? '1px solid rgba(248,247,244,.08)' : '1px solid transparent' },
+      heroFeats: [['square_foot', '2D-план с размерами'], ['chair', 'Богатый каталог мебели'], ['cancel', 'Проверка столкновений'], ['bookmarks', 'Сохранение вариантов'], ['ios_share', 'Экспорт в PNG / PDF']].map(([icon, text]) => ({ icon, text })),
+      heroRoom, heroItems, heroDoors, heroWindows,
+      miniTools: ['arrow_selector_tool', 'crop_square', 'door_front', 'window', 'straighten'].map((i, k) => ({ i, st: ico(k === 0) })),
+      miniCat: K ? [['sofa3', 'Диван'], ['bed2', 'Кровать'], ['dtable', 'Стол'], ['chair', 'Стул'], ['ward', 'Шкаф'], ['night', 'Тумба']].map(([k, short]) => { const c = cat(k); return { ...c, short, dims: `${c.w}×${c.h}` }; }) : [],
+      bedRoom, bedDoors, bedWindows, bedA: R ? R.bedroom.items : [], bedB, bedBStatus: K ? K.analyze(bedRoom, bedB, bedDoors, 60).st : {},
+      steps: [['Создай комнату', 'Введи размеры или загрузи план помещения.'], ['Добавь мебель', 'Выбери из каталога или создай свою.'], ['Проверь расположение', 'Перемещай мебель и следи за расстояниями.'], ['Сохрани результат', 'Экспортируй план и покажи семье или возьми в магазин.']].map(([t, d], i) => ({ n: i + 1, t, d, arrow: i < 3 })),
+      howBeds: K ? [['bed2', false], ['bed2', true], ['sofa2', false], ['sofa3', false]].map(([k, on]) => { const c = cat(k); return { ...c, on, st: { position: 'relative', borderRadius: 10, background: '#F4F2EE', border: on ? '2px solid #D4AF7C' : '1px solid #ECEAE5', display: 'flex', alignItems: 'center', justifyContent: 'center' } }; }) : [],
+      DS, noItems: [], demoViews, demoRays,
+      demoLayer: { position: 'absolute', left: g.off, top: g.off, width: bedRoom.w * DS, height: bedRoom.h * DS },
+      demoTools: [['arrow_selector_tool', 'Выбор'], ['crop_square', 'Стена'], ['door_front', 'Дверь'], ['window', 'Окно'], ['chair', 'Мебель'], ['straighten', 'Размеры']].map(([i, l], k) => ({ i, l, st: { width: 44, height: 44, borderRadius: 11, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1, background: k === 0 ? '#1E1E22' : 'transparent', color: k === 0 ? '#F8F7F4' : '#6B6A66' } })),
+      demoCat: K ? [['sofa2', 'Диван'], ['bed1', 'Кровать'], ['desk', 'Стол'], ['chair', 'Стул'], ['dresser', 'Комод'], ['night', 'Тумба']].map(([k, short]) => { const c = cat(k); return { ...c, short, add: () => { const id = 'n' + (uid++); this.setState(s => ({ items: [...s.items, { id, type: c.type, name: short, w: c.w, h: c.h, x: Math.round((400 - c.w) / 2), y: Math.round((320 - c.h) / 2), rot: 0 }], sel: id })); } }; }) : [],
+      demoReset: () => this.setState({ items: START(), sel: 'b' }),
+      demoStatus: { display: 'flex', alignItems: 'center', gap: 10, minHeight: 48, padding: '10px 16px', borderRadius: 14, fontSize: 14, fontWeight: 700, marginTop: 24, background: an.errs ? '#FCEDED' : an.warns ? '#FCF4E4' : '#EEF6EF', color: an.errs ? '#A93A3A' : an.warns ? '#8A5A12' : '#2F6B38' },
+      demoIcon: an.errs ? 'error' : an.warns ? 'warning' : 'check_circle',
+      demoText: an.errs ? (an.issues.find(i => i.lvl === 'err') || {}).text : an.warns ? (an.issues.find(i => i.lvl === 'warn') || {}).text : 'Столкновений нет, проходы от 60 см',
+      gallery: R ? tpl.map(([k, name]) => ({ ...R[k], name, size: `${m(R[k].room.w)} × ${m(R[k].room.h)} м` })) : tpl.map(([k, name]) => ({ name })),
+      splitRef: this.splitRef, splitDown: e => { this.splitDrag = true; this.setSplit(e.clientX); },
+      splitLeft: { position: 'absolute', left: 0, top: 0, bottom: 0, width: st.split + '%', overflow: 'hidden', borderRight: '2px solid #fff' },
+      splitBar: { position: 'absolute', top: 0, bottom: 0, left: st.split + '%', width: 0, pointerEvents: 'none' },
+      notify: () => this.setState({ notified: true }), notifyText: st.notified ? 'Сообщим, когда 3D будет готов' : 'Узнать первым', notifyIcon: st.notified ? 'check' : 'arrow_forward',
+      faq: faqData.map(([q, a], i) => ({ q, a, open: st.faq === i, on: () => this.setState({ faq: st.faq === i ? -1 : i }), icon: { fontFamily: "'Material Symbols Rounded'", fontSize: 22, color: '#1E1E22', transition: 'transform .2s', transform: st.faq === i ? 'rotate(45deg)' : 'none' } })),
+    };
+  }
+}
+</script>
+</body>
+</html>

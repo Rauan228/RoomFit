@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&display=block" rel="stylesheet">
+<script src="./roomfit-kit.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;height:100%;background:#0B0D0D;font-family:Manrope,system-ui,sans-serif;color:#1E1E22;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#D4AF7C;text-decoration:none}a:hover{color:#E4C595}
+input,button,select{font-family:inherit}button{color:#1E1E22}
+input[type=range]{accent-color:#5FA768}
+</style>
+</helmet>
+
+<div style="position:relative;width:100%;height:100vh;min-height:720px;overflow:hidden;display:flex;flex-direction:column">
+
+<!-- ============ LOGIN / REGISTER ============ -->
+<sc-if value="{{ isAuth }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(420px,1fr);background:#0B0D0D;min-height:0">
+  <div style="position:relative;overflow:hidden;margin:16px;border-radius:24px;background:#16171a">
+    <image-slot id="auth-photo" shape="rect" placeholder="Фото интерьера: тёмная гостиная, мягкий свет" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,13,.55) 0%,rgba(11,13,13,0) 35%,rgba(11,13,13,.85) 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:40px;top:36px;display:flex;align-items:center;gap:10px;pointer-events:none"><img src="assets/logo-mark-dark.png" style="height:40px;mix-blend-mode:lighten"><span style="font-weight:800;font-size:22px;letter-spacing:-.02em;color:#F8F7F4">Room<span style="color:#D4AF7C">Fit</span></span></div>
+    <div style="position:absolute;left:40px;right:40px;bottom:40px;pointer-events:none">
+      <div style="font-size:40px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:#F8F7F4;max-width:460px;text-wrap:pretty">Твой дом в правильных размерах.</div>
+      <div style="margin-top:14px;font-size:15px;color:rgba(248,247,244,.7);max-width:420px">Создай план комнаты, расставь мебель в реальных размерах и проверь, что всё поместится.</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:center;padding:40px">
+    <div style="width:100%;max-width:380px;display:flex;flex-direction:column;gap:14px">
+      <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+        <div style="font-size:30px;font-weight:700;letter-spacing:-.02em;color:#F8F7F4">Вход в RoomFit</div>
+        <div style="font-size:14px;color:rgba(248,247,244,.6);margin-bottom:10px">Рады видеть снова. Ваши комнаты сохранены.</div>
+      </sc-if>
+      <sc-if value="{{ isRegister }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:30px;font-weight:700;letter-spacing:-.02em;color:#F8F7F4">Создать аккаунт</div>
+        <div style="font-size:14px;color:rgba(248,247,244,.6);margin-bottom:10px">Бесплатно. Первая комната — за пару минут.</div>
+      </sc-if>
+      <button onClick="{{ goDash }}" style="height:48px;border-radius:14px;border:none;background:#F8F7F4;color:#0B0D0D;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer" style-hover="background:#fff"><span style="font-weight:800;font-size:17px;color:#4285F4">G</span>Продолжить с Google</button>
+      <button onClick="{{ goDash }}" style="height:48px;border-radius:14px;border:1px solid rgba(248,247,244,.16);background:#1E1E22;color:#F8F7F4;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer" style-hover="background:#26262b"><span style="font-family:'Material Symbols Rounded';font-size:20px">phone_iphone</span>Продолжить с Apple</button>
+      <div style="display:flex;align-items:center;gap:12px;color:rgba(248,247,244,.4);font-size:12px;margin:6px 0"><div style="flex:1;height:1px;background:rgba(248,247,244,.12)"></div>или по email<div style="flex:1;height:1px;background:rgba(248,247,244,.12)"></div></div>
+      <sc-if value="{{ isRegister }}" hint-placeholder-val="{{ false }}">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:rgba(248,247,244,.7)">Имя<input value="Анна" style="height:46px;border-radius:12px;border:1px solid rgba(248,247,244,.14);background:#141517;color:#F8F7F4;padding:0 14px;font-size:15px;outline:none"></label>
+      </sc-if>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:rgba(248,247,244,.7)">Email<input value="anna@mail.ru" style="height:46px;border-radius:12px;border:1px solid rgba(248,247,244,.14);background:#141517;color:#F8F7F4;padding:0 14px;font-size:15px;outline:none"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:rgba(248,247,244,.7)"><span style="display:flex;justify-content:space-between">Пароль<sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}"><a href="#">Забыли пароль?</a></sc-if></span><input type="password" value="roomfit2026" style="height:46px;border-radius:12px;border:1px solid rgba(248,247,244,.14);background:#141517;color:#F8F7F4;padding:0 14px;font-size:15px;outline:none"></label>
+      <sc-if value="{{ isRegister }}" hint-placeholder-val="{{ false }}">
+        <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:rgba(248,247,244,.6);line-height:1.4"><input type="checkbox" checked style="accent-color:#5FA768;margin-top:2px">Я принимаю <a href="#">условия использования</a> и <a href="#">политику конфиденциальности</a></label>
+      </sc-if>
+      <button onClick="{{ goDash }}" style="height:48px;border-radius:14px;border:none;background:#5FA768;color:#fff;font-weight:700;font-size:15px;cursor:pointer;margin-top:6px" style-hover="background:#56985e">{{ authCta }}</button>
+      <div style="text-align:center;font-size:14px;color:rgba(248,247,244,.6)">{{ authSwitchText }} <a href="#" onClick="{{ authSwitch }}">{{ authSwitchLink }}</a></div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ DASHBOARD ============ -->
+<sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;display:flex;min-height:0;background:#F7F7F5">
+  <aside style="width:248px;flex:none;background:#0B0D0D;display:flex;flex-direction:column;padding:20px 14px;gap:4px">
+    <div style="display:flex;align-items:center;gap:10px;padding:4px 8px 22px"><img src="assets/logo-mark-dark.png" style="height:36px;mix-blend-mode:lighten"><span style="font-weight:800;font-size:20px;letter-spacing:-.02em;color:#F8F7F4">Room<span style="color:#D4AF7C">Fit</span></span></div>
+    <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+      <button onClick="{{ n.on }}" style="{{ n.style }}"><span style="font-family:'Material Symbols Rounded';font-size:20px">{{ n.icon }}</span>{{ n.label }}</button>
+    </sc-for>
+    <div style="flex:1"></div>
+    <div style="border-radius:16px;background:#1E1E22;padding:14px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#F8F7F4"><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#D4AF7C">view_in_ar</span>3D-просмотр</div>
+      <div style="font-size:12px;line-height:1.45;color:rgba(248,247,244,.6)">В разработке. Сообщим, когда можно будет осмотреть комнату в объёме.</div>
+      <span style="align-self:flex-start;font-size:11px;font-weight:700;color:#D4AF7C;border:1px solid rgba(212,175,124,.4);border-radius:999px;padding:3px 9px">Скоро</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;padding:14px 8px 2px">
+      <div style="width:34px;height:34px;border-radius:50%;background:#D4AF7C;color:#0B0D0D;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center">АС</div>
+      <div style="min-width:0"><div style="font-size:13px;font-weight:600;color:#F8F7F4">Анна Смирнова</div><div style="font-size:12px;color:rgba(248,247,244,.5)">anna@mail.ru</div></div>
+    </div>
+  </aside>
+  <main style="flex:1;min-width:0;display:flex;flex-direction:column;min-height:0">
+    <header style="height:72px;flex:none;display:flex;align-items:center;gap:14px;padding:0 32px;border-bottom:1px solid #E8E6E1;background:#F7F7F5">
+      <div style="flex:1;max-width:420px;height:42px;border-radius:12px;background:#fff;border:1px solid #E5E3DE;display:flex;align-items:center;gap:8px;padding:0 12px;color:#8A8984"><span style="font-family:'Material Symbols Rounded';font-size:20px">search</span><input placeholder="Поиск проектов" value="{{ q }}" onChange="{{ onQ }}" style="flex:1;border:none;outline:none;background:transparent;font-size:14px;color:#1E1E22"></div>
+      <div style="flex:1"></div>
+      <button onClick="{{ goWizard }}" style="height:42px;padding:0 18px;border-radius:12px;border:none;background:#5FA768;color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;cursor:pointer" style-hover="background:#56985e"><span style="font-family:'Material Symbols Rounded';font-size:20px">add</span>Создать проект</button>
+      <div style="width:42px;height:42px;border-radius:50%;background:#1E1E22;color:#D4AF7C;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">АС</div>
+    </header>
+    <div style="flex:1;overflow:auto;padding:32px">
+
+      <sc-if value="{{ tabProjects }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap">
+          <div><div style="font-size:30px;font-weight:700;letter-spacing:-.02em">Мои проекты</div><div style="font-size:14px;color:#6B6A66;margin-top:4px">{{ projCountText }}</div></div>
+          <button onClick="{{ toggleEmpty }}" style="height:34px;padding:0 12px;border-radius:10px;border:1px dashed #CFCBC2;background:transparent;color:#6B6A66;font-size:12px;cursor:pointer">{{ emptyToggleText }}</button>
+        </div>
+        <sc-if value="{{ showEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="max-width:640px;margin:40px auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px">
+            <div style="width:260px;height:190px;border-radius:20px;border:1.5px dashed #CFCBC2;background:repeating-linear-gradient(45deg,#F1EFEA 0 10px,#F7F7F5 10px 20px);display:flex;align-items:center;justify-content:center"><img src="assets/icon-light.png" style="width:84px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)"></div>
+            <div style="font-size:24px;font-weight:700;letter-spacing:-.01em;margin-top:10px">Здесь появятся ваши комнаты</div>
+            <div style="font-size:15px;color:#6B6A66;max-width:420px;line-height:1.5">Укажите ширину и длину помещения — и через минуту начнёте расставлять мебель в реальных размерах.</div>
+            <button onClick="{{ goWizard }}" style="height:48px;padding:0 22px;border-radius:14px;border:none;background:#5FA768;color:#fff;font-weight:700;font-size:15px;cursor:pointer;margin-top:6px">Создать первую комнату</button>
+            <div style="font-size:13px;color:#8A8984;margin-top:10px">или начните с шаблона</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+              <sc-for list="{{ templates }}" as="t" hint-placeholder-count="6"><button onClick="{{ t.open }}" style="height:34px;padding:0 14px;border-radius:999px;border:1px solid #E5E3DE;background:#fff;font-size:13px;cursor:pointer" style-hover="border-color:#D4AF7C">{{ t.name }}</button></sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px">
+            <button onClick="{{ goWizard }}" style="min-height:290px;border-radius:20px;border:1.5px dashed #CFCBC2;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;color:#1E1E22" style-hover="border-color:#5FA768;background:#fff">
+              <div style="width:56px;height:56px;border-radius:18px;background:#5FA768;color:#fff;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:30px">add</span></div>
+              <div style="font-size:16px;font-weight:700">Создать новый проект</div>
+              <div style="font-size:13px;color:#8A8984">Прямоугольная комната · 1 минута</div>
+            </button>
+            <sc-for list="{{ projectCards }}" as="p" hint-placeholder-count="5">
+              <div style="position:relative;border-radius:20px;background:#fff;border:1px solid #ECEAE5;overflow:visible;display:flex;flex-direction:column;transition:box-shadow .2s, transform .2s" style-hover="box-shadow:0 14px 34px rgba(30,25,15,.10);transform:translateY(-2px)">
+                <div onClick="{{ p.open }}" style="height:190px;border-radius:20px 20px 0 0;background:#F1EFEA;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden">
+                  <x-import component-from-global-scope="RoomFit.Plan" room="{{ p.room }}" items="{{ p.items }}" doors="{{ p.doors }}" windows="{{ p.windows }}" floor="{{ p.floor }}" fit-w="{{ 250 }}" fit-h="{{ 170 }}" dims="{{ false }}" margin="{{ 8 }}" hint-size="250px,170px"></x-import>
+                </div>
+                <div style="padding:14px 16px 16px;display:flex;gap:10px;align-items:flex-start">
+                  <div style="flex:1;min-width:0;cursor:pointer" onClick="{{ p.open }}">
+                    <div style="font-size:16px;font-weight:700">{{ p.name }}</div>
+                    <div style="font-size:13px;color:#6B6A66;margin-top:3px">{{ p.size }} · {{ p.variants }}</div>
+                    <div style="font-size:12px;color:#9A9993;margin-top:6px">{{ p.date }}</div>
+                  </div>
+                  <button onClick="{{ p.menu }}" aria-label="Действия" style="width:34px;height:34px;border-radius:10px;border:none;background:transparent;color:#6B6A66;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:#F1EFEA"><span style="font-family:'Material Symbols Rounded';font-size:20px">more_horiz</span></button>
+                </div>
+                <sc-if value="{{ p.menuOpen }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;right:12px;bottom:56px;z-index:5;width:200px;background:#fff;border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.16);border:1px solid #ECEAE5;padding:6px;display:flex;flex-direction:column">
+                    <button onClick="{{ p.open }}" style="height:38px;border:none;background:transparent;border-radius:10px;text-align:left;padding:0 10px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#F4F2EE"><span style="font-family:'Material Symbols Rounded';font-size:18px">open_in_new</span>Открыть</button>
+                    <button onClick="{{ p.dup }}" style="height:38px;border:none;background:transparent;border-radius:10px;text-align:left;padding:0 10px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#F4F2EE"><span style="font-family:'Material Symbols Rounded';font-size:18px">content_copy</span>Дублировать</button>
+                    <button onClick="{{ p.del }}" style="height:38px;border:none;background:transparent;border-radius:10px;text-align:left;padding:0 10px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:10px;color:#C94848" style-hover="background:#FBEDED"><span style="font-family:'Material Symbols Rounded';font-size:18px">delete</span>Удалить</button>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{ tabTemplates }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:30px;font-weight:700;letter-spacing:-.02em">Шаблоны</div>
+        <div style="font-size:14px;color:#6B6A66;margin:4px 0 24px">Готовые комнаты с расставленной мебелью. Откройте и измените под себя.</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px">
+          <sc-for list="{{ templates }}" as="t" hint-placeholder-count="6">
+            <div style="border-radius:20px;background:#fff;border:1px solid #ECEAE5;overflow:hidden;display:flex;flex-direction:column">
+              <div style="height:200px;background:#F1EFEA;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.Plan" room="{{ t.room }}" items="{{ t.items }}" doors="{{ t.doors }}" windows="{{ t.windows }}" floor="{{ t.floor }}" fit-w="{{ 250 }}" fit-h="{{ 180 }}" dims="{{ false }}" margin="{{ 8 }}" hint-size="250px,180px"></x-import></div>
+              <div style="padding:14px 16px 16px;display:flex;align-items:center;gap:10px"><div style="flex:1"><div style="font-size:16px;font-weight:700">{{ t.name }}</div><div style="font-size:13px;color:#6B6A66;margin-top:3px">{{ t.size }}</div></div>
+              <button onClick="{{ t.open }}" style="height:36px;padding:0 14px;border-radius:10px;border:1px solid #E5E3DE;background:#fff;font-weight:600;font-size:13px;cursor:pointer" style-hover="border-color:#5FA768;color:#3f8048">Использовать шаблон</button></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabCatalog }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:30px;font-weight:700;letter-spacing:-.02em">Каталог мебели</div>
+        <div style="font-size:14px;color:#6B6A66;margin:4px 0 20px">Типовые размеры. Любой предмет можно изменить в редакторе.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+          <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="9"><button onClick="{{ c.on }}" style="{{ c.style }}">{{ c.label }}</button></sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px">
+          <sc-for list="{{ catItems }}" as="c" hint-placeholder-count="8">
+            <div style="border-radius:18px;background:#fff;border:1px solid #ECEAE5;padding:14px;display:flex;flex-direction:column;gap:10px">
+              <div style="height:110px;border-radius:12px;background:#F4F2EE;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ c.type }}" w="{{ c.w }}" h="{{ c.h }}" size="{{ 84 }}" hint-size="84px,84px"></x-import></div>
+              <div><div style="font-size:14px;font-weight:600">{{ c.name }}</div><div style="font-size:12px;color:#8A8984;margin-top:2px">{{ c.dims }}</div></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabMine }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px"><div><div style="font-size:30px;font-weight:700;letter-spacing:-.02em">Моя мебель</div><div style="font-size:14px;color:#6B6A66;margin-top:4px">Предметы с вашими размерами доступны во всех проектах.</div></div>
+        <button onClick="{{ openCustom }}" style="height:42px;padding:0 16px;border-radius:12px;border:1px solid #E5E3DE;background:#fff;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px">straighten</span>Добавить по размерам</button></div>
+        <sc-if value="{{ mineEmpty }}" hint-placeholder-val="{{ true }}">
+          <div style="border-radius:20px;border:1.5px dashed #CFCBC2;padding:56px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+            <span style="font-family:'Material Symbols Rounded';font-size:40px;color:#D4AF7C">weekend</span>
+            <div style="font-size:20px;font-weight:700">Пока пусто</div>
+            <div style="font-size:14px;color:#6B6A66;max-width:380px;line-height:1.5">Измерьте свой диван или шкаф рулеткой и добавьте его сюда — так проверка будет точной.</div>
+          </div>
+        </sc-if>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px">
+          <sc-for list="{{ mineItems }}" as="c" hint-placeholder-count="0">
+            <div style="border-radius:18px;background:#fff;border:1px solid #ECEAE5;padding:14px;display:flex;flex-direction:column;gap:10px">
+              <div style="height:110px;border-radius:12px;background:#F4F2EE;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ c.type }}" w="{{ c.w }}" h="{{ c.h }}" size="{{ 84 }}" hint-size="84px,84px"></x-import></div>
+              <div><div style="font-size:14px;font-weight:600">{{ c.name }}</div><div style="font-size:12px;color:#8A8984;margin-top:2px">{{ c.dims }}</div></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ tabSettings }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:30px;font-weight:700;letter-spacing:-.02em;margin-bottom:24px">Профиль и настройки</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;max-width:980px">
+          <div style="border-radius:20px;background:#fff;border:1px solid #ECEAE5;padding:24px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:center;gap:14px"><div style="width:56px;height:56px;border-radius:50%;background:#D4AF7C;color:#0B0D0D;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center">АС</div><div><div style="font-size:18px;font-weight:700">Анна Смирнова</div><div style="font-size:13px;color:#6B6A66">Бесплатный тариф · 5 проектов</div></div></div>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#6B6A66">Имя<input value="Анна Смирнова" style="height:44px;border-radius:12px;border:1px solid #E5E3DE;padding:0 12px;font-size:14px;outline:none"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#6B6A66">Email<input value="anna@mail.ru" style="height:44px;border-radius:12px;border:1px solid #E5E3DE;padding:0 12px;font-size:14px;outline:none"></label>
+            <button style="align-self:flex-start;height:40px;padding:0 16px;border-radius:12px;border:none;background:#5FA768;color:#fff;font-weight:700;font-size:14px;cursor:pointer">Сохранить изменения</button>
+          </div>
+          <div style="border-radius:20px;background:#fff;border:1px solid #ECEAE5;padding:24px;display:flex;flex-direction:column;gap:18px">
+            <div style="font-size:16px;font-weight:700">Предпочтения</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div style="font-size:14px;font-weight:600">Единицы измерения</div><div style="font-size:12px;color:#8A8984">Для всех новых проектов</div></div>
+              <div style="display:flex;background:#F1EFEA;border-radius:10px;padding:3px"><sc-for list="{{ unitBtns }}" as="u" hint-placeholder-count="2"><button onClick="{{ u.on }}" style="{{ u.style }}">{{ u.label }}</button></sc-for></div></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div><div style="font-size:14px;font-weight:600">Тема интерфейса</div><div style="font-size:12px;color:#8A8984">Холст редактора всегда светлый</div></div>
+              <div style="display:flex;background:#F1EFEA;border-radius:10px;padding:3px"><sc-for list="{{ themeBtns }}" as="u" hint-placeholder-count="3"><button onClick="{{ u.on }}" style="{{ u.style }}">{{ u.label }}</button></sc-for></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600">Минимальный проход<span>{{ thrText }}</span></div><input type="range" min="40" max="100" step="5" value="{{ thr }}" onChange="{{ onThr }}" style="width:100%;margin-top:10px"><div style="font-size:12px;color:#8A8984">Более узкие места отмечаются жёлтым как предупреждение.</div></div>
+            <div style="height:1px;background:#ECEAE5"></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button style="height:40px;padding:0 14px;border-radius:12px;border:1px solid #E5E3DE;background:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px"><span style="font-family:'Material Symbols Rounded';font-size:18px">help</span>Помощь</button>
+              <button onClick="{{ logout }}" style="height:40px;padding:0 14px;border-radius:12px;border:1px solid #E5E3DE;background:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px"><span style="font-family:'Material Symbols Rounded';font-size:18px">logout</span>Выйти</button>
+              <button onClick="{{ askDeleteAccount }}" style="height:40px;padding:0 14px;border-radius:12px;border:none;background:transparent;color:#C94848;font-size:14px;cursor:pointer">Удалить аккаунт</button>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </main>
+</div>
+</sc-if>
+
+<!-- ============ WIZARD ============ -->
+<sc-if value="{{ isWizard }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column;min-height:0;background:#F7F7F5">
+  <header style="height:64px;flex:none;background:#0B0D0D;display:flex;align-items:center;padding:0 24px;gap:14px">
+    <div style="display:flex;align-items:center;gap:10px"><img src="assets/logo-mark-dark.png" style="height:32px;mix-blend-mode:lighten"><span style="font-weight:800;font-size:18px;color:#F8F7F4">Room<span style="color:#D4AF7C">Fit</span></span></div>
+    <div style="flex:1"></div>
+    <button onClick="{{ goDash }}" style="height:38px;padding:0 14px;border-radius:10px;border:1px solid rgba(248,247,244,.16);background:transparent;color:#F8F7F4;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:18px">close</span>Отмена</button>
+  </header>
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:0">
+    <div style="padding:48px clamp(24px,5vw,72px);overflow:auto;display:flex;flex-direction:column">
+      <div style="display:flex;gap:8px;margin-bottom:36px">
+        <sc-for list="{{ wzSteps }}" as="s" hint-placeholder-count="4"><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div style="{{ s.bar }}"></div><div style="{{ s.label }}">{{ s.text }}</div></div></sc-for>
+      </div>
+      <sc-if value="{{ wz1 }}" hint-placeholder-val="{{ true }}">
+        <div style="font-size:32px;font-weight:700;letter-spacing:-.02em">Как назовём комнату?</div>
+        <div style="font-size:15px;color:#6B6A66;margin:8px 0 24px">Название можно изменить в любой момент.</div>
+        <input value="{{ wzName }}" onChange="{{ onWzName }}" style="height:56px;border-radius:14px;border:1.5px solid #5FA768;background:#fff;padding:0 18px;font-size:18px;font-weight:600;outline:none;max-width:480px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><sc-for list="{{ wzNameChips }}" as="c" hint-placeholder-count="5"><button onClick="{{ c.on }}" style="height:34px;padding:0 14px;border-radius:999px;border:1px solid #E5E3DE;background:#fff;font-size:13px;cursor:pointer" style-hover="border-color:#D4AF7C">{{ c.label }}</button></sc-for></div>
+      </sc-if>
+      <sc-if value="{{ wz2 }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:32px;font-weight:700;letter-spacing:-.02em">Как создадим план?</div>
+        <div style="font-size:15px;color:#6B6A66;margin:8px 0 24px">Для большинства комнат достаточно двух размеров.</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:620px">
+          <button style="text-align:left;border-radius:18px;border:2px solid #5FA768;background:#fff;padding:20px;cursor:pointer;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Material Symbols Rounded';font-size:30px;color:#5FA768">square_foot</span><span style="font-size:17px;font-weight:700">Создать вручную</span><span style="font-size:13px;color:#6B6A66;line-height:1.45">Введите ширину и длину комнаты. Двери и окна добавите в редакторе.</span></button>
+          <div style="text-align:left;border-radius:18px;border:1px solid #E5E3DE;background:#F1EFEA;padding:20px;display:flex;flex-direction:column;gap:10px;opacity:.75"><div style="display:flex;justify-content:space-between"><span style="font-family:'Material Symbols Rounded';font-size:30px;color:#8A8984">upload_file</span><span style="font-size:11px;font-weight:700;color:#9C7A45;background:rgba(212,175,124,.22);border-radius:999px;padding:4px 9px;height:fit-content">Скоро</span></div><span style="font-size:17px;font-weight:700;color:#6B6A66">Загрузить план</span><span style="font-size:13px;color:#8A8984;line-height:1.45">Фото или PDF планировки с калибровкой масштаба.</span></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ wz3 }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:32px;font-weight:700;letter-spacing:-.02em">Размеры комнаты</div>
+        <div style="font-size:15px;color:#6B6A66;margin:8px 0 24px">Измеряйте по полу, от стены до стены.</div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;max-width:560px">
+          <sc-for list="{{ wzDims }}" as="d" hint-placeholder-count="2">
+            <label style="flex:1;min-width:160px;display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#6B6A66">{{ d.label }}
+              <div style="height:56px;border-radius:14px;border:1px solid #E5E3DE;background:#fff;display:flex;align-items:center;padding:0 6px 0 16px;gap:6px"><input value="{{ d.value }}" onChange="{{ d.onChange }}" onBlur="{{ d.onBlur }}" onKeyDown="{{ d.onKeyDown }}" style="flex:1;min-width:0;border:none;outline:none;font-size:20px;font-weight:700;color:#1E1E22;background:transparent"><span style="font-size:14px;color:#8A8984">{{ unit }}</span>
+              <div style="display:flex;flex-direction:column"><button onClick="{{ d.inc }}" style="width:28px;height:22px;border:none;background:transparent;cursor:pointer;color:#6B6A66"><span style="font-family:'Material Symbols Rounded';font-size:18px">expand_less</span></button><button onClick="{{ d.dec }}" style="width:28px;height:22px;border:none;background:transparent;cursor:pointer;color:#6B6A66"><span style="font-family:'Material Symbols Rounded';font-size:18px">expand_more</span></button></div></div>
+            </label>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center"><span style="font-size:13px;color:#8A8984">Быстро:</span><sc-for list="{{ wzPresets }}" as="c" hint-placeholder-count="4"><button onClick="{{ c.on }}" style="height:32px;padding:0 12px;border-radius:999px;border:1px solid #E5E3DE;background:#fff;font-size:13px;cursor:pointer" style-hover="border-color:#D4AF7C">{{ c.label }}</button></sc-for></div>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:28px"><span style="font-size:14px;font-weight:600">Единицы</span><div style="display:flex;background:#ECEAE5;border-radius:10px;padding:3px"><sc-for list="{{ unitBtns }}" as="u" hint-placeholder-count="2"><button onClick="{{ u.on }}" style="{{ u.style }}">{{ u.label }}</button></sc-for></div></div>
+        <div style="font-size:14px;font-weight:600;margin:28px 0 10px">Форма комнаты</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <div style="width:150px;border-radius:14px;border:2px solid #5FA768;background:#fff;padding:14px;display:flex;flex-direction:column;gap:10px"><div style="width:48px;height:34px;border:3px solid #1E1E22;border-radius:2px"></div><span style="font-size:13px;font-weight:700">Прямоугольная</span></div>
+          <div style="width:150px;border-radius:14px;border:1px solid #E5E3DE;background:#F1EFEA;padding:14px;display:flex;flex-direction:column;gap:10px;opacity:.7"><div style="display:flex;justify-content:space-between"><div style="width:48px;height:34px;border:3px solid #8A8984;border-radius:2px;clip-path:polygon(0 0,60% 0,60% 50%,100% 50%,100% 100%,0 100%)"></div><span style="font-size:10px;font-weight:700;color:#9C7A45">Скоро</span></div><span style="font-size:13px;font-weight:700;color:#6B6A66">Г-образная</span></div>
+          <div style="width:150px;border-radius:14px;border:1px solid #E5E3DE;background:#F1EFEA;padding:14px;display:flex;flex-direction:column;gap:10px;opacity:.7"><div style="display:flex;justify-content:space-between"><div style="width:48px;height:34px;border:3px dashed #8A8984;border-radius:2px"></div><span style="font-size:10px;font-weight:700;color:#9C7A45">Скоро</span></div><span style="font-size:13px;font-weight:700;color:#6B6A66">Произвольная</span></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ wz4 }}" hint-placeholder-val="{{ false }}">
+        <div style="width:56px;height:56px;border-radius:18px;background:rgba(95,167,104,.14);color:#5FA768;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><span style="font-family:'Material Symbols Rounded';font-size:32px">check_circle</span></div>
+        <div style="font-size:32px;font-weight:700;letter-spacing:-.02em">Комната готова</div>
+        <div style="font-size:15px;color:#6B6A66;margin:8px 0 24px;line-height:1.5">«{{ wzName }}», {{ wzSize }}. Мы добавили одну дверь — передвиньте её в редакторе, если нужно.</div>
+        <div style="display:flex;flex-direction:column;gap:10px;max-width:440px;font-size:14px;color:#3C3B38">
+          <div style="display:flex;gap:10px;align-items:center"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#D4AF7C">drag_pan</span>Перетащите мебель из каталога справа на план</div>
+          <div style="display:flex;gap:10px;align-items:center"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#D4AF7C">rotate_right</span>Клавиша R поворачивает выбранный предмет</div>
+          <div style="display:flex;gap:10px;align-items:center"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#D4AF7C">verified</span>Красная рамка — пересечение, жёлтая — узкий проход</div>
+        </div>
+      </sc-if>
+      <div style="flex:1;min-height:32px"></div>
+      <div style="display:flex;gap:10px">
+        <sc-if value="{{ wzCanBack }}" hint-placeholder-val="{{ false }}"><button onClick="{{ wzBack }}" style="height:50px;padding:0 20px;border-radius:14px;border:1px solid #E5E3DE;background:#fff;font-weight:600;font-size:15px;cursor:pointer">Назад</button></sc-if>
+        <button onClick="{{ wzNext }}" style="height:50px;padding:0 26px;border-radius:14px;border:none;background:#5FA768;color:#fff;font-weight:700;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#56985e">{{ wzNextText }}<span style="font-family:'Material Symbols Rounded';font-size:20px">arrow_forward</span></button>
+      </div>
+    </div>
+    <div style="background:#ECEAE5;display:flex;align-items:center;justify-content:center;position:relative;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:24px 24px">
+      <div style="position:absolute;top:20px;left:24px;font-size:12px;font-weight:600;color:#6B6A66;letter-spacing:.04em;text-transform:uppercase">Предпросмотр</div>
+      <x-import component-from-global-scope="RoomFit.Plan" room="{{ wzRoom }}" doors="{{ wzDoors }}" floor="oak" unit="{{ unit }}" fit-w="{{ 480 }}" fit-h="{{ 420 }}" hint-size="480px,420px"></x-import>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ EDITOR ============ -->
+<sc-if value="{{ isEditor }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column;min-height:0">
+  <header style="height:60px;flex:none;background:#0B0D0D;display:flex;align-items:center;gap:10px;padding:0 14px 0 18px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.06)">
+    <button onClick="{{ goDash }}" title="К проектам" style="display:flex;align-items:center;gap:10px;background:none;border:none;cursor:pointer;padding:0"><img src="assets/logo-mark-dark.png" style="height:32px;mix-blend-mode:lighten"></button>
+    <div style="width:1px;height:26px;background:rgba(255,255,255,.1)"></div>
+    <div style="display:flex;align-items:center;gap:4px;min-width:130px;flex:0 1 auto;overflow:hidden">
+      <sc-if value="{{ renaming }}" hint-placeholder-val="{{ false }}"><input value="{{ projName }}" onChange="{{ onProjName }}" onBlur="{{ stopRename }}" onKeyDown="{{ renameKey }}" autoFocus style="height:34px;border-radius:8px;border:1px solid #D4AF7C;background:#1E1E22;color:#F8F7F4;font-weight:700;font-size:15px;padding:0 10px;outline:none;width:200px"></sc-if>
+      <sc-if value="{{ notRenaming }}" hint-placeholder-val="{{ true }}"><button onClick="{{ startRename }}" title="Переименовать" style="height:34px;display:flex;align-items:center;gap:8px;background:none;border:none;color:#F8F7F4;font-weight:700;font-size:15px;cursor:pointer;border-radius:8px;padding:0 8px;white-space:nowrap;max-width:220px;min-width:0" style-hover="background:#1E1E22"><span style="overflow:hidden;text-overflow:ellipsis;min-width:0">{{ projName }}</span><span style="font-family:'Material Symbols Rounded';font-size:16px;color:rgba(248,247,244,.45)">edit</span></button></sc-if>
+    </div>
+    <div style="flex:1"></div>
+    <div style="display:flex;align-items:center;background:#1E1E22;border-radius:12px;padding:3px;flex:none">
+      <button style="height:32px;padding:0 14px;border-radius:9px;border:none;background:#F8F7F4;color:#0B0D0D;font-weight:700;font-size:13px;cursor:default;white-space:nowrap">2D план</button>
+      <button onClick="{{ try3d }}" title="3D-режим в разработке" style="height:32px;padding:0 12px;border-radius:9px;border:none;background:transparent;color:rgba(248,247,244,.5);font-weight:600;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:16px">lock</span>3D<span style="font-size:10px;font-weight:700;color:#D4AF7C">Скоро</span></button>
+    </div>
+    <div style="display:flex;align-items:center;gap:2px;margin-left:8px;flex:none">
+      <button onClick="{{ undo }}" title="Отменить (Ctrl+Z)" style="{{ undoStyle }}"><span style="font-family:'Material Symbols Rounded';font-size:20px">undo</span></button>
+      <button onClick="{{ redo }}" title="Повторить (Ctrl+Shift+Z)" style="{{ redoStyle }}"><span style="font-family:'Material Symbols Rounded';font-size:20px">redo</span></button>
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><div style="width:1px;height:22px;background:rgba(255,255,255,.1);margin:0 6px"></div>
+      <sc-for list="{{ viewToggles }}" as="v" hint-placeholder-count="3"><button onClick="{{ v.on }}" title="{{ v.title }}" style="{{ v.style }}"><span style="font-family:'Material Symbols Rounded';font-size:20px">{{ v.icon }}</span></button></sc-for></sc-if>
+    </div>
+    <div style="flex:1"></div>
+    <div style="display:flex;background:#1E1E22;border-radius:10px;padding:3px;flex:none"><sc-for list="{{ unitBtnsDark }}" as="u" hint-placeholder-count="2"><button onClick="{{ u.on }}" style="{{ u.style }}">{{ u.label }}</button></sc-for></div>
+    <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(248,247,244,.6);white-space:nowrap;justify-content:flex-end;flex:none"><span style="{{ saveDot }}"></span><sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">{{ saveText }}</sc-if></div>
+    <button onClick="{{ openExport }}" title="Экспорт" style="flex:none;height:38px;padding:0 12px;border-radius:11px;border:1px solid rgba(248,247,244,.16);background:transparent;color:#F8F7F4;font-weight:600;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px" style-hover="background:#1E1E22"><span style="font-family:'Material Symbols Rounded';font-size:18px">ios_share</span><sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">Экспорт</sc-if></button>
+    <button onClick="{{ doSave }}" style="flex:none;height:38px;padding:0 16px;border-radius:11px;border:none;background:#5FA768;color:#fff;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px" style-hover="background:#56985e"><span style="font-family:'Material Symbols Rounded';font-size:18px">save</span>Сохранить</button>
+    <div style="flex:none;width:36px;height:36px;border-radius:50%;background:#D4AF7C;color:#0B0D0D;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center">АС</div>
+  </header>
+  <div style="flex:1;display:flex;min-height:0">
+    <nav style="width:76px;flex:none;background:#0B0D0D;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 0">
+      <sc-for list="{{ tools }}" as="t" hint-placeholder-count="8">
+        <button onClick="{{ t.on }}" title="{{ t.tip }}" style="{{ t.style }}"><span style="font-family:'Material Symbols Rounded';font-size:22px">{{ t.icon }}</span><span style="font-size:10px;font-weight:600">{{ t.label }}</span></button>
+      </sc-for>
+    </nav>
+    <div style="flex:1;min-width:0;overflow:hidden;display:flex;flex-direction:column;background:#F7F7F5">
+      <div style="height:48px;flex:none;display:flex;align-items:center;gap:6px;padding:0 14px;border-bottom:1px solid #E8E6E1;background:#FBFBFA">
+        <div style="flex:1;min-width:0;display:flex;align-items:center;gap:6px;overflow-x:auto;white-space:nowrap;scrollbar-width:none">
+        <span style="font-size:12px;font-weight:600;color:#8A8984;margin-right:4px;flex:none">Варианты</span>
+        <sc-for list="{{ variantTabs }}" as="v" hint-placeholder-count="2">
+          <button onClick="{{ v.on }}" onDoubleClick="{{ v.rename }}" title="Двойной клик — переименовать" style="{{ v.style }}"><span style="{{ v.dot }}"></span>{{ v.label }}</button>
+        </sc-for>
+        <button onClick="{{ dupVariant }}" title="Дублировать текущий вариант" style="flex:none;height:32px;padding:0 10px;border-radius:9px;border:1px dashed #CFCBC2;background:transparent;color:#6B6A66;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px" style-hover="border-color:#5FA768;color:#3f8048"><span style="font-family:'Material Symbols Rounded';font-size:16px">content_copy</span>Дублировать</button>
+        <button onClick="{{ newVariant }}" title="Пустой вариант" style="flex:none;width:32px;height:32px;border-radius:9px;border:1px dashed #CFCBC2;background:transparent;color:#6B6A66;cursor:pointer;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:18px">add</span></button>
+        </div>
+        <button onClick="{{ goCompare }}" style="flex:none;height:32px;padding:0 12px;border-radius:9px;border:1px solid #E5E3DE;background:#fff;color:#1E1E22;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px" style-hover="border-color:#D4AF7C"><span style="font-family:'Material Symbols Rounded';font-size:16px">compare</span><sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">Сравнить варианты</sc-if><sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">Сравнить</sc-if></button>
+      </div>
+      <div ref="{{ cvRef }}" onPointerDown="{{ onCanvasDown }}" onWheel="{{ onWheel }}" onDragOver="{{ onDragOver }}" onDrop="{{ onDrop }}" style="{{ canvasStyle }}">
+        <sc-if value="{{ showGridBg }}" hint-placeholder-val="{{ true }}"><div style="{{ gridStyle }}"></div></sc-if>
+        <div style="{{ stageStyle }}">
+          <x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ noItems }}" doors="{{ doors }}" windows="{{ windows }}" floor="{{ floor }}" unit="{{ unit }}" scale="{{ S }}" margin="{{ M }}" dims="{{ showDims }}" zones="{{ showZones }}" hint-size="600px,480px"></x-import>
+          <div style="{{ layerStyle }}">
+            <sc-for list="{{ itemViews }}" as="it" hint-placeholder-count="0">
+              <div onPointerDown="{{ it.down }}" onDoubleClick="{{ it.dbl }}" style="{{ it.box }}">
+                <div style="{{ it.inner }}">
+                  <x-import component-from-global-scope="RoomFit.Furn" type="{{ it.type }}" w="{{ it.pw }}" h="{{ it.ph }}" tone="{{ it.tone }}" hint-size="40px,40px"></x-import>
+                  <div style="{{ it.ring }}"></div>
+                </div>
+                <sc-if value="{{ it.showName }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;background:rgba(255,255,255,.9);padding:2px 6px;border-radius:6px;white-space:nowrap;pointer-events:none">{{ it.name }}</div></sc-if>
+                <sc-if value="{{ it.sel }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;inset:-4px;border:1.5px solid #5FA768;border-radius:5px;pointer-events:none"></div>
+                  <sc-for list="{{ it.handles }}" as="hd" hint-placeholder-count="4"><div onPointerDown="{{ hd.down }}" style="{{ hd.style }}"></div></sc-for>
+                  <button onPointerDown="{{ it.rotDown }}" title="Повернуть на 90° (R)" style="position:absolute;left:50%;top:-38px;width:26px;height:26px;margin-left:-13px;border-radius:50%;border:1.5px solid #5FA768;background:#fff;color:#3f8048;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.15)"><span style="font-family:'Material Symbols Rounded';font-size:16px">rotate_right</span></button>
+                  <div style="position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);height:22px;padding:0 8px;border-radius:7px;background:#1E1E22;color:#F8F7F4;font-size:11px;font-weight:700;display:flex;align-items:center;white-space:nowrap;pointer-events:none">{{ it.dimText }}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+            <sc-for list="{{ rayViews }}" as="r" hint-placeholder-count="0">
+              <div style="{{ r.line }}"><div style="{{ r.label }}">{{ r.text }}</div></div>
+            </sc-for>
+            <sc-if value="{{ hasMeasure }}" hint-placeholder-val="{{ false }}">
+              <div style="{{ measureLine }}"><div style="position:absolute;left:-4px;top:-4px;width:9px;height:9px;border-radius:50%;background:#1E1E22"></div><div style="position:absolute;right:-4px;top:-4px;width:9px;height:9px;border-radius:50%;background:#1E1E22"></div></div>
+              <div style="{{ measureLabel }}">{{ measureText }}</div>
+            </sc-if>
+          </div>
+        </div>
+        <sc-if value="{{ showHint }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:#1E1E22;color:#F8F7F4;border-radius:14px;padding:10px 10px 10px 14px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.18)" onPointerDown="{{ stop }}">
+            <span style="font-family:'Material Symbols Rounded';font-size:20px;color:#D4AF7C">lightbulb</span>Перетащите мебель из каталога на план. Колесо мыши — масштаб, фон — сдвиг.
+            <button onClick="{{ hideHint }}" style="height:28px;padding:0 10px;border-radius:8px;border:none;background:#2C2C31;color:#F8F7F4;font-size:12px;cursor:pointer">Понятно</button>
+          </div>
+        </sc-if>
+        <div onPointerDown="{{ stop }}" style="position:absolute;left:16px;bottom:16px;display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+          <sc-if value="{{ issuesOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="width:340px;max-height:300px;overflow:auto;background:#fff;border-radius:16px;border:1px solid #ECEAE5;box-shadow:0 16px 40px rgba(0,0,0,.14);padding:8px">
+              <div style="font-size:13px;font-weight:700;padding:8px 10px">Проверка пространства</div>
+              <sc-for list="{{ issueViews }}" as="is" hint-placeholder-count="0">
+                <button onClick="{{ is.on }}" style="width:100%;display:flex;gap:10px;align-items:flex-start;text-align:left;border:none;background:transparent;border-radius:10px;padding:8px 10px;cursor:pointer;font-size:13px;line-height:1.35" style-hover="background:#F4F2EE"><span style="{{ is.icon }}">{{ is.glyph }}</span>{{ is.text }}</button>
+              </sc-for>
+              <sc-if value="{{ noIssues }}" hint-placeholder-val="{{ false }}"><div style="padding:6px 10px 10px;font-size:13px;color:#6B6A66">Все предметы помещаются, проходы шире {{ thrText }}.</div></sc-if>
+            </div>
+          </sc-if>
+          <button onClick="{{ toggleIssues }}" style="{{ checkPill }}"><span style="font-family:'Material Symbols Rounded';font-size:18px">{{ checkIcon }}</span>{{ checkText }}</button>
+        </div>
+        <div onPointerDown="{{ stop }}" style="{{ zoomBarPos }}"><div style="display:flex;align-items:center;gap:2px;background:#fff;border:1px solid #ECEAE5;border-radius:14px;padding:4px;box-shadow:0 6px 20px rgba(0,0,0,.06)">
+          <button onClick="{{ zoomOut }}" title="Уменьшить" style="width:34px;height:34px;border:none;background:transparent;border-radius:10px;cursor:pointer" style-hover="background:#F4F2EE"><span style="font-family:'Material Symbols Rounded';font-size:20px">remove</span></button>
+          <div style="min-width:56px;text-align:center;font-size:13px;font-weight:700">{{ zoomText }}</div>
+          <button onClick="{{ zoomIn }}" title="Увеличить" style="width:34px;height:34px;border:none;background:transparent;border-radius:10px;cursor:pointer" style-hover="background:#F4F2EE"><span style="font-family:'Material Symbols Rounded';font-size:20px">add</span></button>
+          <div style="width:1px;height:20px;background:#ECEAE5;margin:0 4px"></div>
+          <button onClick="{{ fit }}" title="Подогнать комнату под экран" style="height:34px;padding:0 10px;border:none;background:transparent;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600" style-hover="background:#F4F2EE"><span style="font-family:'Material Symbols Rounded';font-size:20px">fit_screen</span>Вписать</button>
+        </div></div>
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;right:16px;bottom:22px;font-size:11px;color:#9A9993;pointer-events:none">{{ roomInfo }}</div></sc-if>
+      </div>
+    </div>
+
+    <aside style="width:320px;flex:none;background:#fff;border-left:1px solid #E8E6E1;display:flex;flex-direction:column;min-height:0">
+      <sc-if value="{{ pCatalog }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:18px 18px 10px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:16px;font-weight:700">Каталог мебели</div><button onClick="{{ openCustom }}" style="height:30px;padding:0 10px;border-radius:9px;border:1px solid #E5E3DE;background:#fff;color:#1E1E22;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap" style-hover="border-color:#D4AF7C"><span style="font-family:'Material Symbols Rounded';font-size:16px">straighten</span>Свои размеры</button></div>
+          <div style="height:40px;border-radius:12px;background:#F4F2EE;display:flex;align-items:center;gap:8px;padding:0 12px;color:#8A8984"><span style="font-family:'Material Symbols Rounded';font-size:20px">search</span><input placeholder="Поиск мебели" value="{{ cq }}" onChange="{{ onCq }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:14px;color:#1E1E22"></div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ catChips }}" as="c" hint-placeholder-count="9"><button onClick="{{ c.on }}" style="{{ c.styleSm }}">{{ c.label }}</button></sc-for></div>
+        </div>
+        <div style="flex:1;overflow:auto;padding:4px 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start">
+          <sc-for list="{{ catItems }}" as="c" hint-placeholder-count="8">
+            <div draggable="true" onDragStart="{{ c.drag }}" style="position:relative;border-radius:14px;border:1px solid #ECEAE5;padding:10px;display:flex;flex-direction:column;gap:6px;cursor:grab;background:#fff" style-hover="border-color:#D4AF7C;box-shadow:0 6px 16px rgba(0,0,0,.06)">
+              <div style="height:76px;border-radius:10px;background:#F4F2EE;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ c.type }}" w="{{ c.w }}" h="{{ c.h }}" size="{{ 60 }}" hint-size="60px,60px"></x-import></div>
+              <div style="font-size:12px;font-weight:700;line-height:1.25">{{ c.name }}</div>
+              <div style="font-size:11px;color:#8A8984">{{ c.dims }}</div>
+              <button onClick="{{ c.add }}" title="Добавить в центр комнаты" style="position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:8px;border:none;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.14);color:#3f8048;cursor:pointer;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:18px">add</span></button>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ pProps }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:48px;height:48px;border-radius:12px;background:#F4F2EE;display:flex;align-items:center;justify-content:center;flex:none"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ selType }}" w="{{ selW }}" h="{{ selH }}" size="{{ 38 }}" hint-size="38px,38px"></x-import></div>
+            <input value="{{ selName }}" onChange="{{ onSelName }}" style="flex:1;min-width:0;height:40px;border-radius:10px;border:1px solid transparent;background:transparent;font-size:16px;font-weight:700;padding:0 8px;outline:none" style-hover="border-color:#E5E3DE" style-focus="border-color:#5FA768;background:#fff">
+            <button onClick="{{ deselect }}" title="Закрыть (Esc)" style="width:32px;height:32px;border-radius:9px;border:none;background:transparent;cursor:pointer;color:#6B6A66" style-hover="background:#F4F2EE"><span style="font-family:'Material Symbols Rounded';font-size:20px">close</span></button>
+          </div>
+          <div style="{{ selStatusBox }}">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700"><span style="font-family:'Material Symbols Rounded';font-size:18px">{{ selStatusIcon }}</span>{{ selStatusTitle }}</div>
+            <sc-for list="{{ selIssues }}" as="t" hint-placeholder-count="0"><div style="font-size:12px;line-height:1.4;margin-top:6px;padding-left:26px">{{ t }}</div></sc-for>
+            <div style="font-size:12px;margin-top:6px;padding-left:26px;opacity:.8">Мин. зазор до препятствий: <b>{{ selMinGap }}</b></div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#8A8984;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Размеры и положение</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <sc-for list="{{ propFields }}" as="f" hint-placeholder-count="4">
+                <label style="min-width:0;display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#8A8984">{{ f.label }}
+                  <div style="height:40px;border-radius:10px;border:1px solid #E5E3DE;display:flex;align-items:center;padding:0 10px;gap:4px;background:#fff"><input value="{{ f.value }}" onChange="{{ f.onChange }}" onBlur="{{ f.onBlur }}" onKeyDown="{{ f.onKeyDown }}" disabled="{{ f.disabled }}" style="flex:1;min-width:0;border:none;outline:none;font-size:14px;font-weight:700;color:#1E1E22;background:transparent"><span style="font-size:12px;color:#9A9993">{{ f.suffix }}</span></div>
+                </label>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#8A8984;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Поворот</div>
+            <div style="display:flex;gap:6px">
+              <sc-for list="{{ rotBtns }}" as="r" hint-placeholder-count="4"><button onClick="{{ r.on }}" style="{{ r.style }}">{{ r.label }}</button></sc-for>
+              <button onClick="{{ rotSel }}" title="Повернуть на 90° (R)" style="width:40px;height:36px;border-radius:10px;border:1px solid #E5E3DE;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:20px">rotate_right</span></button>
+            </div>
+          </div>
+          <label style="display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;cursor:pointer;padding:4px 0"><span style="display:flex;align-items:center;gap:8px"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#6B6A66">lock</span>Заблокировать положение</span>
+            <button onClick="{{ toggleLock }}" style="{{ lockTrack }}"><span style="{{ lockKnob }}"></span></button></label>
+          <div style="display:flex;gap:8px;margin-top:auto">
+            <button onClick="{{ dupSel }}" style="flex:1;height:42px;border-radius:12px;border:1px solid #E5E3DE;background:#fff;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px" style-hover="border-color:#5FA768"><span style="font-family:'Material Symbols Rounded';font-size:18px">content_copy</span>Дублировать</button>
+            <button onClick="{{ delSel }}" style="flex:1;height:42px;border-radius:12px;border:1px solid #F1D3D3;background:#FDF6F6;color:#C94848;font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px" style-hover="background:#FBEDED"><span style="font-family:'Material Symbols Rounded';font-size:18px">delete</span>Удалить</button>
+          </div>
+          <div style="font-size:11px;color:#9A9993;line-height:1.5">Стрелки — сдвиг на 1 см, Shift — на 10 см · R — поворот · Ctrl+D — копия · Delete — удалить</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ pRoom }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:18px">
+          <div><div style="font-size:16px;font-weight:700">Комната</div><div style="font-size:13px;color:#6B6A66;margin-top:2px">Габариты по полу, без толщины стен</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <sc-for list="{{ roomFields }}" as="f" hint-placeholder-count="2">
+              <label style="min-width:0;display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#8A8984">{{ f.label }}<div style="height:44px;border-radius:10px;border:1px solid #E5E3DE;display:flex;align-items:center;padding:0 10px;gap:4px"><input value="{{ f.value }}" onChange="{{ f.onChange }}" onBlur="{{ f.onBlur }}" onKeyDown="{{ f.onKeyDown }}" style="flex:1;min-width:0;border:none;outline:none;font-size:16px;font-weight:700;background:transparent"><span style="font-size:12px;color:#9A9993">{{ unit }}</span></div></label>
+            </sc-for>
+          </div>
+          <div style="font-size:13px;color:#6B6A66;display:flex;justify-content:space-between"><span>Площадь</span><b style="color:#1E1E22">{{ areaText }}</b></div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#8A8984;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Пол</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px"><sc-for list="{{ floorBtns }}" as="f" hint-placeholder-count="4"><button onClick="{{ f.on }}" style="{{ f.style }}"><span style="{{ f.swatch }}"></span><span style="font-size:11px;font-weight:600">{{ f.label }}</span></button></sc-for></div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#8A8984;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Форма</div>
+            <div style="display:flex;gap:8px"><div style="flex:1;height:44px;border-radius:10px;border:2px solid #5FA768;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">Прямоугольная</div><div style="flex:1;height:44px;border-radius:10px;border:1px solid #E5E3DE;background:#F4F2EE;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:600;color:#9A9993">Произвольная <span style="font-size:10px;font-weight:700;color:#9C7A45">Скоро</span></div></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ pWalls }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:14px">
+          <div><div style="font-size:16px;font-weight:700">Стены</div><div style="font-size:13px;color:#6B6A66;margin-top:2px;line-height:1.45">В прямоугольной комнате противоположные стены меняются вместе.</div></div>
+          <sc-for list="{{ wallRows }}" as="w" hint-placeholder-count="4">
+            <label style="display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;font-weight:600">{{ w.label }}<div style="width:130px;height:40px;border-radius:10px;border:1px solid #E5E3DE;display:flex;align-items:center;padding:0 10px;gap:4px"><input value="{{ w.value }}" onChange="{{ w.onChange }}" onBlur="{{ w.onBlur }}" onKeyDown="{{ w.onKeyDown }}" style="flex:1;min-width:0;border:none;outline:none;font-size:14px;font-weight:700;background:transparent"><span style="font-size:12px;color:#9A9993">{{ unit }}</span></div></label>
+          </sc-for>
+          <div style="display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600">Толщина стен<span style="color:#6B6A66">10 см</span></div>
+          <div style="border-radius:14px;background:#F7F4EE;padding:12px 14px;font-size:12px;color:#7A6A50;line-height:1.5;display:flex;gap:8px"><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#D4AF7C">schedule</span>Редактор произвольных стен, ниш и выступов появится в следующих версиях.</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ pOpenings }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:16px;font-weight:700">{{ openTitle }}</div><button onClick="{{ addOpening }}" style="height:32px;padding:0 10px;border-radius:9px;border:none;background:#5FA768;color:#fff;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px"><span style="font-family:'Material Symbols Rounded';font-size:16px">add</span>Добавить</button></div>
+          <sc-for list="{{ openViews }}" as="o" hint-placeholder-count="1">
+            <div style="border-radius:14px;border:1px solid #ECEAE5;padding:14px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:700">{{ o.title }}<button onClick="{{ o.del }}" title="Удалить" style="width:30px;height:30px;border-radius:8px;border:none;background:transparent;color:#C94848;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:18px">delete</span></button></div>
+              <div style="display:flex;background:#F4F2EE;border-radius:10px;padding:3px"><sc-for list="{{ o.walls }}" as="w" hint-placeholder-count="4"><button onClick="{{ w.on }}" style="{{ w.style }}">{{ w.label }}</button></sc-for></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <label style="min-width:0;display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#8A8984">От угла<div style="height:38px;border-radius:10px;border:1px solid #E5E3DE;display:flex;align-items:center;padding:0 10px"><input value="{{ o.at.value }}" onChange="{{ o.at.onChange }}" onBlur="{{ o.at.onBlur }}" onKeyDown="{{ o.at.onKeyDown }}" style="flex:1;min-width:0;border:none;outline:none;font-size:14px;font-weight:700"><span style="font-size:12px;color:#9A9993">{{ unit }}</span></div></label>
+                <label style="min-width:0;display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#8A8984">Ширина проёма<div style="height:38px;border-radius:10px;border:1px solid #E5E3DE;display:flex;align-items:center;padding:0 10px"><input value="{{ o.w.value }}" onChange="{{ o.w.onChange }}" onBlur="{{ o.w.onBlur }}" onKeyDown="{{ o.w.onKeyDown }}" style="flex:1;min-width:0;border:none;outline:none;font-size:14px;font-weight:700"><span style="font-size:12px;color:#9A9993">{{ unit }}</span></div></label>
+              </div>
+              <sc-if value="{{ o.isDoor }}" hint-placeholder-val="{{ true }}"><button onClick="{{ o.flip }}" style="height:38px;border-radius:10px;border:1px solid #E5E3DE;background:#fff;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:18px">swap_horiz</span>{{ o.flipText }}</button></sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ pMeasure }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:14px">
+          <div><div style="font-size:16px;font-weight:700">Размеры</div><div style="font-size:13px;color:#6B6A66;margin-top:2px;line-height:1.45">Нажмите на два предмета — покажем расстояние между ближайшими краями.</div></div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="{{ mStepA }}"><span style="font-weight:800">1</span>{{ mAName }}</div>
+            <div style="{{ mStepB }}"><span style="font-weight:800">2</span>{{ mBName }}</div>
+          </div>
+          <sc-if value="{{ hasMeasure }}" hint-placeholder-val="{{ false }}">
+            <div style="border-radius:16px;background:#1E1E22;color:#F8F7F4;padding:18px"><div style="font-size:12px;color:rgba(248,247,244,.6)">Расстояние</div><div style="font-size:36px;font-weight:800;letter-spacing:-.02em;margin-top:4px">{{ measureText }}</div><div style="font-size:12px;color:#D4AF7C;margin-top:4px">{{ measureVerdict }}</div></div>
+          </sc-if>
+          <button onClick="{{ resetMeasure }}" style="height:38px;border-radius:10px;border:1px solid #E5E3DE;background:#fff;font-size:13px;font-weight:600;cursor:pointer">Сбросить</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ pZones }}" hint-placeholder-val="{{ false }}">
+        <div style="flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:18px">
+          <div><div style="font-size:16px;font-weight:700">Зоны и проходы</div><div style="font-size:13px;color:#6B6A66;margin-top:2px">Настройка проверки пространства</div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:14px;font-weight:600">Минимальный проход<span>{{ thrText }}</span></div><input type="range" min="40" max="100" step="5" value="{{ thr }}" onChange="{{ onThr }}" style="width:100%;margin-top:10px"></div>
+          <label style="display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600">Показывать зону открывания двери<button onClick="{{ toggleZones }}" style="{{ zonesTrack }}"><span style="{{ zonesKnob }}"></span></button></label>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.4">
+            <div style="display:flex;gap:10px"><span style="width:14px;height:14px;border-radius:4px;background:#5FA768;flex:none;margin-top:2px"></span><span><b>Всё в порядке</b> — пересечений нет, проходы достаточные.</span></div>
+            <div style="display:flex;gap:10px"><span style="width:14px;height:14px;border-radius:4px;border:2px dashed #E3A43B;flex:none;margin-top:2px"></span><span><b>Узкий проход</b> — предупреждение. Пройти можно, но тесно.</span></div>
+            <div style="display:flex;gap:10px"><span style="width:14px;height:14px;border-radius:4px;background:#E65A5A;flex:none;margin-top:2px"></span><span><b>Столкновение</b> — предмет пересекает другой, стену или зону двери.</span></div>
+          </div>
+        </div>
+      </sc-if>
+    </aside>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ COMPARE ============ -->
+<sc-if value="{{ isCompare }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1;display:flex;flex-direction:column;min-height:0;background:#F7F7F5">
+  <header style="height:60px;flex:none;background:#0B0D0D;display:flex;align-items:center;gap:12px;padding:0 18px">
+    <button onClick="{{ goEditor }}" style="height:36px;padding:0 12px;border-radius:10px;border:1px solid rgba(248,247,244,.16);background:transparent;color:#F8F7F4;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:18px">arrow_back</span>В редактор</button>
+    <div style="font-size:15px;font-weight:700;color:#F8F7F4">Сравнение вариантов · {{ projName }}</div>
+    <div style="flex:1"></div>
+    <button onClick="{{ openExport }}" style="height:36px;padding:0 14px;border-radius:10px;border:1px solid rgba(248,247,244,.16);background:transparent;color:#F8F7F4;font-weight:600;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:18px">ios_share</span>Экспорт</button>
+  </header>
+  <div style="flex:1;overflow:auto;padding:24px 28px;display:flex;flex-direction:column;gap:18px">
+    <div style="{{ verdictBox }}"><span style="font-family:'Material Symbols Rounded';font-size:22px">{{ verdictIcon }}</span><span>{{ verdictText }}</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px">
+      <sc-for list="{{ cmpCols }}" as="c" hint-placeholder-count="2">
+        <div style="{{ c.card }}">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ c.tabs }}" as="t" hint-placeholder-count="2"><button onClick="{{ t.on }}" style="{{ t.style }}">{{ t.label }}</button></sc-for>
+            <div style="flex:1"></div>
+            <sc-if value="{{ c.best }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;font-weight:700;color:#3f8048;background:rgba(95,167,104,.14);border-radius:999px;padding:5px 10px">Удобнее</span></sc-if>
+          </div>
+          <div style="border-radius:16px;background:#F4F2EE;display:flex;align-items:center;justify-content:center;padding:12px;min-height:400px">
+            <x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ c.items }}" doors="{{ doors }}" windows="{{ windows }}" floor="{{ floor }}" unit="{{ unit }}" status="{{ c.status }}" fit-w="{{ 520 }}" fit-h="{{ 400 }}" zones="{{ true }}" hint-size="520px,400px"></x-import>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <sc-for list="{{ c.metrics }}" as="m" hint-placeholder-count="4"><div style="border-radius:12px;background:#F7F7F5;padding:10px 12px"><div style="font-size:11px;color:#8A8984;font-weight:600">{{ m.label }}</div><div style="{{ m.style }}">{{ m.value }}</div></div></sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <sc-for list="{{ c.issues }}" as="is" hint-placeholder-count="0"><div style="display:flex;gap:8px;font-size:13px;line-height:1.35"><span style="{{ is.icon }}">{{ is.glyph }}</span>{{ is.text }}</div></sc-for>
+          </div>
+          <button onClick="{{ c.choose }}" style="height:44px;border-radius:12px;border:none;background:#1E1E22;color:#F8F7F4;font-weight:700;font-size:14px;cursor:pointer;margin-top:auto" style-hover="background:#2a2a2f">Открыть этот вариант</button>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ MODALS ============ -->
+<sc-if value="{{ modalExport }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeModal }}" style="position:absolute;inset:0;background:rgba(11,13,13,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:50;padding:24px">
+  <div onClick="{{ stop }}" style="width:min(980px,100%);max-height:100%;overflow:auto;background:#fff;border-radius:24px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,1fr);box-shadow:0 30px 80px rgba(0,0,0,.3)">
+    <div style="background:#ECEAE5;padding:28px;display:flex;align-items:center;justify-content:center">
+      <div style="width:100%;max-width:480px;background:#fff;border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:22px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:16px;font-weight:800">{{ projName }}</div><div style="font-size:10px;color:#8A8984;margin-top:2px">{{ variantName }} · {{ roomSizeText }} · {{ areaText }}</div></div><div style="font-size:11px;font-weight:800">Room<span style="color:#B8925A">Fit</span></div></div>
+        <div style="display:flex;justify-content:center;background:#FAFAF8;border-radius:4px;padding:6px"><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ items }}" doors="{{ doors }}" windows="{{ windows }}" floor="{{ floor }}" unit="{{ unit }}" names="{{ expNames }}" dims="{{ expDims }}" fit-w="{{ 400 }}" fit-h="{{ 260 }}" hint-size="400px,260px"></x-import></div>
+        <sc-if value="{{ expList }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:10px;border-top:1px solid #ECEAE5;padding-top:10px">
+            <sc-for list="{{ expRows }}" as="r" hint-placeholder-count="5"><span>{{ r.name }}</span><span style="color:#6B6A66;font-weight:600">{{ r.dims }}</span></sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    <div style="padding:28px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:22px;font-weight:700">Экспорт плана</div><button onClick="{{ closeModal }}" style="width:34px;height:34px;border-radius:10px;border:none;background:#F4F2EE;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px">close</span></button></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><sc-for list="{{ expFormats }}" as="f" hint-placeholder-count="2"><button onClick="{{ f.on }}" style="{{ f.style }}"><span style="font-size:18px;font-weight:800">{{ f.label }}</span><span style="font-size:12px;color:#6B6A66;line-height:1.35">{{ f.desc }}</span></button></sc-for></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><sc-for list="{{ expToggles }}" as="t" hint-placeholder-count="3"><label style="display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600">{{ t.label }}<button onClick="{{ t.on }}" style="{{ t.track }}"><span style="{{ t.knob }}"></span></button></label></sc-for></div>
+      <div style="font-size:12px;color:#8A8984;background:#F7F7F5;border-radius:10px;padding:10px 12px;font-family:ui-monospace,Menlo,monospace">{{ expFile }}</div>
+      <div style="display:flex;gap:10px;margin-top:auto"><button onClick="{{ closeModal }}" style="flex:1;height:46px;border-radius:12px;border:1px solid #E5E3DE;background:#fff;font-weight:600;font-size:14px;cursor:pointer">Отмена</button><button onClick="{{ doExport }}" style="flex:1.4;height:46px;border-radius:12px;border:none;background:#5FA768;color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:18px">download</span>Скачать</button></div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ modalCustom }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeModal }}" style="position:absolute;inset:0;background:rgba(11,13,13,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:50;padding:24px">
+  <div onClick="{{ stop }}" style="width:min(520px,100%);background:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 30px 80px rgba(0,0,0,.3)">
+    <div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:22px;font-weight:700">Мебель по своим размерам</div><div style="font-size:13px;color:#6B6A66;margin-top:2px">Измерьте предмет по самым выступающим точкам</div></div><button onClick="{{ closeModal }}" style="width:34px;height:34px;border-radius:10px;border:none;background:#F4F2EE;cursor:pointer"><span style="font-family:'Material Symbols Rounded';font-size:20px">close</span></button></div>
+    <div style="display:flex;gap:16px;align-items:center">
+      <div style="width:120px;height:120px;border-radius:16px;background:#F4F2EE;display:flex;align-items:center;justify-content:center;flex:none"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ cuType }}" w="{{ cuW }}" h="{{ cuH }}" size="{{ 96 }}" hint-size="96px,96px"></x-import></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <label style="min-width:0;display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#8A8984">Название<input value="{{ cuName }}" onChange="{{ onCuName }}" style="height:42px;border-radius:10px;border:1px solid #E5E3DE;padding:0 12px;font-size:15px;font-weight:700;outline:none"></label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <label style="min-width:0;display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#8A8984">Ширина, см<input value="{{ cuWs }}" onChange="{{ onCuW }}" style="height:42px;border-radius:10px;border:1px solid #E5E3DE;padding:0 12px;font-size:15px;font-weight:700;outline:none"></label>
+          <label style="min-width:0;display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:#8A8984">Глубина, см<input value="{{ cuHs }}" onChange="{{ onCuH }}" style="height:42px;border-radius:10px;border:1px solid #E5E3DE;padding:0 12px;font-size:15px;font-weight:700;outline:none"></label>
+        </div>
+      </div>
+    </div>
+    <div><div style="font-size:12px;font-weight:700;color:#8A8984;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Вид на плане</div><div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ cuTypes }}" as="t" hint-placeholder-count="6"><button onClick="{{ t.on }}" style="{{ t.style }}">{{ t.label }}</button></sc-for></div></div>
+    <label style="display:flex;align-items:center;gap:10px;font-size:14px"><input type="checkbox" checked style="accent-color:#5FA768;width:18px;height:18px">Сохранить в «Моя мебель»</label>
+    <button onClick="{{ addCustom }}" style="height:48px;border-radius:14px;border:none;background:#5FA768;color:#fff;font-weight:700;font-size:15px;cursor:pointer">{{ cuCta }}</button>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ modalConfirm }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeModal }}" style="position:absolute;inset:0;background:rgba(11,13,13,.55);display:flex;align-items:center;justify-content:center;z-index:60;padding:24px">
+  <div onClick="{{ stop }}" style="width:min(420px,100%);background:#fff;border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:12px">
+    <div style="width:44px;height:44px;border-radius:14px;background:#FBEDED;color:#C94848;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:24px">warning</span></div>
+    <div style="font-size:19px;font-weight:700">{{ confTitle }}</div>
+    <div style="font-size:14px;color:#6B6A66;line-height:1.5">{{ confText }}</div>
+    <div style="display:flex;gap:10px;margin-top:8px"><button onClick="{{ closeModal }}" style="flex:1;height:44px;border-radius:12px;border:1px solid #E5E3DE;background:#fff;font-weight:600;font-size:14px;cursor:pointer">Отмена</button><button onClick="{{ confOk }}" style="flex:1;height:44px;border-radius:12px;border:none;background:#E65A5A;color:#fff;font-weight:700;font-size:14px;cursor:pointer">Удалить</button></div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute;left:50%;bottom:76px;transform:translateX(-50%);z-index:70;display:flex;align-items:center;gap:12px;background:#1E1E22;color:#F8F7F4;border-radius:14px;padding:12px 14px 12px 16px;font-size:14px;box-shadow:0 14px 40px rgba(0,0,0,.25)"><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#5FA768">{{ toastIcon }}</span>{{ toastText }}<sc-if value="{{ toastUndo }}" hint-placeholder-val="{{ false }}"><button onClick="{{ toastUndoFn }}" style="height:30px;padding:0 10px;border-radius:8px;border:none;background:#2C2C31;color:#D4AF7C;font-weight:700;font-size:13px;cursor:pointer">Отменить</button></sc-if></div>
+</sc-if>
+
+<div style="position:absolute;right:14px;bottom:14px;z-index:80;display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+  <sc-if value="{{ screensOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#1E1E22;border-radius:14px;padding:6px;display:flex;flex-direction:column;box-shadow:0 14px 40px rgba(0,0,0,.3);min-width:200px">
+      <sc-for list="{{ screenLinks }}" as="l" hint-placeholder-count="8"><button onClick="{{ l.on }}" style="height:34px;border:none;background:transparent;color:#F8F7F4;text-align:left;padding:0 12px;border-radius:9px;font-size:13px;cursor:pointer" style-hover="background:#2C2C31">{{ l.label }}</button></sc-for>
+    </div>
+  </sc-if>
+  <button onClick="{{ toggleScreens }}" title="Все экраны прототипа" style="height:34px;padding:0 12px;border-radius:999px;border:1px solid rgba(212,175,124,.4);background:#0B0D0D;color:#D4AF7C;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;opacity:.9"><span style="font-family:'Material Symbols Rounded';font-size:16px">layers</span>Экраны</button>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;login&quot;,&quot;register&quot;,&quot;dashboard&quot;,&quot;wizard&quot;,&quot;editor&quot;,&quot;compare&quot;],&quot;default&quot;:&quot;editor&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;emptyAccount&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showHints&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const S = 1.4, M = 40;
+const clone = o => JSON.parse(JSON.stringify(o));
+let uid = 500;
+const ic = (bg, fg) => `font-family:'Material Symbols Rounded'`;
+const segBtn = (on, dark) => ({ height: 30, padding: '0 12px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 13, fontWeight: 700, background: on ? (dark ? '#F8F7F4' : '#fff') : 'transparent', color: on ? '#0B0D0D' : (dark ? 'rgba(248,247,244,.6)' : '#6B6A66'), boxShadow: on && !dark ? '0 1px 3px rgba(0,0,0,.1)' : 'none', flex: 1 });
+const track = on => ({ width: 42, height: 24, borderRadius: 999, border: 'none', background: on ? '#5FA768' : '#D9D6CF', position: 'relative', cursor: 'pointer', flex: 'none', transition: 'background .15s' });
+const knob = on => ({ position: 'absolute', top: 3, left: on ? 21 : 3, width: 18, height: 18, borderRadius: '50%', background: '#fff', boxShadow: '0 1px 3px rgba(0,0,0,.2)', transition: 'left .15s' });
+const issueIcon = lvl => ({ icon: { fontFamily: "'Material Symbols Rounded'", fontSize: 18, color: lvl === 'err' ? '#E65A5A' : '#D99528', flex: 'none' }, glyph: lvl === 'err' ? 'error' : 'warning' });
+
+class Component extends DCLogic {
+  state = { ready: false, screen: null, tab: 'projects', empty: null, q: '', projects: [], menuFor: null,
+    wz: { step: 1, name: 'Моя спальня', w: 400, h: 320 },
+    room: { w: 400, h: 320 }, floor: 'oak', doors: [], windows: [], variants: [{ id: 'v1', name: 'Вариант 1', items: [] }], vi: 0,
+    sel: null, tool: 'select', zoom: 1, panX: 0, panY: 0, cw: 900, ch: 600, unit: 'см', theme: 'Системная', thr: 60,
+    showDims: true, showGrid: true, showNames: false, showZones: false, mA: null, mB: null, past: [], future: [], save: 'saved',
+    modal: null, exp: { fmt: 'PDF', dims: true, names: true, list: true }, cat: 'Все', cq: '', toast: null, issuesOpen: false,
+    drafts: {}, cu: { name: 'Мой диван', w: '230', h: '95', type: 'sofa' }, mine: [], cmpA: 0, cmpB: 1, projName: 'Моя спальня',
+    renaming: false, confirm: null, screensOpen: false, hint: true };
+  cv = React.createRef();
+
+  componentDidMount() {
+    const t = () => {
+      if (window.RoomFit) {
+        const R = window.RoomFit.ROOMS;
+        const projects = [
+          { id: 'p1', key: 'bedroom', name: 'Моя спальня', date: 'Изменено сегодня', nv: 2 },
+          { id: 'p2', key: 'living', name: 'Гостиная', date: 'Изменено вчера', nv: 1 },
+          { id: 'p3', key: 'office', name: 'Домашний кабинет', date: 'Изменено 8 октября', nv: 1 },
+          { id: 'p4', key: 'kitchen', name: 'Кухня', date: 'Изменено 2 октября', nv: 1 },
+          { id: 'p5', key: 'studio', name: 'Студия на Лесной', date: 'Изменено 28 сентября', nv: 3 },
+        ];
+        this.setState({ ready: true, projects });
+        this.openProject('bedroom', true);
+      } else setTimeout(t, 40);
+    };
+    t();
+    this._mv = e => this.onMove(e); this._up = e => this.onUp(e); this._key = e => this.onKey(e);
+    this._rs = () => this.setState({ vw: window.innerWidth }); window.addEventListener('resize', this._rs); this._rs();
+    window.addEventListener('pointermove', this._mv); window.addEventListener('pointerup', this._up); window.addEventListener('keydown', this._key);
+    this._ro = new ResizeObserver(() => { const first = !this._fitted; this._fitted = true; this.measure(first); });
+    this._poll = setInterval(() => { const el = this.cv.current; if (el && this._obs !== el) { this._obs = el; this._fitted = false; this._ro.disconnect(); this._ro.observe(el); } if (!el) this._obs = null; }, 250);
+  }
+  componentWillUnmount() { window.removeEventListener('pointermove', this._mv); window.removeEventListener('pointerup', this._up); window.removeEventListener('keydown', this._key); clearInterval(this._poll); this._ro && this._ro.disconnect(); }
+  scr() { return this.state.screen || this.props.startScreen || 'editor'; }
+  go(screen, extra) { this.setState({ screen, screensOpen: false, modal: null, menuFor: null, ...(extra || {}) }); }
+  measure(fit) { const el = this.cv.current; if (!el) return; const r = el.getBoundingClientRect(); this.setState({ cw: r.width, ch: r.height }, () => fit && this.fit()); }
+  g() { return window.RoomFit.geom(this.state.room, { scale: S, margin: M }); }
+  fit() { if (!window.RoomFit) return; const g = this.g(); const z = Math.min((this.state.cw - 60) / g.W, (this.state.ch - 110) / g.H); this.setState({ zoom: Math.max(0.3, Math.min(2.5, Math.round(z * 100) / 100)), panX: 0, panY: -10 }); }
+  toast(text, undo, icon) { clearTimeout(this._tt); this.setState({ toast: { text, undo, icon: icon || 'check_circle' } }); this._tt = setTimeout(() => this.setState({ toast: null }), 3200); }
+
+  openProject(key, initial, name) {
+    const K = window.RoomFit, R = K.ROOMS[key];
+    const variants = key === 'bedroom' ? [{ id: 'v1', name: 'Кровать у стены', items: clone(R.items) }, { id: 'v2', name: 'Кровать у окна', items: clone(K.ROOMS.bedroomB.items) }] : [{ id: 'v1', name: 'Вариант 1', items: clone(R.items) }];
+    this.setState({ room: clone(R.room), floor: R.floor, doors: clone(R.doors), windows: clone(R.windows), variants, vi: 0, sel: null, past: [], future: [], projName: name || R.name, save: 'saved', mA: null, mB: null, tool: 'select', cmpA: 0, cmpB: Math.min(1, variants.length - 1), drafts: {} });
+    if (!initial) this.go('editor');
+  }
+  createFromWizard() {
+    const { wz } = this.state;
+    this.setState({ room: { w: wz.w, h: wz.h }, floor: 'oak', doors: [{ wall: 'bottom', at: Math.max(0, wz.w - 100), w: 80 }], windows: [{ wall: 'top', at: Math.max(0, wz.w / 2 - 70), w: 140 }], variants: [{ id: 'v1', name: 'Вариант 1', items: [] }], vi: 0, sel: null, past: [], future: [], projName: wz.name, save: 'saved', tool: 'select', hint: true, cmpA: 0, cmpB: 0,
+      projects: [{ id: 'p' + (uid++), key: 'bedroom', name: wz.name, date: 'Изменено только что', nv: 1, custom: { room: { w: wz.w, h: wz.h } } }, ...this.state.projects] });
+    this.go('editor');
+  }
+  items() { const v = this.state.variants[this.state.vi]; return v ? v.items : []; }
+  setItems(fn) { this.setState(s => { const v = s.variants.slice(); const cur = v[s.vi].items; v[s.vi] = { ...v[s.vi], items: fn(clone(cur)) }; return { variants: v, past: [...s.past.slice(-60), cur], future: [], save: 'dirty' }; }); }
+  setRaw(fn) { this.setState(s => { const v = s.variants.slice(); v[s.vi] = { ...v[s.vi], items: fn(v[s.vi].items) }; return { variants: v, save: 'dirty' }; }); }
+  patch(id, p) { this.setItems(its => its.map(i => i.id === id ? { ...i, ...p } : i)); }
+  undo() { this.setState(s => { if (!s.past.length) return null; const v = s.variants.slice(); const cur = v[s.vi].items; v[s.vi] = { ...v[s.vi], items: s.past[s.past.length - 1] }; return { variants: v, past: s.past.slice(0, -1), future: [...s.future, cur], save: 'dirty' }; }); }
+  redo() { this.setState(s => { if (!s.future.length) return null; const v = s.variants.slice(); const cur = v[s.vi].items; v[s.vi] = { ...v[s.vi], items: s.future[s.future.length - 1] }; return { variants: v, future: s.future.slice(0, -1), past: [...s.past, cur], save: 'dirty' }; }); }
+  stagePos() { const g = this.g(), z = this.state.zoom; return { left: (this.state.cw - g.W * z) / 2 + this.state.panX, top: (this.state.ch - g.H * z) / 2 + this.state.panY }; }
+
+  onItemDown(e, id) {
+    e.stopPropagation();
+    const { tool, mA, mB } = this.state;
+    if (tool === 'measure') { if (!mA || mB) this.setState({ mA: id, mB: null }); else if (id !== mA) this.setState({ mB: id }); return; }
+    const it = this.items().find(i => i.id === id);
+    this.setState({ sel: id, issuesOpen: false, hint: false, tool: ['select', 'furniture'].includes(tool) ? tool : 'select' });
+    if (!it || it.locked) return;
+    this.drag = { mode: 'move', id, sx: e.clientX, sy: e.clientY, ox: it.x, oy: it.y, snap: this.items(), moved: false };
+  }
+  onHandleDown(e, id, corner) {
+    e.stopPropagation(); const it = this.items().find(i => i.id === id); if (!it || it.locked) return;
+    this.drag = { mode: 'resize', id, corner, sx: e.clientX, sy: e.clientY, b: window.RoomFit.aabb(it), it, snap: this.items(), moved: false };
+  }
+  onCanvasDown(e) {
+    if (e.button !== 0) return;
+    this.setState({ sel: null, issuesOpen: false, ...(this.state.tool === 'measure' ? { mA: null, mB: null } : {}) });
+    this.drag = { mode: 'pan', sx: e.clientX, sy: e.clientY, ox: this.state.panX, oy: this.state.panY };
+  }
+  onMove(e) {
+    const d = this.drag; if (!d) return;
+    const dx = e.clientX - d.sx, dy = e.clientY - d.sy;
+    if (d.mode === 'pan') { this.setState({ panX: d.ox + dx, panY: d.oy + dy }); return; }
+    if (!d.moved && Math.hypot(dx, dy) < 4) return;
+    d.moved = true;
+    const k = S * this.state.zoom, cdx = dx / k, cdy = dy / k, { w: W, h: H } = this.state.room;
+    if (d.mode === 'move') {
+      const it = this.items().find(i => i.id === d.id); const b = window.RoomFit.aabb({ ...it, x: 0, y: 0 });
+      let x = Math.round(d.ox + cdx), y = Math.round(d.oy + cdy); const mg = 5;
+      if (Math.abs(x) < mg) x = 0; if (Math.abs(y) < mg) y = 0;
+      if (Math.abs(x + b.w - W) < mg) x = Math.round(W - b.w); if (Math.abs(y + b.h - H) < mg) y = Math.round(H - b.h);
+      this.setRaw(its => its.map(i => i.id === d.id ? { ...i, x, y } : i));
+    } else if (d.mode === 'resize') {
+      let x = d.b.x, y = d.b.y, x2 = d.b.x + d.b.w, y2 = d.b.y + d.b.h; const c = d.corner;
+      if (c.includes('l')) x = Math.min(x2 - 20, Math.round(d.b.x + cdx));
+      if (c.includes('r')) x2 = Math.max(x + 20, Math.round(x2 + cdx));
+      if (c.includes('t')) y = Math.min(y2 - 20, Math.round(d.b.y + cdy));
+      if (c.includes('b')) y2 = Math.max(y + 20, Math.round(y2 + cdy));
+      const sw = Math.round((d.it.rot || 0) / 90) % 2 !== 0, nw = Math.round(x2 - x), nh = Math.round(y2 - y);
+      this.setRaw(its => its.map(i => i.id === d.id ? { ...i, x, y, w: sw ? nh : nw, h: sw ? nw : nh } : i));
+    }
+  }
+  onUp() { const d = this.drag; this.drag = null; if (d && d.moved && d.snap) this.setState(s => ({ past: [...s.past.slice(-60), d.snap], future: [] })); }
+  rotate(id, to) {
+    const it = this.items().find(i => i.id === id); if (!it) return; const K = window.RoomFit;
+    const b0 = K.aabb(it), cx = b0.x + b0.w / 2, cy = b0.y + b0.h / 2;
+    const nr = to != null ? to : ((it.rot || 0) + 90) % 360; const b1 = K.aabb({ ...it, rot: nr, x: 0, y: 0 });
+    this.patch(id, { rot: nr, x: Math.round(cx - b1.w / 2), y: Math.round(cy - b1.h / 2) });
+  }
+  dup(id) { const it = this.items().find(i => i.id === id); if (!it) return; const n = { ...clone(it), id: 'i' + (uid++), x: it.x + 20, y: it.y + 20, locked: false }; this.setItems(its => [...its, n]); this.setState({ sel: n.id }); this.toast(`Копия «${it.name}» добавлена`); }
+  del(id) { const it = this.items().find(i => i.id === id); if (!it) return; this.setItems(its => its.filter(i => i.id !== id)); this.setState({ sel: null }); this.toast(`«${it.name}» удалён(а)`, true, 'delete'); }
+  add(c, pos) {
+    const { w: W, h: H } = this.state.room;
+    const it = { id: 'i' + (uid++), key: c.key, type: c.type, name: c.name, w: c.w, h: c.h, rot: 0, x: pos ? pos.x : Math.round((W - c.w) / 2), y: pos ? pos.y : Math.round((H - c.h) / 2) };
+    this.setItems(its => [...its, it]); this.setState({ sel: it.id, tool: 'select', hint: false });
+  }
+  onKey(e) {
+    if (this.scr() !== 'editor' || this.state.modal) return;
+    const tag = (e.target.tagName || '').toLowerCase(); if (tag === 'input' || tag === 'textarea') return;
+    const mod = e.metaKey || e.ctrlKey, sel = this.state.sel;
+    if (mod && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? this.redo() : this.undo(); return; }
+    if (mod && e.key.toLowerCase() === 'd' && sel) { e.preventDefault(); this.dup(sel); return; }
+    if (e.key === 'Escape') { this.setState({ sel: null, mA: null, mB: null }); return; }
+    if (!sel) return;
+    const it = this.items().find(i => i.id === sel); if (!it) return;
+    if ((e.key === 'Delete' || e.key === 'Backspace')) { e.preventDefault(); this.del(sel); return; }
+    if (e.key.toLowerCase() === 'r' || e.key === 'к') { this.rotate(sel); return; }
+    const st = e.shiftKey ? 10 : 1, mv = { ArrowLeft: [-st, 0], ArrowRight: [st, 0], ArrowUp: [0, -st], ArrowDown: [0, st] }[e.key];
+    if (mv && !it.locked) { e.preventDefault(); this.patch(sel, { x: it.x + mv[0], y: it.y + mv[1] }); }
+  }
+  nf(key, cm, commit, raw) {
+    const d = this.state.drafts[key], u = this.state.unit;
+    const shown = raw ? String(Math.round(cm)) : (u === 'м' ? (cm / 100).toFixed(2).replace('.', ',') : String(Math.round(cm)));
+    return { value: d != null ? d : shown,
+      onChange: e => { const v = e.target.value; this.setState(s => ({ drafts: { ...s.drafts, [key]: v } })); },
+      onBlur: () => { const v = this.state.drafts[key]; if (v == null) return; const n = parseFloat(String(v).replace(',', '.')); const c = raw || u !== 'м' ? n : n * 100; this.setState(s => { const dd = { ...s.drafts }; delete dd[key]; return { drafts: dd }; }); if (isFinite(c)) commit(Math.round(c)); },
+      onKeyDown: e => { if (e.key === 'Enter') e.target.blur(); } };
+  }
+  setRoom(p) { this.setState(s => ({ room: { ...s.room, ...p }, save: 'dirty' }), () => this.fit()); }
+  setOpen(kind, i, p) { this.setState(s => { const a = s[kind].slice(); a[i] = { ...a[i], ...p }; return { [kind]: a, save: 'dirty' }; }); }
+
+  renderVals() {
+    const st = this.state, K = window.RoomFit, scr = this.scr(), u = st.unit;
+    const fmt = cm => K ? K.fmt(cm, u) : Math.round(cm) + ' см';
+    const items = this.items();
+    const an = K ? K.analyze(st.room, items, st.doors, st.thr) : { st: {}, issues: [], errs: 0, warns: 0, minGap: {} };
+    const sel = items.find(i => i.id === st.sel);
+    const empty = st.empty ?? !!this.props.emptyAccount;
+    const go = s => () => this.go(s);
+    const catalog = K ? K.CATALOG : [];
+    const filt = catalog.filter(c => (st.cat === 'Все' || c.cat === st.cat) && (!st.cq || c.name.toLowerCase().includes(st.cq.toLowerCase())));
+    const tools = [['select', 'arrow_selector_tool', 'Выбор', 'Выбор и перемещение (V)'], ['room', 'crop_square', 'Комната', 'Размеры комнаты и пол'], ['walls', 'border_outer', 'Стены', 'Длина стен'], ['doors', 'door_front', 'Двери', 'Двери и открывание'], ['windows', 'window', 'Окна', 'Окна'], ['furniture', 'chair', 'Мебель', 'Каталог мебели'], ['measure', 'straighten', 'Размеры', 'Измерить расстояние'], ['zones', 'select_all', 'Зоны', 'Проходы и проверки']];
+    const g = K ? this.g() : { off: 54, W: 680, H: 560 };
+    const z = st.zoom; const sp = K ? this.stagePos() : { left: 0, top: 0 };
+
+    const itemViews = items.map(it => {
+      const b = K.aabb(it), s = an.st[it.id], isSel = st.sel === it.id, ortho = Math.round((it.rot || 0)) % 90 === 0;
+      const hs = (c, l, t) => ({ down: e => this.onHandleDown(e, it.id, c), style: { position: 'absolute', left: l, top: t, width: 11, height: 11, marginLeft: -5.5, marginTop: -5.5, background: '#fff', border: '1.5px solid #5FA768', borderRadius: 3, cursor: (c === 'tl' || c === 'br') ? 'nwse-resize' : 'nesw-resize', boxShadow: '0 1px 3px rgba(0,0,0,.2)' } });
+      return { id: it.id, type: it.type, tone: it.tone, name: it.name, pw: it.w * S, ph: it.h * S, sel: isSel, showName: st.showNames && it.type !== 'plant' && it.type !== 'rug' && !isSel,
+        down: e => this.onItemDown(e, it.id), dbl: () => this.rotate(it.id), rotDown: e => { e.stopPropagation(); this.rotate(it.id); },
+        box: { position: 'absolute', left: b.x * S, top: b.y * S, width: b.w * S, height: b.h * S, cursor: st.tool === 'measure' ? 'crosshair' : it.locked ? 'not-allowed' : 'grab', zIndex: isSel ? 5 : it.type === 'rug' ? 0 : 1, touchAction: 'none' },
+        inner: { position: 'absolute', left: '50%', top: '50%', width: it.w * S, height: it.h * S, transform: `translate(-50%,-50%) rotate(${it.rot || 0}deg)` },
+        ring: s === 'err' ? { position: 'absolute', inset: -2, border: '2px solid #E65A5A', background: 'rgba(230,90,90,.18)', borderRadius: 5, pointerEvents: 'none' } : s === 'warn' ? { position: 'absolute', inset: -2, border: '2px dashed #E3A43B', borderRadius: 5, pointerEvents: 'none' } : (st.mA === it.id || st.mB === it.id) ? { position: 'absolute', inset: -3, border: '2px solid #1E1E22', borderRadius: 5, pointerEvents: 'none' } : { display: 'none' },
+        handles: ortho && !it.locked ? [hs('tl', '0%', '0%'), hs('tr', '100%', '0%'), hs('bl', '0%', '100%'), hs('br', '100%', '100%')] : [],
+        dimText: `${fmt(it.w)} × ${fmt(it.h)}${it.locked ? ' · закреплено' : ''}` };
+    });
+
+    let rayViews = [];
+    if (K && sel && st.showDims && st.tool !== 'measure') {
+      rayViews = K.rays(st.room, items, sel.id).filter(r => r.d > 1).map(r => {
+        const warn = r.d > 8 && r.d < st.thr, col = warn ? '#D99528' : '#3B3B40';
+        const hor = r.dir === 'l' || r.dir === 'r';
+        const line = hor ? { position: 'absolute', left: r.x1 * S, top: r.y * S, width: (r.x2 - r.x1) * S, height: 0, borderTop: `1.5px dashed ${col}`, pointerEvents: 'none', zIndex: 6 } : { position: 'absolute', left: r.x * S, top: r.y1 * S, height: (r.y2 - r.y1) * S, width: 0, borderLeft: `1.5px dashed ${col}`, pointerEvents: 'none', zIndex: 6 };
+        return { line, text: fmt(r.d), label: { position: 'absolute', left: hor ? '50%' : 0, top: hor ? 0 : '50%', transform: 'translate(-50%,-50%)', background: warn ? '#E3A43B' : '#fff', color: warn ? '#fff' : '#1E1E22', border: warn ? 'none' : '1px solid #DAD7D0', fontSize: 11, fontWeight: 700, padding: '2px 6px', borderRadius: 6, whiteSpace: 'nowrap' } };
+      });
+    }
+    let measure = null;
+    if (K && st.mA && st.mB && items.find(i => i.id === st.mA) && items.find(i => i.id === st.mB)) measure = K.between(items, st.mA, st.mB);
+    const mLen = measure ? Math.hypot(measure.x2 - measure.x1, measure.y2 - measure.y1) * S : 0, mAng = measure ? Math.atan2(measure.y2 - measure.y1, measure.x2 - measure.x1) * 180 / Math.PI : 0;
+
+    const panel = ['select', 'furniture'].includes(st.tool) ? (sel ? 'props' : 'catalog') : st.tool;
+    const selIssues = sel ? an.issues.filter(i => i.ids.includes(sel.id)).map(i => i.text) : [];
+    const selSt = sel ? an.st[sel.id] : 'ok';
+    const statusBox = { ok: ['#EEF6EF', '#2F6B38', 'check_circle', 'Пересечений нет'], warn: ['#FCF4E4', '#8A5A12', 'warning', 'Узкий проход'], err: ['#FCEDED', '#A93A3A', 'error', 'Есть пересечения'] }[selSt || 'ok'];
+    const openKind = st.tool === 'windows' ? 'windows' : 'doors';
+    const wallNames = [['top', 'Верх'], ['bottom', 'Низ'], ['left', 'Лево'], ['right', 'Право']];
+
+    const projectCards = K ? st.projects.filter(p => !st.q || p.name.toLowerCase().includes(st.q.toLowerCase())).map(p => {
+      const R = K.ROOMS[p.key], room = p.custom ? p.custom.room : R.room;
+      return { name: p.name, room, items: p.custom ? [] : R.items, doors: p.custom ? [{ wall: 'bottom', at: room.w - 100, w: 80 }] : R.doors, windows: p.custom ? [] : R.windows, floor: R.floor, size: `${fmt(room.w)} × ${fmt(room.h)}`, variants: p.nv === 1 ? '1 вариант' : `${p.nv} варианта`, date: p.date,
+        open: () => p.custom ? this.go('editor') : this.openProject(p.key, false, p.name), menu: () => this.setState({ menuFor: st.menuFor === p.id ? null : p.id }), menuOpen: st.menuFor === p.id,
+        dup: () => this.setState(s => ({ menuFor: null, projects: [{ ...p, id: 'p' + (uid++), name: p.name + ' (копия)', date: 'Изменено только что' }, ...s.projects] })),
+        del: () => this.setState({ menuFor: null, modal: 'confirm', confirm: { title: `Удалить «${p.name}»?`, text: 'Проект и все его варианты будут удалены без возможности восстановления.', ok: () => this.setState(s => ({ projects: s.projects.filter(x => x.id !== p.id), modal: null })) } }) };
+    }) : [];
+    const tplKeys = ['bedroom', 'living', 'kids', 'office', 'studio', 'kitchen'];
+    const tplNames = { bedroom: 'Маленькая спальня', living: 'Гостиная', kids: 'Детская', office: 'Домашний кабинет', studio: 'Студия', kitchen: 'Кухня' };
+    const templates = K ? tplKeys.map(k => { const R = K.ROOMS[k]; return { name: tplNames[k], room: R.room, items: R.items, doors: R.doors, windows: R.windows, floor: R.floor, size: `${fmt(R.room.w)} × ${fmt(R.room.h)}`, open: () => this.openProject(k, false, tplNames[k]) }; }) : tplKeys.map(k => ({ name: tplNames[k] }));
+    const navStyle = on => ({ height: 42, display: 'flex', alignItems: 'center', gap: 12, padding: '0 12px', borderRadius: 12, border: 'none', cursor: 'pointer', fontSize: 14, fontWeight: 600, textAlign: 'left', background: on ? 'rgba(212,175,124,.14)' : 'transparent', color: on ? '#D4AF7C' : 'rgba(248,247,244,.72)' });
+    const unitBtnsF = dark => ['см', 'м'].map(x => ({ label: x, on: () => this.setState({ unit: x, drafts: {} }), style: { ...segBtn(u === x, dark), height: dark ? 30 : 32, padding: '0 14px' } }));
+    const chip = (on, sm) => ({ height: sm ? 28 : 34, padding: sm ? '0 10px' : '0 14px', borderRadius: 999, border: on ? 'none' : '1px solid #E5E3DE', background: on ? '#1E1E22' : '#fff', color: on ? '#F8F7F4' : '#3C3B38', fontSize: sm ? 12 : 13, fontWeight: 600, cursor: 'pointer' });
+    const variantName = st.variants[st.vi] ? st.variants[st.vi].name : '';
+
+    const cmpVals = K ? [st.cmpA, st.cmpB].map(i => { const v = st.variants[i] || st.variants[0]; const a = K.analyze(st.room, v.items, st.doors, st.thr); return { v, a, i }; }) : [];
+    const score = x => x.a.errs * 100 + x.a.warns * 10 - (x.a.minPass || 200) / 100;
+    const bestIdx = cmpVals.length === 2 && cmpVals[0].i !== cmpVals[1].i ? (score(cmpVals[0]) <= score(cmpVals[1]) ? 0 : 1) : -1;
+    const best = bestIdx >= 0 ? cmpVals[bestIdx] : null;
+
+    const wzDimF = (key, label) => ({ label, ...this.nf('wz' + key, st.wz[key], v => this.setState(s => ({ wz: { ...s.wz, [key]: Math.max(100, Math.min(2000, v)) } }))), inc: () => this.setState(s => ({ wz: { ...s.wz, [key]: s.wz[key] + 10 } })), dec: () => this.setState(s => ({ wz: { ...s.wz, [key]: Math.max(100, s.wz[key] - 10) } })) });
+
+    return {
+      isAuth: scr === 'login' || scr === 'register', isLogin: scr === 'login', isRegister: scr === 'register', isDash: scr === 'dashboard', isWizard: scr === 'wizard', isEditor: scr === 'editor', isCompare: scr === 'compare',
+      authCta: scr === 'login' ? 'Войти' : 'Создать аккаунт', authSwitchText: scr === 'login' ? 'Нет аккаунта?' : 'Уже есть аккаунт?', authSwitchLink: scr === 'login' ? 'Зарегистрироваться' : 'Войти',
+      authSwitch: e => { e.preventDefault(); this.go(scr === 'login' ? 'register' : 'login'); },
+      goDash: () => this.go('dashboard', { tab: 'projects' }), goWizard: () => this.go('wizard', { wz: { step: 1, name: 'Моя спальня', w: 400, h: 320 } }), goEditor: go('editor'), goCompare: go('compare'), logout: go('login'),
+      stop: e => e.stopPropagation(),
+      navItems: [['projects', 'folder_open', 'Мои проекты'], ['templates', 'dashboard_customize', 'Шаблоны'], ['catalog', 'chair', 'Каталог мебели'], ['mine', 'straighten', 'Моя мебель'], ['settings', 'settings', 'Настройки']].map(([k, icon, label]) => ({ icon, label, on: () => this.setState({ tab: k }), style: navStyle(st.tab === k) })),
+      q: st.q, onQ: e => this.setState({ q: e.target.value }),
+      tabProjects: st.tab === 'projects', tabTemplates: st.tab === 'templates', tabCatalog: st.tab === 'catalog', tabMine: st.tab === 'mine', tabSettings: st.tab === 'settings',
+      showEmpty: empty, showGrid: !empty, projCountText: empty ? 'Пока нет проектов' : `${projectCards.length} проектов · ${st.projects.reduce((s, p) => s + p.nv, 0)} вариантов расстановки`,
+      emptyToggleText: empty ? 'Показать с проектами' : 'Показать пустой аккаунт', toggleEmpty: () => this.setState({ empty: !empty }),
+      projectCards, templates,
+      catChips: (K ? K.CATS : []).map(c => ({ label: c, on: () => this.setState({ cat: c }), style: chip(st.cat === c), styleSm: chip(st.cat === c, true) })),
+      catItems: filt.map(c => ({ ...c, dims: `${fmt(c.w)} × ${fmt(c.h)}`, add: e => { e.stopPropagation(); this.add(c); }, drag: e => { e.dataTransfer.setData('text/plain', c.key); e.dataTransfer.effectAllowed = 'copy'; } })),
+      mineEmpty: !st.mine.length, mineItems: st.mine.map(c => ({ ...c, dims: `${fmt(c.w)} × ${fmt(c.h)}` })),
+      openCustom: () => this.setState({ modal: 'custom' }),
+      unitBtns: unitBtnsF(false), unitBtnsDark: unitBtnsF(true),
+      themeBtns: ['Светлая', 'Тёмная', 'Системная'].map(x => ({ label: x, on: () => this.setState({ theme: x }), style: { ...segBtn(st.theme === x), height: 32 } })),
+      thr: st.thr, thrText: st.thr + ' см', onThr: e => this.setState({ thr: +e.target.value }),
+      askDeleteAccount: () => this.setState({ modal: 'confirm', confirm: { title: 'Удалить аккаунт?', text: 'Все проекты, варианты и ваша мебель будут удалены. Это действие нельзя отменить.', ok: () => this.go('login') } }),
+
+      wzSteps: ['Название', 'Способ', 'Размеры', 'Готово'].map((t, i) => ({ text: `${i + 1}. ${t}`, bar: { height: 4, borderRadius: 4, background: i < st.wz.step ? '#5FA768' : '#E2DFD8' }, label: { fontSize: 12, fontWeight: 600, color: i + 1 === st.wz.step ? '#1E1E22' : '#9A9993' } })),
+      wz1: st.wz.step === 1, wz2: st.wz.step === 2, wz3: st.wz.step === 3, wz4: st.wz.step === 4, wzCanBack: st.wz.step > 1,
+      wzName: st.wz.name, onWzName: e => { const v = e.target.value; this.setState(s => ({ wz: { ...s.wz, name: v } })); },
+      wzNameChips: ['Спальня', 'Гостиная', 'Детская', 'Кабинет', 'Кухня'].map(l => ({ label: l, on: () => this.setState(s => ({ wz: { ...s.wz, name: l } })) })),
+      wzDims: [wzDimF('w', 'Ширина'), wzDimF('h', 'Длина')],
+      wzPresets: [[300, 400], [400, 320], [500, 400], [600, 400]].map(([w, h]) => ({ label: `${(w / 100).toString().replace('.', ',')} × ${(h / 100).toString().replace('.', ',')} м`, on: () => this.setState(s => ({ wz: { ...s.wz, w, h } })) })),
+      wzRoom: { w: st.wz.w, h: st.wz.h }, wzDoors: [{ wall: 'bottom', at: Math.max(0, st.wz.w - 100), w: 80 }], wzSize: `${fmt(st.wz.w)} × ${fmt(st.wz.h)}`,
+      wzNextText: st.wz.step === 4 ? 'Открыть редактор' : 'Далее', wzBack: () => this.setState(s => ({ wz: { ...s.wz, step: s.wz.step - 1 } })),
+      wzNext: () => st.wz.step === 4 ? this.createFromWizard() : this.setState(s => ({ wz: { ...s.wz, step: s.wz.step + 1 } })),
+
+      projName: st.projName, renaming: st.renaming, notRenaming: !st.renaming, startRename: () => this.setState({ renaming: true }), stopRename: () => this.setState({ renaming: false }), renameKey: e => { if (e.key === 'Enter') this.setState({ renaming: false }); }, onProjName: e => this.setState({ projName: e.target.value, save: 'dirty' }),
+      try3d: () => this.toast('3D-просмотр появится в следующих версиях RoomFit', false, 'view_in_ar'),
+      undo: () => this.undo(), redo: () => this.redo(),
+      undoStyle: { width: 36, height: 36, borderRadius: 10, border: 'none', background: 'transparent', color: st.past.length ? '#F8F7F4' : 'rgba(248,247,244,.3)', cursor: st.past.length ? 'pointer' : 'default' },
+      redoStyle: { width: 36, height: 36, borderRadius: 10, border: 'none', background: 'transparent', color: st.future.length ? '#F8F7F4' : 'rgba(248,247,244,.3)', cursor: st.future.length ? 'pointer' : 'default' },
+      wide: (st.vw || 1440) >= 1180, narrow: (st.vw || 1440) < 1180,
+      zoomBarPos: (st.vw || 1440) >= 1180 ? { position: 'absolute', left: '50%', bottom: 16, transform: 'translateX(-50%)' } : { position: 'absolute', right: 16, bottom: 16 },
+      viewToggles: [['showDims', 'straighten', 'Размеры и расстояния'], ['showGrid', 'grid_on', 'Сетка'], ['showNames', 'label', 'Названия мебели']].map(([k, icon, title]) => ({ icon, title, on: () => this.setState({ [k]: !st[k] }), style: { width: 36, height: 36, borderRadius: 10, border: 'none', cursor: 'pointer', background: st[k] ? 'rgba(212,175,124,.16)' : 'transparent', color: st[k] ? '#D4AF7C' : 'rgba(248,247,244,.55)' } })),
+      saveDot: { width: 8, height: 8, borderRadius: '50%', background: st.save === 'saved' ? '#5FA768' : st.save === 'saving' ? '#D4AF7C' : '#E3A43B' },
+      saveText: st.save === 'saved' ? 'Сохранено' : st.save === 'saving' ? 'Сохраняем…' : 'Есть изменения',
+      doSave: () => { this.setState({ save: 'saving' }); setTimeout(() => { this.setState({ save: 'saved' }); this.toast('Проект сохранён'); }, 700); },
+      openExport: () => this.setState({ modal: 'export' }),
+      tools: tools.map(([k, icon, label, tip]) => ({ icon, label, tip, on: () => this.setState({ tool: k, mA: null, mB: null, ...(k === 'zones' ? { showZones: true } : {}) }), style: { width: 62, height: 58, borderRadius: 14, border: 'none', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3, background: st.tool === k ? 'rgba(212,175,124,.16)' : 'transparent', color: st.tool === k ? '#D4AF7C' : 'rgba(248,247,244,.62)' } })),
+      variantTabs: st.variants.map((v, i) => {
+        const a = K ? K.analyze(st.room, v.items, st.doors, st.thr) : { errs: 0, warns: 0 };
+        return { label: v.name, on: () => this.setState({ vi: i, sel: null, past: [], future: [] }), rename: () => { const n = window.prompt('Название варианта', v.name); if (n) this.setState(s => { const vv = s.variants.slice(); vv[i] = { ...vv[i], name: n }; return { variants: vv }; }); },
+          dot: { width: 7, height: 7, borderRadius: '50%', background: a.errs ? '#E65A5A' : a.warns ? '#E3A43B' : '#5FA768' },
+          style: { height: 32, padding: '0 12px', borderRadius: 9, border: i === st.vi ? '1px solid #1E1E22' : '1px solid #E5E3DE', background: i === st.vi ? '#1E1E22' : '#fff', color: i === st.vi ? '#F8F7F4' : '#3C3B38', fontSize: 12, fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7, whiteSpace: 'nowrap', flex: 'none' } };
+      }),
+      dupVariant: () => { this.setState(s => { const v = s.variants[s.vi]; const n = { id: 'v' + (uid++), name: `Вариант ${s.variants.length + 1}`, items: clone(v.items) }; return { variants: [...s.variants, n], vi: s.variants.length, sel: null, past: [], future: [], save: 'dirty' }; }); this.toast('Вариант продублирован'); },
+      newVariant: () => this.setState(s => ({ variants: [...s.variants, { id: 'v' + (uid++), name: `Вариант ${s.variants.length + 1}`, items: [] }], vi: s.variants.length, sel: null, past: [], future: [] })),
+      cvRef: this.cv, canvasStyle: { flex: 1, position: 'relative', overflow: 'hidden', background: '#F7F7F5', cursor: st.tool === 'measure' ? 'crosshair' : 'default', touchAction: 'none' },
+      onCanvasDown: e => this.onCanvasDown(e),
+      onWheel: e => { const nz = Math.max(0.3, Math.min(3, z * (e.deltaY < 0 ? 1.08 : 0.926))); this.setState({ zoom: Math.round(nz * 100) / 100 }); },
+      onDragOver: e => { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; },
+      onDrop: e => { e.preventDefault(); const key = e.dataTransfer.getData('text/plain'); const c = catalog.find(x => x.key === key); if (!c || !this.cv.current) return; const r = this.cv.current.getBoundingClientRect(); const p = this.stagePos(); const x = ((e.clientX - r.left - p.left) / z - g.off) / S - c.w / 2, y = ((e.clientY - r.top - p.top) / z - g.off) / S - c.h / 2; this.add(c, { x: Math.round(x), y: Math.round(y) }); },
+      showGridBg: st.showGrid, gridStyle: { position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(30,30,34,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.055) 1px,transparent 1px)', backgroundSize: `${10 * S * z}px ${10 * S * z}px`, backgroundPosition: `${sp.left + g.off * z}px ${sp.top + g.off * z}px` },
+      stageStyle: { position: 'absolute', left: sp.left, top: sp.top, width: g.W, height: g.H, transform: `scale(${z})`, transformOrigin: '0 0' },
+      layerStyle: { position: 'absolute', left: g.off, top: g.off, width: st.room.w * S, height: st.room.h * S },
+      room: st.room, doors: st.doors, windows: st.windows, floor: st.floor, unit: u, S, M, noItems: [], showDims: st.showDims, showZones: st.showZones,
+      itemViews, rayViews, items,
+      hasMeasure: !!measure, measureText: measure ? fmt(measure.d) : '',
+      measureLine: measure ? { position: 'absolute', left: measure.x1 * S, top: measure.y1 * S, width: mLen, height: 0, borderTop: '2px solid #1E1E22', transform: `rotate(${mAng}deg)`, transformOrigin: '0 0', zIndex: 7, pointerEvents: 'none' } : {},
+      measureLabel: measure ? { position: 'absolute', left: (measure.x1 + measure.x2) / 2 * S, top: (measure.y1 + measure.y2) / 2 * S, transform: 'translate(-50%,-140%)', background: '#1E1E22', color: '#F8F7F4', fontSize: 12, fontWeight: 800, padding: '4px 8px', borderRadius: 8, zIndex: 8, whiteSpace: 'nowrap', pointerEvents: 'none' } : {},
+      measureVerdict: measure ? (measure.d === 0 ? 'Предметы касаются или пересекаются' : measure.d < st.thr ? `Уже рекомендуемого прохода ${st.thr} см` : 'Достаточно для прохода') : '',
+      showHint: st.hint && (this.props.showHints ?? true) && !st.sel, hideHint: () => this.setState({ hint: false }),
+      issuesOpen: st.issuesOpen, toggleIssues: () => this.setState({ issuesOpen: !st.issuesOpen }),
+      issueViews: an.issues.map(is => ({ text: is.text, ...issueIcon(is.lvl), on: () => this.setState({ sel: is.ids[0], tool: 'select', issuesOpen: false }) })), noIssues: !an.issues.length,
+      checkPill: { height: 38, padding: '0 14px', borderRadius: 999, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7, fontSize: 13, fontWeight: 700, boxShadow: '0 6px 18px rgba(0,0,0,.08)', background: an.errs ? '#E65A5A' : an.warns ? '#E3A43B' : '#5FA768', color: '#fff' },
+      checkIcon: an.errs ? 'error' : an.warns ? 'warning' : 'check_circle',
+      checkText: an.errs ? `Столкновений: ${an.errs}${an.warns ? ` · предупреждений: ${an.warns}` : ''}` : an.warns ? `Узких проходов: ${an.warns}` : 'Столкновений нет',
+      zoomIn: () => this.setState({ zoom: Math.min(3, Math.round(z * 112) / 100) }), zoomOut: () => this.setState({ zoom: Math.max(0.3, Math.round(z * 89) / 100) }), zoomText: Math.round(z * 100) + '%', fit: () => this.fit(),
+      roomInfo: `${fmt(st.room.w)} × ${fmt(st.room.h)} · ${items.length} предм. · 1 клетка = 10 см`,
+      pCatalog: panel === 'catalog', pProps: panel === 'props', pRoom: panel === 'room', pWalls: panel === 'walls', pOpenings: panel === 'doors' || panel === 'windows', pMeasure: panel === 'measure', pZones: panel === 'zones',
+      cq: st.cq, onCq: e => this.setState({ cq: e.target.value }),
+      selType: sel ? sel.type : 'bed', selW: sel ? sel.w : 1, selH: sel ? sel.h : 1, selName: sel ? sel.name : '', onSelName: e => sel && this.setRaw(its => its.map(i => i.id === sel.id ? { ...i, name: e.target.value } : i)),
+      deselect: () => this.setState({ sel: null }),
+      selStatusBox: { borderRadius: 14, padding: '12px 14px', background: statusBox[0], color: statusBox[1] }, selStatusIcon: statusBox[2], selStatusTitle: statusBox[3], selIssues,
+      selMinGap: sel && an.minGap[sel.id] != null ? fmt(an.minGap[sel.id]) : 'вплотную',
+      propFields: sel ? [['Ширина', 'w'], ['Глубина', 'h'], ['Координата X', 'x'], ['Координата Y', 'y']].map(([label, k]) => ({ label, suffix: u, disabled: !!sel.locked && (k === 'x' || k === 'y'), ...this.nf(sel.id + k, sel[k], v => this.patch(sel.id, { [k]: (k === 'w' || k === 'h') ? Math.max(5, v) : v })) })).concat([{ label: 'Угол поворота', suffix: '°', disabled: false, ...this.nf(sel.id + 'rot', sel.rot || 0, v => this.rotate(sel.id, ((v % 360) + 360) % 360), true) }]) : [],
+      rotBtns: [0, 90, 180, 270].map(a => ({ label: a + '°', on: () => sel && this.rotate(sel.id, a), style: { flex: 1, height: 36, borderRadius: 10, border: sel && (sel.rot || 0) === a ? '1.5px solid #5FA768' : '1px solid #E5E3DE', background: sel && (sel.rot || 0) === a ? '#EEF6EF' : '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer' } })),
+      rotSel: () => sel && this.rotate(sel.id), toggleLock: () => sel && this.patch(sel.id, { locked: !sel.locked }), lockTrack: track(sel && sel.locked), lockKnob: knob(sel && sel.locked),
+      dupSel: () => sel && this.dup(sel.id), delSel: () => sel && this.del(sel.id),
+      roomFields: [['Ширина', 'w'], ['Длина', 'h']].map(([label, k]) => ({ label, ...this.nf('room' + k, st.room[k], v => this.setRoom({ [k]: Math.max(100, v) })) })),
+      areaText: `${((st.room.w * st.room.h) / 10000).toFixed(1).replace('.', ',')} м²`, roomSizeText: `${fmt(st.room.w)} × ${fmt(st.room.h)}`,
+      floorBtns: K ? [['oak', 'Дуб'], ['light', 'Светлый'], ['walnut', 'Орех'], ['tile', 'Плитка']].map(([k, label]) => ({ label, on: () => this.setState({ floor: k, save: 'dirty' }), style: { border: st.floor === k ? '2px solid #5FA768' : '1px solid #E5E3DE', borderRadius: 12, background: '#fff', padding: 6, display: 'flex', flexDirection: 'column', gap: 5, alignItems: 'center', cursor: 'pointer' }, swatch: { width: '100%', height: 36, borderRadius: 8, ...K.FLOORS[k](0.6) } })) : [],
+      wallRows: [['Верхняя стена', 'w'], ['Нижняя стена', 'w'], ['Левая стена', 'h'], ['Правая стена', 'h']].map(([label, k], i) => ({ label, ...this.nf('wall' + i, st.room[k], v => this.setRoom({ [k]: Math.max(100, v) })) })),
+      openTitle: openKind === 'doors' ? 'Двери' : 'Окна',
+      addOpening: () => this.setState(s => ({ [openKind]: [...s[openKind], { wall: 'top', at: 20, w: openKind === 'doors' ? 80 : 120 }], save: 'dirty' })),
+      openViews: st[openKind].map((o, i) => ({ title: `${openKind === 'doors' ? 'Дверь' : 'Окно'} ${i + 1}`, isDoor: openKind === 'doors', flipText: o.flip ? 'Петли справа' : 'Петли слева',
+        walls: wallNames.map(([k, l]) => ({ label: l, on: () => this.setOpen(openKind, i, { wall: k }), style: { ...segBtn(o.wall === k), height: 30, fontSize: 12 } })),
+        at: this.nf(openKind + i + 'at', o.at, v => this.setOpen(openKind, i, { at: Math.max(0, v) })), w: this.nf(openKind + i + 'w', o.w, v => this.setOpen(openKind, i, { w: Math.max(40, v) })),
+        flip: () => this.setOpen(openKind, i, { flip: !o.flip }), del: () => this.setState(s => ({ [openKind]: s[openKind].filter((_, j) => j !== i), save: 'dirty' })) })),
+      mStepA: { display: 'flex', gap: 10, alignItems: 'center', height: 42, padding: '0 14px', borderRadius: 12, fontSize: 13, background: st.mA ? '#EEF6EF' : '#F4F2EE', color: st.mA ? '#2F6B38' : '#6B6A66', fontWeight: 600 },
+      mStepB: { display: 'flex', gap: 10, alignItems: 'center', height: 42, padding: '0 14px', borderRadius: 12, fontSize: 13, background: st.mB ? '#EEF6EF' : '#F4F2EE', color: st.mB ? '#2F6B38' : '#6B6A66', fontWeight: 600 },
+      mAName: st.mA ? (items.find(i => i.id === st.mA) || {}).name : 'Выберите первый предмет', mBName: st.mB ? (items.find(i => i.id === st.mB) || {}).name : 'Выберите второй предмет',
+      resetMeasure: () => this.setState({ mA: null, mB: null }),
+      toggleZones: () => this.setState({ showZones: !st.showZones }), zonesTrack: track(st.showZones), zonesKnob: knob(st.showZones),
+
+      verdictBox: { display: 'flex', alignItems: 'center', gap: 12, borderRadius: 16, padding: '14px 18px', fontSize: 15, fontWeight: 600, background: best ? '#EEF6EF' : '#F1EFEA', color: best ? '#2F6B38' : '#6B6A66' },
+      verdictIcon: best ? 'thumb_up' : 'info',
+      verdictText: best ? `«${best.v.name}» удобнее: ${best.a.errs ? `меньше пересечений` : 'нет пересечений'}${best.a.minPass ? `, самый узкий проход ${best.a.minPass} см` : ', все проходы шире ' + st.thr + ' см'}.` : 'Выберите два разных варианта для сравнения.',
+      cmpCols: cmpVals.map((c, col) => ({
+        tabs: st.variants.map((v, i) => ({ label: v.name, on: () => this.setState({ [col ? 'cmpB' : 'cmpA']: i }), style: chip(i === c.i, true) })),
+        best: bestIdx === col, items: c.v.items, status: c.a.st,
+        card: { borderRadius: 22, background: '#fff', border: bestIdx === col ? '2px solid #5FA768' : '1px solid #ECEAE5', padding: 18, display: 'flex', flexDirection: 'column', gap: 14 },
+        metrics: [['Столкновения', c.a.errs, c.a.errs ? '#E65A5A' : '#2F6B38'], ['Узкие проходы', c.a.warns, c.a.warns ? '#C98516' : '#2F6B38'], ['Мин. проход', c.a.minPass ? c.a.minPass + ' см' : '≥ ' + st.thr + ' см', '#1E1E22'], ['Свободно', c.a.free + '%', '#1E1E22']].map(([label, value, color]) => ({ label, value, style: { fontSize: 18, fontWeight: 800, color, marginTop: 2 } })),
+        issues: c.a.issues.slice(0, 4).map(is => ({ text: is.text, ...issueIcon(is.lvl) })),
+        choose: () => this.go('editor', { vi: c.i, sel: null }) })),
+
+      modalExport: st.modal === 'export', modalCustom: st.modal === 'custom', modalConfirm: st.modal === 'confirm', closeModal: () => this.setState({ modal: null }),
+      variantName, expNames: st.exp.names, expDims: st.exp.dims, expList: st.exp.list,
+      expRows: items.filter(i => i.type !== 'rug' && i.type !== 'plant').map(i => ({ name: i.name, dims: `${fmt(i.w)} × ${fmt(i.h)}` })),
+      expFormats: [['PNG', 'Картинка для мессенджера или магазина'], ['PDF', 'План, габариты и список мебели']].map(([label, desc]) => ({ label, desc, on: () => this.setState(s => ({ exp: { ...s.exp, fmt: label } })), style: { textAlign: 'left', borderRadius: 14, padding: 14, cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 4, border: st.exp.fmt === label ? '2px solid #5FA768' : '1px solid #E5E3DE', background: st.exp.fmt === label ? '#F3F9F4' : '#fff' } })),
+      expToggles: [['dims', 'Показывать размеры'], ['names', 'Показывать названия мебели'], ['list', 'Включить список предметов']].map(([k, label]) => ({ label, on: () => this.setState(s => ({ exp: { ...s.exp, [k]: !s.exp[k] } })), track: track(st.exp[k]), knob: knob(st.exp[k]) })),
+      expFile: `roomfit-${st.projName.toLowerCase().replace(/\s+/g, '-')}-${variantName.toLowerCase().replace(/\s+/g, '-')}.${st.exp.fmt.toLowerCase()}`,
+      doExport: () => { this.setState({ modal: null }); this.toast(`План сохранён в ${st.exp.fmt}`, false, 'download_done'); },
+      cuType: st.cu.type, cuW: +st.cu.w || 50, cuH: +st.cu.h || 50, cuName: st.cu.name, cuWs: st.cu.w, cuHs: st.cu.h,
+      onCuName: e => { const v = e.target.value; this.setState(s => ({ cu: { ...s.cu, name: v } })); }, onCuW: e => { const v = e.target.value; this.setState(s => ({ cu: { ...s.cu, w: v } })); }, onCuH: e => { const v = e.target.value; this.setState(s => ({ cu: { ...s.cu, h: v } })); },
+      cuTypes: [['custom', 'Прямоугольник'], ['sofa', 'Диван'], ['bed', 'Кровать'], ['desk', 'Стол'], ['wardrobe', 'Шкаф'], ['armchair', 'Кресло']].map(([k, label]) => ({ label, on: () => this.setState(s => ({ cu: { ...s.cu, type: k } })), style: chip(st.cu.type === k, true) })),
+      cuCta: scr === 'editor' ? 'Добавить на план' : 'Сохранить предмет',
+      addCustom: () => { const c = { key: 'cu' + (uid++), type: st.cu.type, name: st.cu.name || 'Мой предмет', w: Math.max(5, +st.cu.w || 50), h: Math.max(5, +st.cu.h || 50) }; this.setState(s => ({ mine: [...s.mine, c], modal: null })); if (scr === 'editor') this.add(c); this.toast(`«${c.name}» ${fmt(c.w)} × ${fmt(c.h)} добавлен`); },
+      confTitle: st.confirm ? st.confirm.title : '', confText: st.confirm ? st.confirm.text : '', confOk: () => st.confirm && st.confirm.ok(),
+      hasToast: !!st.toast, toastText: st.toast ? st.toast.text : '', toastUndo: !!(st.toast && st.toast.undo), toastIcon: st.toast ? st.toast.icon : '', toastUndoFn: () => { this.undo(); this.setState({ toast: null }); },
+      screensOpen: st.screensOpen, toggleScreens: () => this.setState({ screensOpen: !st.screensOpen }),
+      screenLinks: [['Вход', () => this.go('login')], ['Регистрация', () => this.go('register')], ['Мои проекты', () => this.go('dashboard', { tab: 'projects', empty: false })], ['Пустой аккаунт', () => this.go('dashboard', { tab: 'projects', empty: true })], ['Шаблоны', () => this.go('dashboard', { tab: 'templates' })], ['Каталог мебели', () => this.go('dashboard', { tab: 'catalog' })], ['Профиль и настройки', () => this.go('dashboard', { tab: 'settings' })], ['Создание проекта', () => this.go('wizard', { wz: { step: 1, name: 'Моя спальня', w: 400, h: 320 } })], ['2D-редактор', () => this.openProject('bedroom')], ['Свойства мебели', () => { this.openProject('bedroom'); this.setState({ sel: 'b1' }); }], ['Настройки комнаты', () => { this.openProject('bedroom'); this.setState({ tool: 'room' }); }], ['Своя мебель', () => this.setState({ screen: 'editor', modal: 'custom', screensOpen: false })], ['Сравнение вариантов', () => { this.openProject('bedroom'); this.go('compare'); }], ['Экспорт', () => this.setState({ screen: 'editor', modal: 'export', screensOpen: false })]].map(([label, on]) => ({ label, on })),
+    };
+  }
+}
+</script>
+</body>
+</html>

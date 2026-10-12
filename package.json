@@ -1,0 +1,35 @@
+{
+  "name": "roomfit-workspace",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "workspaces": [
+    "landing",
+    "platform",
+    "packages/core"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:landing": "npm run dev --workspace @roomfit/landing",
+    "dev:platform": "npm run dev --workspace @roomfit/platform",
+    "build": "npm run build --workspace @roomfit/landing && npm run build --workspace @roomfit/platform",
+    "test": "vitest run --config vitest.config.ts",
+    "test:landing": "npm run test:e2e --workspace @roomfit/landing",
+    "test:e2e": "playwright test",
+    "setup:api": "node scripts/python.mjs install",
+    "test:api": "node scripts/python.mjs test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^22.10.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "^5.7.0",
+    "vite": "^6.4.0",
+    "vitest": "^5.0.4",
+    "zod-to-json-schema": "^3.25.2"
+  }
+}

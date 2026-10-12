@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&display=block" rel="stylesheet">
+<script src="./roomfit-kit.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;background:#101112;font-family:Manrope,system-ui,sans-serif;color:#F8F7F4;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#D4AF7C;text-decoration:none}a:hover{color:#E4C595}
+button{font-family:inherit;color:inherit}
+</style>
+</helmet>
+
+<section style="padding:64px 64px 40px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;align-items:center;gap:14px"><img src="assets/logo-mark-dark.png" style="height:44px;mix-blend-mode:lighten"><div><div style="font-size:28px;font-weight:800;letter-spacing:-.02em">Мобильный лендинг и мобильная веб-платформа</div><div style="font-size:14px;color:rgba(248,247,244,.55);margin-top:4px">Светлая контентная область, тёмные премиальные акценты. Отдельная компоновка редактора — без уменьшенных десктопных панелей.</div></div></div>
+  <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap">
+
+    <!-- W1 Mobile landing (long scroll) -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W1 · Мобильный лендинг (вся прокрутка)</div>
+    <div style="width:390px;border-radius:44px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;color:#1E1E22;box-shadow:0 30px 80px rgba(0,0,0,.4)">
+      <div style="background:#0B0D0D;color:#F8F7F4;padding:0 0 28px">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 20px"><div style="display:flex;align-items:center;gap:8px"><img src="assets/logo-mark-dark.png" style="height:32px;mix-blend-mode:lighten"><span style="font-weight:800;font-size:18px">Room<span style="color:#D4AF7C">Fit</span></span></div><button style="width:44px;height:44px;border-radius:12px;border:1px solid rgba(248,247,244,.16);background:transparent;display:flex;align-items:center;justify-content:center;color:#F8F7F4"><span style="font-family:'Material Symbols Rounded';font-size:24px">menu</span></button></div>
+        <div style="padding:20px 20px 0"><div style="font-size:38px;line-height:1.04;font-weight:800;letter-spacing:-.035em">Проверь, поместится ли мебель в твою комнату</div><div style="font-size:15px;line-height:1.5;color:rgba(248,247,244,.7);margin-top:14px">Расставь мебель в реальных размерах и убедись, что всё влезет ещё до покупки.</div></div>
+        <div style="margin:22px 20px 0;border-radius:22px;background:#F7F7F5;padding:10px;display:flex;justify-content:center;position:relative"><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ good }}" doors="{{ doors }}" windows="{{ windows }}" fit-w="{{ 330 }}" fit-h="{{ 270 }}" hint-size="330px,270px"></x-import><span style="position:absolute;right:14px;bottom:14px;height:30px;padding:0 10px;border-radius:999px;background:#5FA768;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px"><span style="font-family:'Material Symbols Rounded';font-size:16px">check_circle</span>Столкновений нет</span></div>
+        <div style="padding:20px 20px 0"><div style="height:56px;border-radius:999px;background:#D4AF7C;color:#0B0D0D;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px">Начать бесплатно<span style="font-family:'Material Symbols Rounded';font-size:20px">arrow_forward</span></div></div>
+      </div>
+      <div style="padding:32px 20px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:24px;font-weight:800;letter-spacing:-.02em">Что умеет RoomFit</div>
+        <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4"><div style="display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid #ECEAE5;border-radius:18px;padding:16px"><span style="width:44px;height:44px;flex:none;border-radius:14px;background:#1E1E22;color:#D4AF7C;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:22px">{{ b.icon }}</span><div><div style="font-size:16px;font-weight:700">{{ b.t }}</div><div style="font-size:14px;color:#6B6A66;line-height:1.45;margin-top:3px">{{ b.d }}</div></div></div></sc-for>
+      </div>
+      <div style="padding:8px 20px 32px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-size:24px;font-weight:800;letter-spacing:-.02em">Как это работает</div>
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4"><div style="display:flex;gap:14px"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:#1E1E22;color:#D4AF7C;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center">{{ s.n }}</span><div><div style="font-size:16px;font-weight:700">{{ s.t }}</div><div style="font-size:14px;color:#6B6A66;line-height:1.45;margin-top:2px">{{ s.d }}</div></div></div></sc-for>
+      </div>
+      <div style="padding:0 0 32px">
+        <div style="padding:0 20px 14px;font-size:24px;font-weight:800;letter-spacing:-.02em">Примеры комнат</div>
+        <div style="display:flex;gap:12px;overflow-x:auto;padding:0 20px">
+          <sc-for list="{{ tpls }}" as="t" hint-placeholder-count="3"><div style="width:220px;flex:none;border-radius:18px;background:#fff;border:1px solid #ECEAE5;overflow:hidden"><div style="height:150px;background:#EFECE6;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.Plan" room="{{ t.room }}" items="{{ t.items }}" doors="{{ t.doors }}" windows="{{ t.windows }}" floor="{{ t.floor }}" fit-w="{{ 200 }}" fit-h="{{ 136 }}" dims="{{ false }}" margin="{{ 4 }}" hint-size="200px,136px"></x-import></div><div style="padding:12px 14px"><div style="font-size:15px;font-weight:700">{{ t.name }}</div><div style="font-size:12px;color:#8A8984;margin-top:2px">{{ t.size }}</div></div></div></sc-for>
+        </div>
+      </div>
+      <div style="padding:0 20px 32px"><div style="border-radius:22px;background:#1E1E22;color:#F8F7F4;padding:18px;display:flex;flex-direction:column;gap:12px"><div style="font-size:20px;font-weight:800">Демо редактора</div><div style="font-size:14px;color:rgba(248,247,244,.65);line-height:1.45">Кресло мешает открыть дверь — RoomFit подсветит это красным.</div><div style="border-radius:16px;background:#F7F7F5;display:flex;justify-content:center;padding:8px"><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ bad }}" doors="{{ doors }}" windows="{{ windows }}" status="{{ badSt }}" zones="{{ true }}" fit-w="{{ 300 }}" fit-h="{{ 250 }}" hint-size="300px,250px"></x-import></div><div style="height:48px;border-radius:14px;border:1px solid rgba(248,247,244,.2);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700">Открыть редактор</div></div></div>
+      <div style="padding:0 20px 32px"><div style="border-radius:22px;overflow:hidden;position:relative;height:300px;background:#0B0D0D"><img src="assets/photo-bedroom.png" style="width:100%;height:100%;object-fit:cover;opacity:.75"><div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,13,13,.95),rgba(11,13,13,.1) 70%)"></div><div style="position:absolute;left:18px;right:18px;bottom:18px;color:#F8F7F4"><span style="font-size:12px;font-weight:700;color:#D4AF7C">Скоро</span><div style="font-size:22px;font-weight:800;line-height:1.15;margin-top:6px">Скоро ты сможешь увидеть свою комнату в 3D</div></div></div></div>
+      <div style="padding:0 20px 32px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px">FAQ</div>
+        <div style="border-radius:16px;background:#fff;border:1px solid #ECEAE5;padding:16px"><div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700">Нужно ли устанавливать программу?<span style="font-family:'Material Symbols Rounded';font-size:22px;color:#B8925A">remove</span></div><div style="font-size:14px;color:#6B6A66;line-height:1.5;margin-top:8px">Нет. RoomFit работает в браузере на компьютере и телефоне.</div></div>
+        <div style="min-height:56px;border-radius:16px;background:#fff;border:1px solid #ECEAE5;padding:0 16px;display:flex;align-items:center;justify-content:space-between;font-size:15px;font-weight:700">Можно ли пользоваться бесплатно?<span style="font-family:'Material Symbols Rounded';font-size:22px;color:#B8925A">add</span></div>
+        <div style="min-height:56px;border-radius:16px;background:#fff;border:1px solid #ECEAE5;padding:0 16px;display:flex;align-items:center;justify-content:space-between;font-size:15px;font-weight:700">Когда появится 3D?<span style="font-family:'Material Symbols Rounded';font-size:22px;color:#B8925A">add</span></div>
+      </div>
+      <div style="background:#0B0D0D;color:#F8F7F4;padding:36px 20px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px"><img src="assets/logo-3d.png" style="width:84px;mix-blend-mode:lighten"><div style="font-size:26px;font-weight:800;line-height:1.12;letter-spacing:-.02em">Твоя идеальная расстановка начинается с точного плана</div><div style="height:54px;width:100%;border-radius:999px;background:#D4AF7C;color:#0B0D0D;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center">Создать первую комнату</div></div>
+    </div></div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,390px);gap:40px">
+      <!-- W2 Login -->
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W2 · Вход</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#0B0D0D;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#F8F7F4">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="height:30px;margin:0 14px 6px;border-radius:10px;background:#1E1E22;font-size:12px;color:rgba(248,247,244,.6);display:flex;align-items:center;justify-content:center;gap:4px;flex:none"><span style="font-family:'Material Symbols Rounded';font-size:13px">lock</span>roomfit.app/login</div>
+        <div style="flex:1;padding:36px 22px 30px;display:flex;flex-direction:column;gap:12px">
+          <img src="assets/logo-mark-dark.png" style="width:64px;mix-blend-mode:lighten">
+          <div style="font-size:30px;font-weight:800;letter-spacing:-.02em;margin-top:8px">Вход в RoomFit</div>
+          <div style="font-size:15px;color:rgba(248,247,244,.6);margin-bottom:12px">Ваши комнаты ждут.</div>
+          <div style="height:52px;border-radius:14px;background:#F8F7F4;color:#0B0D0D;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px"><span style="font-weight:800;color:#4285F4">G</span>Продолжить с Google</div>
+          <div style="height:52px;border-radius:14px;background:#1E1E22;border:1px solid rgba(248,247,244,.14);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px"><span style="font-family:'Material Symbols Rounded';font-size:20px">phone_iphone</span>Продолжить с Apple</div>
+          <div style="text-align:center;font-size:12px;color:rgba(248,247,244,.4);margin:6px 0">или</div>
+          <div style="height:52px;border-radius:14px;background:#141517;border:1px solid rgba(248,247,244,.14);padding:0 16px;display:flex;align-items:center;font-size:15px;color:rgba(248,247,244,.85)">anna@mail.ru</div>
+          <div style="height:52px;border-radius:14px;background:#141517;border:1px solid rgba(248,247,244,.14);padding:0 16px;display:flex;align-items:center;font-size:15px;letter-spacing:3px">••••••••</div>
+          <div style="height:52px;border-radius:14px;background:#5FA768;color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;margin-top:4px">Войти</div>
+          <div style="flex:1"></div>
+          <div style="text-align:center;font-size:14px;color:rgba(248,247,244,.6)">Нет аккаунта? <a href="#">Зарегистрироваться</a></div>
+        </div>
+      </div></div>
+
+      <!-- W3 Dashboard -->
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W3 · Мои проекты</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="height:30px;margin:0 14px 6px;border-radius:10px;background:#ECEAE5;font-size:12px;color:#6B6A66;display:flex;align-items:center;justify-content:center;gap:4px;flex:none"><span style="font-family:'Material Symbols Rounded';font-size:13px">lock</span>roomfit.app</div>
+        <div style="height:56px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 18px"><div style="display:flex;align-items:center;gap:8px"><img src="assets/icon-light.png" style="height:32px;border-radius:8px"><span style="font-weight:800;font-size:18px">Room<span style="color:#B8925A">Fit</span></span></div><div style="width:40px;height:40px;border-radius:50%;background:#1E1E22;color:#D4AF7C;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center">АС</div></div>
+        <div style="flex:1;overflow:hidden;padding:6px 18px 0;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:28px;font-weight:800;letter-spacing:-.02em">Мои проекты</div><div style="width:44px;height:44px;border-radius:14px;background:#5FA768;color:#fff;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Rounded';font-size:26px">add</span></div></div>
+          <div style="height:44px;border-radius:14px;background:#fff;border:1px solid #E5E3DE;display:flex;align-items:center;gap:8px;padding:0 14px;color:#8A8984;font-size:15px"><span style="font-family:'Material Symbols Rounded';font-size:20px">search</span>Поиск проектов</div>
+          <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4"><div style="display:flex;gap:12px;align-items:center;background:#fff;border:1px solid #ECEAE5;border-radius:18px;padding:10px"><div style="width:96px;height:76px;flex:none;border-radius:12px;background:#EFECE6;display:flex;align-items:center;justify-content:center;overflow:hidden"><x-import component-from-global-scope="RoomFit.Plan" room="{{ p.room }}" items="{{ p.items }}" doors="{{ p.doors }}" floor="{{ p.floor }}" fit-w="{{ 90 }}" fit-h="{{ 70 }}" dims="{{ false }}" margin="{{ 2 }}" hint-size="90px,70px"></x-import></div><div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:700">{{ p.name }}</div><div style="font-size:13px;color:#6B6A66;margin-top:2px">{{ p.size }}</div><div style="font-size:12px;color:#9A9993;margin-top:4px">{{ p.date }}</div></div><span style="font-family:'Material Symbols Rounded';font-size:22px;color:#B5B2AB">chevron_right</span></div></sc-for>
+        </div>
+        <div style="height:84px;flex:none;background:#fff;border-top:1px solid #ECEAE5;display:flex;align-items:flex-start;justify-content:space-around;padding-top:8px">
+          <div style="width:72px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#1E1E22;font-size:11px;font-weight:700"><span style="font-family:'Material Symbols Rounded';font-size:24px;color:#B8925A">folder_open</span>Проекты</div>
+          <div style="width:72px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8A8984;font-size:11px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:24px">chair</span>Каталог</div>
+          <div style="width:72px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8A8984;font-size:11px;font-weight:600"><span style="width:44px;height:44px;margin-top:-12px;border-radius:50%;background:#5FA768;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:26px;box-shadow:0 6px 16px rgba(95,167,104,.4)">add</span>Создать</div>
+          <div style="width:72px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8A8984;font-size:11px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:24px">person</span>Профиль</div>
+        </div>
+      </div></div>
+
+      <!-- W4 Create room -->
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W4 · Создание комнаты</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="height:30px;margin:0 14px 6px;border-radius:10px;background:#ECEAE5;font-size:12px;color:#6B6A66;display:flex;align-items:center;justify-content:center;gap:4px;flex:none"><span style="font-family:'Material Symbols Rounded';font-size:13px">lock</span>roomfit.app/new</div>
+        <div style="height:52px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px"><span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">close</span><span style="font-size:17px;font-weight:700">Новая комната</span></div>
+        <div style="flex:1;padding:4px 18px;display:flex;flex-direction:column;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#6B6A66">Название<div style="height:52px;border-radius:14px;border:1.5px solid #5FA768;background:#fff;padding:0 16px;display:flex;align-items:center;font-size:17px;font-weight:700;color:#1E1E22">Спальня</div></label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <sc-for list="{{ dims }}" as="d" hint-placeholder-count="2"><label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#6B6A66">{{ d.l }}<div style="height:56px;border-radius:14px;border:1px solid #E5E3DE;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 6px"><span style="width:40px;height:40px;border-radius:10px;background:#F4F2EE;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:20px;color:#1E1E22">remove</span><span style="font-size:19px;font-weight:800;color:#1E1E22">{{ d.v }}</span><span style="width:40px;height:40px;border-radius:10px;background:#F4F2EE;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:20px;color:#1E1E22">add</span></div></label></sc-for>
+          </div>
+          <div style="display:flex;background:#ECEAE5;border-radius:12px;padding:3px"><span style="flex:1;height:38px;border-radius:9px;background:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.1)">Сантиметры</span><span style="flex:1;height:38px;font-size:14px;font-weight:600;color:#6B6A66;display:flex;align-items:center;justify-content:center">Метры</span></div>
+          <div style="flex:1;border-radius:20px;background:#ECEAE5;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:16px 16px;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.Plan" room="{{ room34 }}" doors="{{ doors34 }}" fit-w="{{ 320 }}" fit-h="{{ 300 }}" hint-size="320px,300px"></x-import></div>
+          <div style="font-size:13px;color:#8A8984;text-align:center">Прямоугольная комната · 12 м²</div>
+        </div>
+        <div style="padding:12px 18px 30px;flex:none"><div style="height:56px;border-radius:16px;background:#5FA768;color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px">Создать и открыть<span style="font-family:'Material Symbols Rounded';font-size:20px">arrow_forward</span></div></div>
+      </div></div>
+
+      <!-- W5 Editor selected -->
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W5 · Мобильный 2D-редактор · предмет выбран</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700;background:#fff">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="height:54px;flex:none;display:flex;align-items:center;gap:4px;padding:0 10px;background:#fff"><span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">arrow_back</span><div style="flex:1"><div style="font-size:16px;font-weight:700">Моя спальня</div><div style="font-size:11px;color:#5FA768;font-weight:600">Сохранено</div></div><span style="height:38px;padding:0 14px;border-radius:12px;background:#5FA768;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center">Сохранить</span></div>
+        <div style="flex:none;padding:6px 14px 8px;background:#fff;border-bottom:1px solid #ECEAE5;display:flex;gap:8px;align-items:center"><div style="display:flex;background:#F1EFEA;border-radius:11px;padding:3px;flex:1"><span style="flex:1;height:32px;border-radius:8px;background:#1E1E22;color:#F8F7F4;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center">2D</span><span style="flex:1;height:32px;font-size:13px;font-weight:600;color:#8A8984;display:flex;align-items:center;justify-content:center;gap:4px"><span style="font-family:'Material Symbols Rounded';font-size:15px">lock</span>3D · скоро</span></div><span style="height:38px;padding:0 10px;border-radius:11px;border:1px solid #E5E3DE;font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px">Вариант 1<span style="font-family:'Material Symbols Rounded';font-size:16px">expand_more</span></span></div>
+        <div style="flex:1;position:relative;display:flex;align-items:center;justify-content:center;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:14px 14px">
+          <x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ good }}" doors="{{ doors }}" windows="{{ windows }}" selected-id="b1" fit-w="{{ 370 }}" fit-h="{{ 400 }}" hint-size="370px,400px"></x-import>
+          <span style="position:absolute;left:12px;top:12px;height:32px;padding:0 12px;border-radius:999px;background:#5FA768;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px"><span style="font-family:'Material Symbols Rounded';font-size:16px">check_circle</span>Столкновений нет</span>
+          <span style="position:absolute;right:12px;top:12px;height:32px;padding:0 10px;border-radius:10px;background:#fff;border:1px solid #ECEAE5;font-size:12px;font-weight:700;display:flex;align-items:center">100%</span>
+        </div>
+        <div style="flex:none;margin:0 10px 8px;border-radius:20px;background:#1E1E22;color:#F8F7F4;padding:12px 12px 10px;box-shadow:0 10px 30px rgba(0,0,0,.25)">
+          <div style="display:flex;align-items:center;gap:8px;padding:0 4px 10px"><span style="font-size:15px;font-weight:700;flex:1">Кровать · 160 × 200 см</span><span style="font-family:'Material Symbols Rounded';font-size:22px;color:rgba(248,247,244,.6)">expand_less</span></div>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px"><sc-for list="{{ quick }}" as="q" hint-placeholder-count="5"><div style="height:56px;border-radius:12px;background:#2A2A2F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;font-weight:600"><span style="{{ q.st }}">{{ q.i }}</span>{{ q.l }}</div></sc-for></div>
+        </div>
+        <div style="flex:none;font-size:11px;color:#8A8984;text-align:center;padding-bottom:22px">Удерживайте предмет, чтобы переместить · два пальца — масштаб</div>
+      </div></div>
+
+      <!-- W6 Catalog sheet -->
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W6 · Каталог · bottom sheet</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700;background:#fff">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="height:54px;flex:none;display:flex;align-items:center;gap:4px;padding:0 10px;background:#fff"><span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">arrow_back</span><div style="flex:1;font-size:16px;font-weight:700">Новая спальня</div><span style="height:38px;padding:0 14px;border-radius:12px;background:#5FA768;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center">Сохранить</span></div>
+        <div style="flex:1;position:relative;display:flex;align-items:flex-start;justify-content:center;padding-top:20px;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:14px 14px">
+          <x-import component-from-global-scope="RoomFit.Plan" room="{{ room34 }}" items="{{ none }}" doors="{{ doors34 }}" windows="{{ win34 }}" fit-w="{{ 300 }}" fit-h="{{ 300 }}" hint-size="300px,300px"></x-import>
+        </div>
+        <div style="position:absolute;inset:0;background:rgba(11,13,13,.28)"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:520px;background:#fff;border-radius:28px 28px 0 0;padding:10px 18px 0;display:flex;flex-direction:column;gap:12px;box-shadow:0 -10px 40px rgba(0,0,0,.2)">
+          <div style="width:40px;height:5px;border-radius:3px;background:#DAD7D0;align-self:center"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:20px;font-weight:800">Каталог мебели</div><span style="width:36px;height:36px;border-radius:50%;background:#F4F2EE;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:20px">close</span></div>
+          <div style="height:44px;border-radius:14px;background:#F4F2EE;display:flex;align-items:center;gap:8px;padding:0 14px;color:#8A8984;font-size:15px"><span style="font-family:'Material Symbols Rounded';font-size:20px">search</span>Поиск мебели</div>
+          <div style="display:flex;gap:6px;overflow:hidden"><sc-for list="{{ cats }}" as="c" hint-placeholder-count="5"><span style="{{ c.st }}">{{ c.l }}</span></sc-for></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><sc-for list="{{ cat6 }}" as="c" hint-placeholder-count="6"><div style="border-radius:14px;border:1px solid #ECEAE5;padding:8px;display:flex;flex-direction:column;gap:4px;position:relative"><div style="height:64px;border-radius:10px;background:#F4F2EE;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ c.type }}" w="{{ c.w }}" h="{{ c.h }}" size="{{ 50 }}" hint-size="50px,50px"></x-import></div><div style="font-size:11px;font-weight:700;line-height:1.2">{{ c.name }}</div><div style="font-size:10px;color:#8A8984">{{ c.dims }}</div><span style="position:absolute;right:6px;top:6px;width:24px;height:24px;border-radius:8px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.15);color:#3f8048;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:16px">add</span></div></sc-for></div>
+          <div style="height:48px;border-radius:14px;border:1.5px dashed #CFCBC2;display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700"><span style="font-family:'Material Symbols Rounded';font-size:20px">straighten</span>Свои размеры</div>
+        </div>
+      </div></div>
+
+      <!-- W7 Properties sheet -->
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W7 · Свойства предмета · раскрытая панель</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700;background:#fff">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="flex:1;display:flex;align-items:flex-start;justify-content:center;padding-top:20px;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:14px 14px">
+          <x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ bad }}" doors="{{ doors }}" windows="{{ windows }}" status="{{ badSt }}" selected-id="w1" zones="{{ true }}" fit-w="{{ 340 }}" fit-h="{{ 300 }}" hint-size="340px,300px"></x-import>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:28px 28px 0 0;padding:10px 18px 30px;display:flex;flex-direction:column;gap:14px;box-shadow:0 -10px 40px rgba(0,0,0,.14)">
+          <div style="width:40px;height:5px;border-radius:3px;background:#DAD7D0;align-self:center"></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:48px;height:48px;border-radius:14px;background:#F4F2EE;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.FurnThumb" type="wardrobe" w="{{ 180 }}" h="{{ 60 }}" size="{{ 40 }}" hint-size="40px,40px"></x-import></div><div style="flex:1;font-size:19px;font-weight:800">Шкаф</div><span style="width:36px;height:36px;border-radius:50%;background:#F4F2EE;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:20px">expand_more</span></div>
+          <div style="border-radius:14px;background:#FCF4E4;color:#8A5A12;padding:12px 14px;font-size:13px;font-weight:600;display:flex;gap:8px"><span style="font-family:'Material Symbols Rounded';font-size:18px">warning</span>Узкий проход 40 см: Кровать — Шкаф</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><sc-for list="{{ propF }}" as="f" hint-placeholder-count="2"><label style="display:flex;flex-direction:column;gap:5px;font-size:12px;font-weight:600;color:#8A8984">{{ f.l }}<div style="height:52px;border-radius:14px;border:1px solid #E5E3DE;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:18px;font-weight:800;color:#1E1E22">{{ f.v }}<span style="font-size:13px;color:#9A9993;font-weight:600">см</span></div></label></sc-for></div>
+          <div><div style="font-size:12px;font-weight:600;color:#8A8984;margin-bottom:6px">Поворот</div><div style="display:flex;gap:6px"><span style="flex:1;height:44px;border-radius:12px;border:1px solid #E5E3DE;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700">0°</span><span style="flex:1;height:44px;border-radius:12px;border:1px solid #E5E3DE;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700">90°</span><span style="flex:1;height:44px;border-radius:12px;border:1.5px solid #5FA768;background:#EEF6EF;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700">180°</span><span style="flex:1;height:44px;border-radius:12px;border:1px solid #E5E3DE;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700">270°</span></div></div>
+          <div style="display:flex;gap:10px"><span style="flex:1;height:50px;border-radius:14px;border:1px solid #E5E3DE;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:700"><span style="font-family:'Material Symbols Rounded';font-size:20px">content_copy</span>Дублировать</span><span style="flex:1;height:50px;border-radius:14px;background:#FDF6F6;border:1px solid #F1D3D3;color:#C94848;display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:700"><span style="font-family:'Material Symbols Rounded';font-size:20px">delete</span>Удалить</span></div>
+        </div>
+      </div></div>
+
+      <!-- W8 Compare -->
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W8 · Сравнение вариантов</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="height:52px;flex:none;display:flex;align-items:center;gap:4px;padding:0 10px"><span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">arrow_back</span><span style="font-size:17px;font-weight:700">Сравнение</span></div>
+        <div style="flex:1;overflow:hidden;padding:0 16px;display:flex;flex-direction:column;gap:12px">
+          <div style="border-radius:14px;background:#EEF6EF;color:#2F6B38;padding:12px 14px;font-size:14px;font-weight:600;display:flex;gap:8px"><span style="font-family:'Material Symbols Rounded';font-size:20px">thumb_up</span>«Кровать у стены» удобнее: нет пересечений</div>
+          <div style="border-radius:20px;background:#fff;border:2px solid #5FA768;padding:12px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700">Кровать у стены<span style="color:#3f8048;font-size:12px">0 проблем</span></div><div style="display:flex;justify-content:center"><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ good }}" doors="{{ doors }}" windows="{{ windows }}" fit-w="{{ 300 }}" fit-h="{{ 230 }}" hint-size="300px,230px"></x-import></div></div>
+          <div style="border-radius:20px;background:#fff;border:1px solid #ECEAE5;padding:12px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700">Кровать у окна<span style="color:#C94848;font-size:12px">1 столкновение · 4 узких места</span></div><div style="display:flex;justify-content:center"><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ bad }}" doors="{{ doors }}" windows="{{ windows }}" status="{{ badSt }}" fit-w="{{ 300 }}" fit-h="{{ 230 }}" hint-size="300px,230px"></x-import></div></div>
+        </div>
+        <div style="padding:12px 16px 30px;flex:none"><div style="height:54px;border-radius:16px;background:#1E1E22;color:#F8F7F4;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center">Выбрать «Кровать у стены»</div></div>
+      </div></div>
+
+      <!-- W9 Export -->
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W9 · Экспорт</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="flex:1;display:flex;align-items:flex-start;justify-content:center;padding-top:30px"><div style="background:#fff;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:14px;display:flex;flex-direction:column;gap:8px"><div style="font-size:13px;font-weight:800">Моя спальня</div><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ good }}" doors="{{ doors }}" windows="{{ windows }}" names="{{ true }}" fit-w="{{ 280 }}" fit-h="{{ 220 }}" hint-size="280px,220px"></x-import></div></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:28px 28px 0 0;padding:10px 18px 30px;display:flex;flex-direction:column;gap:14px;box-shadow:0 -10px 40px rgba(0,0,0,.14)">
+          <div style="width:40px;height:5px;border-radius:3px;background:#DAD7D0;align-self:center"></div>
+          <div style="font-size:20px;font-weight:800">Экспорт плана</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div style="border-radius:16px;border:1px solid #E5E3DE;padding:14px"><div style="font-size:17px;font-weight:800">PNG</div><div style="font-size:12px;color:#6B6A66;margin-top:2px">Картинка</div></div><div style="border-radius:16px;border:2px solid #5FA768;background:#F3F9F4;padding:14px"><div style="font-size:17px;font-weight:800">PDF</div><div style="font-size:12px;color:#6B6A66;margin-top:2px">План и список</div></div></div>
+          <sc-for list="{{ expT }}" as="t" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;align-items:center;height:36px;font-size:15px;font-weight:600">{{ t }}<span style="width:46px;height:28px;border-radius:999px;background:#5FA768;position:relative"><span style="position:absolute;right:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff"></span></span></div></sc-for>
+          <div style="height:54px;border-radius:16px;background:#5FA768;color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px"><span style="font-family:'Material Symbols Rounded';font-size:20px">download</span>Скачать PDF</div>
+        </div>
+      </div></div>
+
+      <!-- W10 Profile -->
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">W10 · Профиль</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="height:30px;margin:0 14px 6px;border-radius:10px;background:#ECEAE5;font-size:12px;color:#6B6A66;display:flex;align-items:center;justify-content:center;gap:4px;flex:none"><span style="font-family:'Material Symbols Rounded';font-size:13px">lock</span>roomfit.app/profile</div>
+        <div style="flex:1;padding:14px 18px;display:flex;flex-direction:column;gap:16px">
+          <div style="border-radius:22px;background:#1E1E22;color:#F8F7F4;padding:20px;display:flex;align-items:center;gap:14px"><div style="width:56px;height:56px;border-radius:50%;background:#D4AF7C;color:#0B0D0D;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center">АС</div><div><div style="font-size:18px;font-weight:800">Анна Смирнова</div><div style="font-size:13px;color:rgba(248,247,244,.6)">anna@mail.ru</div></div></div>
+          <div style="border-radius:20px;background:#fff;border:1px solid #ECEAE5;overflow:hidden"><sc-for list="{{ profileRows }}" as="r" hint-placeholder-count="5"><div style="height:56px;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid #F1EFEA;font-size:15px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:22px;color:#B8925A">{{ r.i }}</span><span style="flex:1">{{ r.l }}</span><span style="font-size:14px;color:#8A8984;font-weight:500">{{ r.v }}</span><span style="font-family:'Material Symbols Rounded';font-size:20px;color:#C5C2BB">chevron_right</span></div></sc-for></div>
+          <div style="height:52px;border-radius:16px;background:#fff;border:1px solid #ECEAE5;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700;color:#C94848"><span style="font-family:'Material Symbols Rounded';font-size:20px">logout</span>Выйти</div>
+        </div>
+        <div style="height:84px;flex:none;background:#fff;border-top:1px solid #ECEAE5;display:flex;align-items:flex-start;justify-content:space-around;padding-top:8px">
+          <div style="width:72px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8A8984;font-size:11px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:24px">folder_open</span>Проекты</div>
+          <div style="width:72px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8A8984;font-size:11px;font-weight:600"><span style="font-family:'Material Symbols Rounded';font-size:24px">chair</span>Каталог</div>
+          <div style="width:72px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8A8984;font-size:11px;font-weight:600"><span style="width:44px;height:44px;margin-top:-12px;border-radius:50%;background:#5FA768;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:26px">add</span>Создать</div>
+          <div style="width:72px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#1E1E22;font-size:11px;font-weight:700"><span style="font-family:'Material Symbols Rounded';font-size:24px;color:#B8925A">person</span>Профиль</div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:40px 64px 100px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;align-items:center;gap:14px"><img src="assets/app-icon.png" style="height:52px;border-radius:13px"><div><div style="font-size:28px;font-weight:800;letter-spacing:-.02em">Нативное приложение iOS / Android</div><div style="font-size:14px;color:rgba(248,247,244,.55);margin-top:4px">Та же логика, собственная навигация: таб-бар, нативные переходы, haptic feedback, системное меню «Поделиться».</div></div></div>
+  <div style="display:grid;grid-template-columns:repeat(5,390px);gap:40px">
+
+    <!-- N1 Splash -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N1 · Splash</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:radial-gradient(circle at 50% 42%,#26241F 0%,#0B0D0D 62%);overflow:hidden;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#F8F7F4">
+      <img src="assets/logo-hero.png" style="width:300px;mix-blend-mode:lighten">
+      <div style="position:absolute;bottom:56px;width:36px;height:4px;border-radius:2px;background:rgba(212,175,124,.5)"></div>
+    </div></div>
+
+    <!-- N2-4 Onboarding -->
+    <sc-for list="{{ onboarding }}" as="o" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">{{ o.label }}</div>
+      <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#0B0D0D;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#F8F7F4">
+        <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+        <div style="height:44px;flex:none;display:flex;justify-content:flex-end;padding:0 20px;align-items:center;font-size:15px;color:rgba(248,247,244,.6)">Пропустить</div>
+        <div style="flex:1;margin:10px 18px 0;border-radius:28px;background:#F7F7F5;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:14px 14px">
+          <x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ o.items }}" doors="{{ doors }}" windows="{{ windows }}" status="{{ o.status }}" selected-id="{{ o.sel }}" zones="{{ o.zones }}" fit-w="{{ 330 }}" fit-h="{{ 300 }}" hint-size="330px,300px"></x-import>
+          <span style="{{ o.chipSt }}"><span style="font-family:'Material Symbols Rounded';font-size:16px">{{ o.chipIcon }}</span>{{ o.chip }}</span>
+        </div>
+        <div style="padding:28px 26px 0;flex:none"><div style="font-size:13px;font-weight:700;color:#D4AF7C;letter-spacing:.08em;text-transform:uppercase">{{ o.kicker }}</div><div style="font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-top:8px">{{ o.title }}</div></div>
+        <div style="padding:26px 26px 40px;flex:none;display:flex;align-items:center;justify-content:space-between"><div style="display:flex;gap:6px"><sc-for list="{{ o.dots }}" as="d" hint-placeholder-count="3"><span style="{{ d }}"></span></sc-for></div><div style="height:54px;padding:0 24px;border-radius:999px;background:#D4AF7C;color:#0B0D0D;font-size:16px;font-weight:800;display:flex;align-items:center;gap:6px">{{ o.cta }}<span style="font-family:'Material Symbols Rounded';font-size:20px">arrow_forward</span></div></div>
+      </div></div>
+    </sc-for>
+
+    <!-- N5 Auth -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N5 · Авторизация</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#0B0D0D;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#F8F7F4">
+      <div style="position:absolute;inset:0 0 40% 0"><image-slot id="app-auth-bg" shape="rect" placeholder="Фото: тёмная гостиная" style="width:100%;height:100%"></image-slot></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,13,13,.2) 0%,rgba(11,13,13,.7) 40%,#0B0D0D 62%);pointer-events:none"></div>
+      <div style="position:relative;height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700;pointer-events:none">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px 36px;gap:12px;pointer-events:none">
+        <img src="assets/logo-3d.png" style="width:110px;align-self:center;mix-blend-mode:lighten">
+        <div style="font-size:36px;font-weight:800;text-align:center;letter-spacing:-.02em">Room<span style="color:#D4AF7C">Fit</span></div>
+        <div style="font-size:15px;text-align:center;color:rgba(248,247,244,.7);margin-bottom:16px">Твой дом в правильных размерах.</div>
+        <div style="height:54px;border-radius:16px;background:#F8F7F4;color:#0B0D0D;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px"><span style="font-weight:800;color:#4285F4">G</span>Продолжить с Google</div>
+        <div style="height:54px;border-radius:16px;background:#000;border:1px solid rgba(248,247,244,.2);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px"><span style="font-family:'Material Symbols Rounded';font-size:20px">phone_iphone</span>Продолжить с Apple</div>
+        <div style="height:54px;border-radius:16px;border:1px solid rgba(248,247,244,.2);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px"><span style="font-family:'Material Symbols Rounded';font-size:20px">mail</span>Войти по email</div>
+        <div style="text-align:center;font-size:15px;color:#D4AF7C;font-weight:700;margin-top:6px">Регистрация</div>
+      </div>
+    </div></div>
+
+    <!-- N6 Home -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N6 · Главная</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+      <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="flex:1;overflow:hidden;padding:10px 18px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:14px;color:#8A8984">Добрый вечер,</div><div style="font-size:28px;font-weight:800;letter-spacing:-.02em">Анна</div></div><div style="width:44px;height:44px;border-radius:50%;background:#1E1E22;color:#D4AF7C;font-weight:700;display:flex;align-items:center;justify-content:center">АС</div></div>
+        <div style="border-radius:24px;background:#1E1E22;color:#F8F7F4;padding:14px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-weight:700;color:#D4AF7C">Продолжить работу</span><span style="font-size:12px;color:rgba(248,247,244,.5)">2 мин назад</span></div>
+          <div style="border-radius:16px;background:#F7F7F5;display:flex;justify-content:center;padding:6px"><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ good }}" doors="{{ doors }}" windows="{{ windows }}" fit-w="{{ 300 }}" fit-h="{{ 170 }}" dims="{{ false }}" margin="{{ 4 }}" hint-size="300px,170px"></x-import></div>
+          <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:17px;font-weight:800">Моя спальня</div><div style="font-size:12px;color:rgba(248,247,244,.6)">400 × 320 см · 2 варианта</div></div><span style="width:44px;height:44px;border-radius:14px;background:#5FA768;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:22px">arrow_forward</span></div>
+        </div>
+        <div style="height:56px;border-radius:18px;background:#fff;border:1.5px dashed #CFCBC2;display:flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:800"><span style="width:30px;height:30px;border-radius:10px;background:#5FA768;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:20px">add</span>Создать комнату</div>
+        <div><div style="font-size:17px;font-weight:800;margin-bottom:10px">Шаблоны</div><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ tplChips }}" as="t" hint-placeholder-count="6"><span style="height:38px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid #E5E3DE;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px"><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#B8925A">{{ t.i }}</span>{{ t.l }}</span></sc-for></div></div>
+        <div><div style="display:flex;justify-content:space-between;margin-bottom:10px"><span style="font-size:17px;font-weight:800">Последние</span><span style="font-size:14px;color:#B8925A;font-weight:700">Все</span></div>
+          <sc-for list="{{ recent }}" as="p" hint-placeholder-count="2"><div style="display:flex;gap:12px;align-items:center;padding:6px 0"><div style="width:64px;height:52px;border-radius:12px;background:#EFECE6;display:flex;align-items:center;justify-content:center;overflow:hidden"><x-import component-from-global-scope="RoomFit.Plan" room="{{ p.room }}" items="{{ p.items }}" doors="{{ p.doors }}" floor="{{ p.floor }}" fit-w="{{ 60 }}" fit-h="{{ 48 }}" dims="{{ false }}" margin="{{ 1 }}" hint-size="60px,48px"></x-import></div><div style="flex:1"><div style="font-size:15px;font-weight:700">{{ p.name }}</div><div style="font-size:12px;color:#8A8984">{{ p.size }}</div></div></div></sc-for>
+        </div>
+      </div>
+      <div style="height:84px;flex:none;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid #ECEAE5;display:flex;align-items:flex-start;justify-content:space-around;padding-top:8px">
+        <sc-for list="{{ tabbarHome }}" as="t" hint-placeholder-count="5"><div style="{{ t.st }}"><span style="{{ t.ist }}">{{ t.i }}</span>{{ t.l }}</div></sc-for>
+      </div>
+    </div></div>
+
+    <!-- N7 My projects -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N7 · Мои проекты</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+      <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="flex:1;overflow:hidden;padding:10px 18px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:30px;font-weight:800;letter-spacing:-.02em">Мои проекты</div><span style="width:44px;height:44px;border-radius:50%;background:#5FA768;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:26px">add</span></div>
+        <div style="display:flex;gap:6px"><span style="height:34px;padding:0 14px;border-radius:999px;background:#1E1E22;color:#F8F7F4;font-size:13px;font-weight:700;display:flex;align-items:center">Все</span><span style="height:34px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid #E5E3DE;font-size:13px;font-weight:600;display:flex;align-items:center">Спальни</span><span style="height:34px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid #E5E3DE;font-size:13px;font-weight:600;display:flex;align-items:center">Гостиные</span><span style="height:34px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid #E5E3DE;font-size:13px;font-weight:600;display:flex;align-items:center">Избранное</span></div>
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4"><div style="border-radius:20px;background:#fff;border:1px solid #ECEAE5;padding:10px;display:flex;gap:12px;align-items:center"><div style="width:110px;height:84px;border-radius:14px;background:#EFECE6;display:flex;align-items:center;justify-content:center;overflow:hidden"><x-import component-from-global-scope="RoomFit.Plan" room="{{ p.room }}" items="{{ p.items }}" doors="{{ p.doors }}" floor="{{ p.floor }}" fit-w="{{ 104 }}" fit-h="{{ 78 }}" dims="{{ false }}" margin="{{ 2 }}" hint-size="104px,78px"></x-import></div><div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:700">{{ p.name }}</div><div style="font-size:13px;color:#6B6A66;margin-top:2px">{{ p.size }}</div><div style="font-size:12px;color:#9A9993;margin-top:4px">{{ p.date }}</div></div><span style="font-family:'Material Symbols Rounded';font-size:22px;color:#B5B2AB">more_vert</span></div></sc-for>
+      </div>
+      <div style="height:84px;flex:none;background:rgba(255,255,255,.92);border-top:1px solid #ECEAE5;display:flex;align-items:flex-start;justify-content:space-around;padding-top:8px">
+        <sc-for list="{{ tabbarProj }}" as="t" hint-placeholder-count="5"><div style="{{ t.st }}"><span style="{{ t.ist }}">{{ t.i }}</span>{{ t.l }}</div></sc-for>
+      </div>
+    </div></div>
+
+    <!-- N8 Create room -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N8 · Создание комнаты · нативный sheet</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#0B0D0D;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+      <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700;color:#F8F7F4">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="margin:6px 10px 0;height:20px;border-radius:14px 14px 0 0;background:#3a3a3e"></div>
+      <div style="flex:1;background:#F7F7F5;border-radius:14px 14px 0 0;margin-top:-10px;padding:12px 18px 30px;display:flex;flex-direction:column;gap:16px">
+        <div style="width:40px;height:5px;border-radius:3px;background:#DAD7D0;align-self:center"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:16px"><span style="color:#8A8984">Отмена</span><span style="font-weight:800;font-size:17px">Новая комната</span><span style="color:#3f8048;font-weight:800">Готово</span></div>
+        <div style="border-radius:16px;background:#fff;overflow:hidden"><div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #F1EFEA;font-size:16px"><span style="color:#8A8984">Название</span><b>Детская</b></div><div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #F1EFEA;font-size:16px"><span style="color:#8A8984">Ширина</span><b>320 см</b></div><div style="height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:16px"><span style="color:#8A8984">Длина</span><b>300 см</b></div></div>
+        <div style="border-radius:16px;background:#fff;height:150px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center"><div style="position:absolute;left:0;right:0;top:50%;height:40px;margin-top:-20px;background:#F1EFEA"></div><div style="position:relative;display:flex;gap:40px;font-size:22px;font-weight:700"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;color:#B5B2AB;font-size:17px">310<span style="font-size:22px;color:#1E1E22">320</span>330</div><div style="display:flex;flex-direction:column;align-items:center;gap:6px;color:#B5B2AB;font-size:17px">см<span style="font-size:22px;color:#1E1E22">см</span>м</div></div></div>
+        <div style="flex:1;border-radius:20px;background:#ECEAE5;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.Plan" room="{{ roomKids }}" doors="{{ doorsKids }}" fit-w="{{ 300 }}" fit-h="{{ 240 }}" hint-size="300px,240px"></x-import></div>
+      </div>
+    </div></div>
+
+    <!-- N9 Editor native -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N9 · Редактор · haptic при касании стены</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+      <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700;background:#fff">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="height:52px;flex:none;display:flex;align-items:center;gap:4px;padding:0 10px;background:#fff"><span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">chevron_left</span><div style="flex:1;font-size:17px;font-weight:700">Спальня</div><span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:22px">undo</span><span style="height:36px;padding:0 14px;border-radius:999px;background:#5FA768;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center">Сохранить</span></div>
+      <div style="flex:none;padding:4px 70px 10px;background:#fff"><div style="display:flex;background:#F1EFEA;border-radius:11px;padding:3px"><span style="flex:1;height:30px;border-radius:8px;background:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.1)">2D</span><span style="flex:1;height:30px;font-size:13px;font-weight:600;color:#8A8984;display:flex;align-items:center;justify-content:center;gap:4px">3D<span style="font-family:'Material Symbols Rounded';font-size:14px">lock</span></span></div></div>
+      <div style="flex:1;position:relative;display:flex;align-items:center;justify-content:center;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:14px 14px">
+        <x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ good }}" doors="{{ doors }}" windows="{{ windows }}" selected-id="d1" fit-w="{{ 370 }}" fit-h="{{ 420 }}" hint-size="370px,420px"></x-import>
+        <span style="position:absolute;top:14px;left:50%;transform:translateX(-50%);height:34px;padding:0 14px;border-radius:999px;background:#1E1E22;color:#F8F7F4;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="font-family:'Material Symbols Rounded';font-size:18px;color:#D4AF7C">vibration</span>Стол прижат к стене</span>
+      </div>
+      <div style="height:90px;flex:none;background:#fff;border-top:1px solid #ECEAE5;display:flex;align-items:flex-start;justify-content:space-around;padding-top:10px">
+        <sc-for list="{{ edTools }}" as="t" hint-placeholder-count="5"><div style="{{ t.st }}"><span style="font-family:'Material Symbols Rounded';font-size:24px">{{ t.i }}</span>{{ t.l }}</div></sc-for>
+      </div>
+    </div></div>
+
+    <!-- N10 Catalog screen -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N10 · Каталог мебели</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+      <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="flex:1;overflow:hidden;padding:10px 18px;display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:30px;font-weight:800;letter-spacing:-.02em">Каталог</div>
+        <div style="display:flex;gap:8px"><div style="flex:1;height:44px;border-radius:14px;background:#fff;border:1px solid #E5E3DE;display:flex;align-items:center;gap:8px;padding:0 14px;color:#8A8984;font-size:15px"><span style="font-family:'Material Symbols Rounded';font-size:20px">search</span>Диван до 200 см</div><span style="width:44px;height:44px;border-radius:14px;background:#1E1E22;color:#F8F7F4;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:20px">tune</span></div>
+        <div style="display:flex;gap:6px;overflow:hidden"><sc-for list="{{ cats }}" as="c" hint-placeholder-count="5"><span style="{{ c.st }}">{{ c.l }}</span></sc-for></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><sc-for list="{{ cat6 }}" as="c" hint-placeholder-count="6"><div style="border-radius:18px;background:#fff;border:1px solid #ECEAE5;padding:10px;display:flex;flex-direction:column;gap:6px"><div style="height:96px;border-radius:12px;background:#F4F2EE;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.FurnThumb" type="{{ c.type }}" w="{{ c.w }}" h="{{ c.h }}" size="{{ 72 }}" hint-size="72px,72px"></x-import></div><div style="font-size:14px;font-weight:700">{{ c.name }}</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:#8A8984">{{ c.dims }}</span><span style="width:30px;height:30px;border-radius:10px;background:#5FA768;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px">add</span></div></div></sc-for></div>
+      </div>
+      <div style="height:84px;flex:none;background:rgba(255,255,255,.92);border-top:1px solid #ECEAE5;display:flex;align-items:flex-start;justify-content:space-around;padding-top:8px">
+        <sc-for list="{{ tabbarCat }}" as="t" hint-placeholder-count="5"><div style="{{ t.st }}"><span style="{{ t.ist }}">{{ t.i }}</span>{{ t.l }}</div></sc-for>
+      </div>
+    </div></div>
+
+    <!-- N11 Properties -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N11 · Свойства мебели · столкновение</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+      <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="flex:1;display:flex;align-items:flex-start;justify-content:center;padding-top:16px;background-image:linear-gradient(rgba(30,30,34,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,30,34,.05) 1px,transparent 1px);background-size:14px 14px">
+        <x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ bad }}" doors="{{ doors }}" windows="{{ windows }}" status="{{ badSt }}" selected-id="a1" zones="{{ true }}" fit-w="{{ 350 }}" fit-h="{{ 300 }}" hint-size="350px,300px"></x-import>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:28px 28px 0 0;padding:10px 18px 30px;display:flex;flex-direction:column;gap:14px;box-shadow:0 -10px 40px rgba(0,0,0,.14)">
+        <div style="width:40px;height:5px;border-radius:3px;background:#DAD7D0;align-self:center"></div>
+        <div style="display:flex;align-items:center;gap:12px"><div style="width:48px;height:48px;border-radius:14px;background:#F4F2EE;display:flex;align-items:center;justify-content:center"><x-import component-from-global-scope="RoomFit.FurnThumb" type="armchair" w="{{ 80 }}" h="{{ 80 }}" size="{{ 38 }}" hint-size="38px,38px"></x-import></div><div style="flex:1"><div style="font-size:19px;font-weight:800">Кресло</div><div style="font-size:13px;color:#8A8984">80 × 80 см · 0°</div></div></div>
+        <div style="border-radius:14px;background:#FCEDED;color:#A93A3A;padding:12px 14px;font-size:13px;font-weight:600;display:flex;flex-direction:column;gap:4px"><span style="display:flex;gap:8px;align-items:center"><span style="font-family:'Material Symbols Rounded';font-size:18px">error</span>Кресло мешает открыванию двери</span><span style="padding-left:26px;font-weight:500">Сдвиньте на 20 см влево или поверните дверь</span></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px"><sc-for list="{{ quick4 }}" as="q" hint-placeholder-count="4"><div style="height:64px;border-radius:14px;background:#F4F2EE;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:700"><span style="{{ q.st }}">{{ q.i }}</span>{{ q.l }}</div></sc-for></div>
+      </div>
+    </div></div>
+
+    <!-- N12 Compare -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N12 · Сравнение · свайп между вариантами</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#0B0D0D;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#F8F7F4">
+      <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="height:52px;flex:none;display:flex;align-items:center;gap:4px;padding:0 10px"><span style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:24px">chevron_left</span><span style="font-size:17px;font-weight:700">Сравнение</span></div>
+      <div style="padding:0 18px;display:flex;gap:6px;flex:none"><span style="flex:1;height:40px;border-radius:12px;background:#F8F7F4;color:#0B0D0D;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center">А · Кровать у окна</span><span style="flex:1;height:40px;border-radius:12px;background:#1E1E22;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;color:rgba(248,247,244,.7)">Б · У стены</span></div>
+      <div style="flex:1;margin:14px 18px 0;border-radius:24px;background:#F7F7F5;display:flex;align-items:center;justify-content:center;position:relative"><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ bad }}" doors="{{ doors }}" windows="{{ windows }}" status="{{ badSt }}" zones="{{ true }}" fit-w="{{ 330 }}" fit-h="{{ 340 }}" hint-size="330px,340px"></x-import></div>
+      <div style="padding:14px 18px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex:none"><div style="border-radius:14px;background:#1E1E22;padding:10px 12px"><div style="font-size:11px;color:rgba(248,247,244,.5)">Столкновения</div><div style="font-size:20px;font-weight:800;color:#F08A8A">1</div></div><div style="border-radius:14px;background:#1E1E22;padding:10px 12px"><div style="font-size:11px;color:rgba(248,247,244,.5)">Мин. проход</div><div style="font-size:20px;font-weight:800;color:#EBBE6E">10 см</div></div><div style="border-radius:14px;background:#1E1E22;padding:10px 12px"><div style="font-size:11px;color:rgba(248,247,244,.5)">Свободно</div><div style="font-size:20px;font-weight:800">60%</div></div></div>
+      <div style="padding:14px 18px 34px;flex:none;display:flex;gap:10px"><div style="flex:1;height:54px;border-radius:16px;border:1px solid rgba(248,247,244,.2);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center">Открыть</div><div style="flex:1.4;height:54px;border-radius:16px;background:#D4AF7C;color:#0B0D0D;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center">Выбрать Б</div></div>
+    </div></div>
+
+    <!-- N13 Share -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N13 · Экспорт / Поделиться · системное меню</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F7F7F5;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+      <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="flex:1;display:flex;align-items:flex-start;justify-content:center;padding-top:30px"><div style="background:#fff;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:14px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:800">Моя спальня<span>Room<span style="color:#B8925A">Fit</span></span></div><x-import component-from-global-scope="RoomFit.Plan" room="{{ room }}" items="{{ good }}" doors="{{ doors }}" windows="{{ windows }}" names="{{ true }}" fit-w="{{ 270 }}" fit-h="{{ 210 }}" hint-size="270px,210px"></x-import></div></div>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.25)"></div>
+      <div style="position:absolute;left:8px;right:8px;bottom:8px;background:#F2F2F4;border-radius:30px;padding:16px 0 20px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:12px;padding:0 18px"><div style="width:44px;height:44px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#C94848">PDF</div><div style="flex:1"><div style="font-size:15px;font-weight:700">Моя спальня — план.pdf</div><div style="font-size:12px;color:#8A8984">PDF · 2 стр. · 480 КБ</div></div><span style="width:30px;height:30px;border-radius:50%;background:#E3E3E7;display:flex;align-items:center;justify-content:center;font-family:'Material Symbols Rounded';font-size:18px">close</span></div>
+        <div style="display:flex;gap:16px;padding:0 18px;overflow:hidden"><sc-for list="{{ shareApps }}" as="a" hint-placeholder-count="4"><div style="width:62px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px"><span style="{{ a.st }}">{{ a.i }}</span>{{ a.l }}</div></sc-for></div>
+        <div style="margin:0 14px;border-radius:14px;background:#fff;overflow:hidden"><div style="height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:16px;border-bottom:1px solid #EEE">Сохранить в Файлы<span style="font-family:'Material Symbols Rounded';font-size:22px">folder</span></div><div style="height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:16px;border-bottom:1px solid #EEE">Сохранить PNG в Фото<span style="font-family:'Material Symbols Rounded';font-size:22px">image</span></div><div style="height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:16px">Печать<span style="font-family:'Material Symbols Rounded';font-size:22px">print</span></div></div>
+      </div>
+    </div></div>
+
+    <!-- N14 Profile -->
+    <div style="display:flex;flex-direction:column;gap:12px"><div style="font-size:14px;font-weight:700">N14 · Профиль и настройки</div>
+    <div style="width:390px;height:844px;border-radius:50px;border:10px solid #1C1C1F;background:#F2F1EE;overflow:hidden;position:relative;display:flex;flex-direction:column;color:#1E1E22">
+      <div style="height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:15px;font-weight:700">9:41<span style="font-family:'Material Symbols Rounded';font-size:17px;letter-spacing:2px">signal_cellular_alt wifi battery_full</span></div>
+      <div style="flex:1;overflow:hidden;padding:10px 18px;display:flex;flex-direction:column;gap:18px">
+        <div style="font-size:30px;font-weight:800;letter-spacing:-.02em">Профиль</div>
+        <div style="display:flex;align-items:center;gap:14px"><div style="width:64px;height:64px;border-radius:50%;background:#D4AF7C;color:#0B0D0D;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center">АС</div><div><div style="font-size:19px;font-weight:800">Анна Смирнова</div><div style="font-size:14px;color:#8A8984">anna@mail.ru</div></div></div>
+        <div style="border-radius:18px;background:#fff;overflow:hidden"><div style="height:52px;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid #F1EFEA;font-size:16px"><span style="font-family:'Material Symbols Rounded';font-size:22px;color:#B8925A">folder_open</span><span style="flex:1">Мои проекты</span><span style="color:#8A8984">5</span></div><div style="height:52px;display:flex;align-items:center;gap:12px;padding:0 16px;font-size:16px"><span style="font-family:'Material Symbols Rounded';font-size:22px;color:#B8925A">straighten</span><span style="flex:1">Моя мебель</span><span style="color:#8A8984">2</span></div></div>
+        <div style="border-radius:18px;background:#fff;overflow:hidden;padding:14px 16px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:16px">Единицы<div style="display:flex;background:#F1EFEA;border-radius:9px;padding:2px"><span style="height:30px;padding:0 14px;border-radius:7px;background:#fff;font-size:13px;font-weight:700;display:flex;align-items:center">см</span><span style="height:30px;padding:0 14px;font-size:13px;color:#6B6A66;display:flex;align-items:center">м</span></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:16px">Тема<div style="display:flex;background:#F1EFEA;border-radius:9px;padding:2px"><span style="height:30px;padding:0 10px;font-size:13px;color:#6B6A66;display:flex;align-items:center">Светлая</span><span style="height:30px;padding:0 10px;font-size:13px;color:#6B6A66;display:flex;align-items:center">Тёмная</span><span style="height:30px;padding:0 10px;border-radius:7px;background:#fff;font-size:13px;font-weight:700;display:flex;align-items:center">Авто</span></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:16px">Вибрация при касании<span style="width:50px;height:30px;border-radius:999px;background:#5FA768;position:relative"><span style="position:absolute;right:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#fff"></span></span></div>
+        </div>
+        <div style="border-radius:18px;background:#fff;overflow:hidden"><div style="height:52px;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid #F1EFEA;font-size:16px"><span style="font-family:'Material Symbols Rounded';font-size:22px;color:#B8925A">help</span><span style="flex:1">Помощь</span></div><div style="height:52px;display:flex;align-items:center;gap:12px;padding:0 16px;font-size:16px;color:#C94848"><span style="font-family:'Material Symbols Rounded';font-size:22px">logout</span><span style="flex:1">Выйти</span></div></div>
+      </div>
+      <div style="height:84px;flex:none;background:rgba(255,255,255,.92);border-top:1px solid #ECEAE5;display:flex;align-items:flex-start;justify-content:space-around;padding-top:8px">
+        <sc-for list="{{ tabbarProf }}" as="t" hint-placeholder-count="5"><div style="{{ t.st }}"><span style="{{ t.ist }}">{{ t.i }}</span>{{ t.l }}</div></sc-for>
+      </div>
+    </div></div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { ready: false };
+  componentDidMount() { const t = () => window.RoomFit ? this.setState({ ready: true }) : setTimeout(t, 40); t(); }
+  renderVals() {
+    const K = window.RoomFit, R = K ? K.ROOMS : null;
+    const room = { w: 400, h: 320 }, doors = [{ wall: 'bottom', at: 300, w: 80 }], windows = [{ wall: 'top', at: 130, w: 140 }];
+    const good = R ? R.bedroom.items : [], bad = R ? R.bedroomB.items : [];
+    const badSt = K ? K.analyze(room, bad, doors, 60).st : {};
+    const ico = (c, s) => ({ fontFamily: "'Material Symbols Rounded'", fontSize: s || 22, color: c || 'inherit' });
+    const chip = on => ({ height: 32, padding: '0 12px', borderRadius: 999, flex: 'none', display: 'flex', alignItems: 'center', fontSize: 12, fontWeight: 700, background: on ? '#1E1E22' : '#fff', color: on ? '#F8F7F4' : '#3C3B38', border: on ? 'none' : '1px solid #E5E3DE' });
+    const tab = active => [['home', 'Главная'], ['folder_open', 'Проекты'], ['add_circle', 'Создать'], ['chair', 'Каталог'], ['person', 'Профиль']].map(([i, l], k) => ({ i, l, st: { width: 64, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, fontSize: 10, fontWeight: k === active ? 800 : 600, color: k === active ? '#1E1E22' : '#8A8984' }, ist: ico(k === active ? '#B8925A' : (k === 2 ? '#5FA768' : null), k === 2 ? 30 : 24) }));
+    const projKeys = [['bedroom', 'Моя спальня', 'Изменено сегодня'], ['living', 'Гостиная', 'Изменено вчера'], ['office', 'Домашний кабинет', '8 октября'], ['kitchen', 'Кухня', '2 октября']];
+    const projects = R ? projKeys.map(([k, name, date]) => ({ ...R[k], name, date, size: `${R[k].room.w} × ${R[k].room.h} см` })) : [];
+    const cat6 = K ? ['bed2', 'sofa3', 'desk', 'ward', 'arm', 'night'].map(k => { const c = K.CATALOG.find(x => x.key === k); return { ...c, name: c.name.replace('прикроватная', '').trim(), dims: `${c.w} × ${c.h}` }; }) : [];
+    const dots = i => [0, 1, 2].map(k => ({ height: 6, width: k === i ? 22 : 6, borderRadius: 3, background: k === i ? '#D4AF7C' : 'rgba(248,247,244,.25)' }));
+    const pill = (bg) => ({ position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)', height: 34, padding: '0 14px', borderRadius: 999, background: bg, color: '#fff', fontSize: 13, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap' });
+    return {
+      room, doors, windows, good, bad, badSt, none: [],
+      room34: { w: 300, h: 400 }, doors34: [{ wall: 'bottom', at: 200, w: 80 }], win34: [{ wall: 'top', at: 90, w: 120 }],
+      roomKids: { w: 320, h: 300 }, doorsKids: [{ wall: 'bottom', at: 220, w: 80 }],
+      benefits: [['straighten', 'Реальные размеры', 'Мебель и комнаты в точном масштабе.'], ['chair', 'Каталог мебели', 'Готовые предметы и свои размеры.'], ['verified', 'Проверка столкновений', 'Пересечения и узкие проходы видны сразу.'], ['ios_share', 'Экспорт в PNG / PDF', 'Отправь план в магазин или семье.']].map(([icon, t, d]) => ({ icon, t, d })),
+      steps: [['Создай комнату', 'Укажи ширину и длину.'], ['Добавь мебель', 'Из каталога или по своим размерам.'], ['Проверь расположение', 'Зазоры, проходы и пересечения.'], ['Сохрани результат', 'Сравни варианты и экспортируй.']].map(([t, d], i) => ({ n: i + 1, t, d })),
+      tpls: R ? [['bedroom', 'Маленькая спальня'], ['living', 'Гостиная'], ['kids', 'Детская']].map(([k, name]) => ({ ...R[k], name, size: `${R[k].room.w} × ${R[k].room.h} см` })) : [],
+      projects, recent: projects.slice(1, 3),
+      dims: [{ l: 'Ширина, см', v: '300' }, { l: 'Длина, см', v: '400' }],
+      quick: [['rotate_right', 'Повернуть'], ['open_in_full', 'Размер'], ['content_copy', 'Копия'], ['lock', 'Закрепить'], ['delete', 'Удалить']].map(([i, l]) => ({ i, l, st: ico(i === 'delete' ? '#F08A8A' : '#D4AF7C', 22) })),
+      quick4: [['arrow_back', 'Сдвинуть'], ['rotate_right', 'Повернуть'], ['content_copy', 'Копия'], ['delete', 'Удалить']].map(([i, l]) => ({ i, l, st: ico(i === 'delete' ? '#C94848' : '#1E1E22', 22) })),
+      cats: ['Все', 'Кровати', 'Диваны', 'Столы', 'Шкафы'].map((l, i) => ({ l, st: chip(i === 0) })),
+      cat6, propF: [{ l: 'Ширина', v: '180' }, { l: 'Глубина', v: '60' }],
+      expT: ['Показывать размеры', 'Названия мебели', 'Список предметов'],
+      profileRows: [['folder_open', 'Мои проекты', '5'], ['straighten', 'Единицы измерения', 'см'], ['contrast', 'Тема интерфейса', 'Авто'], ['help', 'Помощь', ''], ['description', 'Условия и конфиденциальность', '']].map(([i, l, v]) => ({ i, l, v })),
+      onboarding: [
+        { label: 'N2 · Онбординг 1 — Планируй', kicker: 'Планируй', title: 'Создавай комнаты с точными размерами.', items: [], status: {}, sel: '', zones: false, chip: '400 × 320 см · 12,8 м²', chipIcon: 'square_foot', chipSt: pill('#1E1E22'), dots: dots(0), cta: 'Далее' },
+        { label: 'N3 · Онбординг 2 — Расставляй', kicker: 'Расставляй', title: 'Добавляй мебель и находи лучшее расположение.', items: good, status: {}, sel: 'b1', zones: false, chip: 'Кровать 160 × 200 см', chipIcon: 'bed', chipSt: pill('#1E1E22'), dots: dots(1), cta: 'Далее' },
+        { label: 'N4 · Онбординг 3 — Проверяй', kicker: 'Проверяй', title: 'Убедись, что всё поместится до покупки.', items: bad, status: badSt, sel: '', zones: true, chip: 'Кресло мешает двери', chipIcon: 'error', chipSt: pill('#E65A5A'), dots: dots(2), cta: 'Начать' },
+      ],
+      tplChips: [['bed', 'Спальня'], ['weekend', 'Гостиная'], ['child_care', 'Детская'], ['desk', 'Кабинет'], ['apartment', 'Студия'], ['kitchen', 'Кухня']].map(([i, l]) => ({ i, l })),
+      tabbarHome: tab(0), tabbarProj: tab(1), tabbarCat: tab(3), tabbarProf: tab(4),
+      edTools: [['add_circle', 'Добавить'], ['crop_square', 'Комната'], ['door_front', 'Двери'], ['straighten', 'Размеры'], ['more_horiz', 'Ещё']].map(([i, l], k) => ({ i, l, st: { width: 64, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, fontSize: 11, fontWeight: 700, color: k === 0 ? '#3f8048' : '#3C3B38' } })),
+      shareApps: [['send', 'Telegram', '#2AABEE'], ['chat', 'WhatsApp', '#25D366'], ['mail', 'Почта', '#3478F6'], ['content_copy', 'Копировать', '#8E8E93']].map(([i, l, c]) => ({ i, l, st: { width: 58, height: 58, borderRadius: 15, background: c, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Material Symbols Rounded'", fontSize: 28 } })),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1892 @@
+[
+  {
+    "id": "Спальня",
+    "name": "Спальня",
+    "document": {
+      "schemaVersion": 1,
+      "name": "Спальня",
+      "units": "cm",
+      "floors": [
+        {
+          "id": "0dac3211-8a12-498f-8b22-7b1810dbf054",
+          "name": "1 этаж",
+          "rooms": [
+            {
+              "id": "e7e2c57d-b71a-400c-aad7-be486e4a6491",
+              "name": "Спальня",
+              "type": "room",
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 3200
+                },
+                {
+                  "x": 0,
+                  "y": 3200
+                }
+              ],
+              "height": 2800,
+              "floor": "oak"
+            }
+          ],
+          "walls": [
+            {
+              "id": "a8b40fcd-7d27-4eb9-a516-d741b85365ac",
+              "roomId": "e7e2c57d-b71a-400c-aad7-be486e4a6491",
+              "start": {
+                "x": 0,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "58f35ac0-a7bf-4384-8c98-2ff952cff9fa",
+              "roomId": "e7e2c57d-b71a-400c-aad7-be486e4a6491",
+              "start": {
+                "x": 4000,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "82dab281-3963-4bf6-8f82-55b8a8e7309c",
+              "roomId": "e7e2c57d-b71a-400c-aad7-be486e4a6491",
+              "start": {
+                "x": 4000,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "01184294-6741-4e9e-8656-755ce5a3a7b9",
+              "roomId": "e7e2c57d-b71a-400c-aad7-be486e4a6491",
+              "start": {
+                "x": 0,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            }
+          ],
+          "openings": [
+            {
+              "id": "b61a6089-e55f-4b5a-8849-eed3faf13693",
+              "wallId": "a8b40fcd-7d27-4eb9-a516-d741b85365ac",
+              "kind": "window",
+              "offset": 1400,
+              "width": 1400,
+              "height": 1500,
+              "sill": 900,
+              "flip": false,
+              "inward": true
+            },
+            {
+              "id": "1d9d18da-8f99-4f12-adf4-91c731aea4e9",
+              "wallId": "82dab281-3963-4bf6-8f82-55b8a8e7309c",
+              "kind": "door",
+              "offset": 100,
+              "width": 800,
+              "height": 2100,
+              "sill": 0,
+              "flip": false,
+              "inward": true
+            }
+          ],
+          "measurements": [],
+          "zones": [],
+          "annotations": []
+        }
+      ],
+      "variants": [
+        {
+          "id": "646edff6-79d7-41be-afcb-be6b89a9182f",
+          "name": "Вариант 1",
+          "items": [
+            {
+              "id": "2005e1f0-69ae-4dce-b485-265fbbc80a5d",
+              "catalogId": "bed-double",
+              "floorId": "0dac3211-8a12-498f-8b22-7b1810dbf054",
+              "name": "Кровать двуспальная",
+              "type": "bed",
+              "category": "Кровати",
+              "x": 2000,
+              "y": 1000,
+              "width": 1600,
+              "depth": 2000,
+              "height": 600,
+              "angle": 0,
+              "locked": false,
+              "color": "#e9e0d1",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "3810d84e-122d-434b-9c9d-4b2433d2f1cb",
+              "catalogId": "wardrobe",
+              "floorId": "0dac3211-8a12-498f-8b22-7b1810dbf054",
+              "name": "Шкаф",
+              "type": "wardrobe",
+              "category": "Шкафы",
+              "x": 900,
+              "y": 2900,
+              "width": 1800,
+              "depth": 600,
+              "height": 2200,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 600,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "268d7aff-a085-4e5d-bc3c-1930988f97da",
+              "catalogId": "nightstand",
+              "floorId": "0dac3211-8a12-498f-8b22-7b1810dbf054",
+              "name": "Тумба",
+              "type": "nightstand",
+              "category": "Тумбы",
+              "x": 900,
+              "y": 250,
+              "width": 500,
+              "depth": 400,
+              "height": 500,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            }
+          ]
+        }
+      ],
+      "activeVariantId": "646edff6-79d7-41be-afcb-be6b89a9182f",
+      "settings": {
+        "clearance": 800,
+        "gridSize": 100,
+        "snap": true,
+        "layers": {
+          "walls": true,
+          "openings": true,
+          "furniture": true,
+          "dimensions": true,
+          "names": false,
+          "zones": true,
+          "underlay": true,
+          "grid": true
+        }
+      }
+    }
+  },
+  {
+    "id": "Гостиная",
+    "name": "Гостиная",
+    "document": {
+      "schemaVersion": 1,
+      "name": "Гостиная",
+      "units": "cm",
+      "floors": [
+        {
+          "id": "83510e35-9c53-476f-b4bf-ac87b93a3508",
+          "name": "1 этаж",
+          "rooms": [
+            {
+              "id": "2dad8439-90e2-4618-9bdb-c35ddad1b182",
+              "name": "Гостиная",
+              "type": "room",
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 3200
+                },
+                {
+                  "x": 0,
+                  "y": 3200
+                }
+              ],
+              "height": 2800,
+              "floor": "oak"
+            }
+          ],
+          "walls": [
+            {
+              "id": "65176de3-46d1-4aa2-9920-b88e529027ac",
+              "roomId": "2dad8439-90e2-4618-9bdb-c35ddad1b182",
+              "start": {
+                "x": 0,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "8c634219-10e0-479e-9812-03d174f90b22",
+              "roomId": "2dad8439-90e2-4618-9bdb-c35ddad1b182",
+              "start": {
+                "x": 4000,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "a56e42ee-d7d0-4727-a911-5f530cdb3b6e",
+              "roomId": "2dad8439-90e2-4618-9bdb-c35ddad1b182",
+              "start": {
+                "x": 4000,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "eb8146b0-987f-4073-a65c-0a8ad9285a3a",
+              "roomId": "2dad8439-90e2-4618-9bdb-c35ddad1b182",
+              "start": {
+                "x": 0,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            }
+          ],
+          "openings": [
+            {
+              "id": "58c856ff-5c2b-4db0-ba83-26f70be3bedf",
+              "wallId": "65176de3-46d1-4aa2-9920-b88e529027ac",
+              "kind": "window",
+              "offset": 1400,
+              "width": 1400,
+              "height": 1500,
+              "sill": 900,
+              "flip": false,
+              "inward": true
+            },
+            {
+              "id": "79de31fd-ffbb-456a-84b7-d3553e8fd5e5",
+              "wallId": "a56e42ee-d7d0-4727-a911-5f530cdb3b6e",
+              "kind": "door",
+              "offset": 100,
+              "width": 800,
+              "height": 2100,
+              "sill": 0,
+              "flip": false,
+              "inward": true
+            }
+          ],
+          "measurements": [],
+          "zones": [],
+          "annotations": []
+        }
+      ],
+      "variants": [
+        {
+          "id": "d7fa7fc9-17e3-42f2-b1d6-f393f8c42e64",
+          "name": "Вариант 1",
+          "items": [
+            {
+              "id": "a09f74fa-daa9-4fa9-a971-b4524b46eb71",
+              "catalogId": "sofa",
+              "floorId": "83510e35-9c53-476f-b4bf-ac87b93a3508",
+              "name": "Диван",
+              "type": "sofa",
+              "category": "Диваны",
+              "x": 1800,
+              "y": 2650,
+              "width": 2200,
+              "depth": 950,
+              "height": 850,
+              "angle": 0,
+              "locked": false,
+              "color": "#819986",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "281c7079-ceac-41c6-9475-8e5e34c4a0a6",
+              "catalogId": "coffee",
+              "floorId": "83510e35-9c53-476f-b4bf-ac87b93a3508",
+              "name": "Журнальный стол",
+              "type": "coffee",
+              "category": "Столы",
+              "x": 1800,
+              "y": 1550,
+              "width": 800,
+              "depth": 550,
+              "height": 450,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "f5cbd477-fa6f-4dc8-b671-53076d3e3bc2",
+              "catalogId": "armchair",
+              "floorId": "83510e35-9c53-476f-b4bf-ac87b93a3508",
+              "name": "Кресло",
+              "type": "armchair",
+              "category": "Кресла",
+              "x": 3450,
+              "y": 1600,
+              "width": 800,
+              "depth": 800,
+              "height": 900,
+              "angle": 0,
+              "locked": false,
+              "color": "#819986",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "0245a895-4a92-4815-a6c8-984494ca3c59",
+              "catalogId": "plant",
+              "floorId": "83510e35-9c53-476f-b4bf-ac87b93a3508",
+              "name": "Растение",
+              "type": "plant",
+              "category": "Декор",
+              "x": 300,
+              "y": 300,
+              "width": 450,
+              "depth": 450,
+              "height": 1000,
+              "angle": 0,
+              "locked": false,
+              "color": "#639568",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            }
+          ]
+        }
+      ],
+      "activeVariantId": "d7fa7fc9-17e3-42f2-b1d6-f393f8c42e64",
+      "settings": {
+        "clearance": 800,
+        "gridSize": 100,
+        "snap": true,
+        "layers": {
+          "walls": true,
+          "openings": true,
+          "furniture": true,
+          "dimensions": true,
+          "names": false,
+          "zones": true,
+          "underlay": true,
+          "grid": true
+        }
+      }
+    }
+  },
+  {
+    "id": "Детская",
+    "name": "Детская",
+    "document": {
+      "schemaVersion": 1,
+      "name": "Детская",
+      "units": "cm",
+      "floors": [
+        {
+          "id": "b8395e7c-e542-4eed-9542-88abb6aef53c",
+          "name": "1 этаж",
+          "rooms": [
+            {
+              "id": "ca94efe0-4310-4c84-a45e-ab8dc305401c",
+              "name": "Детская",
+              "type": "room",
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 3200
+                },
+                {
+                  "x": 0,
+                  "y": 3200
+                }
+              ],
+              "height": 2800,
+              "floor": "oak"
+            }
+          ],
+          "walls": [
+            {
+              "id": "2aa58c3d-0a10-4869-9fa7-6137f8eddffe",
+              "roomId": "ca94efe0-4310-4c84-a45e-ab8dc305401c",
+              "start": {
+                "x": 0,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "d214b039-3c9b-445b-a3fc-a62894388eb0",
+              "roomId": "ca94efe0-4310-4c84-a45e-ab8dc305401c",
+              "start": {
+                "x": 4000,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "80c3bd6c-1f87-4a90-913d-a7f5025ace77",
+              "roomId": "ca94efe0-4310-4c84-a45e-ab8dc305401c",
+              "start": {
+                "x": 4000,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "beb83555-8835-44c9-90a1-896a79cc7e76",
+              "roomId": "ca94efe0-4310-4c84-a45e-ab8dc305401c",
+              "start": {
+                "x": 0,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            }
+          ],
+          "openings": [
+            {
+              "id": "502ae370-52a9-43dd-bd25-3cb4f90ad717",
+              "wallId": "2aa58c3d-0a10-4869-9fa7-6137f8eddffe",
+              "kind": "window",
+              "offset": 1400,
+              "width": 1400,
+              "height": 1500,
+              "sill": 900,
+              "flip": false,
+              "inward": true
+            },
+            {
+              "id": "7e6a7e43-d63c-4a1d-8711-53a0248ec750",
+              "wallId": "80c3bd6c-1f87-4a90-913d-a7f5025ace77",
+              "kind": "door",
+              "offset": 100,
+              "width": 800,
+              "height": 2100,
+              "sill": 0,
+              "flip": false,
+              "inward": true
+            }
+          ],
+          "measurements": [],
+          "zones": [],
+          "annotations": []
+        }
+      ],
+      "variants": [
+        {
+          "id": "91b426a6-5048-4669-a61a-8e0681ab4544",
+          "name": "Вариант 1",
+          "items": [
+            {
+              "id": "70cb1f75-f467-49a8-910e-e962af170d0d",
+              "catalogId": "bed-kids",
+              "floorId": "b8395e7c-e542-4eed-9542-88abb6aef53c",
+              "name": "Детская кровать",
+              "type": "bed",
+              "category": "Кровати",
+              "x": 2000,
+              "y": 1000,
+              "width": 800,
+              "depth": 1600,
+              "height": 550,
+              "angle": 0,
+              "locked": false,
+              "color": "#e9e0d1",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "fe08b041-d902-4a3e-b973-475fdafade5e",
+              "catalogId": "wardrobe",
+              "floorId": "b8395e7c-e542-4eed-9542-88abb6aef53c",
+              "name": "Шкаф",
+              "type": "wardrobe",
+              "category": "Шкафы",
+              "x": 900,
+              "y": 2900,
+              "width": 1800,
+              "depth": 600,
+              "height": 2200,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 600,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "4da61eb4-e956-4d59-a031-a8f595c4c632",
+              "catalogId": "nightstand",
+              "floorId": "b8395e7c-e542-4eed-9542-88abb6aef53c",
+              "name": "Тумба",
+              "type": "nightstand",
+              "category": "Тумбы",
+              "x": 900,
+              "y": 250,
+              "width": 500,
+              "depth": 400,
+              "height": 500,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            }
+          ]
+        }
+      ],
+      "activeVariantId": "91b426a6-5048-4669-a61a-8e0681ab4544",
+      "settings": {
+        "clearance": 800,
+        "gridSize": 100,
+        "snap": true,
+        "layers": {
+          "walls": true,
+          "openings": true,
+          "furniture": true,
+          "dimensions": true,
+          "names": false,
+          "zones": true,
+          "underlay": true,
+          "grid": true
+        }
+      }
+    }
+  },
+  {
+    "id": "Кухня",
+    "name": "Кухня",
+    "document": {
+      "schemaVersion": 1,
+      "name": "Кухня",
+      "units": "cm",
+      "floors": [
+        {
+          "id": "3874c21e-97bd-4056-9944-34dfa5801190",
+          "name": "1 этаж",
+          "rooms": [
+            {
+              "id": "614969eb-3237-48c4-915a-e173badd3473",
+              "name": "Кухня",
+              "type": "room",
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 3200
+                },
+                {
+                  "x": 0,
+                  "y": 3200
+                }
+              ],
+              "height": 2800,
+              "floor": "oak"
+            }
+          ],
+          "walls": [
+            {
+              "id": "712e3e51-175a-4aad-973a-3fe036bf9f7f",
+              "roomId": "614969eb-3237-48c4-915a-e173badd3473",
+              "start": {
+                "x": 0,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "ffe2a589-cbd7-44d8-ac67-09d08e7d66e9",
+              "roomId": "614969eb-3237-48c4-915a-e173badd3473",
+              "start": {
+                "x": 4000,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "f9bbd599-bd5a-4485-ac33-3bb77ec6507e",
+              "roomId": "614969eb-3237-48c4-915a-e173badd3473",
+              "start": {
+                "x": 4000,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "56805154-b423-4e62-833b-935183754c93",
+              "roomId": "614969eb-3237-48c4-915a-e173badd3473",
+              "start": {
+                "x": 0,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            }
+          ],
+          "openings": [
+            {
+              "id": "012a9ca2-26b8-4ff8-bed3-212140efb2b8",
+              "wallId": "712e3e51-175a-4aad-973a-3fe036bf9f7f",
+              "kind": "window",
+              "offset": 1400,
+              "width": 1400,
+              "height": 1500,
+              "sill": 900,
+              "flip": false,
+              "inward": true
+            },
+            {
+              "id": "14af1f11-0777-4a6e-9190-cf2110e6ec37",
+              "wallId": "f9bbd599-bd5a-4485-ac33-3bb77ec6507e",
+              "kind": "door",
+              "offset": 100,
+              "width": 800,
+              "height": 2100,
+              "sill": 0,
+              "flip": false,
+              "inward": true
+            }
+          ],
+          "measurements": [],
+          "zones": [],
+          "annotations": []
+        }
+      ],
+      "variants": [
+        {
+          "id": "385f4a3b-7449-4db8-b6b8-018ff857fe2f",
+          "name": "Вариант 1",
+          "items": [
+            {
+              "id": "e946fa83-6b66-4055-b09e-f41dfac8bdc0",
+              "catalogId": "kitchen",
+              "floorId": "3874c21e-97bd-4056-9944-34dfa5801190",
+              "name": "Кухонный гарнитур",
+              "type": "kitchen",
+              "category": "Кухня",
+              "x": 1200,
+              "y": 300,
+              "width": 2400,
+              "depth": 600,
+              "height": 900,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "dcc8028d-be30-4824-8dd3-cbb180163e5d",
+              "catalogId": "table",
+              "floorId": "3874c21e-97bd-4056-9944-34dfa5801190",
+              "name": "Обеденный стол",
+              "type": "table",
+              "category": "Столы",
+              "x": 1800,
+              "y": 2000,
+              "width": 1400,
+              "depth": 800,
+              "height": 750,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "6cacca57-63ba-4d63-8417-9bd8a550897a",
+              "catalogId": "fridge",
+              "floorId": "3874c21e-97bd-4056-9944-34dfa5801190",
+              "name": "Холодильник",
+              "type": "fridge",
+              "category": "Техника",
+              "x": 3650,
+              "y": 325,
+              "width": 600,
+              "depth": 650,
+              "height": 1900,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            }
+          ]
+        }
+      ],
+      "activeVariantId": "385f4a3b-7449-4db8-b6b8-018ff857fe2f",
+      "settings": {
+        "clearance": 800,
+        "gridSize": 100,
+        "snap": true,
+        "layers": {
+          "walls": true,
+          "openings": true,
+          "furniture": true,
+          "dimensions": true,
+          "names": false,
+          "zones": true,
+          "underlay": true,
+          "grid": true
+        }
+      }
+    }
+  },
+  {
+    "id": "Кабинет",
+    "name": "Кабинет",
+    "document": {
+      "schemaVersion": 1,
+      "name": "Кабинет",
+      "units": "cm",
+      "floors": [
+        {
+          "id": "4b88322f-03a5-4e05-893c-5c7669515211",
+          "name": "1 этаж",
+          "rooms": [
+            {
+              "id": "20218e7e-c468-4831-9c55-fdc5f82f7c94",
+              "name": "Кабинет",
+              "type": "room",
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 3200
+                },
+                {
+                  "x": 0,
+                  "y": 3200
+                }
+              ],
+              "height": 2800,
+              "floor": "oak"
+            }
+          ],
+          "walls": [
+            {
+              "id": "2de58db7-5a04-4fe6-92bd-ea0e1dae6878",
+              "roomId": "20218e7e-c468-4831-9c55-fdc5f82f7c94",
+              "start": {
+                "x": 0,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "e1518299-3c3a-4645-992e-1b174f840166",
+              "roomId": "20218e7e-c468-4831-9c55-fdc5f82f7c94",
+              "start": {
+                "x": 4000,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "93435074-0c3f-4a74-bf3e-d781aed2cacb",
+              "roomId": "20218e7e-c468-4831-9c55-fdc5f82f7c94",
+              "start": {
+                "x": 4000,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "6a9a0e1f-cc05-4908-ad61-e41fb05637ef",
+              "roomId": "20218e7e-c468-4831-9c55-fdc5f82f7c94",
+              "start": {
+                "x": 0,
+                "y": 3200
+              },
+              "end": {
+                "x": 0,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            }
+          ],
+          "openings": [
+            {
+              "id": "31fa19f7-5c6b-4762-b695-395b6407aa43",
+              "wallId": "2de58db7-5a04-4fe6-92bd-ea0e1dae6878",
+              "kind": "window",
+              "offset": 1400,
+              "width": 1400,
+              "height": 1500,
+              "sill": 900,
+              "flip": false,
+              "inward": true
+            },
+            {
+              "id": "4eb6b944-da1a-4e69-91eb-9d30fd7ac032",
+              "wallId": "93435074-0c3f-4a74-bf3e-d781aed2cacb",
+              "kind": "door",
+              "offset": 100,
+              "width": 800,
+              "height": 2100,
+              "sill": 0,
+              "flip": false,
+              "inward": true
+            }
+          ],
+          "measurements": [],
+          "zones": [],
+          "annotations": []
+        }
+      ],
+      "variants": [
+        {
+          "id": "78ea0ee5-2c09-4483-be35-f249cddae196",
+          "name": "Вариант 1",
+          "items": [
+            {
+              "id": "be483333-ffc9-4865-a4fe-cc905f57461e",
+              "catalogId": "desk",
+              "floorId": "4b88322f-03a5-4e05-893c-5c7669515211",
+              "name": "Рабочий стол",
+              "type": "desk",
+              "category": "Столы",
+              "x": 2800,
+              "y": 300,
+              "width": 1200,
+              "depth": 600,
+              "height": 750,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "ebed983c-3164-4a72-a22d-53747092b285",
+              "catalogId": "chair",
+              "floorId": "4b88322f-03a5-4e05-893c-5c7669515211",
+              "name": "Стул",
+              "type": "chair",
+              "category": "Стулья",
+              "x": 2800,
+              "y": 950,
+              "width": 450,
+              "depth": 500,
+              "height": 850,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "e793f7be-76e2-4a76-ab5d-712c4fdfe920",
+              "catalogId": "shelf",
+              "floorId": "4b88322f-03a5-4e05-893c-5c7669515211",
+              "name": "Стеллаж",
+              "type": "shelf",
+              "category": "Стеллажи",
+              "x": 400,
+              "y": 2000,
+              "width": 800,
+              "depth": 350,
+              "height": 1800,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            }
+          ]
+        }
+      ],
+      "activeVariantId": "78ea0ee5-2c09-4483-be35-f249cddae196",
+      "settings": {
+        "clearance": 800,
+        "gridSize": 100,
+        "snap": true,
+        "layers": {
+          "walls": true,
+          "openings": true,
+          "furniture": true,
+          "dimensions": true,
+          "names": false,
+          "zones": true,
+          "underlay": true,
+          "grid": true
+        }
+      }
+    }
+  },
+  {
+    "id": "Студия",
+    "name": "Студия",
+    "document": {
+      "schemaVersion": 1,
+      "name": "Студия",
+      "units": "cm",
+      "floors": [
+        {
+          "id": "64671c73-22c0-4ba1-8f1e-6db035ee8d48",
+          "name": "1 этаж",
+          "rooms": [
+            {
+              "id": "39072329-7408-438d-a82b-42b0af5c2dfc",
+              "name": "Студия",
+              "type": "room",
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 6000,
+                  "y": 0
+                },
+                {
+                  "x": 6000,
+                  "y": 4500
+                },
+                {
+                  "x": 0,
+                  "y": 4500
+                }
+              ],
+              "height": 2800,
+              "floor": "oak"
+            }
+          ],
+          "walls": [
+            {
+              "id": "ad9e64c0-4c4f-40a9-8703-403db01df3a3",
+              "roomId": "39072329-7408-438d-a82b-42b0af5c2dfc",
+              "start": {
+                "x": 0,
+                "y": 0
+              },
+              "end": {
+                "x": 6000,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "c63725f8-5d82-45da-8de9-b3c5b30f3a68",
+              "roomId": "39072329-7408-438d-a82b-42b0af5c2dfc",
+              "start": {
+                "x": 6000,
+                "y": 0
+              },
+              "end": {
+                "x": 6000,
+                "y": 4500
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "fe118bf6-39ea-4175-8157-eb262a649a61",
+              "roomId": "39072329-7408-438d-a82b-42b0af5c2dfc",
+              "start": {
+                "x": 6000,
+                "y": 4500
+              },
+              "end": {
+                "x": 0,
+                "y": 4500
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "e4055810-9279-4ca6-b983-5f027de7fbd5",
+              "roomId": "39072329-7408-438d-a82b-42b0af5c2dfc",
+              "start": {
+                "x": 0,
+                "y": 4500
+              },
+              "end": {
+                "x": 0,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            }
+          ],
+          "openings": [
+            {
+              "id": "de37cccc-7453-43d8-92f3-60b8ee446341",
+              "wallId": "ad9e64c0-4c4f-40a9-8703-403db01df3a3",
+              "kind": "window",
+              "offset": 1400,
+              "width": 1400,
+              "height": 1500,
+              "sill": 900,
+              "flip": false,
+              "inward": true
+            },
+            {
+              "id": "93e62f66-289c-4089-9566-83aa16a0100e",
+              "wallId": "fe118bf6-39ea-4175-8157-eb262a649a61",
+              "kind": "door",
+              "offset": 100,
+              "width": 800,
+              "height": 2100,
+              "sill": 0,
+              "flip": false,
+              "inward": true
+            }
+          ],
+          "measurements": [],
+          "zones": [],
+          "annotations": []
+        }
+      ],
+      "variants": [
+        {
+          "id": "b8d51687-33be-4307-8954-7fe1bb663157",
+          "name": "Вариант 1",
+          "items": [
+            {
+              "id": "0bc0e9bc-0af2-4e68-8149-4011907adbd6",
+              "catalogId": "sofa",
+              "floorId": "64671c73-22c0-4ba1-8f1e-6db035ee8d48",
+              "name": "Диван",
+              "type": "sofa",
+              "category": "Диваны",
+              "x": 1800,
+              "y": 2650,
+              "width": 2200,
+              "depth": 950,
+              "height": 850,
+              "angle": 0,
+              "locked": false,
+              "color": "#819986",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "573bf0e5-a84d-4bc5-aedb-54a67a8f56d0",
+              "catalogId": "coffee",
+              "floorId": "64671c73-22c0-4ba1-8f1e-6db035ee8d48",
+              "name": "Журнальный стол",
+              "type": "coffee",
+              "category": "Столы",
+              "x": 1800,
+              "y": 1550,
+              "width": 800,
+              "depth": 550,
+              "height": 450,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "9cc6dad5-2f14-4fa3-a9ef-7e62b9ad110a",
+              "catalogId": "armchair",
+              "floorId": "64671c73-22c0-4ba1-8f1e-6db035ee8d48",
+              "name": "Кресло",
+              "type": "armchair",
+              "category": "Кресла",
+              "x": 3450,
+              "y": 1600,
+              "width": 800,
+              "depth": 800,
+              "height": 900,
+              "angle": 0,
+              "locked": false,
+              "color": "#819986",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "b82f5201-0dd9-4f29-ab3e-8108a73263ac",
+              "catalogId": "plant",
+              "floorId": "64671c73-22c0-4ba1-8f1e-6db035ee8d48",
+              "name": "Растение",
+              "type": "plant",
+              "category": "Декор",
+              "x": 300,
+              "y": 300,
+              "width": 450,
+              "depth": 450,
+              "height": 1000,
+              "angle": 0,
+              "locked": false,
+              "color": "#639568",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            }
+          ]
+        }
+      ],
+      "activeVariantId": "b8d51687-33be-4307-8954-7fe1bb663157",
+      "settings": {
+        "clearance": 800,
+        "gridSize": 100,
+        "snap": true,
+        "layers": {
+          "walls": true,
+          "openings": true,
+          "furniture": true,
+          "dimensions": true,
+          "names": false,
+          "zones": true,
+          "underlay": true,
+          "grid": true
+        }
+      }
+    }
+  },
+  {
+    "id": "Небольшая квартира",
+    "name": "Небольшая квартира",
+    "document": {
+      "schemaVersion": 1,
+      "name": "Небольшая квартира",
+      "units": "cm",
+      "floors": [
+        {
+          "id": "5fdff41b-6a98-40c6-ab49-e46ed9d42253",
+          "name": "1 этаж",
+          "rooms": [
+            {
+              "id": "ecedeeb5-96f6-4278-9587-da036e937927",
+              "name": "Гостиная",
+              "type": "room",
+              "points": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 0
+                },
+                {
+                  "x": 4000,
+                  "y": 6400
+                },
+                {
+                  "x": 0,
+                  "y": 6400
+                }
+              ],
+              "height": 2800,
+              "floor": "oak"
+            },
+            {
+              "id": "02009ae2-1d86-4fa4-888b-cf100c8d3d22",
+              "name": "Спальня",
+              "type": "room",
+              "points": [
+                {
+                  "x": 4000,
+                  "y": 0
+                },
+                {
+                  "x": 7400,
+                  "y": 0
+                },
+                {
+                  "x": 7400,
+                  "y": 3200
+                },
+                {
+                  "x": 4000,
+                  "y": 3200
+                }
+              ],
+              "height": 2800,
+              "floor": "oak"
+            },
+            {
+              "id": "693ea903-80a2-4723-a38a-5e90036fc36c",
+              "name": "Кухня",
+              "type": "room",
+              "points": [
+                {
+                  "x": 4000,
+                  "y": 3200
+                },
+                {
+                  "x": 7400,
+                  "y": 3200
+                },
+                {
+                  "x": 7400,
+                  "y": 6400
+                },
+                {
+                  "x": 4000,
+                  "y": 6400
+                }
+              ],
+              "height": 2800,
+              "floor": "oak"
+            }
+          ],
+          "walls": [
+            {
+              "id": "c8e87d6e-b8c8-4044-8e9c-21a86a98cb9e",
+              "roomId": "ecedeeb5-96f6-4278-9587-da036e937927",
+              "start": {
+                "x": 0,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "228cc99a-5151-4706-bbed-0875db876d9a",
+              "roomId": "ecedeeb5-96f6-4278-9587-da036e937927",
+              "start": {
+                "x": 4000,
+                "y": 0
+              },
+              "end": {
+                "x": 4000,
+                "y": 6400
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "3ac4d8b2-4375-4397-a471-7c45ad894c5c",
+              "roomId": "ecedeeb5-96f6-4278-9587-da036e937927",
+              "start": {
+                "x": 4000,
+                "y": 6400
+              },
+              "end": {
+                "x": 0,
+                "y": 6400
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "159f44a9-df7c-4441-a3ea-c1f74b987f7d",
+              "roomId": "ecedeeb5-96f6-4278-9587-da036e937927",
+              "start": {
+                "x": 0,
+                "y": 6400
+              },
+              "end": {
+                "x": 0,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "4db64ef3-b7e2-4010-b4df-f7240c0ae511",
+              "roomId": "02009ae2-1d86-4fa4-888b-cf100c8d3d22",
+              "start": {
+                "x": 4000,
+                "y": 0
+              },
+              "end": {
+                "x": 7400,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "2c2d0876-3223-4fb9-9877-506d571fca58",
+              "roomId": "02009ae2-1d86-4fa4-888b-cf100c8d3d22",
+              "start": {
+                "x": 7400,
+                "y": 0
+              },
+              "end": {
+                "x": 7400,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "0e29ce0e-619e-4345-9038-059eb2f2ecf3",
+              "roomId": "02009ae2-1d86-4fa4-888b-cf100c8d3d22",
+              "start": {
+                "x": 7400,
+                "y": 3200
+              },
+              "end": {
+                "x": 4000,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "46c2da02-4eea-4a70-9492-a5dea221f322",
+              "roomId": "02009ae2-1d86-4fa4-888b-cf100c8d3d22",
+              "start": {
+                "x": 4000,
+                "y": 3200
+              },
+              "end": {
+                "x": 4000,
+                "y": 0
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "c87a3822-812d-4d3d-bfa5-a6a2a6f929d3",
+              "roomId": "693ea903-80a2-4723-a38a-5e90036fc36c",
+              "start": {
+                "x": 4000,
+                "y": 3200
+              },
+              "end": {
+                "x": 7400,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "b4c1d5c6-44af-4b52-9953-54100c3f5158",
+              "roomId": "693ea903-80a2-4723-a38a-5e90036fc36c",
+              "start": {
+                "x": 7400,
+                "y": 3200
+              },
+              "end": {
+                "x": 7400,
+                "y": 6400
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "76ecd724-f1b5-4951-ad2e-1b692a36c8e6",
+              "roomId": "693ea903-80a2-4723-a38a-5e90036fc36c",
+              "start": {
+                "x": 7400,
+                "y": 6400
+              },
+              "end": {
+                "x": 4000,
+                "y": 6400
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            },
+            {
+              "id": "4f8f5f76-2541-4541-8db4-c023e9dc8f1d",
+              "roomId": "693ea903-80a2-4723-a38a-5e90036fc36c",
+              "start": {
+                "x": 4000,
+                "y": 6400
+              },
+              "end": {
+                "x": 4000,
+                "y": 3200
+              },
+              "thickness": 100,
+              "height": 2800,
+              "color": "#34383c"
+            }
+          ],
+          "openings": [
+            {
+              "id": "2a3ace64-9520-4ed8-86e1-56512838c06a",
+              "wallId": "c8e87d6e-b8c8-4044-8e9c-21a86a98cb9e",
+              "kind": "sliding",
+              "offset": 100,
+              "width": 1100,
+              "height": 2100,
+              "sill": 0,
+              "flip": false,
+              "inward": true
+            },
+            {
+              "id": "81806744-30d1-4cc8-9ca2-5fed5faadbec",
+              "wallId": "46c2da02-4eea-4a70-9492-a5dea221f322",
+              "kind": "sliding",
+              "offset": 1000,
+              "width": 1100,
+              "height": 2100,
+              "sill": 0,
+              "flip": false,
+              "inward": true
+            },
+            {
+              "id": "d96b2fd8-5417-495d-9f78-0e360dfe07ce",
+              "wallId": "4f8f5f76-2541-4541-8db4-c023e9dc8f1d",
+              "kind": "sliding",
+              "offset": 1000,
+              "width": 1100,
+              "height": 2100,
+              "sill": 0,
+              "flip": false,
+              "inward": true
+            }
+          ],
+          "measurements": [],
+          "zones": [],
+          "annotations": []
+        }
+      ],
+      "variants": [
+        {
+          "id": "bfafabd8-db88-4fd5-8210-b18db0acefe7",
+          "name": "Вариант 1",
+          "items": [
+            {
+              "id": "8680e190-c3d4-4254-a1b8-e78ab3ddd176",
+              "catalogId": "sofa",
+              "floorId": "5fdff41b-6a98-40c6-ab49-e46ed9d42253",
+              "name": "Диван",
+              "type": "sofa",
+              "category": "Диваны",
+              "x": 2000,
+              "y": 5400,
+              "width": 2200,
+              "depth": 950,
+              "height": 850,
+              "angle": 0,
+              "locked": false,
+              "color": "#819986",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "172dfb4e-1e5d-4734-bcdc-9fb0164c9e2b",
+              "catalogId": "coffee",
+              "floorId": "5fdff41b-6a98-40c6-ab49-e46ed9d42253",
+              "name": "Журнальный стол",
+              "type": "coffee",
+              "category": "Столы",
+              "x": 2000,
+              "y": 4200,
+              "width": 800,
+              "depth": 550,
+              "height": 450,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "844ebd95-aeec-4126-b68f-3714e0835ca1",
+              "catalogId": "bed-double",
+              "floorId": "5fdff41b-6a98-40c6-ab49-e46ed9d42253",
+              "name": "Кровать двуспальная",
+              "type": "bed",
+              "category": "Кровати",
+              "x": 5900,
+              "y": 1000,
+              "width": 1600,
+              "depth": 2000,
+              "height": 600,
+              "angle": 0,
+              "locked": false,
+              "color": "#e9e0d1",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "9a18ec0d-38dc-4021-b9c6-c883af561461",
+              "catalogId": "wardrobe",
+              "floorId": "5fdff41b-6a98-40c6-ab49-e46ed9d42253",
+              "name": "Шкаф",
+              "type": "wardrobe",
+              "category": "Шкафы",
+              "x": 5300,
+              "y": 2900,
+              "width": 1800,
+              "depth": 600,
+              "height": 2200,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 600,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "78ff1091-8c81-4dbf-a5b8-d7eb7d245d27",
+              "catalogId": "kitchen",
+              "floorId": "5fdff41b-6a98-40c6-ab49-e46ed9d42253",
+              "name": "Кухонный гарнитур",
+              "type": "kitchen",
+              "category": "Кухня",
+              "x": 5600,
+              "y": 3500,
+              "width": 2400,
+              "depth": 600,
+              "height": 900,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            },
+            {
+              "id": "e34cea66-a793-48d2-a4d9-acee6f419aa9",
+              "catalogId": "table",
+              "floorId": "5fdff41b-6a98-40c6-ab49-e46ed9d42253",
+              "name": "Обеденный стол",
+              "type": "table",
+              "category": "Столы",
+              "x": 5900,
+              "y": 5100,
+              "width": 1400,
+              "depth": 800,
+              "height": 750,
+              "angle": 0,
+              "locked": false,
+              "color": "#cbb99e",
+              "clearance": 0,
+              "shopping": {
+                "owned": false,
+                "price": 0,
+                "store": "",
+                "url": "",
+                "note": ""
+              }
+            }
+          ]
+        }
+      ],
+      "activeVariantId": "bfafabd8-db88-4fd5-8210-b18db0acefe7",
+      "settings": {
+        "clearance": 800,
+        "gridSize": 100,
+        "snap": true,
+        "layers": {
+          "walls": true,
+          "openings": true,
+          "furniture": true,
+          "dimensions": true,
+          "names": false,
+          "zones": true,
+          "underlay": true,
+          "grid": true
+        }
+      }
+    }
+  }
+]

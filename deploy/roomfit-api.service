@@ -1,0 +1,26 @@
+[Unit]
+Description=RoomFit isolated API
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=roomfit
+Group=roomfit
+WorkingDirectory=/opt/roomfit/api
+EnvironmentFile=/opt/roomfit/api/.env
+Environment=OPENBLAS_NUM_THREADS=1
+Environment=OMP_NUM_THREADS=1
+ExecStart=/opt/roomfit/api/.venv/bin/python -m uvicorn roomfit.app:app --host 127.0.0.1 --port 4182 --proxy-headers --forwarded-allow-ips 127.0.0.1
+Restart=on-failure
+RestartSec=5
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/roomfit/api/data
+MemoryMax=700M
+TasksMax=100
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+[Unit]
+Description=RoomFit private PostgreSQL backup
+After=postgresql.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/roomfit-backup
