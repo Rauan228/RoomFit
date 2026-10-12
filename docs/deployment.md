@@ -1,57 +1,88 @@
-# Деплой RoomFit
+# Деплой RoomFit на VPS
 
-Текущие публичные адреса: [лендинг](https://room-fit-gamma.vercel.app/), [платформа](https://roomfitplatform-kappa.vercel.app/login). Production-версия лендинга использует этот адрес платформы по умолчанию; `VITE_PLATFORM_URL` позволяет переопределить его.
+RoomFit размещён на **212.19.134.179**. Namecheap обслуживает DNS; Nginx отдаёт оба React-приложения, FastAPI работает отдельным сервисом, данные хранятся в PostgreSQL.
 
-## Vercel — сначала платформа
+Старые Vercel-проекты RoomFit остановлены, автоматические сборки отключены, привязки roomfit.art и platform.roomfit.art удалены из Vercel. Рабочее размещение полностью на VPS.
 
-1. Открыть **Add New → Project**, импортировать `Rauan228/RoomFit`.
-2. Назвать проект, например `roomfit-platform`.
-3. **Root Directory:** `platform`.
-4. Включить **Include source files outside of the Root Directory in the Build Step**: платформа использует `packages/core` из этого же репозитория.
-5. Framework Preset: **Vite**. Build Command: `npm run build`, Output Directory: `dist`. Install Command уже задан в `platform/vercel.json`: `cd .. && npm ci --include=dev --workspace=@roomfit/platform --workspace=@roomfit/core --include-workspace-root=false`. Он устанавливает зависимости платформы и общей библиотеки из корневого lockfile, включая TypeScript и Vite. Отдельный Override в панели Vercel не нужен.
-6. Node.js: **22.x** или более новый поддерживаемый выпуск.
-7. Нажать Deploy. Зарегистрировать свой аккаунт на полученном `https://…vercel.app` и проверить сохранение комнаты после перезагрузки.
+| Адрес | Назначение | Каталог / сервис |
+| --- | --- | --- |
+| https://roomfit.art | Лендинг | /opt/roomfit/web-current/landing/dist |
+| https://www.roomfit.art | Перенаправление на основной домен | Nginx, 301 |
+| https://platform.roomfit.art | Платформа | /opt/roomfit/web-current/platform/dist |
+| https://platform.roomfit.art/api | API на том же домене | 127.0.0.1:4182, roomfit-api |
 
-В `platform/vercel.json` уже есть проксирование `/api/:path*` на `https://roomfit.212.19.134.179.sslip.io/api/:path*`. Браузер обращается к API на своём Vercel-адресе; HttpOnly Secure cookie и CSRF работают через этот же адрес. Не заменять это прямыми запросами браузера к другому домену.
+## DNS в Namecheap
 
-Если предыдущая сборка завершилась с `tsc: command not found`, развернуть последний коммит `main`, содержащий исправление зависимостей, а не повторять старую сборку. Инструменты сборки теперь объявлены непосредственно в `platform/package.json`, поэтому платформа не зависит от установки devDependencies корневого workspace.
+**Domain List → Manage → Advanced DNS → Host Records**:
 
-## Vercel — лендинг
+| Type | Host | Value | TTL |
+| --- | --- | --- | --- |
+| A Record | @ | 212.19.134.179 | Automatic |
+| A Record | platform | 212.19.134.179 | Automatic |
+| CNAME Record | www | roomfit.art | Automatic |
 
-1. Снова импортировать **тот же репозиторий** как второй проект, например `roomfit-landing`.
-2. **Root Directory:** `landing`.
-3. Framework Preset **Vite**, Build Command `npm run build`, Output Directory `dist`.
-4. При необходимости добавить Environment Variable **`VITE_PLATFORM_URL`** со значением адреса платформы `https://roomfitplatform-kappa.vercel.app`, без завершающего `/`. Выбрать нужные окружения Production/Preview. Если переменная уже задана, проверить, что в ней нет localhost или старого адреса: она имеет приоритет над production-адресом в коде.
-5. Deploy. «Начать бесплатно» открывает `/register`, «Войти» — `/login`. Демо на самом лендинге продолжает работать.
+Парковочный CNAME и URL Redirect заменены этими записями. Nameservers остаются Namecheap BasicDNS. [Описание DNS-записей Namecheap](https://www.namecheap.com/support/knowledgebase/article.aspx/579/2237/which-record-type-option-should-i-choose-for-the-information-im-about-to-enter/).
 
-После изменения `VITE_PLATFORM_URL` нужен Redeploy: Vite подставляет её при сборке. Vercel будет автоматически пересобирать проекты после новых коммитов в `main`.
+## Обновление лендинга и платформы из Windows
 
-Настройки монорепозиториев описаны в [документации Vercel](https://vercel.com/docs/monorepos). Внешний API подключается через [external rewrites](https://vercel.com/docs/rewrites).
+Нужны Node.js 22.12+ и PuTTY с plink.exe и pscp.exe в стандартной папке Program Files.
 
-## Что уже работает на VPS
-
-- Каталог установки: `/opt/roomfit`; служебный пользователь `roomfit`.
-- API слушает **только** `127.0.0.1:4182`.
-- PostgreSQL: отдельная БД и роль `roomfit`, доступ локальный.
-- Настройки и случайные серверные ключи: `/opt/roomfit/api/.env`, `root:roomfit`, права `640`.
-- Systemd: `roomfit-api.service`, `roomfit-backup.timer`.
-- Отдельный Nginx-конфиг: `/etc/nginx/sites-available/roomfit`.
-- HTTPS: Let's Encrypt, временный адрес `roomfit.212.19.134.179.sslip.io`.
-- Ежедневный PostgreSQL dump и копия `.env`: `/var/backups/roomfit`, права закрыты, хранение 14 дней.
-- Существующие конфиги и приложения других проектов не используются RoomFit.
-
-После того как появится Vercel-адрес, заменить `FRONTEND_URL` в `.env` на этот адрес и перезапустить **только** `roomfit-api`. Это важно для ссылок восстановления пароля после подключения SMTP. `ALLOWED_ORIGINS` нужен при прямом CORS-доступе; штатный фронт использует rewrite.
-
-```bash
-systemctl status roomfit-api --no-pager
-journalctl -u roomfit-api -n 50 --no-pager
-curl -fsS https://roomfit.212.19.134.179.sslip.io/api/health
-systemctl list-timers roomfit-backup.timer
+```powershell
+npm ci
+./scripts/deploy-web.ps1
 ```
 
-## Обновление backend
+Скрипт собирает оба приложения с VITE_PLATFORM_URL=https://platform.roomfit.art, создаёт архив, проверяет его SHA-256 на VPS и активирует новый релиз. PuTTY запрашивает пароль при загрузке и подключении. Пароль не записывается в скрипт или репозиторий.
 
-Сначала выполнить проверки локально. Загрузить исходники **только** в каталог RoomFit, не перезаписывая `.env`, `.venv`, `data`. Затем:
+Проверки приложения выполнять до обновления:
+
+```powershell
+npm test
+npm run test:api
+npm run test:e2e
+npm run test:landing
+```
+
+Готовые сборки можно загрузить с ./scripts/deploy-web.ps1 -SkipBuild. Они должны быть собраны для production-адреса платформы.
+
+Релизы находятся в /opt/roomfit/web-releases; /opt/roomfit/web-current переключается атомарно после полной распаковки и проверки обоих index.html. Хешированные файлы предыдущих сборок доступны открытым вкладкам. Обновление фронтендов не заменяет API, .env, базу или пользовательские проекты.
+
+## Nginx и HTTPS
+
+Основной конфиг доменов: /etc/nginx/sites-available/roomfit-domains. Его шаблоны находятся в deploy/nginx-domains-http.conf и deploy/nginx-domains-https.conf.
+
+Первичная настройка после загрузки фронтендов и DNS:
+
+```bash
+bash /opt/roomfit/deploy/configure-domains.sh
+```
+
+Скрипт включает HTTP-маршрут ACME, получает сертификат roomfit.art для всех трёх имён и включает HTTPS. Nginx проверяется перед каждым reload; неизвестный конфиг RoomFit не перезаписывается.
+
+Сертификат: /etc/letsencrypt/live/roomfit.art/. Продление выполняет существующий certbot.timer. Отдельный hook проверяет Nginx и делает reload при продлении сертификатов RoomFit. [Режим webroot Certbot](https://eff-certbot.readthedocs.io/en/stable/using.html#webroot).
+
+```bash
+nginx -t
+systemctl status roomfit-api --no-pager
+systemctl list-timers certbot.timer
+certbot renew --cert-name roomfit.art --dry-run
+curl -fsS https://platform.roomfit.art/api/health
+```
+
+Страницы SPA используют fallback на index.html; отсутствующие файлы /assets/ возвращают 404. HTML отдаётся с no-cache, файлы с хешами — с длительным кешированием. API использует proxy_pass без удаления префикса /api/. Cookies HttpOnly Secure и CSRF работают на домене платформы.
+
+## API и данные
+
+- Каталог установки: /opt/roomfit, служебный пользователь roomfit.
+- API слушает только 127.0.0.1:4182.
+- PostgreSQL: отдельная БД и роль roomfit, доступ локальный.
+- Секреты: /opt/roomfit/api/.env, root:roomfit, права 640.
+- FRONTEND_URL=https://platform.roomfit.art — адрес для почтовых ссылок восстановления.
+- API обращается к базе и сохранённым проектам, существовавшим до переноса фронтендов.
+- Backup: roomfit-backup.timer, закрытый каталог /var/backups/roomfit, хранение 14 дней.
+- Отдельный старый hostname sslip.io остаётся служебным адресом VPS; приложения используют основные домены.
+
+После изменения backend загрузить исходники в каталог RoomFit, затем:
 
 ```bash
 cd /opt/roomfit/api
@@ -61,29 +92,25 @@ systemctl restart roomfit-api
 curl -fsS http://127.0.0.1:4182/api/health
 ```
 
-Для первоначальной установки приложены `deploy/bootstrap.sh` и `deploy/provision-database.py`. Bootstrap рассчитан на подготовленный архив `/tmp/roomfit-deploy.tgz`, запускается как root, останавливается при обнаружении неизвестного `/opt/roomfit` и сохраняет уже существующий RoomFit `.env`. Временный просмотр фронта на VPS обновляется копированием `platform/dist` только в `/opt/roomfit/platform/dist`.
+Для проверки нового сервера сохранён deploy/bootstrap.sh: он разворачивает API и его служебный адрес из /tmp/roomfit-deploy.tgz. После этого фронтенды загружаются через deploy-web.ps1 и домены подключаются через configure-domains.sh.
 
-NumPy ограничен версией `<2.4`: процессор этого VPS не поддерживает x86-64-v2, требуемый новыми стандартными колёсами. Причина изменения описана в [официальных release notes NumPy](https://numpy.org/doc/stable/release/2.4.0-notes.html). Системный Python и окружения других приложений не заменялись.
+NumPy ограничен версией <2.4: процессор этого VPS не поддерживает x86-64-v2, требуемый новыми стандартными колёсами. [Release notes NumPy](https://numpy.org/doc/stable/release/2.4.0-notes.html).
 
 ## SMTP и администратор
 
-Заполнить `SMTP_HOST`, `SMTP_PORT`, `SMTP_FROM`, `SMTP_USER`, `SMTP_PASSWORD` в серверном `.env`. Нужен SMTP с STARTTLS. После `systemctl restart roomfit-api` восстановление пароля включится автоматически. До этого интерфейс сообщает, что почта не подключена; токены в ответ API и логи не выдаются.
+Заполнить SMTP_HOST, SMTP_PORT, SMTP_FROM, SMTP_USER, SMTP_PASSWORD в серверном .env. Используется SMTP с STARTTLS. После перезапуска roomfit-api восстановление пароля включится автоматически. До этого интерфейс сообщает, что почта не подключена; токены не выдаются в ответах API или логах.
 
-Администратор назначается вручную через CLI; первый зарегистрировавшийся пользователь не получает административные права:
+Администратор назначается вручную:
 
 ```bash
 cd /opt/roomfit/api
 .venv/bin/python -m roomfit.admin --email your-email@example.com
 ```
 
-У существующего аккаунта изменяется роль. При создании нового CLI запросит пароль скрытым вводом.
+У существующего аккаунта меняется роль. При создании нового CLI запрашивает пароль скрытым вводом.
 
-## Собственный API-домен
+## Резервные копии и откат
 
-Создать DNS A-запись `api.yourdomain` → VPS. Выпустить сертификат через webroot, добавить этот домен в **RoomFit** Nginx-конфиг, проверить `nginx -t` и выполнить reload. Обновить внешний адрес в `platform/vercel.json`, закоммитить и передеплоить платформу. Старый адрес можно оставить на переходный период.
+Ручная копия БД и настроек: /usr/local/sbin/roomfit-backup. Для проверки восстановления использовать отдельную временную БД; процедура находится в deploy/verify-restore.sh. Копии на VPS дополнительно стоит отправлять в внешнее хранилище.
 
-## Резервное копирование и восстановление
-
-Ручная копия: `/usr/local/sbin/roomfit-backup`. Копии на том же VPS не защищают от потери самого сервера: для публичного продукта их нужно дополнительно отправлять в выбранное внешнее хранилище.
-
-Для проверки восстановления создать **отдельную временную БД**, восстановить туда dump и сверить таблицы/число проектов; рабочую БД для проверки не заменять. Процедура проверки приложена в `deploy/verify-restore.sh`.
+Откат фронтендов: выбрать предыдущий каталог в /opt/roomfit/web-releases, создать временную ссылку внутри /opt/roomfit и атомарно заменить web-current. База и сохранённые проекты при этом не меняются. Перед переключением проверить, что выбранный путь принадлежит RoomFit.

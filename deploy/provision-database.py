@@ -33,8 +33,8 @@ content = f"""DATABASE_URL=postgresql+psycopg://roomfit:{password}@127.0.0.1:543
 APP_ENV=production
 COOKIE_SECURE=true
 SECRET_KEY={secrets.token_urlsafe(64)}
-FRONTEND_URL=https://roomfit.212.19.134.179.sslip.io
-ALLOWED_ORIGINS=https://roomfit.212.19.134.179.sslip.io
+FRONTEND_URL=https://platform.roomfit.art
+ALLOWED_ORIGINS=https://platform.roomfit.art,https://roomfit.212.19.134.179.sslip.io
 SMTP_HOST=
 SMTP_PORT=587
 SMTP_FROM=

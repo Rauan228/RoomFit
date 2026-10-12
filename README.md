@@ -36,7 +36,7 @@ npm run dev
 
 Автосохранение после 1,6 секунды без изменений, локальная резервная копия и проверка версии при записи. При конфликте вкладок нужно скачать локальный JSON и обновить проект; сервер не перезаписывает чужое сохранение молча.
 
-Подробности и границы алгоритмов: [docs/implementation.md](docs/implementation.md). Перед публичным запуском подключить SMTP и собственный API-домен. OAuth, платежи и 3D не подключены; тарифы в ТЗ обозначены как гипотеза.
+Подробности и границы алгоритмов: [docs/implementation.md](docs/implementation.md). Почтовое восстановление включается после подключения SMTP. OAuth, платежи и 3D не подключены; тарифы в ТЗ обозначены как гипотеза.
 
 ## Проверки
 
@@ -53,4 +53,6 @@ npm run test:landing
 
 ## Деплой
 
-Пошаговая инструкция: [docs/deployment.md](docs/deployment.md). На Vercel импортируется один GitHub-репозиторий двумя проектами с Root Directory `platform` и `landing`. API работает на VPS отдельным пользователем и сервисом `roomfit-api`.
+Пошаговая инструкция: [docs/deployment.md](docs/deployment.md). Лендинг: **https://roomfit.art**, платформа: **https://platform.roomfit.art**. Оба фронтенда раздаёт Nginx на VPS; API работает сервисом `roomfit-api`, база — PostgreSQL. DNS настроен в Namecheap, HTTPS выпускает Let's Encrypt.
+
+Обновление обоих фронтендов из Windows: `./scripts/deploy-web.ps1` — сборка, загрузка через PuTTY и переключение на новый релиз.

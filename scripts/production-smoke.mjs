@@ -1,7 +1,7 @@
 import { chromium } from "@playwright/test";
 import crypto from "node:crypto";
 const origin =
-  process.env.ROOMFIT_SMOKE_URL || "https://roomfit.212.19.134.179.sslip.io";
+  process.env.ROOMFIT_SMOKE_URL || "https://platform.roomfit.art";
 const browser = await chromium.launch();
 const context = await browser.newContext({ baseURL: origin });
 const page = await context.newPage();

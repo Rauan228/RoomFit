@@ -97,9 +97,9 @@ function Logo() {
 const platformUrl = (
   import.meta.env.VITE_PLATFORM_URL ||
   (import.meta.env.PROD
-    ? "https://roomfitplatform-kappa.vercel.app"
+    ? "https://platform.roomfit.art"
     : "http://127.0.0.1:4181")
-).replace(/\/$/, "");
+).trim().replace(/\/$/, "");
 function StartLink({
   children = "Начать бесплатно",
   className = "",
