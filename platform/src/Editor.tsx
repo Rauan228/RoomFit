@@ -25,6 +25,8 @@ import {
   ShoppingBag,
   GitCompare,
   WandSparkles,
+  DoorOpen,
+  PanelsTopLeft,
 } from "lucide-react";
 import {
   analyzeFloor,
@@ -42,17 +44,21 @@ import {
   smartLayouts,
   whatFits,
   documentSchema,
+  openingPlacement,
+  openingPosition,
+  wallPolygon,
   type Point,
   type Furniture,
   type CatalogItem,
   type Floor,
   type ProjectDocument,
   type Variant,
+  type Opening,
 } from "@roomfit/core";
 import { request, catalog as loadCatalog, type Project } from "./api";
 import { useAuth } from "./App";
 import { useProject } from "./useProject";
-import { PlanContent, planBounds, polygonPoints } from "./Plan";
+import { PlanContent, OpeningShape, planBounds, polygonPoints } from "./Plan";
 import { Logo, Loading, ErrorBox, Modal } from "./components";
 import { Inspector } from "./Inspector";
 import {
@@ -69,6 +75,8 @@ export type Tool =
   | "pan"
   | "room"
   | "wall"
+  | "door"
+  | "window"
   | "measure"
   | "zone"
   | "annotation"
@@ -76,11 +84,12 @@ export type Tool =
   | "calibrate";
 type View = { x: number; y: number; width: number; height: number };
 type Drag = {
-  kind: "items" | "pan" | "lasso" | "vertex" | "rotate" | "resize";
+  kind: "items" | "pan" | "lasso" | "vertex" | "rotate" | "resize" | "opening";
   start: Point;
   items?: Furniture[];
   vertex?: Point;
   originalView?: View;
+  opening?: Opening;
 };
 export function EditorPage() {
   const { id } = useParams(),
@@ -296,6 +305,17 @@ export function Editor({
     setSelected([]);
     setEntity({ id, kind });
     setPanel("properties");
+    if (kind === "opening") {
+      const opening = floor.openings.find((o) => o.id === id);
+      if (opening) {
+        begin();
+        drag.current = {
+          kind: "opening",
+          start: screenPoint(e.clientX, e.clientY),
+          opening: structuredClone(opening),
+        };
+      }
+    }
   };
   const startItems = (item: Furniture, e: React.PointerEvent<SVGGElement>) => {
     if (readOnly || tool !== "select") return;
@@ -383,6 +403,8 @@ export function Editor({
       const ctrl = e.ctrlKey || e.metaKey;
       if (e.key === "Escape") {
         setTool(readOnly ? "pan" : "select");
+        setHint("");
+        setCursor(null);
         setDraft([]);
         setSelected([]);
         setEntity({ id: "", kind: "" });
@@ -501,6 +523,54 @@ export function Editor({
     setTool("select");
   };
   const pointAction = (p: Point) => {
+    if (tool === "door" || tool === "window") {
+      if (floor.openings.length >= 200) {
+        setHint(
+          "На этаже уже 200 проёмов. Удали ненужный, чтобы добавить новый.",
+        );
+        return;
+      }
+      const placement = openingPlacement(
+        floor,
+        p,
+        tool === "window" ? 1200 : 800,
+        24 / (svg.current?.getScreenCTM()?.a || 1),
+      );
+      if (!placement) {
+        setHint(
+          "Нажми на свободный участок стены: для двери нужно 80 см, для окна — 120 см.",
+        );
+        return;
+      }
+      const id = uid(),
+        kind = tool;
+      change((d) => {
+        const target = d.floors.find((f) => f.id === floor.id)!;
+        target.openings.push({
+          id,
+          wallId: placement.wall.id,
+          kind,
+          offset: placement.offset,
+          width: placement.width,
+          height: kind === "window" ? 1500 : 2100,
+          sill: kind === "window" ? 900 : 0,
+          flip: false,
+          inward: placement.inward,
+        });
+        d.settings.layers.openings = true;
+        d.settings.layers.walls = true;
+      });
+      setTool("select");
+      setSelected([]);
+      setEntity({ id, kind: "opening" });
+      setPanel("properties");
+      setMobilePanel(true);
+      setCursor(null);
+      setHint(
+        `${kind === "window" ? "Окно добавлено" : "Дверь добавлена"}. Перетаскивай вдоль стены или задай точное положение в свойствах.`,
+      );
+      return;
+    }
     if (tool === "room" || tool === "zone") {
       if (draft.length >= 3 && distance(p, draft[0]) < view.width / 45) {
         finishPolygon();
@@ -604,7 +674,7 @@ export function Editor({
       setEntity({ id: "", kind: "" });
       drag.current = { kind: "lasso", start: p };
       setLasso([p, p]);
-    } else pointAction(snapped(p));
+    } else pointAction(tool === "door" || tool === "window" ? p : snapped(p));
   };
   const pointerMove = (e: React.PointerEvent<SVGSVGElement>) => {
     if (pointerMap.current.has(e.pointerId))
@@ -635,6 +705,7 @@ export function Editor({
     const p = screenPoint(e.clientX, e.clientY),
       d = drag.current;
     if (draft.length) setCursor(snapped(p));
+    if (tool === "door" || tool === "window") setCursor(p);
     if (!d) return;
     if (d.kind === "pan") {
       const v = d.originalView!,
@@ -646,6 +717,33 @@ export function Editor({
       });
     }
     if (d.kind === "lasso") setLasso([d.start, p]);
+    if (d.kind === "opening" && d.opening) {
+      const original = d.opening,
+        wall = floor.walls.find((w) => w.id === original.wallId);
+      if (!wall) return;
+      const { start, end } = openingPosition(wall, original),
+        center = {
+          x: (start.x + end.x) / 2 + p.x - d.start.x,
+          y: (start.y + end.y) / 2 + p.y - d.start.y,
+        },
+        placement = openingPlacement(
+          floor,
+          center,
+          original.width,
+          32 / (svg.current?.getScreenCTM()?.a || 1),
+          original.id,
+        );
+      if (placement)
+        updateFloor((f) => {
+          const opening = f.openings.find((o) => o.id === original.id)!;
+          opening.wallId = placement.wall.id;
+          opening.offset = placement.offset;
+          opening.inward =
+            placement.wall.id === original.wallId
+              ? original.inward
+              : placement.inward;
+        }, true);
+    }
     if (d.kind === "items") {
       let dx = p.x - d.start.x,
         dy = p.y - d.start.y;
@@ -736,7 +834,9 @@ export function Editor({
     }
     if (
       drag.current &&
-      ["items", "vertex", "resize", "rotate"].includes(drag.current.kind)
+      ["items", "vertex", "resize", "rotate", "opening"].includes(
+        drag.current.kind,
+      )
     )
       commit();
     drag.current = null;
@@ -744,18 +844,35 @@ export function Editor({
   const changeTool = (t: Tool) => {
     setTool(t);
     setDraft([]);
+    setCursor(null);
+    if (t === "door" || t === "window") {
+      setMobilePanel(false);
+      setSelected([]);
+      setEntity({ id: "", kind: "" });
+    }
     setHint(
       t === "select"
         ? ""
-        : t === "room" || t === "zone"
-          ? "Нажимай на углы контура. Нажми на первую точку или «Замкнуть контур»."
-          : t === "pan"
-            ? "Перетаскивай план. Колесо мыши или два пальца — масштаб."
-            : t === "annotation"
-              ? "Нажми на место для подписи."
-              : "Нажми на две точки на плане.",
+        : t === "door" || t === "window"
+          ? `Нажми на стену в месте ${t === "door" ? "двери" : "окна"}. Размер и положение можно уточнить после добавления. Esc — отмена.`
+          : t === "room" || t === "zone"
+            ? "Нажимай на углы контура. Нажми на первую точку или «Замкнуть контур»."
+            : t === "pan"
+              ? "Перетаскивай план. Колесо мыши или два пальца — масштаб."
+              : t === "annotation"
+                ? "Нажми на место для подписи."
+                : "Нажми на две точки на плане.",
     );
   };
+  const openingPreview =
+    cursor && (tool === "door" || tool === "window")
+      ? openingPlacement(
+          floor,
+          cursor,
+          tool === "window" ? 1200 : 800,
+          24 / (svg.current?.getScreenCTM()?.a || 1),
+        )
+      : null;
   const selectedItem =
     selected.length === 1
       ? variant.items.find((i) => i.id === selected[0])
@@ -1026,6 +1143,11 @@ export function Editor({
         store.status.includes("Конфликт") ||
         store.status.includes("Ошибка")) && (
         <div className="editor-message">
+          {(tool === "door" || tool === "window") && (
+            <button onClick={() => changeTool("select")}>
+              Отменить добавление
+            </button>
+          )}
           <ErrorBox error={error} />
           {error && (
             <button className="icon" onClick={() => setError("")}>
@@ -1068,6 +1190,8 @@ export function Editor({
                 ["pan", Hand, "Перемещение"],
                 ["room", Square, "Контур комнаты"],
                 ["wall", PencilRuler, "Стена"],
+                ["door", DoorOpen, "Добавить дверь"],
+                ["window", PanelsTopLeft, "Добавить окно"],
                 ["measure", Ruler, "Измерение"],
                 ["zone", Square, "Запретная зона"],
                 ["annotation", StickyNote, "Подпись"],
@@ -1128,6 +1252,32 @@ export function Editor({
               selectItem={readOnly ? undefined : startItems}
               selectEntity={readOnly ? undefined : selectEntity}
             >
+              {openingPreview && (
+                <g pointerEvents="none" opacity=".75">
+                  <polygon
+                    points={polygonPoints(wallPolygon(openingPreview.wall))}
+                    fill="#28786a"
+                    fillOpacity=".35"
+                    stroke="#28786a"
+                    strokeWidth="14"
+                  />
+                  <OpeningShape
+                    wall={openingPreview.wall}
+                    selected
+                    opening={{
+                      id: "preview",
+                      wallId: openingPreview.wall.id,
+                      kind: tool === "window" ? "window" : "door",
+                      offset: openingPreview.offset,
+                      width: openingPreview.width,
+                      height: 2100,
+                      sill: 0,
+                      flip: false,
+                      inward: openingPreview.inward,
+                    }}
+                  />
+                </g>
+              )}
               {routeResult && (
                 <g pointerEvents="none">
                   {routeResult.reachable.map((p, i) => (
@@ -1327,6 +1477,13 @@ export function Editor({
             }}
             onRoute={() => setRoute((v) => !v)}
             onFit={() => changeTool("fit")}
+            onOpeningTool={(kind) => changeTool(kind)}
+            onSelectOpening={(id) => {
+              setSelected([]);
+              setEntity({ id, kind: "opening" });
+              setPanel("properties");
+              setMobilePanel(true);
+            }}
             onFocusIssue={(p) =>
               setView((v) => ({
                 ...v,

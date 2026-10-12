@@ -13,6 +13,8 @@ import {
   type Furniture,
   type ProjectDocument,
   type Point,
+  type Opening,
+  type Wall,
 } from "@roomfit/core";
 export const polygonPoints = (p: Point[]) =>
   p.map((v) => `${v.x},${v.y}`).join(" ");
@@ -243,6 +245,66 @@ export function FurnitureShape({
     </g>
   );
 }
+export function OpeningShape({
+  opening: o,
+  wall: w,
+  selected = false,
+  onPointerDown,
+}: {
+  opening: Opening;
+  wall: Wall;
+  selected?: boolean;
+  onPointerDown?: (e: React.PointerEvent<SVGGElement>) => void;
+}) {
+  const { start, end, normal } = openingPosition(w, o),
+    sweep = doorPolygons(w, o);
+  return (
+    <g
+      data-opening-id={o.id}
+      data-opening-kind={o.kind}
+      onPointerDown={onPointerDown}
+      style={{ cursor: onPointerDown ? "move" : undefined }}
+    >
+      <path
+        d={`M ${start.x} ${start.y} L ${end.x} ${end.y}`}
+        stroke="#fffefa"
+        strokeWidth={w.thickness * 2 + 15}
+      />
+      <path
+        d={`M ${start.x} ${start.y} L ${end.x} ${end.y}`}
+        stroke={
+          selected ? "#28786a" : o.kind === "window" ? "#6e9dba" : "#8e7a5b"
+        }
+        strokeWidth={o.kind === "window" ? 30 : 15}
+      />
+      {o.kind === "window" ? (
+        <path
+          d={`M ${start.x + normal.x * 40} ${start.y + normal.y * 40} L ${end.x + normal.x * 40} ${end.y + normal.y * 40}`}
+          stroke="#6e9dba"
+          strokeWidth="15"
+        />
+      ) : (
+        sweep.map((p, i) => (
+          <polygon
+            key={i}
+            points={polygonPoints(p)}
+            fill="#dcb782"
+            fillOpacity=".16"
+            stroke={selected ? "#28786a" : "#ac9169"}
+            strokeWidth="10"
+          />
+        ))
+      )}
+      {onPointerDown && (
+        <path
+          d={`M ${start.x} ${start.y} L ${end.x} ${end.y}`}
+          stroke="transparent"
+          strokeWidth={Math.max(180, w.thickness * 2 + 60)}
+        />
+      )}
+    </g>
+  );
+}
 export function PlanContent({
   floor,
   items,
@@ -378,6 +440,7 @@ export function PlanContent({
         floor.walls.map((w) => (
           <polygon
             key={w.id}
+            data-wall-id={w.id}
             points={points(wallPolygon(w))}
             fill={selectedEntity === w.id ? "#28786a" : w.color}
             stroke={selectedEntity === w.id ? "#8dc2b5" : w.color}
@@ -389,49 +452,18 @@ export function PlanContent({
         floor.openings.map((o) => {
           const w = floor.walls.find((v) => v.id === o.wallId);
           if (!w) return null;
-          const { start, end, normal } = openingPosition(w, o),
-            sweep = doorPolygons(w, o);
           return (
-            <g
+            <OpeningShape
               key={o.id}
-              onPointerDown={(e) => selectEntity?.(o.id, "opening", e)}
-              style={{ cursor: selectEntity ? "pointer" : undefined }}
-            >
-              <path
-                d={`M ${start.x} ${start.y} L ${end.x} ${end.y}`}
-                stroke="#fffefa"
-                strokeWidth={w.thickness * 2 + 15}
-              />
-              <path
-                d={`M ${start.x} ${start.y} L ${end.x} ${end.y}`}
-                stroke={
-                  selectedEntity === o.id
-                    ? "#28786a"
-                    : o.kind === "window"
-                      ? "#6e9dba"
-                      : "#8e7a5b"
-                }
-                strokeWidth={o.kind === "window" ? 30 : 15}
-              />
-              {o.kind === "window" ? (
-                <path
-                  d={`M ${start.x + normal.x * 40} ${start.y + normal.y * 40} L ${end.x + normal.x * 40} ${end.y + normal.y * 40}`}
-                  stroke="#6e9dba"
-                  strokeWidth="15"
-                />
-              ) : (
-                sweep.map((p, i) => (
-                  <polygon
-                    key={i}
-                    points={points(p)}
-                    fill="#dcb782"
-                    fillOpacity=".12"
-                    stroke="#ac9169"
-                    strokeWidth="10"
-                  />
-                ))
-              )}
-            </g>
+              opening={o}
+              wall={w}
+              selected={selectedEntity === o.id}
+              onPointerDown={
+                selectEntity
+                  ? (e) => selectEntity(o.id, "opening", e)
+                  : undefined
+              }
+            />
           );
         })}
       {layers.furniture &&

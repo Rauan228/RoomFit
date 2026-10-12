@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   FileUp,
   ChevronRight,
+  PanelsTopLeft,
 } from "lucide-react";
 import {
   area,
@@ -27,6 +28,7 @@ import {
   selfIntersects,
   uid,
   furniturePolygon,
+  openingPlacement,
   type ProjectDocument,
   type Floor,
   type Variant,
@@ -102,6 +104,8 @@ interface Props {
   importFile: (f: File) => Promise<void>;
   onRoute: () => void;
   onFit: () => void;
+  onOpeningTool: (kind: "door" | "window") => void;
+  onSelectOpening: (id: string) => void;
   onFocusIssue: (p: Point) => void;
 }
 export function Inspector(p: Props) {
@@ -122,6 +126,25 @@ export function Inspector(p: Props) {
     [category, setCategory] = useState("Все"),
     [maxWidth, setMaxWidth] = useState(""),
     [maxDepth, setMaxDepth] = useState("");
+  const openingActions = !readOnly && (
+    <div className="opening-actions">
+      <div className="opening-action-buttons">
+        <button
+          onClick={() => p.onOpeningTool("door")}
+          disabled={!floor.walls.length}
+        >
+          <DoorOpen size={18} /> Дверь
+        </button>
+        <button
+          onClick={() => p.onOpeningTool("window")}
+          disabled={!floor.walls.length}
+        >
+          <PanelsTopLeft size={18} /> Окно
+        </button>
+      </div>
+      <p>Выбери дверь или окно, затем нажми на стену на плане.</p>
+    </div>
+  );
   const lengthField = (
     label: string,
     value: number,
@@ -163,6 +186,7 @@ export function Inspector(p: Props) {
           <span>{source.length}</span>
         </div>
         <p className="muted small">Нажми на предмет, чтобы добавить на план.</p>
+        {openingActions}
         <div className="search">
           <Search size={16} />
           <input
@@ -402,6 +426,37 @@ export function Inspector(p: Props) {
     return (
       <div className="panel-content">
         <h2>Помещение</h2>
+        <h3>Двери и окна</h3>
+        {openingActions}
+        {floor.openings.length > 0 && (
+          <div className="opening-list">
+            {floor.openings.map((o) => (
+              <button key={o.id} onClick={() => p.onSelectOpening(o.id)}>
+                {o.kind === "window" ? (
+                  <PanelsTopLeft size={18} />
+                ) : (
+                  <DoorOpen size={18} />
+                )}
+                <span>
+                  <strong>
+                    {o.kind === "window"
+                      ? "Окно"
+                      : o.kind === "double"
+                        ? "Двустворчатая дверь"
+                        : o.kind === "sliding"
+                          ? "Раздвижная дверь"
+                          : "Дверь"}
+                  </strong>
+                  <small>
+                    Стена {floor.walls.findIndex((w) => w.id === o.wallId) + 1}{" "}
+                    · {formatLength(o.width, doc.units)}
+                  </small>
+                </span>
+                <ChevronRight size={16} />
+              </button>
+            ))}
+          </div>
+        )}
         <fieldset disabled={readOnly}>
           <Field label="Название этажа">
             <input
@@ -533,17 +588,33 @@ export function Inspector(p: Props) {
             </form>
           </details>
           <details>
-            <summary>Двери и окна</summary>
+            <summary>Добавить проём по номеру стены</summary>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 const form = new FormData(e.currentTarget),
                   wall = floor.walls.find((w) => w.id === form.get("wall"))!;
+                if (!wall || floor.openings.length >= 200) return;
                 const width = Math.min(
                   Number(form.get("width")) * 10,
                   distance(wall.start, wall.end),
                 );
                 if (width < 100) return;
+                const placement = openingPlacement(
+                  { ...floor, walls: [wall] },
+                  {
+                    x: (wall.start.x + wall.end.x) / 2,
+                    y: (wall.start.y + wall.end.y) / 2,
+                  },
+                  width,
+                  0,
+                );
+                if (!placement) {
+                  p.setHint(
+                    "В центре этой стены уже есть проём. Добавь новый нажатием на свободный участок стены.",
+                  );
+                  return;
+                }
                 const id = uid();
                 updateFloor((f) =>
                   f.openings.push({
@@ -561,7 +632,7 @@ export function Inspector(p: Props) {
                     inward: true,
                   }),
                 );
-                p.setEntity({ id, kind: "opening" });
+                p.onSelectOpening(id);
                 p.setHint(
                   "Проём добавлен. Смещение и направление открывания доступны в свойствах.",
                 );
@@ -595,7 +666,10 @@ export function Inspector(p: Props) {
                   required
                 />
               </Field>
-              <button className="full" disabled={!floor.walls.length}>
+              <button
+                className="full"
+                disabled={!floor.walls.length || floor.openings.length >= 200}
+              >
                 <DoorOpen size={17} /> Добавить проём
               </button>
             </form>
@@ -1103,14 +1177,68 @@ export function Inspector(p: Props) {
           (() => {
             const w = floor.walls.find((w) => w.id === opening.wallId)!,
               l = distance(w.start, w.end);
-            const patch = (fn: (o: NonNullable<typeof opening>) => void) =>
+            const patch = (fn: (o: NonNullable<typeof opening>) => void) => {
+              const next = { ...opening };
+              fn(next);
+              if (
+                floor.openings.some(
+                  (o) =>
+                    o.id !== next.id &&
+                    o.wallId === next.wallId &&
+                    next.offset < o.offset + o.width &&
+                    next.offset + next.width > o.offset,
+                )
+              ) {
+                p.setHint(
+                  "Проёмы на одной стене не должны пересекаться. Измени ширину или расстояние от края.",
+                );
+                return;
+              }
               updateFloor((f) => {
                 const o = f.openings.find((v) => v.id === opening.id)!;
-                fn(o);
+                Object.assign(o, next);
               });
+            };
             return (
               <>
-                <h3>Проём в стене</h3>
+                <h3>{opening.kind === "window" ? "Окно" : "Дверь"} в стене</h3>
+                <p className="micro-note">
+                  Перетаскивай проём вдоль стены. Здесь можно задать точные
+                  размеры и расстояния от её краёв.
+                </p>
+                <Field label="Стена проёма">
+                  <select
+                    value={opening.wallId}
+                    onChange={(e) => {
+                      const target = floor.walls.find(
+                        (v) => v.id === e.target.value,
+                      )!;
+                      if (distance(target.start, target.end) < opening.width) {
+                        p.setHint(
+                          "Эта стена короче проёма. Сначала уменьши его ширину.",
+                        );
+                        return;
+                      }
+                      patch((o) => {
+                        o.wallId = target.id;
+                        o.offset = Math.min(
+                          o.offset,
+                          distance(target.start, target.end) - o.width,
+                        );
+                      });
+                    }}
+                  >
+                    {floor.walls.map((wall, i) => (
+                      <option key={wall.id} value={wall.id}>
+                        Стена {i + 1} ·{" "}
+                        {formatLength(
+                          distance(wall.start, wall.end),
+                          doc.units,
+                        )}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
                 <Field label="Тип">
                   <select
                     value={opening.kind}
@@ -1138,11 +1266,21 @@ export function Inspector(p: Props) {
                   Math.min(10000, l),
                 )}
                 {lengthField(
-                  "Смещение от начала стены",
+                  "От первого края стены",
                   opening.offset,
                   (n) =>
                     patch((o) => {
                       o.offset = n;
+                    }),
+                  0,
+                  l - opening.width,
+                )}
+                {lengthField(
+                  "От второго края стены",
+                  l - opening.offset - opening.width,
+                  (n) =>
+                    patch((o) => {
+                      o.offset = l - o.width - n;
                     }),
                   0,
                   l - opening.width,
@@ -1157,40 +1295,45 @@ export function Inspector(p: Props) {
                   100,
                   10000,
                 )}
-                {lengthField(
-                  "Подоконник",
-                  opening.sill,
-                  (n) =>
-                    patch((o) => {
-                      o.sill = n;
-                    }),
-                  0,
-                  10000,
+                {opening.kind === "window" &&
+                  lengthField(
+                    "Подоконник",
+                    opening.sill,
+                    (n) =>
+                      patch((o) => {
+                        o.sill = n;
+                      }),
+                    0,
+                    10000,
+                  )}
+                {opening.kind !== "window" && opening.kind !== "sliding" && (
+                  <>
+                    <label className="checkbox">
+                      <input
+                        type="checkbox"
+                        checked={opening.flip}
+                        onChange={(e) =>
+                          patch((o) => {
+                            o.flip = e.target.checked;
+                          })
+                        }
+                      />{" "}
+                      Петли с другой стороны
+                    </label>
+                    <label className="checkbox">
+                      <input
+                        type="checkbox"
+                        checked={opening.inward}
+                        onChange={(e) =>
+                          patch((o) => {
+                            o.inward = e.target.checked;
+                          })
+                        }
+                      />{" "}
+                      Открывание внутрь
+                    </label>
+                  </>
                 )}
-                <label className="checkbox">
-                  <input
-                    type="checkbox"
-                    checked={opening.flip}
-                    onChange={(e) =>
-                      patch((o) => {
-                        o.flip = e.target.checked;
-                      })
-                    }
-                  />{" "}
-                  Петли с другой стороны
-                </label>
-                <label className="checkbox">
-                  <input
-                    type="checkbox"
-                    checked={opening.inward}
-                    onChange={(e) =>
-                      patch((o) => {
-                        o.inward = e.target.checked;
-                      })
-                    }
-                  />{" "}
-                  Открывание внутрь
-                </label>
                 <button className="danger full" onClick={p.deleteSelected}>
                   Удалить проём
                 </button>

@@ -10,6 +10,7 @@ import {
   routeClearance,
   smartLayouts,
   whatFits,
+  openingPlacement,
 } from "./geometry";
 import {
   createDocument,
@@ -39,6 +40,49 @@ const item = (
   angle,
 });
 describe("millimetre geometry independent from viewport", () => {
+  it("places openings on walls, clamps corners and rejects empty space or occupied spans", () => {
+    const floor = room().floors[0];
+    const placed = openingPlacement(floor, { x: 1300, y: -60 }, 800, 100)!;
+    expect(placed.wall.id).toBe(floor.walls[0].id);
+    expect(placed.offset).toBe(900);
+    expect(placed.inward).toBe(true);
+    expect(openingPlacement(floor, { x: 30, y: 0 }, 800, 100)?.offset).toBe(0);
+    expect(openingPlacement(floor, { x: 2000, y: 1600 }, 800, 100)).toBeNull();
+    expect(openingPlacement(floor, { x: 1500, y: 0 }, 5000, 100)).toBeNull();
+    floor.openings.push({
+      id: crypto.randomUUID(),
+      wallId: placed.wall.id,
+      kind: "door",
+      offset: placed.offset,
+      width: 800,
+      height: 2100,
+      sill: 0,
+      flip: false,
+      inward: true,
+    });
+    expect(openingPlacement(floor, { x: 1400, y: 0 }, 800, 100)).toBeNull();
+    expect(
+      openingPlacement(floor, { x: 1400, y: 0 }, 800, 100, floor.openings[0].id)
+        ?.offset,
+    ).toBe(1000);
+  });
+  it("projects openings onto diagonal and reversed walls and chooses the side of a partition", () => {
+    const floor = room().floors[0];
+    floor.walls = [
+      {
+        ...floor.walls[0],
+        roomId: undefined,
+        start: { x: 3000, y: 3000 },
+        end: { x: 0, y: 0 },
+      },
+    ];
+    const placed = openingPlacement(floor, { x: 2000, y: 2010 }, 800, 100)!;
+    expect(placed.offset).toBeCloseTo(1007, 0);
+    expect(placed.inward).toBe(false);
+    expect(
+      openingPlacement(floor, { x: 2010, y: 2000 }, 800, 100)?.inward,
+    ).toBe(true);
+  });
   it("instantiates UUIDs and validates every template", () => {
     for (const name of TEMPLATE_NAMES)
       expect(documentSchema.safeParse(createTemplate(name)).success).toBe(true);

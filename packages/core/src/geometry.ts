@@ -147,6 +147,53 @@ export function openingPosition(w: Wall, o: Opening) {
     normal: { x: -u.y * (o.inward ? 1 : -1), y: u.x * (o.inward ? 1 : -1) },
   };
 }
+export function openingPlacement(
+  floor: Floor,
+  point: Point,
+  width: number,
+  tolerance: number,
+  ignoreId?: string,
+) {
+  const wall = [...floor.walls].sort(
+    (a, b) =>
+      segmentDistance(point, a.start, a.end) -
+      segmentDistance(point, b.start, b.end),
+  )[0];
+  if (!wall || width < 100 || width > 10000) return null;
+  const length = distance(wall.start, wall.end);
+  if (
+    length < width ||
+    segmentDistance(point, wall.start, wall.end) >
+      Math.max(tolerance, wall.thickness)
+  )
+    return null;
+  const dx = wall.end.x - wall.start.x,
+    dy = wall.end.y - wall.start.y,
+    along =
+      ((point.x - wall.start.x) * dx + (point.y - wall.start.y) * dy) / length,
+    offset = Math.max(
+      0,
+      Math.min(length - width, Math.round(along - width / 2)),
+    );
+  if (
+    floor.openings.some(
+      (o) =>
+        o.id !== ignoreId &&
+        o.wallId === wall.id &&
+        offset < o.offset + o.width &&
+        offset + width > o.offset,
+    )
+  )
+    return null;
+  return {
+    wall,
+    offset,
+    width,
+    inward:
+      Boolean(wall.roomId) ||
+      dx * (point.y - wall.start.y) - dy * (point.x - wall.start.x) >= 0,
+  };
+}
 export function doorPolygons(w: Wall, o: Opening): Point[][] {
   if (o.kind === "window" || o.kind === "sliding") return [];
   const { start, end, u, normal } = openingPosition(w, o);

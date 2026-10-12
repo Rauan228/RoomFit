@@ -1,5 +1,148 @@
 ﻿import { test, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
+test("door and window placement, dragging, undo and persistence", async ({
+  page,
+}, info) => {
+  const bootstrap = await page.request.get("/api/auth/me"),
+    csrf = (await bootstrap.json()).csrf;
+  await page.request.post("/api/auth/register", {
+    headers: { "X-CSRF-Token": csrf },
+    data: {
+      name: "Opening Test",
+      email: `openings-${info.project.name}-${Date.now()}@example.com`,
+      password: "test-roomfit-password",
+    },
+  });
+  const { createDocument } = await import("../../packages/core/src/model");
+  const created = await page.request.post("/api/projects", {
+    headers: { "X-CSRF-Token": csrf },
+    data: { document: createDocument("Двери и окна", 4000, 3200) },
+  });
+  const project = await created.json();
+  await page.goto(`/project/${project.id}`);
+  await expect(page.locator(".editor-canvas")).toBeVisible();
+  const screen = async (x: number, y: number) =>
+    page.locator(".editor-canvas").evaluate(
+      (el, point) => {
+        const p = new DOMPoint(point.x, point.y).matrixTransform(
+          (el as SVGSVGElement).getScreenCTM()!,
+        );
+        return { x: p.x, y: p.y };
+      },
+      { x, y },
+    );
+  const clickPlan = async (x: number, y: number) => {
+    const point = await screen(x, y);
+    if (info.project.name === "mobile")
+      await page.touchscreen.tap(point.x, point.y);
+    else await page.mouse.click(point.x, point.y);
+  };
+  const openings = page.locator(
+    '.editor-canvas [data-opening-id]:not([data-opening-id="preview"])',
+  );
+  const hideMobilePanel = async () => {
+    if (
+      info.project.name === "mobile" &&
+      (await page.locator(".mobile-close").isVisible())
+    )
+      await page.locator(".mobile-close").click();
+  };
+  if (info.project.name === "mobile")
+    await page.getByRole("button", { name: "Мебель и свойства" }).click();
+  await page.getByRole("button", { name: "Дверь", exact: true }).click();
+  await clickPlan(2000, 1600);
+  await expect(openings).toHaveCount(0);
+  await clickPlan(1500, 0);
+  await expect(openings).toHaveCount(1);
+  await expect(page.getByLabel("Ширина, см", { exact: true })).toHaveValue(
+    "80",
+  );
+  await page.getByLabel("Ширина, см", { exact: true }).fill("90");
+  await page.getByLabel("Ширина, см", { exact: true }).press("Tab");
+  await page
+    .getByLabel("От первого края стены, см", { exact: true })
+    .fill("60");
+  await page
+    .getByLabel("От первого края стены, см", { exact: true })
+    .press("Tab");
+  await expect(
+    page.getByLabel("От второго края стены, см", { exact: true }),
+  ).toHaveValue("250");
+  await page.getByLabel("Петли с другой стороны").check();
+  await page.getByLabel("Открывание внутрь").uncheck();
+  await hideMobilePanel();
+  const a = await screen(1050, 0),
+    b = await screen(1750, 0);
+  if (info.project.name === "mobile") {
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [a],
+    });
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchMove",
+      touchPoints: [b],
+    });
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchEnd",
+      touchPoints: [],
+    });
+    await cdp.detach();
+  } else {
+    await page.mouse.move(a.x, a.y);
+    await page.mouse.down();
+    await page.mouse.move(b.x, b.y, { steps: 5 });
+    await page.mouse.up();
+  }
+  const path = openings.first().locator("path").first();
+  await expect(path).toHaveAttribute("d", /^M 13\d\d 0 L 22\d\d 0$/);
+  await page
+    .getByRole("button", { name: "Отменить (Ctrl+Z)", exact: true })
+    .click();
+  await expect(path).toHaveAttribute("d", "M 600 0 L 1500 0");
+  await page
+    .getByRole("button", { name: "Повторить (Ctrl+Shift+Z)", exact: true })
+    .click();
+  await expect(path).toHaveAttribute("d", /^M 13\d\d 0 L 22\d\d 0$/);
+  await page
+    .getByRole("button", { name: "Добавить окно", exact: true })
+    .click();
+  await clickPlan(1750, 0);
+  await expect(openings).toHaveCount(1);
+  await clickPlan(2000, 3200);
+  await expect(openings).toHaveCount(2);
+  await expect(page.getByLabel("Ширина, см", { exact: true })).toHaveValue(
+    "120",
+  );
+  await expect(page.getByLabel("Подоконник, см", { exact: true })).toHaveValue(
+    "90",
+  );
+  await expect(page.getByLabel("Открывание внутрь")).toHaveCount(0);
+  await hideMobilePanel();
+  await expect(page.locator(".save-status")).toContainText("Сохранено");
+  const saved = await (
+    await page.request.get(`/api/projects/${project.id}`)
+  ).json();
+  const door = saved.document.floors[0].openings.find(
+    (o: { kind: string }) => o.kind === "door",
+  );
+  expect(door.width).toBe(900);
+  expect(door.offset).toBeGreaterThanOrEqual(1295);
+  expect(door.offset).toBeLessThanOrEqual(1305);
+  expect(door.flip).toBe(true);
+  expect(door.inward).toBe(false);
+  expect(
+    saved.document.floors[0].openings.find(
+      (o: { kind: string }) => o.kind === "window",
+    ).width,
+  ).toBe(1200);
+  await page.reload();
+  await expect(openings).toHaveCount(2);
+  await mkdir("artifacts", { recursive: true });
+  await page.screenshot({
+    path: `artifacts/openings-${info.project.name}.png`,
+  });
+});
 test("register → room → furniture → check → autosave → reopen → export", async ({
   page,
 }, info) => {

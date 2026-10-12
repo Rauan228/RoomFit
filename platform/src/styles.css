@@ -1016,6 +1016,8 @@ hr {
 }
 .tool-room,
 .tool-wall,
+.tool-door,
+.tool-window,
 .tool-measure,
 .tool-zone,
 .tool-fit,
@@ -1038,6 +1040,8 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  max-height: calc(100% - 110px);
+  overflow-y: auto;
 }
 .toolbox button {
   border: none;
@@ -1206,6 +1210,49 @@ hr {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+}
+.opening-actions {
+  padding: 12px;
+  border: 1px solid #dce5d5;
+  border-radius: 10px;
+  background: #f6f8f2;
+  margin: 12px 0 16px;
+}
+.opening-action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.panel-content .opening-action-buttons button {
+  font-size: 12px;
+  min-height: 44px;
+  color: #426951;
+}
+.opening-actions p {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+.opening-list {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.opening-list button {
+  justify-content: flex-start;
+  min-height: 48px;
+  text-align: left;
+}
+.opening-list button > svg:last-child {
+  margin-left: auto;
+}
+.opening-list span {
+  display: grid;
+  gap: 3px;
+}
+.opening-list small {
+  color: var(--muted);
 }
 .catalog-item {
   display: block;
