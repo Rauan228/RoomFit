@@ -219,6 +219,7 @@ export function Inspector(p: Props) {
               onClick={() => p.addItem(c)}
             >
               <svg
+                className="catalog-preview"
                 viewBox={`-${c.width / 2 + 120} -${c.depth / 2 + 120} ${c.width + 240} ${c.depth + 240}`}
                 aria-hidden="true"
               >
@@ -247,7 +248,7 @@ export function Inspector(p: Props) {
                 {formatLength(c.width, doc.units)} ×{" "}
                 {formatLength(c.depth, doc.units)}
               </span>
-              <i>
+              <i className="catalog-add" aria-hidden="true">
                 <Plus size={14} />
               </i>
             </button>

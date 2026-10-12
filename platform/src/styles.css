@@ -1216,7 +1216,7 @@ hr {
   overflow: hidden;
   border-color: #e7e9e0;
 }
-.catalog-item svg {
+.catalog-item > .catalog-preview {
   height: 85px;
   width: 100%;
   padding: 13px 8px;
@@ -1235,16 +1235,21 @@ hr {
   display: block;
   margin-top: 3px;
 }
-.catalog-item i {
+.catalog-add {
   position: absolute;
   right: 8px;
   top: 8px;
   background: #ffffffcf;
   display: grid;
   place-items: center;
-  border-radius: 4px;
-  padding: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
   color: #8f9a83;
+}
+.catalog-add > svg {
+  width: 14px;
+  height: 14px;
 }
 .catalog-filter {
   font-size: 10px;
@@ -2235,7 +2240,7 @@ td button {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
   }
-  .catalog-item svg {
+  .catalog-item > .catalog-preview {
     height: 77px;
     padding: 10px 4px;
   }
