@@ -23,6 +23,8 @@ RoomFit размещён на **212.19.134.179**. Namecheap обслуживае
 
 Парковочный CNAME и URL Redirect заменены этими записями. Nameservers остаются Namecheap BasicDNS. [Описание DNS-записей Namecheap](https://www.namecheap.com/support/knowledgebase/article.aspx/579/2237/which-record-type-option-should-i-choose-for-the-information-im-about-to-enter/).
 
+Авторитетные серверы Namecheap уже отдают IP VPS. Рекурсивные DNS-серверы могут ещё возвращать старую парковку до истечения TTL; повторно менять правильные записи для этого не нужно.
+
 ## Обновление лендинга и платформы из Windows
 
 Нужны Node.js 22.12+ и PuTTY с plink.exe и pscp.exe в стандартной папке Program Files.
@@ -65,7 +67,7 @@ bash /opt/roomfit/deploy/configure-domains.sh
 nginx -t
 systemctl status roomfit-api --no-pager
 systemctl list-timers certbot.timer
-certbot renew --cert-name roomfit.art --dry-run
+certbot renew --cert-name roomfit.art --dry-run --no-random-sleep-on-renew
 curl -fsS https://platform.roomfit.art/api/health
 ```
 
