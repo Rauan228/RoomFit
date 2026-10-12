@@ -6,11 +6,13 @@
 2. Назвать проект, например `roomfit-platform`.
 3. **Root Directory:** `platform`.
 4. Включить **Include source files outside of the Root Directory in the Build Step**: платформа использует `packages/core` из этого же репозитория.
-5. Framework Preset: **Vite**. Build Command: `npm run build`, Output Directory: `dist`. Install Command оставить автоматическим. Если автоматическое определение workspace не сработало, указать `cd .. && npm ci`.
+5. Framework Preset: **Vite**. Build Command: `npm run build`, Output Directory: `dist`. Install Command уже задан в `platform/vercel.json`: `cd .. && npm ci --include=dev --workspace=@roomfit/platform --workspace=@roomfit/core --include-workspace-root=false`. Он устанавливает зависимости платформы и общей библиотеки из корневого lockfile, включая TypeScript и Vite. Отдельный Override в панели Vercel не нужен.
 6. Node.js: **22.x** или более новый поддерживаемый выпуск.
 7. Нажать Deploy. Зарегистрировать свой аккаунт на полученном `https://…vercel.app` и проверить сохранение комнаты после перезагрузки.
 
 В `platform/vercel.json` уже есть проксирование `/api/:path*` на `https://roomfit.212.19.134.179.sslip.io/api/:path*`. Браузер обращается к API на своём Vercel-адресе; HttpOnly Secure cookie и CSRF работают через этот же адрес. Не заменять это прямыми запросами браузера к другому домену.
+
+Если предыдущая сборка завершилась с `tsc: command not found`, развернуть последний коммит `main`, содержащий исправление зависимостей, а не повторять старую сборку. Инструменты сборки теперь объявлены непосредственно в `platform/package.json`, поэтому платформа не зависит от установки devDependencies корневого workspace.
 
 ## Vercel — лендинг
 
