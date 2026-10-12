@@ -1,4 +1,6 @@
-import { useId, type PointerEventHandler, type ReactNode } from "react";
+import { FurnitureShape } from "./FurnitureShape";
+export { FurnitureShape } from "./FurnitureShape";
+import { useId, type ReactNode } from "react";
 import {
   bounds,
   distance,
@@ -54,197 +56,6 @@ export function planBounds(floor: Floor, items: Furniture[] = []) {
     height: b.maxY - b.minY + 1000,
   };
 }
-export function FurnitureShape({
-  item,
-  selected = false,
-  status,
-  names,
-  units,
-  onPointerDown,
-}: {
-  item: Furniture;
-  selected?: boolean;
-  status?: string;
-  names?: boolean;
-  units: ProjectDocument["units"];
-  onPointerDown?: PointerEventHandler<SVGGElement>;
-}) {
-  const w = item.width,
-    d = item.depth,
-    outline =
-      status === "error"
-        ? "#c34638"
-        : status === "warning"
-          ? "#ba8426"
-          : "#796f60";
-  return (
-    <g
-      data-item-id={item.id}
-      onPointerDown={onPointerDown}
-      className={onPointerDown ? "furniture-object" : ""}
-      role={onPointerDown ? "button" : undefined}
-      aria-label={`${item.name}, ${formatLength(w, units)} × ${formatLength(d, units)}`}
-    >
-      <polygon
-        points={polygonPoints(furniturePolygon(item))}
-        fill={item.color}
-        fillOpacity={item.type === "rug" ? 0.5 : 1}
-        stroke={outline}
-        strokeWidth={selected ? 24 : 12}
-        strokeLinejoin="round"
-      />
-      <g
-        transform={`translate(${item.x} ${item.y}) rotate(${item.angle})`}
-        pointerEvents="none"
-        stroke={outline}
-        strokeWidth="10"
-        fill="none"
-      >
-        {item.type === "bed" && (
-          <>
-            <rect
-              x={-w / 2 + 40}
-              y={-d / 2 + 45}
-              width={w - 80}
-              height={d - 90}
-              rx="45"
-            />
-            <path d={`M ${-w / 2 + 50} ${-d / 2 + 440} H ${w / 2 - 50}`} />
-            <rect
-              x={-w / 2 + 90}
-              y={-d / 2 + 90}
-              width={w > 1100 ? w / 2 - 140 : w - 180}
-              height="280"
-              rx="45"
-              fill="#f6f2ea"
-            />
-            {w > 1100 && (
-              <rect
-                x="50"
-                y={-d / 2 + 90}
-                width={w / 2 - 140}
-                height="280"
-                rx="45"
-                fill="#f6f2ea"
-              />
-            )}
-          </>
-        )}
-        {item.type === "sofa" && (
-          <>
-            <rect
-              x={-w / 2 + 130}
-              y={-d / 2 + 180}
-              width={w - 260}
-              height={d - 230}
-              rx="55"
-            />
-            <path
-              d={`M 0 ${-d / 2 + 180} V ${d / 2 - 50} M ${-w / 2 + 120} ${-d / 2 + 40} H ${w / 2 - 120}`}
-            />
-          </>
-        )}
-        {item.type === "wardrobe" && (
-          <>
-            <path d={`M 0 ${-d / 2} V ${d / 2}`} />
-            <circle cx="-65" cy="40" r="15" />
-            <circle cx="65" cy="40" r="15" />
-          </>
-        )}
-        {["desk", "table", "coffee", "nightstand"].includes(item.type) && (
-          <rect
-            x={-w / 2 + 40}
-            y={-d / 2 + 40}
-            width={w - 80}
-            height={d - 80}
-            rx="35"
-          />
-        )}
-        {["chair", "armchair"].includes(item.type) && (
-          <>
-            <rect
-              x={-w / 2 + 60}
-              y={-d / 2 + 90}
-              width={w - 120}
-              height={d - 140}
-              rx="60"
-            />
-            <path d={`M ${-w / 2 + 50} ${-d / 2 + 50} H ${w / 2 - 50}`} />
-          </>
-        )}
-        {item.type === "plant" && (
-          <>
-            <circle r={w * 0.38} fill="#789a70" />
-            {[0, 60, 120].map((a) => (
-              <ellipse
-                key={a}
-                ry={d * 0.32}
-                rx={w * 0.13}
-                transform={`rotate(${a})`}
-                fill="#a6bea0"
-              />
-            ))}
-          </>
-        )}
-        {item.type === "rug" && (
-          <rect
-            x={-w / 2 + 65}
-            y={-d / 2 + 65}
-            width={w - 130}
-            height={d - 130}
-            strokeDasharray="30 25"
-          />
-        )}
-        {item.type === "bath" && (
-          <rect
-            x={-w / 2 + 65}
-            y={-d / 2 + 65}
-            width={w - 130}
-            height={d - 130}
-            rx="200"
-            fill="#f5f5ee"
-          />
-        )}
-        {item.type === "sink" && (
-          <ellipse rx={w * 0.32} ry={d * 0.32} fill="#f5f5ee" />
-        )}
-      </g>
-      {selected && (
-        <polygon
-          points={polygonPoints(furniturePolygon(item, 45))}
-          fill="none"
-          stroke="#28786a"
-          strokeWidth="15"
-          strokeDasharray="55 25"
-          pointerEvents="none"
-        />
-      )}
-      {names && (
-        <text
-          x={item.x}
-          y={item.y + item.depth / 2 + 130}
-          textAnchor="middle"
-          fontSize="95"
-          fill="#3a3936"
-          pointerEvents="none"
-        >
-          {item.name}
-        </text>
-      )}
-      {item.locked && (
-        <text
-          x={item.x}
-          y={item.y}
-          textAnchor="middle"
-          fontSize="120"
-          pointerEvents="none"
-        >
-          ▣
-        </text>
-      )}
-    </g>
-  );
-}
 export function OpeningShape({
   opening: o,
   wall: w,
@@ -256,8 +67,10 @@ export function OpeningShape({
   selected?: boolean;
   onPointerDown?: (e: React.PointerEvent<SVGGElement>) => void;
 }) {
-  const { start, end, normal } = openingPosition(w, o),
-    sweep = doorPolygons(w, o);
+  const { start, end, normal, angle, u } = openingPosition(w, o),
+    sweep = doorPolygons(w, o),
+    inside = w.roomId ? 0 : w.thickness / 2,
+    outside = w.roomId ? w.thickness : w.thickness / 2;
   return (
     <g
       data-opening-id={o.id}
@@ -277,24 +90,115 @@ export function OpeningShape({
         }
         strokeWidth={o.kind === "window" ? 30 : 15}
       />
-      {o.kind === "window" ? (
-        <path
-          d={`M ${start.x + normal.x * 40} ${start.y + normal.y * 40} L ${end.x + normal.x * 40} ${end.y + normal.y * 40}`}
-          stroke="#6e9dba"
-          strokeWidth="15"
-        />
-      ) : (
+      {o.kind !== "window" &&
         sweep.map((p, i) => (
           <polygon
             key={i}
             points={polygonPoints(p)}
             fill="#dcb782"
-            fillOpacity=".16"
+            fillOpacity=".09"
             stroke={selected ? "#28786a" : "#ac9169"}
             strokeWidth="10"
           />
-        ))
-      )}
+        ))}
+      <g
+        transform={`translate(${start.x} ${start.y}) rotate(${angle})`}
+        pointerEvents="none"
+      >
+        {o.kind === "window" && (
+          <>
+            <rect
+              x="8"
+              y={-outside + 8}
+              width={Math.max(10, o.width - 16)}
+              height={Math.max(8, w.thickness - 16)}
+              rx="5"
+              fill="#dbeae8"
+              stroke={selected ? "#28786a" : "#7e9c9b"}
+              strokeWidth="12"
+            />
+            <path
+              d={`M 15 ${-outside + w.thickness * 0.35} H ${o.width - 15} M 15 ${-outside + w.thickness * 0.65} H ${o.width - 15}`}
+              stroke="#f9fcf5"
+              strokeWidth="8"
+            />
+            <path
+              d={`M ${o.width / 2} ${-outside + 6} V ${inside - 6} M -8 ${inside + 23} H ${o.width + 8}`}
+              stroke="#819b95"
+              strokeWidth="14"
+            />
+          </>
+        )}
+        {[0, o.width].map((x) => (
+          <rect
+            key={x}
+            x={x - 15}
+            y={-outside - 8}
+            width="30"
+            height={w.thickness + 16}
+            rx="4"
+            fill={o.kind === "window" ? "#a5b8ad" : "#c4ae89"}
+            stroke={selected ? "#28786a" : "#8e8b70"}
+            strokeWidth="6"
+          />
+        ))}
+        {o.kind === "sliding" && (
+          <>
+            <path
+              d={`M 24 ${-outside + w.thickness * 0.33} H ${o.width * 0.64} M ${o.width * 0.36} ${-outside + w.thickness * 0.67} H ${o.width - 24}`}
+              stroke="#b7a283"
+              strokeWidth="27"
+            />
+            <path
+              d={`M ${o.width * 0.59} ${-outside + w.thickness * 0.33 - 20} V ${-outside + w.thickness * 0.33 + 20}`}
+              stroke="#748577"
+              strokeWidth="10"
+            />
+          </>
+        )}
+      </g>
+      {(o.kind === "door" || o.kind === "double") &&
+        (o.kind === "double"
+          ? [
+              { hinge: start, width: o.width / 2, flip: false },
+              { hinge: end, width: o.width / 2, flip: true },
+            ]
+          : [{ hinge: o.flip ? end : start, width: o.width, flip: o.flip }]
+        ).map((leaf, i) => {
+          const endX = leaf.hinge.x + normal.x * leaf.width,
+            endY = leaf.hinge.y + normal.y * leaf.width,
+            handleX = leaf.hinge.x + normal.x * leaf.width * 0.84,
+            handleY = leaf.hinge.y + normal.y * leaf.width * 0.84,
+            side = leaf.flip ? -1 : 1;
+          return (
+            <g key={i} pointerEvents="none">
+              <path
+                d={`M ${leaf.hinge.x} ${leaf.hinge.y} L ${endX} ${endY}`}
+                stroke={selected ? "#28786a" : "#9a8667"}
+                strokeWidth="36"
+                strokeLinecap="round"
+              />
+              <path
+                d={`M ${leaf.hinge.x + u.x * 4} ${leaf.hinge.y + u.y * 4} L ${endX + u.x * 4} ${endY + u.y * 4}`}
+                stroke="#e1cfad"
+                strokeWidth="16"
+                strokeLinecap="round"
+              />
+              <path
+                d={`M ${handleX} ${handleY} L ${handleX + u.x * 50 * side} ${handleY + u.y * 50 * side}`}
+                stroke="#778273"
+                strokeWidth="12"
+                strokeLinecap="round"
+              />
+              <circle
+                cx={leaf.hinge.x}
+                cy={leaf.hinge.y}
+                r="17"
+                fill="#7b8b78"
+              />
+            </g>
+          );
+        })}
       {onPointerDown && (
         <path
           d={`M ${start.x} ${start.y} L ${end.x} ${end.y}`}

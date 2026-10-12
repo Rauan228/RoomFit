@@ -55,7 +55,28 @@ export async function exportPlan(doc: ProjectDocument, options: ExportOptions) {
     },
   };
   const drawing = renderToStaticMarkup(
-    createElement(PlanContent, { floor: exportFloor, items, doc: scope }),
+    createElement(
+      "svg",
+      {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: options.resolution,
+        height: Math.round((options.resolution * b.height) / b.width),
+        viewBox: `${b.x} ${b.y} ${b.width} ${b.height}`,
+      },
+      createElement(
+        "style",
+        null,
+        `text{font-family:Arial,sans-serif}${options.mono ? "svg{filter:grayscale(1)}" : ""}`,
+      ),
+      createElement("rect", {
+        x: b.x,
+        y: b.y,
+        width: b.width,
+        height: b.height,
+        fill: "white",
+      }),
+      createElement(PlanContent, { floor: exportFloor, items, doc: scope }),
+    ),
   );
   const escape = (s: string) =>
     s.replace(
@@ -75,7 +96,7 @@ export async function exportPlan(doc: ProjectDocument, options: ExportOptions) {
         `${i.name} · ${formatLength(i.width, doc.units)} × ${formatLength(i.depth, doc.units)} × ${formatLength(i.height, doc.units)} · ${i.shopping.owned ? "уже есть" : "купить"} · ${i.shopping.price.toLocaleString("ru-RU")}`,
     )
     .join("\n");
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${options.resolution}" height="${Math.round((options.resolution * b.height) / b.width)}" viewBox="${b.x} ${b.y} ${b.width} ${b.height}"><style>text{font-family:Arial,sans-serif}${options.mono ? "g{filter:grayscale(1)}" : ""}</style><rect x="${b.x}" y="${b.y}" width="${b.width}" height="${b.height}" fill="white"/>${drawing}</svg>`;
+  const svg = drawing;
   if (options.format === "svg") {
     download(new Blob([svg], { type: "image/svg+xml" }), `${doc.name}.svg`);
     return;
