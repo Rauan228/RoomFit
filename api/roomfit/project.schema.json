@@ -289,7 +289,8 @@
             "properties": {
               "src": {
                 "type": "string",
-                "maxLength": 6000000
+                "maxLength": 6000000,
+                "pattern": "^data:image\\/(png|jpeg|webp);base64,"
               },
               "x": {
                 "type": "number"
@@ -470,7 +471,8 @@
                     },
                     "url": {
                       "type": "string",
-                      "maxLength": 2000
+                      "maxLength": 2000,
+                      "pattern": "^(?:$|[hH][tT][tT][pP][sS]?:\\/\\/\\S+)$"
                     },
                     "note": {
                       "type": "string",

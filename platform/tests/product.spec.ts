@@ -153,6 +153,41 @@ test("editor preserves dimensions under zoom, undo and offline recovery", async 
   expect(await page.locator(".editor-canvas").getAttribute("viewBox")).not.toBe(
     before,
   );
+  const resized = await page.locator(".editor-canvas").getAttribute("viewBox");
+  expect(Number(resized!.split(" ")[2])).toBeCloseTo(
+    Number(before!.split(" ")[2]) / 1.25,
+    4,
+  );
+  if (info.project.name === "mobile") {
+    const rect = await page.locator(".editor-canvas").boundingBox();
+    const cdp = await page.context().newCDPSession(page);
+    const x = rect!.x + rect!.width * 0.6,
+      y = rect!.y + rect!.height * 0.5;
+    const view = await page.locator(".editor-canvas").getAttribute("viewBox");
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [
+        { x: x - 30, y },
+        { x: x + 30, y },
+      ],
+    });
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchMove",
+      touchPoints: [
+        { x: x - 60, y },
+        { x: x + 60, y },
+      ],
+    });
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchEnd",
+      touchPoints: [],
+    });
+    await expect(page.locator(".editor-canvas")).not.toHaveAttribute(
+      "viewBox",
+      view!,
+    );
+    await cdp.detach();
+  }
   await page
     .getByRole("button", { name: "Дублировать вариант", exact: true })
     .click();

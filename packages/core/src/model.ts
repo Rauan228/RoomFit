@@ -40,7 +40,7 @@ export const furnitureSchema = z.object({
       url: z
         .string()
         .max(2000)
-        .refine((v) => !v || /^https?:\/\//i.test(v), "Только http/https"),
+        .regex(/^(?:$|[hH][tT][tT][pP][sS]?:\/\/\S+)$/, "Только http/https"),
       note: z.string().max(2000),
     })
     .default({ owned: false, price: 0, store: "", url: "", note: "" }),
@@ -106,7 +106,7 @@ export const floorSchema = z.object({
       src: z
         .string()
         .max(6e6)
-        .refine((v) => /^data:image\/(png|jpeg|webp);base64,/.test(v)),
+        .regex(/^data:image\/(png|jpeg|webp);base64,/),
       x: number,
       y: number,
       width: number.min(1).max(1e6),

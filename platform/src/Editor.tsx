@@ -186,6 +186,8 @@ export function Editor({
     [cursor, setCursor] = useState<Point | null>(null),
     [lasso, setLasso] = useState<Point[] | null>(null);
   viewRef.current = view;
+  const zoomRef = useRef(zoom);
+  zoomRef.current = zoom;
   const clipboard = useRef<Furniture[]>([]);
   const analysis = useMemo(
     () => analyzeFloor(floor, variant.items, doc.settings.clearance),
@@ -256,24 +258,24 @@ export function Editor({
           p,
           floor,
           doc.settings.gridSize,
-          (svg.current?.clientWidth || 1) / view.width,
+          svg.current?.getScreenCTM()?.a || 1,
         )
       : p;
   const zoomBy = useCallback((factor: number, center?: Point) => {
-    setZoom((z) => {
-      const next = Math.max(0.1, Math.min(8, z * factor)),
-        ratio = z / next;
-      setView((v) => {
-        const p = center || { x: v.x + v.width / 2, y: v.y + v.height / 2 };
-        return {
-          x: p.x - (p.x - v.x) * ratio,
-          y: p.y - (p.y - v.y) * ratio,
-          width: v.width * ratio,
-          height: v.height * ratio,
-        };
-      });
-      return next;
+    const z = zoomRef.current;
+    const next = Math.max(0.1, Math.min(8, z * factor)),
+      ratio = z / next;
+    zoomRef.current = next;
+    setView((v) => {
+      const p = center || { x: v.x + v.width / 2, y: v.y + v.height / 2 };
+      return {
+        x: p.x - (p.x - v.x) * ratio,
+        y: p.y - (p.y - v.y) * ratio,
+        width: v.width * ratio,
+        height: v.height * ratio,
+      };
     });
+    setZoom(next);
   }, []);
   useEffect(() => {
     const node = svg.current!;
@@ -632,7 +634,7 @@ export function Editor({
     }
     const p = screenPoint(e.clientX, e.clientY),
       d = drag.current;
-    setCursor(snapped(p));
+    if (draft.length) setCursor(snapped(p));
     if (!d) return;
     if (d.kind === "pan") {
       const v = d.originalView!,
