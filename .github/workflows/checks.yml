@@ -1,6 +1,19 @@
 name: RoomFit checks
 on: [push, pull_request]
 jobs:
+  platform-deploy-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install platform and core dependencies only
+        run: npm ci --include=dev --workspace=@roomfit/platform --workspace=@roomfit/core --include-workspace-root=false
+      - name: Build platform without root test dependencies
+        working-directory: platform
+        run: npm run build
   product:
     runs-on: ubuntu-latest
     steps:
