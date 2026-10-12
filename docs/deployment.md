@@ -1,5 +1,7 @@
 # Деплой RoomFit
 
+Текущие публичные адреса: [лендинг](https://room-fit-gamma.vercel.app/), [платформа](https://roomfitplatform-kappa.vercel.app/login). Production-версия лендинга использует этот адрес платформы по умолчанию; `VITE_PLATFORM_URL` позволяет переопределить его.
+
 ## Vercel — сначала платформа
 
 1. Открыть **Add New → Project**, импортировать `Rauan228/RoomFit`.
@@ -19,7 +21,7 @@
 1. Снова импортировать **тот же репозиторий** как второй проект, например `roomfit-landing`.
 2. **Root Directory:** `landing`.
 3. Framework Preset **Vite**, Build Command `npm run build`, Output Directory `dist`.
-4. Добавить Environment Variable **`VITE_PLATFORM_URL`** со значением адреса первого проекта, например `https://roomfit-platform.vercel.app`, без завершающего `/`. Выбрать нужные окружения Production/Preview.
+4. При необходимости добавить Environment Variable **`VITE_PLATFORM_URL`** со значением адреса платформы `https://roomfitplatform-kappa.vercel.app`, без завершающего `/`. Выбрать нужные окружения Production/Preview. Если переменная уже задана, проверить, что в ней нет localhost или старого адреса: она имеет приоритет над production-адресом в коде.
 5. Deploy. «Начать бесплатно» открывает `/register`, «Войти» — `/login`. Демо на самом лендинге продолжает работать.
 
 После изменения `VITE_PLATFORM_URL` нужен Redeploy: Vite подставляет её при сборке. Vercel будет автоматически пересобирать проекты после новых коммитов в `main`.

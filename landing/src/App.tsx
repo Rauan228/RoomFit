@@ -94,7 +94,12 @@ function Logo() {
     </span>
   );
 }
-const platformUrl = (import.meta.env.VITE_PLATFORM_URL || 'http://127.0.0.1:4181').replace(/\/$/, '');
+const platformUrl = (
+  import.meta.env.VITE_PLATFORM_URL ||
+  (import.meta.env.PROD
+    ? "https://roomfitplatform-kappa.vercel.app"
+    : "http://127.0.0.1:4181")
+).replace(/\/$/, "");
 function StartLink({
   children = "Начать бесплатно",
   className = "",
