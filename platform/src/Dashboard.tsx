@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   Plus,
   Search,
@@ -22,7 +22,16 @@ import { request, type Project } from "./api";
 import { Shell, useAuth } from "./App";
 import { MiniPlan, roomSummary } from "./Plan";
 import { Modal, Field, ErrorBox, Loading } from "./components";
+import { createStarter } from "../../shared/create-starter";
+import { starterKey } from "../../shared/starter-rooms";
+import { track } from "../../shared/analytics";
 export function Dashboard() {
+  const [params, setParams] = useSearchParams();
+  const requestedStarter = starterKey(params.get("template"));
+  const starter = useMemo(
+    () => (requestedStarter ? createStarter(requestedStarter) : null),
+    [requestedStarter],
+  );
   const { user } = useAuth(),
     navigate = useNavigate();
   const [projects, setProjects] = useState<Project[]>([]),
@@ -82,6 +91,7 @@ export function Dashboard() {
     document.settings.clearance = Number(user?.preferences.clearance ?? 800);
     try {
       const p = await request<Project>("/projects", "POST", { document });
+      track("project_created", "platform");
       navigate(`/project/${p.id}`);
     } catch (err) {
       setError((err as Error).message);
@@ -117,6 +127,37 @@ export function Dashboard() {
         </button>
       </header>
       <ErrorBox error={error} />
+      {starter && (
+        <section className="dashboard-starter card">
+          <MiniPlan doc={starter} />
+          <div>
+            <span className="eyebrow">ИЗ ПРИМЕРА ROOMFIT</span>
+            <h2>{starter.name}</h2>
+            <p className="muted">
+              Создай свою копию и измени размеры, мебель и проёмы под свою
+              комнату.
+            </p>
+            <button
+              className="primary"
+              disabled={busy}
+              onClick={() => void newProject(structuredClone(starter))}
+            >
+              Создать проект по этому плану <ArrowUpRight size={18} />
+            </button>
+          </div>
+          <button
+            className="icon"
+            title="Убрать предложенный план"
+            onClick={() => {
+              const next = new URLSearchParams(params);
+              next.delete("template");
+              setParams(next, { replace: true });
+            }}
+          >
+            ×
+          </button>
+        </section>
+      )}
       <section className="dashboard-banner">
         <div>
           <span className="tag">ОТ ИДЕИ К ПЛАНУ</span>

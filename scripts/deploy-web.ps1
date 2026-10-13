@@ -18,7 +18,7 @@ try {
     }
     New-Item -ItemType Directory -Path .local -Force | Out-Null
     $taskArchive = Join-Path $taskRepoRoot '.local/roomfit-web.tgz'
-    & tar.exe -czf $taskArchive landing/dist platform/dist deploy/frontend-update.sh deploy/configure-domains.sh deploy/nginx-domains-http.conf deploy/nginx-domains-https.conf deploy/certificate-reload.sh
+    & tar.exe -czf $taskArchive landing/dist platform/dist deploy/frontend-update.sh deploy/configure-domains.sh deploy/nginx-domains-http.conf deploy/nginx-domains-https.conf deploy/certificate-reload.sh scripts/seo-report.py
     if ($LASTEXITCODE -ne 0) { throw 'Archive creation failed' }
     $taskSha = (Get-FileHash -LiteralPath $taskArchive -Algorithm SHA256).Hash.ToLowerInvariant()
     $taskPuttyRoot = Join-Path $env:ProgramFiles 'PuTTY'

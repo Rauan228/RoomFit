@@ -1,12 +1,18 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import "@fontsource-variable/manrope";
-import App from "./App";
+import Site from "./Site";
 import "./styles.css";
 import "./motion.css";
+import "./guides.css";
+import { initializeAnalytics } from "../../shared/analytics";
 
-createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root")!;
+const site = (
   <StrictMode>
-    <App />
-  </StrictMode>,
+    <Site path={window.location.pathname} />
+  </StrictMode>
 );
+if (root.hasChildNodes()) hydrateRoot(root, site);
+else createRoot(root).render(site);
+initializeAnalytics();

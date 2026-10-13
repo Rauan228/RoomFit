@@ -7,6 +7,7 @@ import {
   Link,
   useNavigate,
   useSearchParams,
+  useLocation,
 } from "react-router-dom";
 import {
   ArrowRight,
@@ -22,6 +23,11 @@ import { Logo, Field, ErrorBox, Loading, Modal } from "./components";
 import { Dashboard } from "./Dashboard";
 import { EditorPage, SharedPage } from "./Editor";
 import { Admin } from "./Admin";
+import {
+  initializeAnalytics,
+  starterQuery,
+  track,
+} from "../../shared/analytics";
 const Auth = createContext<{
   user: User | null;
   setUser: (u: User | null) => void;
@@ -34,6 +40,7 @@ export function App() {
     [error, setError] = useState(""),
     [resetAvailable, setResetAvailable] = useState(false);
   useEffect(() => {
+    initializeAnalytics();
     bootstrap()
       .then((r) => {
         setUser(r.user);
@@ -62,18 +69,16 @@ export function App() {
         <Routes>
           <Route
             path="/"
-            element={user ? <Dashboard /> : <Navigate to="/login" replace />}
+            element={user ? <Dashboard /> : <AuthRedirect to="/login" />}
           />
           <Route
             path="/login"
-            element={
-              user ? <Navigate to="/" replace /> : <AuthPage mode="login" />
-            }
+            element={user ? <AuthRedirect to="/" /> : <AuthPage mode="login" />}
           />
           <Route
             path="/register"
             element={
-              user ? <Navigate to="/" replace /> : <AuthPage mode="register" />
+              user ? <AuthRedirect to="/" /> : <AuthPage mode="register" />
             }
           />
           <Route path="/forgot" element={<AuthPage mode="forgot" />} />
@@ -97,6 +102,15 @@ export function App() {
         </Routes>
       </BrowserRouter>
     </Auth.Provider>
+  );
+}
+function AuthRedirect({ to }: { to: string }) {
+  const location = useLocation();
+  return (
+    <Navigate
+      to={to + starterQuery(new URLSearchParams(location.search))}
+      replace
+    />
   );
 }
 function AuthPage({
@@ -181,7 +195,9 @@ function AuthPage({
                       values,
                     );
                     setUser(r.user);
-                    navigate("/");
+                    if (mode === "register")
+                      track("signup_complete", "platform");
+                    navigate("/" + starterQuery(params));
                   } else {
                     await request(`/auth/${mode}`, "POST", {
                       ...values,
@@ -265,12 +281,16 @@ function AuthPage({
                 Забыл пароль?
               </Link>
               <p className="auth-switch">
-                Впервые здесь? <Link to="/register">Создать аккаунт</Link>
+                Впервые здесь?{" "}
+                <Link to={"/register" + starterQuery(params)}>
+                  Создать аккаунт
+                </Link>
               </p>
             </>
           ) : (
             <p className="auth-switch">
-              Уже есть аккаунт? <Link to="/login">Войти</Link>
+              Уже есть аккаунт?{" "}
+              <Link to={"/login" + starterQuery(params)}>Войти</Link>
             </p>
           )}
           <div className="auth-benefits">

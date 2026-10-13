@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { documentSchema, type ProjectDocument } from "@roomfit/core";
 import { request, ApiError, type Project } from "./api";
+import { track } from "../../shared/analytics";
 export function useProject(project: Project, userId: string, readOnly = false) {
   const [doc, setDoc] = useState(project.document),
     [status, setStatus] = useState("Сохранено"),
@@ -103,6 +104,15 @@ export function useProject(project: Project, userId: string, readOnly = false) {
       });
       version.current = result.version;
       saved.current = encoded;
+      const analyticsKey = `roomfit:saved-event:${project.id}`;
+      try {
+        if (!sessionStorage.getItem(analyticsKey)) {
+          track("project_saved", "platform");
+          sessionStorage.setItem(analyticsKey, "1");
+        }
+      } catch {
+        /* Statistics never affect saving a project. */
+      }
       retries.current = 0;
       if (JSON.stringify(current.current) === encoded) {
         localStorage.removeItem(key);

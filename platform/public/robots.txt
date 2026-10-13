@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /api/
+Disallow: /events
+
+# HTML pages have noindex; crawling them is allowed so bots can read it.

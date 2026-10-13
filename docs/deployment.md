@@ -71,7 +71,7 @@ certbot renew --cert-name roomfit.art --dry-run --no-random-sleep-on-renew
 curl -fsS https://platform.roomfit.art/api/health
 ```
 
-Страницы SPA используют fallback на index.html; отсутствующие файлы /assets/ возвращают 404. HTML отдаётся с no-cache, файлы с хешами — с длительным кешированием. API использует proxy_pass без удаления префикса /api/. Cookies HttpOnly Secure и CSRF работают на домене платформы.
+Лендинг собирается в готовые HTML-страницы: известные маршруты имеют собственный index.html, неизвестные адреса возвращают HTTP 404. Платформа использует SPA fallback на index.html и noindex. HTML отдаётся с no-cache, файлы с хешами — с длительным кешированием. API использует proxy_pass без удаления префикса /api/. Cookies HttpOnly Secure и CSRF работают на домене платформы. Настройка индексации и Search Console: [seo.md](seo.md).
 
 ## API и данные
 

@@ -83,11 +83,11 @@ export default function DemoEditor({
   templateKey?: string;
   onStatus?: (status: ReturnType<typeof analyze>) => void;
 }) {
-  const [saved] = useState(loadSaved);
-  const [template, setTemplate] = useState(saved?.template ?? ROOMS.bedroom);
+  const initial = (templateKey && ROOMS[templateKey]) || ROOMS.bedroom;
+  const [template, setTemplate] = useState(initial);
   const [history, setHistory] = useState<Timeline>({
     past: [],
-    current: saved?.items ?? initialItems(),
+    current: templateKey ? initial.items : initialItems(),
     future: [],
   });
   const [selected, setSelected] = useState<string | null>(
@@ -120,6 +120,14 @@ export default function DemoEditor({
       c.name.toLocaleLowerCase("ru").includes(query.toLocaleLowerCase("ru")),
   );
 
+  useEffect(() => {
+    if (templateKey) return;
+    const saved = loadSaved();
+    if (!saved) return;
+    setTemplate(saved.template);
+    setHistory({ past: [], current: saved.items, future: [] });
+    setSelected(saved.items[0]?.id ?? null);
+  }, []);
   useEffect(() => {
     onStatus?.(analyze(template.room, history.current, template.doors));
   }, [template, history.current, onStatus]);

@@ -47,6 +47,7 @@ npm run test:api
 npx playwright install chromium
 npm run test:e2e
 npm run test:landing
+npm run test:seo --workspace @roomfit/landing
 ```
 
 После изменения модели или встроенных шаблонов выполнить `npx tsx scripts/export-schema.ts` и сохранить обновлённые файлы API. Новые изменения БД оформлять миграцией Alembic, а не правкой существующей миграции.
@@ -56,3 +57,5 @@ npm run test:landing
 Пошаговая инструкция: [docs/deployment.md](docs/deployment.md). Лендинг: **https://roomfit.art**, платформа: **https://platform.roomfit.art**. Оба фронтенда раздаёт Nginx на VPS; API работает сервисом `roomfit-api`, база — PostgreSQL. DNS настроен в Namecheap, HTTPS выпускает Let's Encrypt.
 
 Обновление обоих фронтендов из Windows: `./scripts/deploy-web.ps1` — сборка, загрузка через PuTTY и переключение на новый релиз.
+
+Лендинг и инструкции собираются в готовые HTML-страницы. SEO, Search Console, Bing, IndexNow и агрегированная статистика: [docs/seo.md](docs/seo.md). План следующих материалов и черновики публикаций: [docs/seo-content-plan.md](docs/seo-content-plan.md).

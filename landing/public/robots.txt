@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /events
+Disallow: /templates/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /events
+Disallow: /templates/
+
+Sitemap: https://roomfit.art/sitemap.xml

@@ -27,6 +27,7 @@ import PlanPreview from "./components/PlanPreview";
 import ComparisonSlider from "./components/ComparisonSlider";
 import Modal from "./components/Modal";
 import useLandingMotion from "./hooks/useLandingMotion";
+import GuideCards from "./components/GuideCards";
 
 const navigation = [
   ["features", "Возможности"],
@@ -56,15 +57,15 @@ const faq = [
   ],
   [
     "Можно ли пользоваться с телефона?",
-    "Да. Лендинг и демо адаптированы для телефона: предметы можно перемещать пальцем, а поворачивать кнопкой под планом.",
+    "Да. Лендинг, демо и платформа адаптированы для телефона. Предметы можно перемещать пальцем, а размеры и проёмы — редактировать через панель свойств.",
   ],
   [
     "Можно ли пользоваться бесплатно?",
-    "Демо на этой странице бесплатно. В нём можно расставлять мебель, проверять пересечения, сохранять план на своём устройстве и скачивать PNG.",
+    "Да. Текущая версия платформы доступна бесплатно: создай аккаунт, нарисуй свою комнату и сохраняй проекты. Демо на этой странице работает без регистрации и сохраняет план на устройстве.",
   ],
   [
     "Можно ли загрузить план квартиры?",
-    "Загрузка и калибровка плана — в планах развития. Сейчас в демо доступны готовые комнаты: выбери подходящий пример и попробуй изменить расстановку.",
+    "Да. В платформе можно загрузить PNG, JPG или PDF как подложку и откалибровать масштаб по известному расстоянию. Затем нарисуй стены, добавь двери и окна и расставь мебель.",
   ],
   [
     "Насколько точные размеры?",
@@ -76,11 +77,11 @@ const faq = [
   ],
   [
     "Можно ли добавить свою мебель?",
-    "Сейчас в демо можно добавлять предметы из каталога. Создание мебели со своими размерами появится в полноценном редакторе.",
+    "Да. В платформе можно создать свою мебель с точными размерами или изменить габариты предмета из каталога. В демо на лендинге используется ограниченный каталог.",
   ],
   [
     "Подходит ли RoomFit для профессионалов?",
-    "RoomFit задуман как простой инструмент для повседневных задач. Дизайнеры также смогут использовать его для быстрой проверки расстановки; сложное проектирование не входит в текущую демоверсию.",
+    "RoomFit подходит для предварительной проверки размеров и вариантов расстановки. Можно сравнивать планы, экспортировать результат и делиться ссылкой на просмотр. Для строительной документации нужен специализированный инструмент.",
   ],
 ];
 
@@ -99,7 +100,9 @@ const platformUrl = (
   (import.meta.env.PROD
     ? "https://platform.roomfit.art"
     : "http://127.0.0.1:4181")
-).trim().replace(/\/$/, "");
+)
+  .trim()
+  .replace(/\/$/, "");
 function StartLink({
   children = "Начать бесплатно",
   className = "",
@@ -108,7 +111,10 @@ function StartLink({
   className?: string;
 }) {
   return (
-    <a className={`button button-gold ${className}`} href={`${platformUrl}/register`}>
+    <a
+      className={`button button-gold ${className}`}
+      href={`${platformUrl}/register`}
+    >
       {children}
       <ArrowRight size={18} />
     </a>
@@ -397,7 +403,11 @@ export default function App() {
           </nav>
         )}
       </header>
-      <main id="main" ref={mainRef}>
+      <main
+        id="main"
+        ref={mainRef}
+        data-prerendered={import.meta.env.PROD ? "true" : undefined}
+      >
         <section id="top" className="hero section-dark">
           <img
             className="hero-background"
@@ -429,8 +439,8 @@ export default function App() {
                 </span>
               </h1>
               <p>
-                Создай план комнаты, расставь мебель в реальных размерах и
-                убедись, что всё влезет — ещё до покупки.
+                Планировщик комнаты онлайн: создай план, расставь мебель в
+                реальных размерах и убедись, что всё влезет — ещё до покупки.
               </p>
               <div className="hero-actions">
                 <StartLink />
@@ -715,6 +725,15 @@ export default function App() {
             </div>
           </div>
         </section>
+        <section className="landing-guides section-light">
+          <div className="container section-space">
+            <SectionHeading title="Планы, которые можно примерить">
+              Разбираем размеры, двери и мебель на конкретных примерах.{" "}
+              <a href="/rukovodstva/">Все планы и инструкции →</a>
+            </SectionHeading>
+            <GuideCards />
+          </div>
+        </section>
         <section className="final-cta section-dark">
           <div className="container split-layout section-space">
             <div className="section-copy">
@@ -740,20 +759,17 @@ export default function App() {
             <p>Твой дом в правильных размерах.</p>
           </div>
           <nav aria-label="Навигация внизу страницы">
-            <button onClick={() => setModal("about")}>О проекте</button>
+            <a href="/o-proekte/">О проекте</a>
             <a href="#features">Возможности</a>
             <a href="#examples">Примеры</a>
             <a href="#faq">Помощь</a>
+            <a href="/rukovodstva/">Планы и инструкции</a>
           </nav>
           <div className="footer-legal">
             <span>© 2026 RoomFit</span>
             <div>
-              <button onClick={() => setModal("privacy")}>
-                Конфиденциальность
-              </button>
-              <button onClick={() => setModal("terms")}>
-                Условия использования
-              </button>
+              <a href="/konfidencialnost/">Конфиденциальность</a>
+              <a href="/usloviya/">Условия использования</a>
             </div>
           </div>
         </div>

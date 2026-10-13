@@ -70,7 +70,12 @@ export default function useLandingMotion() {
       targets.forEach((el) => {
         if (seen.has(el) || typeof el.animate !== "function") return;
         const rect = el.getBoundingClientRect();
-        if (rect.bottom <= 0) {
+        // Pre-rendered content may already have painted before hydration.
+        // Never hide a block the visitor can already see.
+        if (
+          rect.bottom <= 0 ||
+          (root.dataset.prerendered === "true" && rect.top < window.innerHeight)
+        ) {
           seen.add(el);
           return;
         }
