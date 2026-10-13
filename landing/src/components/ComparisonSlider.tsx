@@ -9,7 +9,11 @@ export default function ComparisonSlider() {
     <div className="comparison-slider">
       <img
         className="comparison-photo"
-        src="/assets/photo-bedroom.png"
+        src={
+          import.meta.env.PROD
+            ? "/assets/photo-bedroom.webp"
+            : "/assets/photo-bedroom.png"
+        }
         alt="Визуальная концепция спальни в 3D"
         loading="lazy"
         width={424}

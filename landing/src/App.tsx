@@ -412,6 +412,12 @@ export default function App() {
           <img
             className="hero-background"
             src="/assets/living-room.webp"
+            srcSet={
+              import.meta.env.PROD
+                ? "/assets/living-room-400.webp 400w, /assets/living-room-800.webp 800w, /assets/living-room-1200.webp 1200w, /assets/living-room-1600.webp 1600w"
+                : undefined
+            }
+            sizes="100vw"
             alt=""
             fetchPriority="high"
             width={1672}

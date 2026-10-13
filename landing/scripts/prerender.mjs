@@ -63,6 +63,26 @@ await writeFile(
   join(dist, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${PUBLIC_PATHS.map((path) => `  <url><loc>https://roomfit.art${path}</loc></url>`).join("\n")}\n</urlset>\n`,
 );
+// Public source assets stay intact. Production gets sizes for actual screens.
+for (const width of [400, 800, 1200, 1600]) {
+  await sharp(resolve("public/assets/living-room.webp"))
+    .resize({ width, withoutEnlargement: true })
+    .webp({ quality: 80 })
+    .toFile(join(dist, "assets", `living-room-${width}.webp`));
+}
+await sharp(resolve("public/assets/photo-bedroom.png"))
+  .webp({ quality: 85 })
+  .toFile(join(dist, "assets/photo-bedroom.webp"));
+for (const [name, width] of [
+  ["logo-mark-dark.png", 128],
+  ["icon-dark.png", 64],
+]) {
+  const optimized = await sharp(resolve("public/assets", name))
+    .resize({ width, withoutEnlargement: true })
+    .png({ compressionLevel: 9 })
+    .toBuffer();
+  await writeFile(join(dist, "assets", name), optimized);
+}
 console.log(
   `Pre-rendered ${PUBLIC_PATHS.length} public pages, 404, 6 image sets and 4 editable templates.`,
 );

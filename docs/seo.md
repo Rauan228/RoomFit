@@ -71,6 +71,23 @@ Google рекомендует обычные основы SEO и уникаль�
 
 ## Проверка и обновление
 
+Лабораторный мобильный замер главной через Lighthouse 12.8.2, 13 октября 2026 года:
+
+| Показатель | После статической генерации | После оптимизации изображений и HTTP/2 |
+| --- | --- | --- |
+| Performance | 83 | 96 |
+| SEO | 100 | 100 |
+| Accessibility | 100 | 100 |
+| LCP | 4,4 с | 2,4 с |
+| CLS | 0 | 0 |
+| TBT | 10 мс | 10 мс |
+
+Это лабораторные прогоны с мобильными настройками и имитацией медленной сети; показатели зависят от условий и не описывают позиции в поиске. Реальные пользовательские Core Web Vitals проверять отдельно, когда появятся полевые данные. Изображения под экраны, WebP-концепция, уменьшенные логотип/favicon и HTTP/2 генерируются/включаются в обычном деплое.
+
+```powershell
+npx --yes lighthouse@12.8.2 https://roomfit.art/ --only-categories=performance,seo,accessibility --chrome-flags="--headless --disable-gpu" --output=json --output-path=.local/lighthouse-roomfit.json
+```
+
 ```powershell
 npm run build
 npm test
