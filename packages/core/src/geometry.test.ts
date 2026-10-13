@@ -188,7 +188,13 @@ describe("millimetre geometry independent from viewport", () => {
   it("computes union area so overlapping furniture is not counted twice", () => {
     const doc = room(),
       f = doc.floors[0],
-      a = item(doc);
+      a = {
+        ...item(doc),
+        catalogId: undefined,
+        assetId: undefined,
+        assetVersion: undefined,
+        contour: undefined,
+      };
     const b = { ...a, id: crypto.randomUUID() };
     const result = analyzeFloor(f, [a, b]);
     expect(result.freeArea).toBe(12_800_000 - 640_000);

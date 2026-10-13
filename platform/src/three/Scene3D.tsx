@@ -1,6 +1,7 @@
 import {
   Component,
   useEffect,
+  useCallback,
   useMemo,
   useRef,
   useState,
@@ -178,6 +179,12 @@ export default function Scene3D(props: Scene3DProps) {
   );
   const [cutaway, setCutaway] = useState(true),
     [reset, setReset] = useState(0);
+  const [assets, setAssets] = useState({ loaded: 0, loading: 0, failed: 0 });
+  const onAssets = useCallback(
+    (loaded: number, loading: number, failed: number) =>
+      setAssets({ loaded, loading, failed }),
+    [],
+  );
   const frame = useMemo(() => sceneBounds(floor, items), [floor, props.items]);
   const span = frame.span;
   return (
@@ -186,6 +193,9 @@ export default function Scene3D(props: Scene3DProps) {
       hidden={!active}
       aria-label="3D-план комнаты"
       data-scene-ready={ready ? "true" : "false"}
+      data-assets-loaded={assets.loaded}
+      data-assets-loading={assets.loading}
+      data-assets-failed={assets.failed}
     >
       {!available || lost ? (
         <Fallback onBack={onBack} />
@@ -239,7 +249,7 @@ export default function Scene3D(props: Scene3DProps) {
               />
               <ContextGuard onLost={() => setLost(true)} />
               <FirstFrame onReady={() => setReady(true)} />
-              <SceneResourceProvider>
+              <SceneResourceProvider onAssets={onAssets}>
                 <group position={[-frame.center[0], 0, -frame.center[2]]}>
                   {floor.rooms.map((room) => (
                     <RoomMesh
@@ -280,6 +290,13 @@ export default function Scene3D(props: Scene3DProps) {
             <span className="three-badge">
               <Box size={14} /> 3D · ранний доступ
             </span>
+            {(assets.loading > 0 || assets.failed > 0) && (
+              <span role="status">
+                {assets.loading
+                  ? `Загружаем модели: ${assets.loading}…`
+                  : "Часть моделей недоступна — показан упрощённый вид."}
+              </span>
+            )}
             <span>
               Вращай обзор мышью или пальцем. Выбери предмет, чтобы изменить
               свойства.

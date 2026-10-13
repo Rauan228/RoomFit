@@ -1,0 +1,12 @@
+{
+  "asset_id": "bed-kids",
+  "generation_version": "v1-09243861fd4e",
+  "files": {
+    "3d/model.glb": "88545c9d6f3a7155a0f53ce93724f92c50a5460de4178d23a20982ce3fa5e99d",
+    "validation/coordinates.png": "4259a03dac0fee47e4c1b0a8b97362eb4bb78e55299e4501740df79f75043c48",
+    "2d/original/top_view_1024.png": "7e20e2bd7fda448b1dd2f72e41d72cf440389fe18fc44737cbf814bca96ac609",
+    "2d/sand/top_view_1024.png": "506c5a4ad8245357709f9d0603322571394a259459a13dbb84094f6a8463f37e",
+    "2d/graphite/top_view_1024.png": "3984bf45f6ff102bb15acb05dfd61fc1efae67adc086be21f3e6f830707c8506",
+    "2d/walnut/top_view_1024.png": "6bc5538d3a6d82075f2e4f83ebf8fe048f4187dd6d473eca78c3e0010d1f35f1"
+  }
+}

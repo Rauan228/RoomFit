@@ -1,0 +1,12 @@
+{
+  "asset_id": "shelf",
+  "generation_version": "v1-2d7c30dd3228",
+  "files": {
+    "3d/model.glb": "fd3411fc70387523834411db37b98fd6f203eaf6a5d695b541f4b85a6b4364a2",
+    "validation/coordinates.png": "6c92135ddb7aa84703c5ff806df396589877f931ea64fdb1052e928b3bc61171",
+    "2d/original/top_view_1024.png": "e208604e43def20443cf4c4f7e658dc8c08ef922533f4bdf6b6369c0e0721961",
+    "2d/sand/top_view_1024.png": "8b3d177d3fae9ee355f1914a9d0b8eb3055d9c458df6afdc0a02eff3693847d1",
+    "2d/graphite/top_view_1024.png": "0e7cf3af9bf9e0d18349b9a9427316da36516355d0ec2c7209e56aac4d696847",
+    "2d/walnut/top_view_1024.png": "fdd45557c7624d05fb30a319c134a137d68e41791da8d54fbce8329c24a58fff"
+  }
+}

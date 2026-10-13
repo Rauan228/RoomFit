@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RoomFit synchronized furniture asset",
+  "type": "object",
+  "required": ["asset_id", "generation_version", "dimensions", "orientation", "assets", "footprints", "material_variants", "validation_status", "resizing", "installation", "license"],
+  "properties": {
+    "asset_id": {"type": "string", "pattern": "^[a-z0-9_-]+$"},
+    "generation_version": {"type": "string", "pattern": "^v1-[a-f0-9]{12}$"},
+    "dimensions": {"type": "object", "required": ["width_mm", "depth_mm", "height_mm"], "properties": {"width_mm": {"type": "number", "exclusiveMinimum": 0}, "depth_mm": {"type": "number", "exclusiveMinimum": 0}, "height_mm": {"type": "number", "exclusiveMinimum": 0}}},
+    "orientation": {"type": "object", "required": ["front", "up", "pivot", "units"], "properties": {"front": {"const": "+Z"}, "up": {"const": "+Y"}, "pivot": {"const": "bottom_center"}, "units": {"const": "meters"}}},
+    "resizing": {"enum": ["fixed", "scalable", "parametric"]},
+    "installation": {"enum": ["floor", "wall"]},
+    "elevation_mm": {"type": "number", "minimum": 0},
+    "license": {"type": "string", "minLength": 1},
+    "validation_status": {"enum": ["approved", "rejected"]},
+    "assets": {"type": "object", "required": ["model_3d", "top_2d", "technical_2d", "preview", "comparison"], "additionalProperties": {"type": "string", "pattern": "^[a-zA-Z0-9_./-]+$"}},
+    "material_variants": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "name", "color", "roughness", "top_2d"], "properties": {"id": {"type": "string", "pattern": "^[a-z0-9_-]+$"}, "color": {"type": "string", "pattern": "^#[a-fA-F0-9]{6}$"}, "roughness": {"type": "number", "minimum": 0, "maximum": 1}}}},
+    "footprints": {"type": "object", "required": ["visual", "collision", "volumes", "clearance_zones"], "properties": {
+      "visual": {"type": "array", "minItems": 1, "items": {"$ref": "#/definitions/polygon"}},
+      "collision": {"type": "array", "minItems": 1, "items": {"$ref": "#/definitions/polygon"}},
+      "volumes": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["min_height_mm", "max_height_mm", "footprints"], "properties": {"min_height_mm": {"type": "number"}, "max_height_mm": {"type": "number"}, "footprints": {"type": "array", "minItems": 1, "items": {"$ref": "#/definitions/polygon"}}}}},
+      "clearance_zones": {"type": "array"}
+    }}
+  },
+  "definitions": {
+    "point": {"type": "object", "required": ["x", "y"], "properties": {"x": {"type": "number", "minimum": 0, "maximum": 1}, "y": {"type": "number", "minimum": 0, "maximum": 1}}},
+    "ring": {"type": "array", "minItems": 3, "maxItems": 200, "items": {"$ref": "#/definitions/point"}},
+    "polygon": {"type": "object", "required": ["outer", "holes"], "properties": {"outer": {"$ref": "#/definitions/ring"}, "holes": {"type": "array", "items": {"$ref": "#/definitions/ring"}}}}
+  }
+}

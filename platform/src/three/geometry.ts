@@ -1,7 +1,7 @@
 import {
   bounds,
   distance,
-  furniturePolygon,
+  furniturePoints,
   wallPolygon,
   type Floor,
   type Furniture,
@@ -24,7 +24,7 @@ export const toWorld = (point: Point, height = 0): [number, number, number] => [
   point.y * MM_TO_M,
 ];
 export const furniturePose = (item: Furniture) => ({
-  position: toWorld(item),
+  position: toWorld(item, item.elevation || 0),
   yaw: (-item.angle * Math.PI) / 180,
   size: [item.width * MM_TO_M, item.height * MM_TO_M, item.depth * MM_TO_M] as [
     number,
@@ -191,7 +191,7 @@ export function sceneBounds(floor: Floor, items: Furniture[]) {
     ...floor.rooms.flatMap((room) => room.points),
     ...floor.walls.flatMap((wall) => [wall.start, wall.end]),
   ];
-  for (const item of floorItems) points.push(...furniturePolygon(item));
+  for (const item of floorItems) points.push(...furniturePoints(item));
   const box = points.length
     ? bounds(points)
     : { minX: 0, minY: 0, maxX: 4000, maxY: 3200 };
@@ -206,7 +206,7 @@ export function sceneBounds(floor: Floor, items: Furniture[]) {
       (box.maxX - box.minX) / 1000,
       (box.maxY - box.minY) / 1000,
       ...floor.walls.map((w) => w.height / 1000),
-      ...floorItems.map((item) => item.height / 1000),
+      ...floorItems.map((item) => (item.height + (item.elevation || 0)) / 1000),
     ),
   };
 }

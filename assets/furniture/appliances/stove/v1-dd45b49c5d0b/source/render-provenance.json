@@ -1,0 +1,12 @@
+{
+  "asset_id": "stove",
+  "generation_version": "v1-dd45b49c5d0b",
+  "files": {
+    "3d/model.glb": "e0688cf995547386974aae08b0d8af5055e1606e32a971a73b1633ea267c9e28",
+    "validation/coordinates.png": "2210944c1558af719a345ba7efeead514d10441a0413da4e977aa896f90ce441",
+    "2d/original/top_view_1024.png": "601263927fcff6f6aa43e201a128e2b55efc8dc977c674c9df117f49f4fcba5b",
+    "2d/sand/top_view_1024.png": "8e7cd9b38d03ac0da072e0363be75844ee6702129fa7d5209d30aba34466146c",
+    "2d/graphite/top_view_1024.png": "fa5c198afb849b2720654182623ab0371f0871bb357fa6bd7fe0cbc13358399d",
+    "2d/walnut/top_view_1024.png": "29ec9201e01e7f0651f1b27b08143387b79f9a0cb3e2783772b7d48819847126"
+  }
+}

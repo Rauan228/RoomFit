@@ -5,7 +5,7 @@ test("door and window placement, dragging, undo and persistence", async ({
 }, info) => {
   const bootstrap = await page.request.get("/api/auth/me"),
     csrf = (await bootstrap.json()).csrf;
-  await page.request.post("/api/auth/register", {
+  const registered = await page.request.post("/api/auth/register", {
     headers: { "X-CSRF-Token": csrf },
     data: {
       name: "Opening Test",
@@ -13,11 +13,13 @@ test("door and window placement, dragging, undo and persistence", async ({
       password: "test-roomfit-password",
     },
   });
+  expect(registered.ok(), await registered.text()).toBe(true);
   const { createDocument } = await import("../../packages/core/src/model");
   const created = await page.request.post("/api/projects", {
     headers: { "X-CSRF-Token": csrf },
     data: { document: createDocument("Двери и окна", 4000, 3200) },
   });
+  expect(created.ok(), await created.text()).toBe(true);
   const project = await created.json();
   await page.goto(`/project/${project.id}`);
   await expect(page.locator(".editor-canvas")).toBeVisible();

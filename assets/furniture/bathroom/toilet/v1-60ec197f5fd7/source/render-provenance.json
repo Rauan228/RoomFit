@@ -1,0 +1,12 @@
+{
+  "asset_id": "toilet",
+  "generation_version": "v1-60ec197f5fd7",
+  "files": {
+    "3d/model.glb": "e6b2c1d347ac7faaa6469e5ec56288e1101612093abb3091a431fba66ad480d7",
+    "validation/coordinates.png": "e193beb1771ec51d59c7a8a81fb02f509fbee775f0e97a2f466a316756931a97",
+    "2d/original/top_view_1024.png": "74dd1436f52ede5ca17b84fcad4ab335d436909db32a1e6509c8a7b802dedece",
+    "2d/sand/top_view_1024.png": "27ac0acfd04ed90b2a9c1a24024e93b29dd78989fef0af05390a56008416c33d",
+    "2d/graphite/top_view_1024.png": "d79fbed35da6c0baf91edd3e53968831a02671c37b125753b32031875a0c5ab4",
+    "2d/walnut/top_view_1024.png": "f2373b239b606e7eb41a2a5fe5d825a3eb564a7c6d8fa946d153494d496e6f72"
+  }
+}

@@ -6,6 +6,7 @@ import {
   type CatalogItem,
   type ProjectDocument,
 } from "./model";
+import { assetCatalogFields } from "./assets";
 const entries: [string, string, string, number, number, number][] = [
   ["bed-double", "Кровать двуспальная", "Кровати", 1600, 2000, 600],
   ["bed-single", "Кровать односпальная", "Кровати", 900, 2000, 600],
@@ -31,6 +32,8 @@ const entries: [string, string, string, number, number, number][] = [
   ["lamp", "Торшер", "Освещение", 400, 400, 1700],
   ["plant", "Растение", "Декор", 450, 450, 1000],
   ["rug", "Ковёр", "Декор", 2000, 1400, 10],
+  ["sofa-corner", "Угловой диван", "Диваны", 2800, 1800, 850],
+  ["wall-shelf", "Настенная полка", "Стеллажи", 1000, 260, 240],
 ];
 export const CATALOG: CatalogItem[] = entries.map(
   ([id, name, category, width, depth, height]) => ({
@@ -50,6 +53,7 @@ export const CATALOG: CatalogItem[] = entries.map(
           : "#cbb99e",
     clearance: ["wardrobe", "dresser"].includes(id) ? 600 : 0,
     tags: [category],
+    ...assetCatalogFields(id),
   }),
 );
 export const CATEGORIES = [...new Set(CATALOG.map((c) => c.category))];

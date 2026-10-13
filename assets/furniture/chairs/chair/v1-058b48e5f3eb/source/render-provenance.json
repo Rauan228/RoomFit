@@ -1,0 +1,12 @@
+{
+  "asset_id": "chair",
+  "generation_version": "v1-058b48e5f3eb",
+  "files": {
+    "3d/model.glb": "a6361dd8d56ce17fd259f8f2d174c0da43d5084d6f27e635db7005f945a01dfb",
+    "validation/coordinates.png": "f1eb774f2f7fc45ef0027a66ccf364f64f31524284077b680cbeb62ca4cfd8dc",
+    "2d/original/top_view_1024.png": "a8f55896fb62711a7a9915c8313c8ebfb07d4d55b8f18b4f49a177498befa319",
+    "2d/sand/top_view_1024.png": "7d527806bb4777632e2b85056383add1d423c0f13377c5bbc44324b34be360e5",
+    "2d/graphite/top_view_1024.png": "56d54721cbf4e87da2a83f6e69220b26a8b999386f389bfcb06162371d66e967",
+    "2d/walnut/top_view_1024.png": "6b78d54077c8fcf5ac4297ed7397c8805f672e2b9f8bd32a83b686f022ad9239"
+  }
+}

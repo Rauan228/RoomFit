@@ -1,0 +1,12 @@
+{
+  "asset_id": "fridge",
+  "generation_version": "v1-3b214078b0ee",
+  "files": {
+    "3d/model.glb": "4c4a1c6282ef75c002ea9d312ec729d4abe6cc2010a5582ec076f2df72d1b46f",
+    "validation/coordinates.png": "966ae3c304048852b5e6cd3d94c4109d4b650c5920b890365ed7fb41eb188927",
+    "2d/original/top_view_1024.png": "e83c9afa314da2d143914e68069a789905168bd61fc47963319df57567dd41b4",
+    "2d/sand/top_view_1024.png": "54aa848029c3034b504050d849d07507130f38ef3803f5590e11d8f91573242d",
+    "2d/graphite/top_view_1024.png": "7509cad6de24ec7e82983a097d884315debfc74c934996c82f4ea7d9bf395b97",
+    "2d/walnut/top_view_1024.png": "a1edbbdad167d3695a2280ae22ec904b52556da4e36d0a906ab9f501710f8a74"
+  }
+}

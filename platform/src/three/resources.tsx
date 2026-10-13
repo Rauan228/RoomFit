@@ -14,10 +14,79 @@ import {
   RepeatWrapping,
   SphereGeometry,
   SRGBColorSpace,
+  type Material,
+  type Mesh,
+  type Texture,
 } from "three";
+import { GLTFLoader, type GLTF } from "three/addons/loaders/GLTFLoader.js";
 import type { Room } from "@roomfit/core";
 
 class SceneResources {
+  alive = true;
+  models = new Map<
+    string,
+    { promise: Promise<GLTF>; value?: GLTF; failed?: boolean }
+  >();
+  constructor(
+    private onAssets?: (
+      loaded: number,
+      loading: number,
+      failed: number,
+    ) => void,
+  ) {}
+  report() {
+    const entries = [...this.models.values()];
+    queueMicrotask(
+      () =>
+        this.alive &&
+        this.onAssets?.(
+          entries.filter((e) => e.value).length,
+          entries.filter((e) => !e.value && !e.failed).length,
+          entries.filter((e) => e.failed).length,
+        ),
+    );
+  }
+  model(url: string) {
+    if (!this.models.has(url)) {
+      const entry: { promise: Promise<GLTF>; value?: GLTF; failed?: boolean } =
+        { promise: Promise.resolve(null as unknown as GLTF) };
+      entry.promise = new Promise((resolve, reject) =>
+        new GLTFLoader().load(
+          url,
+          (value) => {
+            entry.value = value;
+            if (!this.alive) disposeModel(value);
+            this.report();
+            resolve(value);
+          },
+          undefined,
+          (error) => {
+            entry.failed = true;
+            this.report();
+            reject(error);
+          },
+        ),
+      );
+      this.models.set(url, entry);
+      this.report();
+    }
+    return this.models.get(url)!.promise;
+  }
+  assetMaterial(
+    url: string,
+    original: MeshStandardMaterial,
+    variant: { id: string; color: string; roughness: number },
+  ) {
+    if (original.userData.slot !== "primary") return original;
+    const key = `asset:${url}:${original.uuid}:${variant.id}`;
+    if (!this.materials.has(key)) {
+      const material = original.clone();
+      material.color.set(variant.color);
+      material.roughness = variant.roughness;
+      this.materials.set(key, material);
+    }
+    return this.materials.get(key)!;
+  }
   geometries = {
     box: new BoxGeometry(1, 1, 1),
     cylinder: new CylinderGeometry(0.5, 0.5, 1, 20),
@@ -108,16 +177,58 @@ class SceneResources {
     return this.materials.get(key)!;
   }
   dispose() {
+    this.alive = false;
+    this.models.forEach((entry) => entry.value && disposeModel(entry.value));
     Object.values(this.geometries).forEach((geometry) => geometry.dispose());
     this.materials.forEach((m) => m.dispose());
     this.lines.forEach((m) => m.dispose());
     this.textures.forEach((texture) => texture.dispose());
   }
 }
+function disposeModel(model: GLTF) {
+  const geometries = new Set<Mesh["geometry"]>(),
+    materials = new Set<Material>(),
+    textures = new Set<Texture>();
+  model.scene.traverse((object) => {
+    const mesh = object as Mesh;
+    if (!mesh.isMesh) return;
+    geometries.add(mesh.geometry);
+    for (const material of Array.isArray(mesh.material)
+      ? mesh.material
+      : [mesh.material]) {
+      materials.add(material);
+      for (const value of Object.values(material))
+        if (value && typeof value === "object" && "isTexture" in value)
+          textures.add(value as Texture);
+    }
+  });
+  geometries.forEach((g) => g.dispose());
+  materials.forEach((m) => m.dispose());
+  textures.forEach((t) => {
+    t.dispose();
+    const bitmap = t.source.data;
+    if (typeof ImageBitmap !== "undefined" && bitmap instanceof ImageBitmap)
+      bitmap.close();
+  });
+}
 const Resources = createContext<SceneResources | null>(null);
-export function SceneResourceProvider({ children }: { children: ReactNode }) {
-  const resources = useMemo(() => new SceneResources(), []);
-  useEffect(() => () => resources.dispose(), [resources]);
+export function SceneResourceProvider({
+  children,
+  onAssets,
+}: {
+  children: ReactNode;
+  onAssets?: (loaded: number, loading: number, failed: number) => void;
+}) {
+  const resources = useMemo(() => new SceneResources(onAssets), []);
+  useEffect(() => {
+    resources.alive = true;
+    return () => {
+      resources.alive = false;
+      queueMicrotask(() => {
+        if (!resources.alive) resources.dispose();
+      });
+    };
+  }, [resources]);
   return <Resources.Provider value={resources}>{children}</Resources.Provider>;
 }
 export function useSceneResources() {

@@ -1,0 +1,12 @@
+{
+  "asset_id": "kitchen",
+  "generation_version": "v1-8b42e3a0a016",
+  "files": {
+    "3d/model.glb": "4e8cdb4e6442258f04c8b446cac3d5d442f46acffa5e1e193cc106c1d22f8857",
+    "validation/coordinates.png": "0174cafa989ded9bf9035167590376558b81b0070e9074ba6e9e459d32267fde",
+    "2d/original/top_view_1024.png": "97c2936eae2cd01c377a1a11b34e61d0321fd5a052b673db3442ed308dedd0bc",
+    "2d/sand/top_view_1024.png": "e7baf0f1affa3ab8c1047d3edb557cc192e7a64c0ec5c909f2ec6b52b7da55d1",
+    "2d/graphite/top_view_1024.png": "dad711d60805fed683bf88095c8edda31f9761404a9efc4a00cbf6d7650a6980",
+    "2d/walnut/top_view_1024.png": "2fb199f8342139752f1d2e98a8ef9a7a181df90de356a842415a98ccf83a97fb"
+  }
+}

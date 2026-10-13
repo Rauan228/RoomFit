@@ -104,6 +104,14 @@ test("lazy 3D, ray selection, shared properties, Undo and persistence", async ({
       { timeout: 30000 },
     );
     await expect(page.locator(".three-host canvas")).toBeVisible();
+    await expect(page.locator(".three-host")).toHaveAttribute(
+      "data-assets-loaded",
+      "1",
+    );
+    await expect(page.locator(".three-host")).toHaveAttribute(
+      "data-assets-failed",
+      "0",
+    );
     const box = (await page.locator(".three-host canvas").boundingBox())!;
     const factor = box.width < box.height ? 1.5 : 1,
       camera = new PerspectiveCamera(45, box.width / box.height, 0.01, 200);

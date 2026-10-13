@@ -59,6 +59,15 @@ try {
     { timeout: 30000 },
   );
   await expect(page.locator(".three-host canvas")).toBeVisible();
+  await expect(page.locator(".three-host")).toHaveAttribute(
+    "data-assets-loaded",
+    "1",
+    { timeout: 30000 },
+  );
+  await expect(page.locator(".three-host")).toHaveAttribute(
+    "data-assets-failed",
+    "0",
+  );
   await page.locator(".three-objects summary").click();
   await page.locator(".three-objects button").click();
   await expect(page.getByLabel("Ширина, см", { exact: true })).toHaveValue(
@@ -81,6 +90,14 @@ try {
   );
   await mobilePage.locator(".three-objects summary").click();
   await mobilePage.locator(".three-objects button").click();
+  await expect(mobilePage.locator(".three-host")).toHaveAttribute(
+    "data-assets-loaded",
+    "1",
+    { timeout: 30000 },
+  );
+  await mobilePage
+    .getByLabel("Материал мебели", { exact: true })
+    .selectOption("graphite");
   await mobilePage.getByLabel("Ширина, см", { exact: true }).fill("190");
   await mobilePage.getByLabel("Ширина, см", { exact: true }).press("Tab");
   await expect
@@ -96,6 +113,52 @@ try {
   await expect(mobilePage.locator(".editor-canvas [data-item-id]")).toHaveCount(
     1,
   );
+  await expect(
+    mobilePage.locator(".editor-canvas image[data-asset-id]"),
+  ).toHaveAttribute("data-material-variant", "graphite");
+  const finished = await (
+    await mobile.request.get(`/api/projects/${id}`)
+  ).json();
+  if (
+    finished.document.variants[0].items[0].materialVariant !== "graphite" ||
+    !finished.document.variants[0].items[0].assetVersion
+  )
+    throw Error("Asset finish/version persistence mismatch");
+  const library = await context.request.get("/assets/furniture/manifest.json");
+  if (!library.ok())
+    throw Error("Approved asset library was not published completely");
+  const manifest = await library.json();
+  if (
+    Object.keys(manifest).length !== 26 ||
+    !library.headers()["cache-control"]?.includes("no-cache")
+  )
+    throw Error("Asset manifest is incomplete or cannot be refreshed");
+  for (const asset of Object.values(manifest)) {
+    const model = await context.request.get(
+      asset.base_url + asset.assets.model_3d,
+    );
+    const body = await model.body();
+    const verification = await context.request.get(
+      asset.base_url + "validation.json",
+    );
+    if (!verification.ok())
+      throw Error("Missing asset validation: " + asset.asset_id);
+    const report = await verification.json();
+    if (
+      !model.ok() ||
+      body.toString("ascii", 0, 4) !== "glTF" ||
+      body.length !== asset.glb_bytes ||
+      crypto.createHash("sha256").update(body).digest("hex") !==
+        report.model_sha256 ||
+      report.status !== "approved"
+    )
+      throw Error("Invalid published asset: " + asset.asset_id);
+    const top = await context.request.get(
+      asset.base_url + asset.material_variants[0].top_128,
+    );
+    if (!top.ok() || (await top.body()).toString("ascii", 8, 12) !== "WEBP")
+      throw Error("Missing top view: " + asset.asset_id);
+  }
   await mobile.close();
   if (errors.length) throw Error(errors.join("\n"));
   console.log(
@@ -108,6 +171,9 @@ try {
       secureHttpOnlyCookie: true,
       threeDesktop: true,
       threeMobile: true,
+      synchronizedAssetLibrary: 26,
+      verifiedPublishedGLBAndWebP: 26,
+      persistedMaterialVariant: true,
       runtimeErrors: 0,
     }),
   );

@@ -28,6 +28,8 @@ import {
   selfIntersects,
   uid,
   furniturePolygon,
+  assetById,
+  furnitureAsset,
   openingPlacement,
   type ProjectDocument,
   type Floor,
@@ -265,6 +267,7 @@ export function Inspector(p: Props) {
                     },
                   }}
                   units={doc.units}
+                  thumbnail
                 />
               </svg>
               <strong>{c.name}</strong>
@@ -881,17 +884,71 @@ export function Inspector(p: Props) {
                   1e6,
                 )}
               </div>
-              <Field label="Цвет">
-                <input
-                  type="color"
-                  value={item.color}
-                  onChange={(e) =>
-                    patchItem((i) => {
-                      i.color = e.target.value;
-                    })
-                  }
-                />
-              </Field>
+              {furnitureAsset({ ...item, materialVariant: "original" }) && (
+                <Field label="Материал мебели">
+                  <select
+                    value={furnitureAsset(item)?.variant.id || "custom"}
+                    onChange={(event) =>
+                      patchItem((i) => {
+                        const asset = assetById(
+                          i.assetId || i.catalogId,
+                          i.assetVersion,
+                        )!;
+                        const variant = asset.material_variants.find(
+                          (v) => v.id === event.target.value,
+                        )!;
+                        i.assetId = asset.asset_id;
+                        i.assetVersion = asset.generation_version;
+                        i.materialVariant = variant.id;
+                        i.color = variant.color;
+                      })
+                    }
+                  >
+                    {!furnitureAsset(item) && (
+                      <option value="custom" disabled>
+                        Свой цвет / контур · упрощённый вид
+                      </option>
+                    )}
+                    {assetById(
+                      item.assetId || item.catalogId,
+                      item.assetVersion,
+                    )!.material_variants.map((variant) => (
+                      <option key={variant.id} value={variant.id}>
+                        {variant.name}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+              )}
+              {!furnitureAsset(item) && (
+                <Field label="Цвет">
+                  <input
+                    type="color"
+                    value={item.color}
+                    onChange={(e) =>
+                      patchItem((i) => {
+                        i.color = e.target.value;
+                      })
+                    }
+                  />
+                </Field>
+              )}
+              {furnitureAsset(item) && (
+                <p className="micro-note">
+                  Материал одинаков в 2D и 3D. Изменение размеров масштабирует
+                  оба представления и общий контур.
+                </p>
+              )}
+              {lengthField(
+                "Высота установки над полом",
+                item.elevation || 0,
+                (n) =>
+                  patchItem((i) => {
+                    i.elevation = n;
+                  }),
+                0,
+                20000,
+              )}
               {lengthField(
                 "Зона обслуживания вокруг",
                 item.clearance,
@@ -903,8 +960,9 @@ export function Inspector(p: Props) {
                 3000,
               )}
               <p className="micro-note">
-                Зона обслуживания симметрична. Для точного запрета добавь
-                отдельную зону на плане.
+                {furnitureAsset(item)?.asset.footprints.clearance_zones.length
+                  ? "Зона доступа расположена перед мебелью и поворачивается вместе с ней."
+                  : "Зона обслуживания симметрична. Для точного запрета добавь отдельную зону на плане."}
               </p>
             </fieldset>
             <div className="object-actions">

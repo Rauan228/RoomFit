@@ -1,5 +1,6 @@
 ﻿import clip, { type Ring, type MultiPolygon } from "polygon-clipping";
 import RBush from "rbush";
+import { furnitureAsset, type AssetPolygon } from "./assets";
 import {
   uid,
   type Point,
@@ -120,6 +121,105 @@ export function furniturePolygon(item: Furniture, clearance = 0): Point[] {
     return { x: item.x + r.x, y: item.y + r.y };
   });
 }
+function assetShape(item: Furniture, polygons: AssetPolygon[]): MultiPolygon {
+  return polygons.map((polygon) =>
+    [polygon.outer, ...polygon.holes].map((points) =>
+      ring(
+        points.map((point) => {
+          const rotated = rotate(
+            {
+              x: (point.x - 0.5) * item.width,
+              y: (point.y - 0.5) * item.depth,
+            },
+            item.angle,
+          );
+          return { x: rotated.x + item.x, y: rotated.y + item.y };
+        }),
+      ),
+    ),
+  );
+}
+/** Real compound projection, including holes. A bounding box is only a spatial index. */
+export function furnitureGeometry(
+  item: Furniture,
+  kind: "collision" | "visual" = "collision",
+): MultiPolygon {
+  const resolved = furnitureAsset(item);
+  return resolved
+    ? assetShape(item, resolved.asset.footprints[kind])
+    : [[ring(furniturePolygon(item))]];
+}
+export function furniturePoints(item: Furniture) {
+  return furnitureGeometry(item, "visual").flatMap((polygon) =>
+    polygon[0].map(([x, y]) => ({ x, y })),
+  );
+}
+export function furnitureHeight(item: Furniture) {
+  const bottom = item.elevation || 0;
+  return { bottom, top: bottom + item.height };
+}
+export function furnitureVolumes(item: Furniture) {
+  const resolved = furnitureAsset(item),
+    bottom = item.elevation || 0;
+  if (!resolved)
+    return [
+      { bottom, top: bottom + item.height, shape: furnitureGeometry(item) },
+    ];
+  const scale = item.height / resolved.asset.dimensions.height_mm;
+  return resolved.asset.footprints.volumes.map((v) => ({
+    bottom: bottom + v.min_height_mm * scale,
+    top: bottom + v.max_height_mm * scale,
+    shape: assetShape(item, v.footprints),
+  }));
+}
+export function furnitureOverlap(a: Furniture, b: Furniture) {
+  const ah = furnitureHeight(a),
+    bh = furnitureHeight(b);
+  if (Math.min(ah.top, bh.top) - Math.max(ah.bottom, bh.bottom) <= 0.01)
+    return 0;
+  const projected = polygonArea(
+    clip.intersection(furnitureGeometry(a), furnitureGeometry(b)),
+  );
+  if (projected <= 1) return 0;
+  for (const av of furnitureVolumes(a))
+    for (const bv of furnitureVolumes(b)) {
+      if (
+        Math.min(av.top, bv.top) - Math.max(av.bottom, bv.bottom) > 0.01 &&
+        polygonArea(clip.intersection(av.shape, bv.shape)) > 1
+      )
+        return projected;
+    }
+  return 0;
+}
+export function furnitureServiceGeometry(item: Furniture): MultiPolygon {
+  const resolved = furnitureAsset(item);
+  if (!item.clearance) return [];
+  if (!resolved?.asset.footprints.clearance_zones.length)
+    return [[ring(furniturePolygon(item, item.clearance))]];
+  return assetShape(
+    item,
+    resolved.asset.footprints.clearance_zones.map((zone) => ({
+      holes: [],
+      outer: zone.points.map((p) => ({
+        x: p.x,
+        y:
+          p.y <= 1
+            ? p.y
+            : 1 +
+              ((((p.y - 1) * item.clearance) / zone.depth_mm) *
+                resolved.asset.dimensions.depth_mm) /
+                item.depth,
+      })),
+    })),
+  );
+}
+export function furnitureFitsRoom(item: Furniture, floor: Floor) {
+  const rooms = union(floor.rooms.map((room) => [[ring(room.points)]]));
+  return (
+    rooms.length > 0 &&
+    polygonArea(clip.difference(furnitureGeometry(item), rooms)) < 1
+  );
+}
 export function wallPolygon(w: Wall): Point[] {
   const l = distance(w.start, w.end),
     n = { x: -(w.end.y - w.start.y) / l, y: (w.end.x - w.start.x) / l },
@@ -231,6 +331,30 @@ export function minimumDistance(a: Point[], b: Point[]) {
       );
   return min;
 }
+function geometryDistance(a: MultiPolygon, b: MultiPolygon) {
+  if (polygonArea(clip.intersection(a, b)) > EPS) return 0;
+  let min = Infinity;
+  for (const ar of a.flatMap((p) => p))
+    for (const br of b.flatMap((p) => p))
+      for (let i = 0; i < ar.length; i++)
+        for (let j = 0; j < br.length; j++) {
+          const point = ([x, y]: number[]) => ({ x, y });
+          min = Math.min(
+            min,
+            segmentDistance(
+              point(ar[i]),
+              point(br[j]),
+              point(br[(j + 1) % br.length]),
+            ),
+            segmentDistance(
+              point(br[j]),
+              point(ar[i]),
+              point(ar[(i + 1) % ar.length]),
+            ),
+          );
+        }
+  return min;
+}
 export function fitsRoom(points: Point[], floor: Floor) {
   if (!floor.rooms.length) return false;
   const rooms = union(floor.rooms.map((r) => [[ring(r.points)]]));
@@ -278,14 +402,19 @@ export function analyzeFloor(
   const shapes = solid.map((item) => ({
     item,
     points: furniturePolygon(item),
-    ...bounds(furniturePolygon(item)),
+    shape: furnitureGeometry(item),
+    ...bounds(
+      furnitureGeometry(item).flatMap((polygon) =>
+        polygon.flatMap((ring) => ring.map(([x, y]) => ({ x, y }))),
+      ),
+    ),
   }));
   const index = new RBush<(typeof shapes)[number]>();
   index.load(shapes);
   const checked = new Set<string>();
   let minClearance = Infinity;
   for (const s of shapes) {
-    if (!fitsRoom(s.points, floor))
+    if (!furnitureFitsRoom(s.item, floor))
       push(
         "error",
         "outside",
@@ -294,7 +423,10 @@ export function analyzeFloor(
         s.item,
       );
     for (const wall of floor.walls)
-      if (intersectionArea(s.points, wallPolygon(wall)) > 1)
+      if (
+        furnitureHeight(s.item).bottom < wall.height &&
+        polygonArea(clip.intersection(s.shape, [ring(wallPolygon(wall))])) > 1
+      )
         push(
           "error",
           "wall",
@@ -306,8 +438,9 @@ export function analyzeFloor(
       const wall = floor.walls.find((w) => w.id === opening.wallId);
       if (
         wall &&
+        furnitureHeight(s.item).bottom < opening.height &&
         doorPolygons(wall, opening).some(
-          (p) => intersectionArea(s.points, p) > 1,
+          (p) => polygonArea(clip.intersection(s.shape, [ring(p)])) > 1,
         )
       )
         push(
@@ -319,7 +452,7 @@ export function analyzeFloor(
         );
     }
     for (const zone of floor.zones.filter((z) => z.forbidden))
-      if (intersectionArea(s.points, zone.points) > 1)
+      if (polygonArea(clip.intersection(s.shape, [ring(zone.points)])) > 1)
         push(
           "error",
           "zone",
@@ -344,7 +477,7 @@ export function analyzeFloor(
       const key = [s.item.id, other.item.id].sort().join(":");
       if (checked.has(key)) continue;
       checked.add(key);
-      const overlap = intersectionArea(s.points, other.points);
+      const overlap = furnitureOverlap(s.item, other.item);
       if (overlap > 1)
         push(
           "error",
@@ -354,8 +487,8 @@ export function analyzeFloor(
           s.item,
           overlap,
         );
-      else {
-        const gap = minimumDistance(s.points, other.points);
+      else if (!(s.item.elevation || 0) && !(other.item.elevation || 0)) {
+        const gap = geometryDistance(s.shape, other.shape);
         if (
           gap > 80 &&
           !["plant", "lamp", "chair"].includes(s.item.type) &&
@@ -375,9 +508,13 @@ export function analyzeFloor(
       }
       if (
         other.item.clearance > 0 &&
-        intersectionArea(
-          s.points,
-          furniturePolygon(other.item, other.item.clearance),
+        Math.min(furnitureHeight(s.item).top, furnitureHeight(other.item).top) >
+          Math.max(
+            furnitureHeight(s.item).bottom,
+            furnitureHeight(other.item).bottom,
+          ) &&
+        polygonArea(
+          clip.intersection(s.shape, furnitureServiceGeometry(other.item)),
         ) > 1 &&
         overlap <= 1
       )
@@ -390,9 +527,13 @@ export function analyzeFloor(
         );
       if (
         s.item.clearance > 0 &&
-        intersectionArea(
-          other.points,
-          furniturePolygon(s.item, s.item.clearance),
+        Math.min(furnitureHeight(s.item).top, furnitureHeight(other.item).top) >
+          Math.max(
+            furnitureHeight(s.item).bottom,
+            furnitureHeight(other.item).bottom,
+          ) &&
+        polygonArea(
+          clip.intersection(other.shape, furnitureServiceGeometry(s.item)),
         ) > 1 &&
         overlap <= 1
       )
@@ -406,12 +547,20 @@ export function analyzeFloor(
     }
     const wallGaps = floor.walls
       .map((w) =>
-        Math.min(...s.points.map((p) => segmentDistance(p, w.start, w.end))),
+        Math.min(
+          ...furniturePoints(s.item).map((p) =>
+            segmentDistance(p, w.start, w.end),
+          ),
+        ),
       )
       .filter((d) => d > 80);
     const gap = Math.min(...wallGaps);
-    minClearance = Math.min(minClearance, gap);
-    if (gap < threshold && !["plant", "lamp", "chair"].includes(s.item.type))
+    if (!(s.item.elevation || 0)) minClearance = Math.min(minClearance, gap);
+    if (
+      !(s.item.elevation || 0) &&
+      gap < threshold &&
+      !["plant", "lamp", "chair"].includes(s.item.type)
+    )
       push(
         "warning",
         "wall-gap",
@@ -422,7 +571,7 @@ export function analyzeFloor(
       );
   }
   for (const i of visible.filter((i) => i.type === "rug"))
-    if (!fitsRoom(furniturePolygon(i), floor))
+    if (!furnitureFitsRoom(i, floor))
       push("error", "outside", [i.id], `${i.name}: за границей комнаты`, i);
   for (let i = 0; i < shapes.length; i++)
     for (let j = i + 1; j < shapes.length; j++) {
@@ -430,17 +579,26 @@ export function analyzeFloor(
         b = shapes[j];
       if (
         !checked.has([a.item.id, b.item.id].sort().join(":")) &&
+        !(a.item.elevation || 0) &&
+        !(b.item.elevation || 0) &&
         !["plant", "lamp", "chair"].includes(a.item.type) &&
         !["plant", "lamp", "chair"].includes(b.item.type)
       ) {
-        const gap = minimumDistance(a.points, b.points);
+        const gap = geometryDistance(a.shape, b.shape);
         if (gap > 80) minClearance = Math.min(minClearance, gap);
       }
     }
   const rooms = union(floor.rooms.map((r) => [[ring(r.points)]])),
     occupied =
       solid.length && rooms.length
-        ? clip.intersection(rooms, union(shapes.map((s) => [[ring(s.points)]])))
+        ? clip.intersection(
+            rooms,
+            union(
+              shapes
+                .filter((s) => !(s.item.elevation || 0))
+                .map((s) => s.shape),
+            ),
+          )
         : [];
   return {
     issues,
@@ -563,10 +721,23 @@ export function routeClearance(
     );
   });
   const polygons = items
-      .filter((i) => i.floorId === floor.id && i.type !== "rug")
-      .map((i) => furniturePolygon(i)),
+      .filter(
+        (i) =>
+          i.floorId === floor.id &&
+          i.type !== "rug" &&
+          furnitureHeight(i).bottom < 1800,
+      )
+      .flatMap((i) =>
+        furnitureGeometry(i).map((poly) =>
+          poly.map((contour) => contour.map(([x, y]) => ({ x, y }))),
+        ),
+      ),
     forbidden = floor.zones.filter((z) => z.forbidden).map((z) => z.points),
-    all = [...polygons, ...forbidden, ...wallParts];
+    all = [
+      ...polygons,
+      ...forbidden.map((poly) => [poly]),
+      ...wallParts.map((poly) => [poly]),
+    ];
   const nx = Math.ceil((box.maxX - box.minX) / step),
     ny = Math.ceil((box.maxY - box.minY) / step),
     free = new Set<number>(),
@@ -585,10 +756,13 @@ export function routeClearance(
       if (
         all.some(
           (poly) =>
-            pointInside(p, poly) ||
+            (pointInside(p, poly[0]) &&
+              !poly.slice(1).some((hole) => pointInside(p, hole))) ||
             Math.min(
-              ...poly.map((a, i) =>
-                segmentDistance(p, a, poly[(i + 1) % poly.length]),
+              ...poly.flatMap((contour) =>
+                contour.map((a, i) =>
+                  segmentDistance(p, a, contour[(i + 1) % contour.length]),
+                ),
               ),
             ) <
               radius + step * 0.71,
@@ -677,20 +851,31 @@ export function routeClearance(
   };
 }
 function physicallyFits(item: Furniture, floor: Floor, others: Furniture[]) {
-  const p = furniturePolygon(item);
+  const shape = furnitureGeometry(item),
+    height = furnitureHeight(item);
   return (
-    fitsRoom(p, floor) &&
+    furnitureFitsRoom(item, floor) &&
     !others
       .filter((i) => i.floorId === floor.id && i.type !== "rug")
-      .some((i) => intersectionArea(p, furniturePolygon(i)) > 1) &&
-    !floor.walls.some((w) => intersectionArea(p, wallPolygon(w)) > 1) &&
+      .some((i) => furnitureOverlap(item, i) > 1) &&
+    !floor.walls.some(
+      (w) =>
+        height.bottom < w.height &&
+        polygonArea(clip.intersection(shape, [ring(wallPolygon(w))])) > 1,
+    ) &&
     !floor.zones
       .filter((z) => z.forbidden)
-      .some((z) => intersectionArea(p, z.points) > 1) &&
+      .some(
+        (z) => polygonArea(clip.intersection(shape, [ring(z.points)])) > 1,
+      ) &&
     !floor.openings.some((o) => {
       const w = floor.walls.find((w) => w.id === o.wallId);
       return (
-        w && doorPolygons(w, o).some((poly) => intersectionArea(p, poly) > 1)
+        w &&
+        height.bottom < o.height &&
+        doorPolygons(w, o).some(
+          (poly) => polygonArea(clip.intersection(shape, [ring(poly)])) > 1,
+        )
       );
     })
   );
@@ -731,7 +916,9 @@ export function whatFits(
         };
         if (
           physicallyFits(item, floor, items) &&
-          furniturePolygon(item).every((v) => pointInside(v, region))
+          polygonArea(
+            clip.difference(furnitureGeometry(item), [ring(region)]),
+          ) < 1
         ) {
           results.push({
             catalog: c,
@@ -754,7 +941,7 @@ export function whatFits(
   return {
     results,
     physicalBounds: { width: b.maxX - b.minX, depth: b.maxY - b.minY },
-    note: "Проверены прямоугольные предметы в ориентациях 0° и 90°. Габариты области не являются гарантированным размером для любого положения.",
+    note: "Проверены контуры предметов в ориентациях 0° и 90°. Габариты области не являются гарантированным размером для любого положения.",
   };
 }
 export function smartLayouts(floor: Floor, variant: Variant): Variant[] {

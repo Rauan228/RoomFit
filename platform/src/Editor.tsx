@@ -1219,6 +1219,23 @@ export function Editor({
       )}
       <div className="editor-body">
         <div className={`canvas-host view-${viewMode}`} ref={canvasHost}>
+          <label className="plan-style">
+            Мебель
+            <select
+              aria-label="Представление мебели в 2D"
+              disabled={readOnly}
+              value={doc.settings.furnitureMode || "detailed"}
+              onChange={(event) =>
+                change((d) => {
+                  d.settings.furnitureMode = event.target.value as
+                    "detailed" | "technical";
+                })
+              }
+            >
+              <option value="detailed">Детализированная</option>
+              <option value="technical">Техническая</option>
+            </select>
+          </label>
           <div className="toolbox">
             {(
               [

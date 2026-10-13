@@ -1,0 +1,12 @@
+{
+  "asset_id": "rug",
+  "generation_version": "v1-b6c0443d76cd",
+  "files": {
+    "3d/model.glb": "0f766c8ce796631ccfc7dc807a96a2562e3a3aad0a62a23044ddfc2d805c1680",
+    "validation/coordinates.png": "95ef0c921a1cf95872367a5a591c927c090b5b282b246e6e4bc548a58a52205b",
+    "2d/original/top_view_1024.png": "c89dc408362a16a2b4de9a0fb9774e4a65caaa6d3ea30d2fc5b497f981f1dfd4",
+    "2d/sand/top_view_1024.png": "9f97c0f5e209a51e9bd3e05cdb87679e9a7e0de66508675d49e9631019abf8f9",
+    "2d/graphite/top_view_1024.png": "3dff1f30bd8690f3f819cea0aae1c75c03823901d3970ec4ce8f1893eeec52d2",
+    "2d/walnut/top_view_1024.png": "e3295a978eccd4eba00b9724f2adad87df0807a56eb18a7a0a2008d29e7466d6"
+  }
+}

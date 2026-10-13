@@ -3,6 +3,8 @@ import {
   CATALOG,
   createDocument,
   furniturePolygon,
+  furniturePoints,
+  bounds,
   instantiate,
   area,
   type Opening,
@@ -36,7 +38,12 @@ describe("Physical conversion between the plan and scene", () => {
       angle: 45,
     };
     const pose = furniturePose(item);
-    const corner = new Vector3(-item.width / 2000, 0, -item.depth / 2000)
+    const point = item.contour?.[0] || { x: 0, y: 0 };
+    const corner = new Vector3(
+      ((point.x - 0.5) * item.width) / 1000,
+      0,
+      ((point.y - 0.5) * item.depth) / 1000,
+    )
       .applyEuler(new Euler(0, pose.yaw, 0))
       .add(new Vector3(...pose.position));
     const planCorner = furniturePolygon(item)[0];
@@ -55,8 +62,12 @@ describe("Physical conversion between the plan and scene", () => {
     const frame = sceneBounds(floor, [item]);
     expect(frame.center).toEqual([1, 0, 1]);
     expect(frame.span).toBe(6);
+    const footprint = bounds(furniturePoints(item));
     expect(sceneBounds(floor, [{ ...item, height: 500 }]).span).toBeCloseTo(
-      Math.sqrt(32),
+      Math.max(
+        footprint.maxX - footprint.minX,
+        footprint.maxY - footprint.minY,
+      ) / 1000,
       6,
     );
   });

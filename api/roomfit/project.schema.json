@@ -365,6 +365,26 @@
                   "type": "string",
                   "maxLength": 100
                 },
+                "assetId": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9_-]+$",
+                  "maxLength": 100
+                },
+                "assetVersion": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z0-9_.-]+$",
+                  "maxLength": 100
+                },
+                "materialVariant": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9_-]+$",
+                  "maxLength": 80
+                },
+                "elevation": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 20000
+                },
                 "floorId": {
                   "$ref": "#/properties/floors/items/properties/id"
                 },
@@ -530,6 +550,13 @@
     "settings": {
       "type": "object",
       "properties": {
+        "furnitureMode": {
+          "type": "string",
+          "enum": [
+            "detailed",
+            "technical"
+          ]
+        },
         "clearance": {
           "type": "number",
           "minimum": 0,

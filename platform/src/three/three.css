@@ -33,6 +33,27 @@
 .three-host[hidden] {
   display: none;
 }
+.plan-style {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fffffff2;
+  font-size: 11px;
+}
+.plan-style select {
+  min-height: 34px;
+  font-size: 11px;
+}
+.canvas-host.view-3d > .plan-style {
+  display: none;
+}
 .three-host > div:first-child {
   width: 100%;
   height: 100%;

@@ -4,11 +4,34 @@ from io import BytesIO
 from jsonschema import Draft7Validator, FormatChecker
 from shapely.geometry import Polygon
 from PIL import Image
+from functools import lru_cache
 
 SCHEMA_PATH = Path(__file__).with_name("project.schema.json")
 VALIDATOR = Draft7Validator(
     json.loads(SCHEMA_PATH.read_text(encoding="utf-8")), format_checker=FormatChecker()
 )
+
+
+@lru_cache(maxsize=4)
+def _asset_registry(fingerprints):
+    current, versions = fingerprints
+    assets = json.loads(Path(current[0]).read_text(encoding="utf-8")) if current[1] else {}
+    archived = json.loads(Path(versions[0]).read_text(encoding="utf-8")) if versions[1] else {}
+    return assets, archived
+
+
+def validate_asset_reference(item):
+    if not item.get("assetId"):
+        return
+    paths = [Path(__file__).with_name(name) for name in ("asset-manifest.json", "asset-versions.json")]
+    current, archived = _asset_registry(tuple((str(p), p.stat().st_mtime_ns if p.exists() else 0) for p in paths))
+    asset = archived.get(item["assetId"] + "@" + item.get("assetVersion", "")) if item.get("assetVersion") else current.get(item["assetId"])
+    if not asset or asset.get("validation_status") != "approved":
+        raise ValueError("Версия модели мебели недоступна")
+    if item.get("materialVariant") and item["materialVariant"] not in {v["id"] for v in asset["material_variants"]}:
+        raise ValueError("Вариант материала недоступен")
+    if asset["resizing"] == "fixed" and any(abs(item[key] - asset["dimensions"][dimension]) > .01 for key, dimension in [("width", "width_mm"), ("depth", "depth_mm"), ("height", "height_mm")]):
+        raise ValueError("Эта модель имеет фиксированные размеры")
 
 
 def validate_document(doc):
@@ -17,7 +40,7 @@ def validate_document(doc):
     errors = list(VALIDATOR.iter_errors(doc))
     if errors:
         raise ValueError(
-            "Некорректный проект: " + ".".join(str(p) for p in errors[0].absolute_path)
+            "Некорректный проект: " + ".".join(str(p) for p in errors[0].absolute_path) + ": " + errors[0].message
         )
     floor_ids = {f["id"] for f in doc["floors"]}
     if len(floor_ids) != len(doc["floors"]):
@@ -99,6 +122,7 @@ def validate_document(doc):
         if len({i["id"] for i in v["items"]}) != len(v["items"]):
             raise ValueError("Повторяющиеся предметы")
         for item in v["items"]:
+            validate_asset_reference(item)
             if item["floorId"] not in floor_ids:
                 raise ValueError("Предмет относится к неизвестному этажу")
             if item.get("contour"):
@@ -130,6 +154,11 @@ def validate_catalog(data):
             or (field != "height" and n < 10)
         ):
             raise ValueError("Некорректные размеры")
+    if data.get("elevation") is not None and (not isinstance(data["elevation"], (int, float)) or not math.isfinite(data["elevation"]) or not 0 <= data["elevation"] <= 20000):
+        raise ValueError("Некорректная высота установки")
+    for key, pattern, limit in [("assetId", r"^[a-z0-9_-]+$", 100), ("assetVersion", r"^[a-zA-Z0-9_.-]+$", 100), ("materialVariant", r"^[a-z0-9_-]+$", 80)]:
+        if key in data and (not isinstance(data[key], str) or len(data[key]) > limit or not re.fullmatch(pattern, data[key])):
+            raise ValueError("Некорректные метаданные ассета")
     if not isinstance(data.get("type"), str) or not isinstance(
         data.get("category"), str
     ):
@@ -163,4 +192,5 @@ def validate_catalog(data):
             or any(not 0 <= v[k] <= 1 for v in contour for k in ["x", "y"])
         ):
             raise ValueError("Некорректный контур")
+    validate_asset_reference(data)
     return data

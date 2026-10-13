@@ -10,6 +10,22 @@ const polygon = z.array(pointSchema).min(3).max(200);
 export const furnitureSchema = z.object({
   id,
   catalogId: z.string().max(100).optional(),
+  assetId: z
+    .string()
+    .regex(/^[a-z0-9_-]+$/)
+    .max(100)
+    .optional(),
+  assetVersion: z
+    .string()
+    .regex(/^[a-zA-Z0-9_.-]+$/)
+    .max(100)
+    .optional(),
+  materialVariant: z
+    .string()
+    .regex(/^[a-z0-9_-]+$/)
+    .max(80)
+    .optional(),
+  elevation: number.min(0).max(20000).optional(),
   floorId: id,
   name: z.string().min(1).max(120),
   type: z.string().max(40),
@@ -132,6 +148,7 @@ export const documentSchema = z.object({
     .max(30),
   activeVariantId: id,
   settings: z.object({
+    furnitureMode: z.enum(["detailed", "technical"]).optional(),
     clearance: number.min(0).max(3000),
     gridSize: number.min(1).max(1000),
     snap: z.boolean(),
@@ -166,6 +183,10 @@ export type CatalogItem = Pick<
   | "color"
   | "clearance"
   | "contour"
+  | "assetId"
+  | "assetVersion"
+  | "materialVariant"
+  | "elevation"
 > & { id: string; tags: string[] };
 export const unitFactor = (unit: ProjectDocument["units"]) =>
   unit === "m" ? 1000 : unit === "ft" ? 304.8 : 10;

@@ -1,0 +1,12 @@
+{
+  "asset_id": "desk",
+  "generation_version": "v1-81b200bad9fc",
+  "files": {
+    "3d/model.glb": "de4ae8cc1752939d69815ed3a1b45ff21cc97311e660318a192a4806cf142d86",
+    "validation/coordinates.png": "c4272b46da8a3d721b0271e6d153898a2193f4a6c6ff6ea4dfb86a69090653a2",
+    "2d/original/top_view_1024.png": "98b8265fbb3976888366fb57d612e9712aa23adca04cf6ab9a3fe80be06ded51",
+    "2d/sand/top_view_1024.png": "d5e1acd73382671bef574a864fa9fb832bbf85244141962a47935f5b05235173",
+    "2d/graphite/top_view_1024.png": "8c45e775d503ce4d3114727fa0de4410fd63eb04d93e0dae7e222f0ec7de82ed",
+    "2d/walnut/top_view_1024.png": "96a6e63f37a58eb862474a73fada523ad36e6466a82d0e4e59a9717cec201ec6"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "asset_id": "lamp",
+  "generation_version": "v1-a19c35f28a75",
+  "files": {
+    "3d/model.glb": "f8e1b8c05363185fcc3649e75b60cc4d95bce1b04abc25f13f39e4f4851bf772",
+    "validation/coordinates.png": "a07903e16fcb20dcf64654d1485479dbbfa240a6a50424acdf4efe0318651c5d",
+    "2d/original/top_view_1024.png": "cee903a2c294a23293d37422fbb22e5c03fcf53e63be9da1e0a7e2efabe7bd4f",
+    "2d/sand/top_view_1024.png": "c7f169003e9a8e1d6dc6624b2705c3daf1fdcf6e8cadcdc8a43a6e5da81d1d74",
+    "2d/graphite/top_view_1024.png": "837fe148998abaa6be0e34a3a83fe0fb29242746de8c7f17b0354cd30ed4c2aa",
+    "2d/walnut/top_view_1024.png": "73cda8d59764653fa4a619f8c4dd89d61991610aa7c15271428c3f636fc5f185"
+  }
+}

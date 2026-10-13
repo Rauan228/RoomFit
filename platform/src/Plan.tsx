@@ -4,7 +4,7 @@ import { useId, type ReactNode } from "react";
 import {
   bounds,
   distance,
-  furniturePolygon,
+  furniturePoints,
   openingPosition,
   doorPolygons,
   formatLength,
@@ -45,7 +45,7 @@ export function planBounds(floor: Floor, items: Furniture[] = []) {
       : []),
     ...items
       .filter((i) => i.floorId === floor.id)
-      .flatMap((i) => furniturePolygon(i)),
+      .flatMap((i) => furniturePoints(i)),
   ]);
   if (!Number.isFinite(b.minX))
     return { x: -400, y: -400, width: 4800, height: 4000 };
@@ -219,6 +219,7 @@ export function PlanContent({
   selectItem,
   selectEntity,
   children,
+  highResolution = false,
 }: {
   floor: Floor;
   items: Furniture[];
@@ -233,6 +234,7 @@ export function PlanContent({
     e: React.PointerEvent<SVGElement>,
   ) => void;
   children?: ReactNode;
+  highResolution?: boolean;
 }) {
   const rawId = useId(),
     id = rawId.replace(/:/g, ""),
@@ -372,7 +374,11 @@ export function PlanContent({
         })}
       {layers.furniture &&
         [...items.filter((i) => i.floorId === floor.id)]
-          .sort((a, b) => Number(b.type === "rug") - Number(a.type === "rug"))
+          .sort(
+            (a, b) =>
+              (a.elevation || 0) - (b.elevation || 0) ||
+              Number(b.type === "rug") - Number(a.type === "rug"),
+          )
           .map((item) => (
             <FurnitureShape
               key={item.id}
@@ -381,6 +387,8 @@ export function PlanContent({
               status={status[item.id]}
               units={unit}
               names={layers.names}
+              displayMode={doc.settings.furnitureMode || "detailed"}
+              highResolution={highResolution}
               onPointerDown={
                 selectItem ? (e) => selectItem(item, e) : undefined
               }

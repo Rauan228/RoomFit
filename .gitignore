@@ -24,3 +24,5 @@ api/data/
 *.zip
 *.tar.gz
 *.thumbnail
+*.blend1
+/assets/furniture/**/generation.log

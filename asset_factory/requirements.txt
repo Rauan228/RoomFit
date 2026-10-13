@@ -1,0 +1,5 @@
+Pillow>=11,<13
+numpy>=2.2,<2.4
+shapely>=2.0,<3
+pytest>=8,<10
+jsonschema>=4.23,<5

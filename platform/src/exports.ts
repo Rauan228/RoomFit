@@ -75,7 +75,12 @@ export async function exportPlan(doc: ProjectDocument, options: ExportOptions) {
         height: b.height,
         fill: "white",
       }),
-      createElement(PlanContent, { floor: exportFloor, items, doc: scope }),
+      createElement(PlanContent, {
+        floor: exportFloor,
+        items,
+        doc: scope,
+        highResolution: true,
+      }),
     ),
   );
   const escape = (s: string) =>
@@ -96,7 +101,7 @@ export async function exportPlan(doc: ProjectDocument, options: ExportOptions) {
         `${i.name} · ${formatLength(i.width, doc.units)} × ${formatLength(i.depth, doc.units)} × ${formatLength(i.height, doc.units)} · ${i.shopping.owned ? "уже есть" : "купить"} · ${i.shopping.price.toLocaleString("ru-RU")}`,
     )
     .join("\n");
-  const svg = drawing;
+  const svg = await embedAssetImages(drawing);
   if (options.format === "svg") {
     download(new Blob([svg], { type: "image/svg+xml" }), `${doc.name}.svg`);
     return;
@@ -176,6 +181,42 @@ export async function exportPlan(doc: ProjectDocument, options: ExportOptions) {
     );
   }
   pdf.save(`${doc.name}.pdf`);
+}
+const imageData = new Map<string, Promise<string>>();
+async function embedAssetImages(svg: string) {
+  const sources = [
+    ...new Set(
+      [...svg.matchAll(/href="(\/assets\/furniture\/[^"<>]+)"/g)].map(
+        (match) => match[1],
+      ),
+    ),
+  ];
+  for (const source of sources) {
+    if (!imageData.has(source))
+      imageData.set(
+        source,
+        (async () => {
+          const response = await fetch(source);
+          if (!response.ok)
+            throw Error("Не удалось загрузить изображение мебели для экспорта");
+          return new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result));
+            reader.onerror = reject;
+            response.blob().then((blob) => reader.readAsDataURL(blob), reject);
+          });
+        })(),
+      );
+    try {
+      svg = svg
+        .split(`href="${source}"`)
+        .join(`href="${await imageData.get(source)}"`);
+    } catch (error) {
+      imageData.delete(source);
+      throw error;
+    }
+  }
+  return svg;
 }
 async function rasterize(svg: string, width: number, height: number) {
   if (width * height > 32e6)

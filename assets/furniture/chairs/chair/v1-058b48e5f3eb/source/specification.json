@@ -1,0 +1,54 @@
+{
+  "asset_id": "chair",
+  "name": "Стул",
+  "category": "chairs",
+  "catalog_category": "Стулья",
+  "type": "chair",
+  "dimensions": {
+    "width_mm": 450,
+    "depth_mm": 500,
+    "height_mm": 850
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#cbb99e",
+      "roughness": 0.72
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#c9b696",
+      "roughness": 0.78
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#66716a",
+      "roughness": 0.67
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#927356",
+      "roughness": 0.5
+    }
+  ],
+  "generation_version": "v1-058b48e5f3eb"
+}

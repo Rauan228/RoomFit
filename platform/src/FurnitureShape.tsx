@@ -1,11 +1,14 @@
 import { useId, type PointerEventHandler } from "react";
 import {
-  furniturePolygon,
+  furnitureAsset,
+  furnitureGeometry,
+  furniturePoints,
   formatLength,
   type Furniture,
   type ProjectDocument,
 } from "@roomfit/core";
-import { FurnitureArtwork } from "./FurnitureArtwork";
+import FallbackArtwork from "./FallbackArtwork";
+import AssetArtwork from "./AssetArtwork";
 
 export function FurnitureShape({
   item,
@@ -14,6 +17,9 @@ export function FurnitureShape({
   names,
   units,
   onPointerDown,
+  displayMode = "detailed",
+  thumbnail = false,
+  highResolution = false,
 }: {
   item: Furniture;
   selected?: boolean;
@@ -21,11 +27,24 @@ export function FurnitureShape({
   names?: boolean;
   units: ProjectDocument["units"];
   onPointerDown?: PointerEventHandler<SVGGElement>;
+  displayMode?: "detailed" | "technical";
+  thumbnail?: boolean;
+  highResolution?: boolean;
 }) {
   const clipId = `footprint-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`,
-    footprint = furniturePolygon(item),
-    points = (p: { x: number; y: number }[]) =>
-      p.map((v) => `${v.x},${v.y}`).join(" "),
+    resolved = furnitureAsset(item),
+    shape = furnitureGeometry(item),
+    shapePath = (geometry: typeof shape) =>
+      geometry
+        .map((poly) =>
+          poly
+            .map(
+              (ring) =>
+                "M " + ring.map(([x, y]) => `${x},${y}`).join(" L ") + " Z",
+            )
+            .join(" "),
+        )
+        .join(" "),
     contour = item.contour || [
       { x: 0, y: 0 },
       { x: 1, y: 0 },
@@ -53,27 +72,31 @@ export function FurnitureShape({
           />
         </clipPath>
       </defs>
-      <polygon
-        points={points(footprint)}
+      <path
+        d={shapePath(shape)}
         fill="transparent"
+        fillRule="evenodd"
         pointerEvents="all"
       />
       <g
         transform={`translate(${item.x} ${item.y}) rotate(${item.angle}) translate(${-item.width / 2} ${-item.depth / 2}) scale(${item.width / 1000} ${item.depth / 1000})`}
         pointerEvents="none"
-        clipPath={`url(#${clipId})`}
+        clipPath={resolved ? undefined : `url(#${clipId})`}
       >
-        <FurnitureArtwork
-          type={item.type}
-          color={item.color}
-          width={item.width}
-          depth={item.depth}
-          catalogId={item.catalogId}
-        />
+        {resolved ? (
+          <AssetArtwork
+            item={item}
+            mode={displayMode}
+            thumbnail={thumbnail}
+            highResolution={highResolution}
+          />
+        ) : (
+          <FallbackArtwork item={item} />
+        )}
       </g>
       {(status || item.contour) && (
-        <polygon
-          points={points(footprint)}
+        <path
+          d={shapePath(shape)}
           fill="none"
           stroke={status ? outline : "#7b8070"}
           strokeWidth={status ? 18 : 10}
@@ -82,8 +105,14 @@ export function FurnitureShape({
         />
       )}
       {selected && (
-        <polygon
-          points={points(furniturePolygon(item, 45))}
+        <path
+          d={shapePath(
+            furnitureGeometry({
+              ...item,
+              width: item.width + 90,
+              depth: item.depth + 90,
+            }),
+          )}
           fill="none"
           stroke="#28786a"
           strokeWidth="15"
@@ -95,7 +124,7 @@ export function FurnitureShape({
       {names && (
         <text
           x={item.x}
-          y={Math.max(...footprint.map((p) => p.y)) + 145}
+          y={Math.max(...furniturePoints(item).map((p) => p.y)) + 145}
           textAnchor="middle"
           fontSize="95"
           fill="#3a3936"

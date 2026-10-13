@@ -1,0 +1,12 @@
+{
+  "asset_id": "bath",
+  "generation_version": "v1-4fce4eef4462",
+  "files": {
+    "3d/model.glb": "531a0aba8533ea0776c8c48eae6fc0a2094eedff37d891808643664fef5b23b7",
+    "validation/coordinates.png": "08dd0c7b0c03f7d6e6ad5c3b109481203a13b6a05a303fc5933b08c3f4aa4f4f",
+    "2d/original/top_view_1024.png": "03071f6453288a586858720bc5bb4f27017fbf7e42bd3fe2d915b0ad5b939630",
+    "2d/sand/top_view_1024.png": "51adc92f68171f689c47b42b91b10708471fe19bc4395067e9beee587c8fa466",
+    "2d/graphite/top_view_1024.png": "8a95b14c89356d0393e7c2843a6d34c2ca8307d098312667cebf4edfdb8a59d6",
+    "2d/walnut/top_view_1024.png": "ffdc867bde2dabb7f4355493f2c0ec507b128e5a79b8ba355ce70e5d9a06c4f4"
+  }
+}

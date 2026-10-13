@@ -1,0 +1,12 @@
+{
+  "asset_id": "bed-single",
+  "generation_version": "v1-14029ece910d",
+  "files": {
+    "3d/model.glb": "ae329f49bbfdc0bd9621faab8279651848ef281953dd8bc12b22870ecebb845b",
+    "validation/coordinates.png": "c553bf01050bc76ccc018e49ffbad09b0416359fe295c1855f3fd6eea33d6a88",
+    "2d/original/top_view_1024.png": "506538317c61983a282ac6068b44c271832f8bf4f3be23a8f5413657b1469840",
+    "2d/sand/top_view_1024.png": "0317df4a75e44f43f167510cf91b222f24d6604d43134d5177b50bd68dc2fc44",
+    "2d/graphite/top_view_1024.png": "2578fa45a00c6cd2f22c38f776981137cc6afea8fd785cc9c1c99ea954f071bb",
+    "2d/walnut/top_view_1024.png": "fb418e862f82f26bc465e4655e04a650b375c01a4c10ebdc1a79ecf5bf9e4be9"
+  }
+}

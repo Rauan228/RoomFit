@@ -1,0 +1,12 @@
+{
+  "asset_id": "plant",
+  "generation_version": "v1-728f8f3a231a",
+  "files": {
+    "3d/model.glb": "4bfee97a7def145a80292803b1b34a76932d7a8ce0532cbe011909c549dcffbf",
+    "validation/coordinates.png": "e6b313ca3453dcde68aa84d51168cdab97e35937711e7e26fd7f78c16f3a16e5",
+    "2d/original/top_view_1024.png": "4b966b2e402eb42c50904cbf563eac94ad0e3f4ec77dfb4332fd0fa668e7f305",
+    "2d/sand/top_view_1024.png": "d748eb11a9dca276553520368ba233498c5e7efd2e362f6a184d1eb730a718d0",
+    "2d/graphite/top_view_1024.png": "fa585e98a2130aa7983b013727c01958f33b3f34e1d08bf589b09a56835b5cdd",
+    "2d/walnut/top_view_1024.png": "7b2c6ea9f8fd0d246d637011a32e6f8e12a2539f430fff2496494f63e74a92ac"
+  }
+}

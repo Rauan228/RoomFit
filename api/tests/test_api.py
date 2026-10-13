@@ -1,4 +1,5 @@
 import os, json
+import uuid
 from pathlib import Path
 
 os.environ["DATABASE_URL"] = "sqlite://"
@@ -49,6 +50,38 @@ def doc():
 
 def project(c):
     return c.post("/api/projects", json={"document": doc()})
+
+
+def asset_document():
+    document = doc()
+    catalog = json.loads((Path(__file__).parents[1] / "roomfit/catalog.json").read_text(encoding="utf-8"))
+    source = next(c for c in catalog if c["id"] == "sofa")
+    allowed = {"name", "type", "category", "width", "depth", "height", "color", "clearance", "contour", "assetId", "assetVersion", "materialVariant", "elevation"}
+    furniture = {key: value for key, value in source.items() if key in allowed}
+    furniture.update(id=str(uuid.uuid4()), catalogId="sofa", floorId=document["floors"][0]["id"], x=2000, y=1600, angle=45, locked=False, elevation=1500, materialVariant="graphite", color="#66716a", shopping={"owned": False, "price": 0, "store": "", "url": "", "note": ""})
+    document["variants"][0]["items"] = [furniture]
+    document["settings"]["furnitureMode"] = "technical"
+    return document
+
+
+def test_asset_version_material_elevation_and_mode_survive_save(client):
+    register(client)
+    document = asset_document()
+    response = client.post("/api/projects", json={"document": document})
+    assert response.status_code == 201, response.text
+    restored = client.get("/api/projects/" + response.json()["id"]).json()["document"]
+    assert restored["variants"][0]["items"][0] == document["variants"][0]["items"][0]
+    assert restored["settings"]["furnitureMode"] == "technical"
+
+
+def test_unavailable_asset_version_and_material_cannot_be_saved(client):
+    register(client)
+    document = asset_document()
+    document["variants"][0]["items"][0]["assetVersion"] = "v1-missing"
+    assert client.post("/api/projects", json={"document": document}).status_code == 422
+    document = asset_document()
+    document["variants"][0]["items"][0]["materialVariant"] = "missing-finish"
+    assert client.post("/api/projects", json={"document": document}).status_code == 422
 
 
 def test_registration_session_and_csrf(client):

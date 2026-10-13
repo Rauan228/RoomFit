@@ -1,0 +1,1383 @@
+[
+  {
+    "asset_id": "bed-double",
+    "name": "Кровать двуспальная",
+    "category": "beds",
+    "catalog_category": "Кровати",
+    "type": "bed",
+    "dimensions": {
+      "width_mm": 1600,
+      "depth_mm": 2000,
+      "height_mm": 600
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#e9e0d1",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "bed-single",
+    "name": "Кровать односпальная",
+    "category": "beds",
+    "catalog_category": "Кровати",
+    "type": "bed",
+    "dimensions": {
+      "width_mm": 900,
+      "depth_mm": 2000,
+      "height_mm": 600
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#e9e0d1",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "bed-kids",
+    "name": "Детская кровать",
+    "category": "beds",
+    "catalog_category": "Кровати",
+    "type": "bed",
+    "dimensions": {
+      "width_mm": 800,
+      "depth_mm": 1600,
+      "height_mm": 550
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#e9e0d1",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "sofa",
+    "name": "Диван",
+    "category": "sofas",
+    "catalog_category": "Диваны",
+    "type": "sofa",
+    "dimensions": {
+      "width_mm": 2200,
+      "depth_mm": 950,
+      "height_mm": 850
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#819986",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "sofa-small",
+    "name": "Компактный диван",
+    "category": "sofas",
+    "catalog_category": "Диваны",
+    "type": "sofa",
+    "dimensions": {
+      "width_mm": 1600,
+      "depth_mm": 900,
+      "height_mm": 800
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "armchair",
+    "name": "Кресло",
+    "category": "armchairs",
+    "catalog_category": "Кресла",
+    "type": "armchair",
+    "dimensions": {
+      "width_mm": 800,
+      "depth_mm": 800,
+      "height_mm": 900
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#819986",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "desk",
+    "name": "Рабочий стол",
+    "category": "tables",
+    "catalog_category": "Столы",
+    "type": "desk",
+    "dimensions": {
+      "width_mm": 1200,
+      "depth_mm": 600,
+      "height_mm": 750
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "table",
+    "name": "Обеденный стол",
+    "category": "tables",
+    "catalog_category": "Столы",
+    "type": "table",
+    "dimensions": {
+      "width_mm": 1400,
+      "depth_mm": 800,
+      "height_mm": 750
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "coffee",
+    "name": "Журнальный стол",
+    "category": "tables",
+    "catalog_category": "Столы",
+    "type": "coffee",
+    "dimensions": {
+      "width_mm": 800,
+      "depth_mm": 550,
+      "height_mm": 450
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "chair",
+    "name": "Стул",
+    "category": "chairs",
+    "catalog_category": "Стулья",
+    "type": "chair",
+    "dimensions": {
+      "width_mm": 450,
+      "depth_mm": 500,
+      "height_mm": 850
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "wardrobe",
+    "name": "Шкаф",
+    "category": "wardrobes",
+    "catalog_category": "Шкафы",
+    "type": "wardrobe",
+    "dimensions": {
+      "width_mm": 1800,
+      "depth_mm": 600,
+      "height_mm": 2200
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 600,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "dresser",
+    "name": "Комод",
+    "category": "dressers",
+    "catalog_category": "Комоды",
+    "type": "dresser",
+    "dimensions": {
+      "width_mm": 1000,
+      "depth_mm": 450,
+      "height_mm": 900
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 600,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "nightstand",
+    "name": "Тумба",
+    "category": "nightstands",
+    "catalog_category": "Тумбы",
+    "type": "nightstand",
+    "dimensions": {
+      "width_mm": 500,
+      "depth_mm": 400,
+      "height_mm": 500
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "shelf",
+    "name": "Стеллаж",
+    "category": "shelves",
+    "catalog_category": "Стеллажи",
+    "type": "shelf",
+    "dimensions": {
+      "width_mm": 800,
+      "depth_mm": 350,
+      "height_mm": 1800
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "kitchen",
+    "name": "Кухонный гарнитур",
+    "category": "kitchens",
+    "catalog_category": "Кухня",
+    "type": "kitchen",
+    "dimensions": {
+      "width_mm": 2400,
+      "depth_mm": 600,
+      "height_mm": 900
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "sink",
+    "name": "Раковина",
+    "category": "bathroom",
+    "catalog_category": "Сантехника",
+    "type": "sink",
+    "dimensions": {
+      "width_mm": 600,
+      "depth_mm": 500,
+      "height_mm": 850
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "bath",
+    "name": "Ванна",
+    "category": "bathroom",
+    "catalog_category": "Сантехника",
+    "type": "bath",
+    "dimensions": {
+      "width_mm": 1700,
+      "depth_mm": 750,
+      "height_mm": 600
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "toilet",
+    "name": "Унитаз",
+    "category": "bathroom",
+    "catalog_category": "Сантехника",
+    "type": "toilet",
+    "dimensions": {
+      "width_mm": 400,
+      "depth_mm": 650,
+      "height_mm": 750
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "fridge",
+    "name": "Холодильник",
+    "category": "appliances",
+    "catalog_category": "Техника",
+    "type": "fridge",
+    "dimensions": {
+      "width_mm": 600,
+      "depth_mm": 650,
+      "height_mm": 1900
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ],
+    "generator": "appliance"
+  },
+  {
+    "asset_id": "washer",
+    "name": "Стиральная машина",
+    "category": "appliances",
+    "catalog_category": "Техника",
+    "type": "washer",
+    "dimensions": {
+      "width_mm": 600,
+      "depth_mm": 600,
+      "height_mm": 850
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ],
+    "generator": "appliance"
+  },
+  {
+    "asset_id": "stove",
+    "name": "Плита",
+    "category": "appliances",
+    "catalog_category": "Техника",
+    "type": "stove",
+    "dimensions": {
+      "width_mm": 600,
+      "depth_mm": 600,
+      "height_mm": 850
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ],
+    "generator": "appliance"
+  },
+  {
+    "asset_id": "lamp",
+    "name": "Торшер",
+    "category": "lighting",
+    "catalog_category": "Освещение",
+    "type": "lamp",
+    "dimensions": {
+      "width_mm": 400,
+      "depth_mm": 400,
+      "height_mm": 1700
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "plant",
+    "name": "Растение",
+    "category": "decor",
+    "catalog_category": "Декор",
+    "type": "plant",
+    "dimensions": {
+      "width_mm": 450,
+      "depth_mm": 450,
+      "height_mm": 1000
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#639568",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "rug",
+    "name": "Ковёр",
+    "category": "decor",
+    "catalog_category": "Декор",
+    "type": "rug",
+    "dimensions": {
+      "width_mm": 2000,
+      "depth_mm": 1400,
+      "height_mm": 10
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "sofa-corner",
+    "name": "Угловой диван",
+    "category": "sofas",
+    "catalog_category": "Диваны",
+    "type": "sofa-corner",
+    "dimensions": {
+      "width_mm": 2800,
+      "depth_mm": 1800,
+      "height_mm": 850
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "floor",
+    "elevation_mm": 0,
+    "clearance_mm": 0,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#819986",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  },
+  {
+    "asset_id": "wall-shelf",
+    "name": "Настенная полка",
+    "category": "shelves",
+    "catalog_category": "Стеллажи",
+    "type": "wall-shelf",
+    "dimensions": {
+      "width_mm": 1000,
+      "depth_mm": 260,
+      "height_mm": 240
+    },
+    "orientation": {
+      "front": "+Z",
+      "back": "-Z",
+      "left": "-X",
+      "right": "+X",
+      "up": "+Y",
+      "pivot": "bottom_center",
+      "units": "meters"
+    },
+    "resizing": "scalable",
+    "installation": "wall",
+    "elevation_mm": 1500,
+    "clearance_mm": 400,
+    "license": "CC0-1.0",
+    "author": "RoomFit Asset Factory",
+    "material_variants": [
+      {
+        "id": "original",
+        "name": "Оригинальный",
+        "color": "#cbb99e",
+        "roughness": 0.72
+      },
+      {
+        "id": "sand",
+        "name": "Песочный",
+        "color": "#c9b696",
+        "roughness": 0.78
+      },
+      {
+        "id": "graphite",
+        "name": "Графитовый",
+        "color": "#66716a",
+        "roughness": 0.67
+      },
+      {
+        "id": "walnut",
+        "name": "Тёплый орех",
+        "color": "#927356",
+        "roughness": 0.5
+      }
+    ]
+  }
+]
