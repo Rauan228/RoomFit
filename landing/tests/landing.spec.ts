@@ -185,10 +185,10 @@ test("FAQ, roadmap dialog and mobile navigation are usable", async ({
       page.getByRole("navigation", { name: "Мобильная навигация" }),
     ).toHaveCount(0);
   }
-  await page.getByRole("button", { name: "Когда появится 3D-режим?" }).click();
+  await page.getByRole("button", { name: "Есть ли 3D-режим?" }).click();
   await expect(
-    page.getByRole("region", { name: "Когда появится 3D-режим?" }),
-  ).toContainText("Точной даты пока нет");
+    page.getByRole("region", { name: "Есть ли 3D-режим?" }),
+  ).toContainText("базовый 3D-просмотр");
   await page.getByRole("button", { name: "Что будет в 3D" }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");

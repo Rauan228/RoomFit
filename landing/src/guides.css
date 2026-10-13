@@ -242,7 +242,8 @@
   transform: translateY(-4px);
   border-color: #6c805e;
 }
-.guide-card img {
+.guide-card img,
+.guide-card > svg {
   width: 100%;
   height: auto;
   aspect-ratio: 600/480;

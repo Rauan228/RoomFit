@@ -1,4 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -70,6 +78,8 @@ import {
   CustomFurnitureDialog,
 } from "./EditorDialogs";
 import { downloadJSON, readUnderlay } from "./exports";
+import "./three/three.css";
+const Scene3D = lazy(() => import("./three/Scene3D"));
 export type Tool =
   | "select"
   | "pan"
@@ -155,6 +165,8 @@ export function Editor({
     store = useProject(project, user?.id || "guest", readOnly),
     { doc, change, begin, commit } = store;
   const [viewVariant, setViewVariant] = useState(doc.activeVariantId);
+  const [viewMode, setViewMode] = useState<"2d" | "3d">("2d");
+  const [visited3D, setVisited3D] = useState(false);
   const [floorId, setFloorId] = useState(doc.floors[0].id),
     floor = doc.floors.find((f) => f.id === floorId) || doc.floors[0],
     variant =
@@ -842,6 +854,7 @@ export function Editor({
     drag.current = null;
   };
   const changeTool = (t: Tool) => {
+    if (t !== "select" && t !== "pan") setViewMode("2d");
     setTool(t);
     setDraft([]);
     setCursor(null);
@@ -1034,7 +1047,7 @@ export function Editor({
           )}
           <button className="primary" onClick={() => setDialog("export")}>
             <Download size={17} />
-            <span>Экспорт</span>
+            <span>{viewMode === "3d" ? "Экспорт 2D" : "Экспорт"}</span>
           </button>
         </div>
       </header>
@@ -1114,6 +1127,29 @@ export function Editor({
             </button>
           )}
         </div>
+        <div
+          className="editor-view-switch"
+          role="group"
+          aria-label="Режим просмотра"
+        >
+          <button
+            aria-label="2D"
+            aria-pressed={viewMode === "2d"}
+            onClick={() => setViewMode("2d")}
+          >
+            2D
+          </button>
+          <button
+            aria-label="3D"
+            aria-pressed={viewMode === "3d"}
+            onClick={() => {
+              setVisited3D(true);
+              setViewMode("3d");
+            }}
+          >
+            3D
+          </button>
+        </div>
         <span className="area-label">
           {(analysis.totalArea / 1e6).toFixed(2)} м²
         </span>
@@ -1182,7 +1218,7 @@ export function Editor({
         </div>
       )}
       <div className="editor-body">
-        <div className="canvas-host" ref={canvasHost}>
+        <div className={`canvas-host view-${viewMode}`} ref={canvasHost}>
           <div className="toolbox">
             {(
               [
@@ -1415,6 +1451,41 @@ export function Editor({
               <Maximize size={18} />
             </button>
           </div>
+          {visited3D && (
+            <Suspense
+              fallback={
+                viewMode === "3d" ? (
+                  <div className="three-loading" role="status">
+                    Загружаем 3D-режим…
+                  </div>
+                ) : null
+              }
+            >
+              <Scene3D
+                floor={floor}
+                items={variant.items}
+                selected={selected}
+                status={analysis.status}
+                active={viewMode === "3d"}
+                onBack={() => setViewMode("2d")}
+                onClear={() => {
+                  setSelected([]);
+                  setEntity({ id: "", kind: "" });
+                }}
+                onSelect={(id, kind) => {
+                  if (kind === "item") {
+                    setSelected([id]);
+                    setEntity({ id: "", kind: "" });
+                  } else {
+                    setSelected([]);
+                    setEntity({ id, kind });
+                  }
+                  setPanel("properties");
+                  setMobilePanel(true);
+                }}
+              />
+            </Suspense>
+          )}
           <button
             className="mobile-panel-toggle"
             onClick={() => setMobilePanel((v) => !v)}

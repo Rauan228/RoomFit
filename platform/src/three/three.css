@@ -1,0 +1,223 @@
+.editor-view-switch {
+  display: flex;
+  border: 1px solid var(--line);
+  padding: 3px;
+  border-radius: 10px;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.editor-view-switch button {
+  border: 0;
+  padding: 4px 12px;
+  min-height: 28px;
+  font-size: 11px;
+  border-radius: 7px;
+  background: transparent;
+}
+.editor-view-switch button[aria-pressed="true"] {
+  background: #343f36;
+  color: #f7e2bf;
+}
+.canvas-host.view-3d > .editor-canvas,
+.canvas-host.view-3d > .toolbox,
+.canvas-host.view-3d > .zoom-controls,
+.canvas-host.view-3d > .canvas-legend,
+.canvas-host.view-3d > .close-polygon {
+  display: none;
+}
+.three-host {
+  position: absolute;
+  inset: 0;
+  background: #efeee7;
+}
+.three-host[hidden] {
+  display: none;
+}
+.three-host > div:first-child {
+  width: 100%;
+  height: 100%;
+}
+.three-host canvas {
+  touch-action: none;
+  display: block;
+  outline: none;
+}
+.three-caption {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  max-width: min(62%, 420px);
+  color: #53614d;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.three-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #3a4b33;
+}
+.three-controls {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  max-width: calc(100% - 30px);
+  padding: 9px 16px;
+  border: 1px solid #d3d7c8;
+  border-radius: 14px;
+  background: #fffffff5;
+  box-shadow: 0 8px 28px #48533814;
+  color: #43513d;
+}
+.three-controls label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.three-controls input[type="checkbox"] {
+  width: 15px;
+  accent-color: #5c754b;
+}
+.three-controls select {
+  font-size: 11px;
+  min-height: 32px;
+  padding: 5px 8px;
+}
+.three-controls .icon {
+  border: 0;
+}
+.three-objects {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  max-width: 220px;
+  width: 220px;
+  border: 1px solid #d6dbcd;
+  border-radius: 12px;
+  background: #fffffff5;
+  color: #43513d;
+  box-shadow: 0 8px 28px #4853380a;
+}
+.three-objects summary {
+  list-style: none;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+}
+.three-objects > div {
+  max-height: min(340px, 45vh);
+  overflow: auto;
+  padding: 0 7px 7px;
+}
+.three-objects button {
+  width: 100%;
+  padding: 9px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 3px 0;
+  border: 0;
+  background: transparent;
+}
+.three-objects button.active {
+  background: #edf1e6;
+}
+.three-objects small {
+  font-size: 9px;
+  color: #78846d;
+}
+.three-loading,
+.three-fallback {
+  position: absolute;
+  inset: 0;
+  background: #efeee7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  padding: 30px;
+  text-align: center;
+  color: #42513b;
+}
+.three-fallback h2 {
+  font-size: 24px;
+}
+.three-fallback p {
+  max-width: 400px;
+  line-height: 1.8;
+  color: #626c5a;
+}
+.three-objects summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+@media (max-width: 760px) {
+  .editor-view-switch {
+    padding: 2px;
+  }
+  .editor-view-switch button {
+    font-size: 11px;
+    min-height: 30px;
+    padding: 4px 10px;
+  }
+  .three-caption {
+    top: 14px;
+    left: 12px;
+    max-width: 52%;
+  }
+  .three-caption > span:last-child {
+    display: none;
+  }
+  .three-objects {
+    top: 12px;
+    right: 12px;
+    width: 160px;
+  }
+  .three-controls {
+    left: 12px;
+    right: 12px;
+    bottom: 72px;
+    transform: none;
+    gap: 10px;
+    padding: 8px 10px;
+    justify-content: space-between;
+  }
+  .three-controls label {
+    font-size: 11px;
+  }
+  .three-quality {
+    font-size: 0 !important;
+    gap: 0 !important;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .three-host {
+    animation: three-entry 180ms ease-out;
+  }
+  @keyframes three-entry {
+    from {
+      opacity: 0.7;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

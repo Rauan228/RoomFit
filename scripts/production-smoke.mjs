@@ -1,9 +1,17 @@
-import { chromium } from "@playwright/test";
+import { chromium, devices, expect } from "@playwright/test";
 import crypto from "node:crypto";
-const origin =
-  process.env.ROOMFIT_SMOKE_URL || "https://platform.roomfit.art";
-const browser = await chromium.launch();
-const context = await browser.newContext({ baseURL: origin });
+const origin = process.env.ROOMFIT_SMOKE_URL || "https://platform.roomfit.art";
+const browser = await chromium.launch({
+  args: [
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+  ],
+});
+const context = await browser.newContext({
+  baseURL: origin,
+  extraHTTPHeaders: { DNT: "1" },
+});
 const page = await context.newPage();
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
@@ -44,6 +52,51 @@ try {
   const session = cookies.find((c) => c.name === "roomfit_session");
   if (!session?.secure || !session?.httpOnly)
     throw Error("Session cookie flags incorrect");
+  await page.getByRole("button", { name: "3D", exact: true }).click();
+  await expect(page.locator(".three-host")).toHaveAttribute(
+    "data-scene-ready",
+    "true",
+    { timeout: 30000 },
+  );
+  await expect(page.locator(".three-host canvas")).toBeVisible();
+  await page.locator(".three-objects summary").click();
+  await page.locator(".three-objects button").click();
+  await expect(page.getByLabel("Ширина, см", { exact: true })).toHaveValue(
+    "180",
+  );
+  const mobile = await browser.newContext({
+    ...devices["iPhone 13"],
+    baseURL: origin,
+    storageState: await context.storageState(),
+    extraHTTPHeaders: { DNT: "1" },
+  });
+  const mobilePage = await mobile.newPage();
+  mobilePage.on("pageerror", (e) => errors.push(e.message));
+  await mobilePage.goto(`/project/${id}`);
+  await mobilePage.getByRole("button", { name: "3D", exact: true }).click();
+  await expect(mobilePage.locator(".three-host")).toHaveAttribute(
+    "data-scene-ready",
+    "true",
+    { timeout: 30000 },
+  );
+  await mobilePage.locator(".three-objects summary").click();
+  await mobilePage.locator(".three-objects button").click();
+  await mobilePage.getByLabel("Ширина, см", { exact: true }).fill("190");
+  await mobilePage.getByLabel("Ширина, см", { exact: true }).press("Tab");
+  await expect
+    .poll(
+      async () =>
+        (await (await mobile.request.get(`/api/projects/${id}`)).json())
+          .document.variants[0].items[0].width,
+      { timeout: 10000 },
+    )
+    .toBe(1900);
+  await mobilePage.locator(".inspector .mobile-close").click();
+  await mobilePage.getByRole("button", { name: "2D", exact: true }).click();
+  await expect(mobilePage.locator(".editor-canvas [data-item-id]")).toHaveCount(
+    1,
+  );
+  await mobile.close();
   if (errors.length) throw Error(errors.join("\n"));
   console.log(
     JSON.stringify({
@@ -53,6 +106,8 @@ try {
       project: true,
       persistence: true,
       secureHttpOnlyCookie: true,
+      threeDesktop: true,
+      threeMobile: true,
       runtimeErrors: 0,
     }),
   );

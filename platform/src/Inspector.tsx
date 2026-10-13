@@ -1134,6 +1134,14 @@ export function Inspector(p: Props) {
               (n) =>
                 updateFloor((f) => {
                   f.rooms.find((r) => r.id === room.id)!.height = n;
+                  f.walls
+                    .filter(
+                      (wall) =>
+                        wall.roomId === room.id && wall.height === room.height,
+                    )
+                    .forEach((wall) => {
+                      wall.height = n;
+                    });
                 }),
               500,
             )}

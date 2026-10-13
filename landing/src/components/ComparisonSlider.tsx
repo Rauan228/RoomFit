@@ -27,7 +27,7 @@ export default function ComparisonSlider() {
       </div>
       <span className="slider-label left">2D план</span>
       <span className="slider-label right">
-        3D просмотр <small>скоро</small>
+        3D концепция <small>иллюстрация</small>
       </span>
       <div className="slider-divider" style={{ left: `${split}%` }}>
         <span>
