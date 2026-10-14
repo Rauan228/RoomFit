@@ -29,7 +29,14 @@ describe("Public plans preserve their physical layout when copied into the platf
         source.doors[0].at * 10,
       );
       for (const [index, item] of source.items.entries()) {
-        const box = bounds(furniturePolygon(doc.variants[0].items[index]));
+        // The source plan stores the position of the physical dimension rectangle.
+        // Rounded fabric and small recessed outlines do not change that placement.
+        const box = bounds(
+          furniturePolygon({
+            ...doc.variants[0].items[index],
+            contour: undefined,
+          }),
+        );
         expect(box.minX).toBeCloseTo(item.x * 10);
         expect(box.minY).toBeCloseTo(item.y * 10);
       }

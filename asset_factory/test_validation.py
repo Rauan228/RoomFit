@@ -5,6 +5,9 @@ from PIL import Image, ImageOps
 from pipeline import folder_for, load_specs, assert_immutable, write_export_provenance
 from validation import validate
 from validation import read_glb
+from validation import geometry
+import numpy as np
+from shapely.geometry import Polygon
 import struct
 
 
@@ -29,6 +32,39 @@ def test_real_export_matches_geometry_materials_and_all_rotations(sofa_copy):
     assert report["dimension_error_mm"] < 1
     assert [r["angle"] for r in report["rotations"]] == [0, 45, 90, 180, 270]
     assert footprints["visual"] and footprints["collision"] and footprints["volumes"]
+
+
+def test_upholstery_transports_albedo_normal_roughness_and_restrained_sheen_to_glb(sofa_copy):
+    _, folder = sofa_copy
+    document, _ = read_glb(folder / "3d/model.glb")
+    primary = next(m for m in document["materials"] if m.get("extras", {}).get("slot") == "primary")
+    assert "baseColorTexture" in primary["pbrMetallicRoughness"]
+    assert "metallicRoughnessTexture" in primary["pbrMetallicRoughness"]
+    assert "normalTexture" in primary
+    assert max(primary["extensions"]["KHR_materials_sheen"]["sheenColorFactor"]) < .3
+    assert all("bufferView" in image and "uri" not in image for image in document["images"])
+
+
+def test_splayed_chair_legs_use_physical_vertices_for_dimensions_and_floor_contact():
+    spec = next(s for s in load_specs() if s["asset_id"] == "chair")
+    folder = folder_for(spec)
+    _, meshes = geometry(folder / "3d/model.glb")
+    points = np.concatenate([m["vertices"] for m in meshes])
+    dims = spec["dimensions"]
+    assert np.allclose(points.max(axis=0) - points.min(axis=0), [dims["width_mm"], dims["height_mm"], dims["depth_mm"]], atol=1)
+    assert abs(points[:, 1].min()) < 1
+
+
+def test_published_normalized_contours_are_simple_and_can_be_saved_by_the_api():
+    manifest = json.loads((Path(__file__).resolve().parents[1] / "packages/core/src/asset-manifest.json").read_text(encoding="utf-8"))
+    assert len(manifest) == 26
+    for asset in manifest.values():
+        shapes = asset["footprints"]["visual"] + asset["footprints"]["collision"]
+        shapes += [p for v in asset["footprints"]["volumes"] for p in v["footprints"]]
+        for contour in shapes:
+            polygon = Polygon([(p["x"], p["y"]) for p in contour["outer"]], [[(p["x"], p["y"]) for p in hole] for hole in contour["holes"]])
+            assert polygon.is_valid, asset["asset_id"]
+            assert polygon.area > 0, asset["asset_id"]
 
 
 def test_modified_runtime_webp_cannot_be_republished(sofa_copy):

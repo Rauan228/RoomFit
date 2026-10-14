@@ -1,0 +1,56 @@
+{
+  "asset_id": "bed-double",
+  "name": "Кровать двуспальная",
+  "category": "beds",
+  "catalog_category": "Кровати",
+  "type": "bed",
+  "dimensions": {
+    "width_mm": 1600,
+    "depth_mm": 2000,
+    "height_mm": 600
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#9d9690",
+      "roughness": 0.72
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#c9b696",
+      "roughness": 0.78
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#555b61",
+      "roughness": 0.67
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#927356",
+      "roughness": 0.5
+    }
+  ],
+  "generator": "interior",
+  "style_revision": "reference-interiors-2026-10",
+  "generation_version": "v1-ce28ccb4e352"
+}

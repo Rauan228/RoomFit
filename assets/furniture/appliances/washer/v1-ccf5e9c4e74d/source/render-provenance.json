@@ -1,0 +1,12 @@
+{
+  "asset_id": "washer",
+  "generation_version": "v1-ccf5e9c4e74d",
+  "files": {
+    "3d/model.glb": "478c894d30ad4fd3fcf48ff050ece300a4066b8f861c444e0c9736971476e123",
+    "validation/coordinates.png": "a09093a4930a409faab83c63f49d23bce1059adfaa18f6b324d5c4d9edc71ff7",
+    "2d/original/top_view_1024.png": "5a50eb3ad8c7d64dd37672e10fa4f2228e762a39efe74261da93c75d3e8133c7",
+    "2d/sand/top_view_1024.png": "d6990d7f14f4d3c85c2ddd68d3afce39b21b0627f67b93541d7910f35cd77e8d",
+    "2d/graphite/top_view_1024.png": "6d5ea0624653fb2fc131594da8e9bc76872a7db3254361cf0fc20e1ce0b8d36e",
+    "2d/walnut/top_view_1024.png": "145095ee52adcaafc023bb2a66364c9d40768df99008ecc9242b923d6e5adeba"
+  }
+}

@@ -1,13 +1,13 @@
 {
   "status": "approved",
   "assets": {
-    "bed-double": "v1-3a21d5739f07",
-    "sofa": "v1-9cbd96602f15",
-    "armchair": "v1-6c37b579ba3d",
-    "table": "v1-6dc5a888e88e",
-    "wardrobe": "v1-7eca48b408c9",
-    "sofa-corner": "v1-a4e50d1ac257",
-    "wall-shelf": "v1-cd303d90b4f1"
+    "bed-double": "v1-ce28ccb4e352",
+    "sofa": "v1-c0a670f09aba",
+    "armchair": "v1-3792df5dcb7e",
+    "table": "v1-3511cb479e5b",
+    "wardrobe": "v1-0d0133b07bfa",
+    "sofa-corner": "v1-45e7fce1c411",
+    "wall-shelf": "v1-d679788f4fb9"
   },
   "browser_modes": [
     "desktop",

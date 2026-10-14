@@ -1,0 +1,12 @@
+{
+  "asset_id": "sofa",
+  "generation_version": "v1-c0a670f09aba",
+  "files": {
+    "3d/model.glb": "2070002eb4c04286fa3f512e924848cbcbd8c84af31c785444cf1715164748a5",
+    "validation/coordinates.png": "f53ab448f7ef2c93641806073667dc0455467828be26b19c73afa2f06b2519d8",
+    "2d/original/top_view_1024.png": "a5faff4a5e9e657f32610376d3488901356491a26debee3a897cd3be1fcc898b",
+    "2d/sand/top_view_1024.png": "d4ba2c1f1006c7b3ad4caad6f2831cebcdebc214b0ca92d8c3f81586d92a3b91",
+    "2d/graphite/top_view_1024.png": "2b721c2faef0fb1a6d8b8013594b47672c7b2e82d01a2962cdc254dbb3413234",
+    "2d/walnut/top_view_1024.png": "cadca088f5f733a9584e13d31808bfc48808f12b4bd08613998b2b16207cc06c"
+  }
+}

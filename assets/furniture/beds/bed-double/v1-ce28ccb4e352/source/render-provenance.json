@@ -1,0 +1,12 @@
+{
+  "asset_id": "bed-double",
+  "generation_version": "v1-ce28ccb4e352",
+  "files": {
+    "3d/model.glb": "febd6580ce944858cc1cb44edfb5888033b1eab07dac8b1ddd828319bc8d3a47",
+    "validation/coordinates.png": "aaee0fc241e860f78c7fc47362206ead25b33c644a47d804e65868b531450863",
+    "2d/original/top_view_1024.png": "c55c0e932f3338f9c32f04f8521ee8ac751df12700fe7221a8f52e0a7b2a3c39",
+    "2d/sand/top_view_1024.png": "e6d2feb4ba32e66a02f1a806e1315e2913a95b9c1cb6f71417df4814bff58ebd",
+    "2d/graphite/top_view_1024.png": "73816b69df985f4cc3df59b8d60e73e5cf03e20bcbfe195c9c90fefce1051305",
+    "2d/walnut/top_view_1024.png": "291ddb64b494b982482fc456b4e448b95c9d4b1de19b937154140ca7b5c6ee48"
+  }
+}

@@ -1,5 +1,6 @@
 import { chromium, devices, expect } from "@playwright/test";
 import crypto from "node:crypto";
+import { readFile } from "node:fs/promises";
 const origin = process.env.ROOMFIT_SMOKE_URL || "https://platform.roomfit.art";
 const browser = await chromium.launch({
   args: [
@@ -159,6 +160,100 @@ try {
     if (!top.ok() || (await top.body()).toString("ascii", 8, 12) !== "WEBP")
       throw Error("Missing top view: " + asset.asset_id);
   }
+  const versions = JSON.parse(
+    await readFile(
+      new URL("../packages/core/src/asset-versions.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  const latest = manifest["bed-double"];
+  const previous = Object.values(versions).find(
+    (asset) =>
+      asset.asset_id === "bed-double" &&
+      asset.generation_version !== latest.generation_version,
+  );
+  if (!previous)
+    throw Error("The previous approved bed version must remain available");
+  const legacyDocument = structuredClone(finished.document);
+  const legacyBed = legacyDocument.variants[0].items[0];
+  legacyBed.assetVersion = previous.generation_version;
+  legacyBed.contour = previous.footprints.collision[0].outer;
+  const me = await (await context.request.get("/api/auth/me")).json();
+  const createdLegacy = await context.request.post("/api/projects", {
+    headers: { "X-CSRF-Token": me.csrf },
+    data: { document: legacyDocument },
+  });
+  if (!createdLegacy.ok())
+    throw Error("Previous approved assets cannot be saved");
+  const legacyProject = await createdLegacy.json();
+  await page.goto(`/project/${legacyProject.id}`);
+  await page
+    .getByRole("button", { name: "Обновить мебель", exact: true })
+    .click();
+  const bedImage = page.locator(
+    `.editor-canvas [data-item-id="${legacyBed.id}"] image`,
+  );
+  await expect(bedImage).toHaveAttribute(
+    "data-asset-version",
+    latest.generation_version,
+  );
+  await page.getByTitle("Отменить (Ctrl+Z)").click();
+  await expect(bedImage).toHaveAttribute(
+    "data-asset-version",
+    previous.generation_version,
+  );
+  await page.getByTitle("Повторить (Ctrl+Shift+Z)").click();
+  await expect
+    .poll(
+      async () =>
+        (
+          await (
+            await context.request.get(`/api/projects/${legacyProject.id}`)
+          ).json()
+        ).document.variants[0].items[0].assetVersion,
+    )
+    .toBe(latest.generation_version);
+  const upgraded = (
+    await (
+      await context.request.get(`/api/projects/${legacyProject.id}`)
+    ).json()
+  ).document.variants[0].items[0];
+  for (const key of [
+    "id",
+    "floorId",
+    "x",
+    "y",
+    "angle",
+    "width",
+    "depth",
+    "height",
+    "elevation",
+    "locked",
+    "shopping",
+  ])
+    expect(upgraded[key]).toEqual(legacyBed[key]);
+  await page.reload();
+  await expect(
+    page.getByRole("button", { name: "Обновить мебель", exact: true }),
+  ).toHaveCount(0);
+  await page.getByRole("button", { name: "3D", exact: true }).click();
+  await expect(page.locator(".three-host")).toHaveAttribute(
+    "data-assets-loaded",
+    "1",
+    { timeout: 30000 },
+  );
+  await expect(page.locator(".three-host")).toHaveAttribute(
+    "data-assets-failed",
+    "0",
+  );
+  for (const preset of ["oak", "light", "walnut", "tile"])
+    for (const filename of ["color.jpg", "normal.png", "roughness.jpg"]) {
+      const map = await context.request.get(
+        `/assets/materials/floors/reference-v1/${preset}/${filename}`,
+      );
+      if (!map.ok())
+        throw Error(`Missing floor PBR texture: ${preset}/${filename}`);
+    }
   await mobile.close();
   if (errors.length) throw Error(errors.join("\n"));
   console.log(
@@ -174,6 +269,8 @@ try {
       synchronizedAssetLibrary: 26,
       verifiedPublishedGLBAndWebP: 26,
       persistedMaterialVariant: true,
+      existingRoomUpgradeUndoPersistence: true,
+      floorPBRMaps: 12,
       runtimeErrors: 0,
     }),
   );

@@ -60,9 +60,17 @@ describe("Physical conversion between the plan and scene", () => {
       angle: 45,
     };
     const frame = sceneBounds(floor, [item]);
-    expect(frame.center).toEqual([1, 0, 1]);
     expect(frame.span).toBe(6);
     const footprint = bounds(furniturePoints(item));
+    // A draped blanket makes a rotated footprint slightly asymmetric.
+    expect(frame.center[0]).toBeCloseTo(
+      (footprint.minX + footprint.maxX) / 2000,
+      6,
+    );
+    expect(frame.center[2]).toBeCloseTo(
+      (footprint.minY + footprint.maxY) / 2000,
+      6,
+    );
     expect(sceneBounds(floor, [{ ...item, height: 500 }]).span).toBeCloseTo(
       Math.max(
         footprint.maxX - footprint.minX,

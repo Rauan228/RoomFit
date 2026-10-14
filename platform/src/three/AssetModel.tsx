@@ -8,22 +8,25 @@ export default function AssetModel({
   item,
   status,
   fallback,
+  active = true,
 }: {
   item: Furniture;
   status?: string;
   fallback: ReactNode;
+  active?: boolean;
 }) {
   const resolved = furnitureAsset(item)!,
     resources = useSceneResources();
   const url = resolved.asset.base_url + resolved.asset.assets.model_3d;
-  const [model, setModel] = useState<GLTF>();
+  const [model, setModel] = useState<{ url: string; gltf: GLTF }>();
   const [failed, setFailed] = useState<string>();
   useEffect(() => {
+    if (!active || model?.url === url) return;
     let current = true;
     setModel(undefined);
     resources.model(url).then(
       (value) => {
-        if (current) setModel(value);
+        if (current) setModel({ url, gltf: value });
       },
       () => {
         if (current) setFailed(url);
@@ -32,18 +35,21 @@ export default function AssetModel({
     return () => {
       current = false;
     };
-  }, [resources, url]);
+  }, [resources, url, active]);
   const scene = useMemo(() => {
-    if (!model) return;
-    const cloned = model.scene.clone(true);
+    if (!model || model.url !== url) return;
+    const cloned = model.gltf.scene.clone(true);
     cloned.traverse((object) => {
       const mesh = object as Mesh;
       if (!mesh.isMesh) return;
       mesh.castShadow = mesh.receiveShadow = true;
       const material = (source: MeshStandardMaterial) =>
-        status === "error"
-          ? resources.material("#ad6856", 0.8)
-          : resources.assetMaterial(url, source, resolved.variant);
+        resources.assetMaterial(
+          url,
+          source,
+          resolved.variant,
+          status === "error",
+        );
       mesh.material = Array.isArray(mesh.material)
         ? mesh.material.map((m) => material(m as MeshStandardMaterial))
         : material(mesh.material as MeshStandardMaterial);
@@ -57,7 +63,8 @@ export default function AssetModel({
       object={scene}
       scale={[
         item.width / d.width_mm,
-        item.height / d.height_mm,
+        (item.type === "rug" && item.height === 0 ? 0.1 : item.height) /
+          d.height_mm,
         item.depth / d.depth_mm,
       ]}
       dispose={null}

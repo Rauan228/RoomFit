@@ -131,3 +131,66 @@ export function assetCatalogFields(id: string) {
       }
     : {};
 }
+
+const contourMatches = (a: Point[], b?: Point[]) =>
+  !!b &&
+  a.length === b.length &&
+  a.every(
+    (p, index) =>
+      Math.abs(p.x - b[index].x) < 0.00001 &&
+      Math.abs(p.y - b[index].y) < 0.00001,
+  );
+
+/** Explicit, undoable upgrade. Private shapes and every placement/dimension remain intact. */
+export function upgradeFurnitureAsset(item: Furniture): Furniture | undefined {
+  const id = item.assetId || item.catalogId;
+  const latest = assetById(id);
+  if (!latest) return;
+  if (item.assetVersion === latest.generation_version && furnitureAsset(item))
+    return;
+  const previous = assetById(id, item.assetVersion);
+  if (item.contour) {
+    const rectangle =
+      item.contour.length === 4 &&
+      new Set(item.contour.map((p) => `${p.x},${p.y}`)).size === 4 &&
+      item.contour.every(
+        (p) => (p.x === 0 || p.x === 1) && (p.y === 0 || p.y === 1),
+      );
+    const known = [
+      latest,
+      previous,
+      ...Object.values(ASSET_VERSIONS).filter((v) => v.asset_id === id),
+    ].some(
+      (asset) =>
+        asset &&
+        contourMatches(item.contour!, asset.footprints.collision[0]?.outer),
+    );
+    if (!rectangle && !known) return;
+  }
+  const preferred =
+    item.materialVariant ||
+    previous?.material_variants.find(
+      (v) => v.color.toLowerCase() === item.color.toLowerCase(),
+    )?.id;
+  const rgb = (color: string) =>
+    [1, 3, 5].map((index) => parseInt(color.slice(index, index + 2), 16));
+  const target = rgb(item.color);
+  const finish =
+    latest.material_variants.find((v) => v.id === preferred) ||
+    [...latest.material_variants].sort((a, b) => {
+      const distance = (color: string) =>
+        rgb(color).reduce(
+          (sum, value, index) => sum + (value - target[index]) ** 2,
+          0,
+        );
+      return distance(a.color) - distance(b.color);
+    })[0];
+  return {
+    ...item,
+    assetId: latest.asset_id,
+    assetVersion: latest.generation_version,
+    materialVariant: finish.id,
+    color: finish.color,
+    contour: latest.footprints.collision[0].outer,
+  };
+}

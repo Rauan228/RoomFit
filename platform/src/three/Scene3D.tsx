@@ -17,7 +17,7 @@ import {
 import { OrbitControls } from "@react-three/drei";
 import {
   ACESFilmicToneMapping,
-  PCFShadowMap,
+  PCFSoftShadowMap,
   type Object3D,
   type WebGLRenderer,
 } from "three";
@@ -28,6 +28,7 @@ import { sceneBounds } from "./geometry";
 import FurnitureMesh from "./FurnitureMesh";
 import { RoomMesh, WallMesh } from "./RoomMeshes";
 import { SceneResourceProvider } from "./resources";
+import StudioLighting from "./StudioLighting";
 import "./three.css";
 
 type Quality = "low" | "medium" | "high";
@@ -204,7 +205,7 @@ export default function Scene3D(props: Scene3DProps) {
           <SceneBoundary onBack={onBack} onFailure={() => setLost(true)}>
             <Canvas
               events={sceneEvents}
-              shadows={quality !== "low" ? { type: PCFShadowMap } : false}
+              shadows={quality !== "low" ? { type: PCFSoftShadowMap } : false}
               frameloop={active ? "demand" : "never"}
               dpr={quality === "low" ? 1 : quality === "high" ? 2 : 1.5}
               camera={{
@@ -221,14 +222,15 @@ export default function Scene3D(props: Scene3DProps) {
               fallback={<Fallback onBack={onBack} />}
               onPointerMissed={() => onClear()}
               onCreated={({ gl }) => {
-                (gl as WebGLRenderer).toneMappingExposure = 1.1;
+                (gl as WebGLRenderer).toneMappingExposure = 1.0;
               }}
             >
-              <color attach="background" args={["#efeee7"]} />
-              <hemisphereLight args={["#fff9ef", "#a7aa91", 2.1]} />
+              <color attach="background" args={["#f0efec"]} />
+              <StudioLighting />
+              <hemisphereLight args={["#fffaf3", "#bbb8b2", 0.65]} />
               <directionalLight
                 position={[-span * 0.7, span * 1.9, -span * 0.8]}
-                intensity={3.1}
+                intensity={2.2}
                 castShadow={quality !== "low"}
                 shadow-mapSize={[
                   quality === "high" ? 2048 : 1024,
@@ -240,6 +242,7 @@ export default function Scene3D(props: Scene3DProps) {
                 shadow-camera-bottom={-span}
                 shadow-camera-far={span * 6}
                 shadow-normalBias={0.02}
+                shadow-bias={-0.0002}
               />
               <CameraRig
                 span={span}
@@ -272,6 +275,7 @@ export default function Scene3D(props: Scene3DProps) {
                     <FurnitureMesh
                       key={item.id}
                       item={item}
+                      active={active}
                       selected={selected.includes(item.id)}
                       status={status[item.id]}
                       onSelect={() => onSelect(item.id, "item")}

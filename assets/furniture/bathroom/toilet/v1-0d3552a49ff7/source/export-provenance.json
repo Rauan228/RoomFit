@@ -1,0 +1,30 @@
+{
+  "files": {
+    "2d/technical.svg": "f44784652fd147c30dcc394f1e888967717f05801e34174bee6fc82e76e71d73",
+    "2d/graphite/top_view_1024.png": "aff57fb25721c191e1d8219ac21f6e02c5893dc582567b2bec24c127a9871096",
+    "2d/graphite/top_view_128.webp": "585e57343bfa1e4af4be1b4ab651007c5d197a32be07e8f3e22cdd4ae856f4e1",
+    "2d/graphite/top_view_256.webp": "a907e2057ba92c20edfaf1be65408d28933a42a8b301e9b12d81b7af34eec8ed",
+    "2d/graphite/top_view_512.webp": "550b78902ffd522e8101af8b1a4aa1d2f74e70e04c74611ec6c0e3cf24faa112",
+    "2d/original/top_view_1024.png": "168c4718dcce817cf2f20466872a7bc5c966762afe6a4dbb3e34b067a49960e5",
+    "2d/original/top_view_128.webp": "b4d4d73a95918b1d4316a358c97e26f57b23d95b8099bf115d0f1ea06c4896c3",
+    "2d/original/top_view_256.webp": "5f9bf5e4127d97527fb05003ca590b47ab2c79e6b8cb602043a5744075e46ba7",
+    "2d/original/top_view_512.webp": "5d30fa24b87f5d13d99055722f5a14c508d575f99ed876544e823b96bcf1caaa",
+    "2d/sand/top_view_1024.png": "d67529a9ec56a39e7f257a643e2005cc4c4530fbbf2de42319cf1e9cbee00329",
+    "2d/sand/top_view_128.webp": "ba615680ab7501955b56146571090dcba59ab665c6105c0fa9a58104822e1610",
+    "2d/sand/top_view_256.webp": "e5bcb3d20eb584fefdfcb70acb151515f2efe66166560933173c170392736f86",
+    "2d/sand/top_view_512.webp": "064d4daa091883520097650681ba35576df7898680e523b94a0a7723d25d6814",
+    "2d/walnut/top_view_1024.png": "f863fb3356e55b8de2d3b3e197a98cb54a00b15e10e089398e8db2c5fd50fe68",
+    "2d/walnut/top_view_128.webp": "da037eca40504be4ddb76d9b50eb8b9d6a2c99920d7412e361d0e5237e54a7c0",
+    "2d/walnut/top_view_256.webp": "ddc084529a255c02970c30b12a542cc6c7fd9382a4934e0864fa11197696f76a",
+    "2d/walnut/top_view_512.webp": "dbbd7b6bd9803d3273f8ee5394d4bd8cf0e396b4d5d66f5e34017816815545b4",
+    "3d/model.glb": "b1a415860b380bcfb63808b221ea838aab4fa3e17ea22bb08a68d0430b1d72fb",
+    "previews/front.png": "66e6fa1d232e3789acb309450692f14079efa02b292c6a53836b95b8da7731af",
+    "previews/front.webp": "fe36c07a324150b356413b9792ef9e27ac7777a5ad27db6049844dc9a7143088",
+    "previews/isometric.png": "3eab9d5d32dd3be5f5597c4265e3f87baea62806991a56c33051d77fa2286d6d",
+    "previews/isometric.webp": "49ada1e19ad226dd24d3fd56f3de1cc7f9001b2d1ce9f7991ff69910b690b3bc",
+    "previews/side.png": "67ccbfaf421bfa48cb187a38b7d73d955e562564529b67a7c0b6bbb0f75969a4",
+    "previews/side.webp": "1a815b6045bd271ed2f4c6cf7d007946c114bd4f1e5531cb3b50bc4fd88fa81b",
+    "comparison.jpg": "d94351e874335ed579679ebbfd0fdff7922fef76e28dd4fa385fdbda5cfa1f69",
+    "source/model.blend": "1fa708c4660bb3d4a45573d68edacdd918cade57c535078674779aef6e217c16"
+  }
+}

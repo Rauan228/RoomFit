@@ -1,6 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { mkdir, writeFile } from "node:fs/promises";
-import { CATALOG, assetById, createDocument, instantiate } from "@roomfit/core";
+import {
+  CATALOG,
+  ASSET_VERSIONS,
+  assetById,
+  createDocument,
+  instantiate,
+} from "@roomfit/core";
 
 test.use({
   launchOptions: {
@@ -20,6 +26,170 @@ const pilotIds = [
   "sofa-corner",
   "wall-shelf",
 ];
+
+test("older rooms upgrade stock furniture with one undoable action and retain private objects", async ({
+  page,
+}, info) => {
+  const csrf = (await (await page.request.get("/api/auth/me")).json()).csrf;
+  const password = "asset-upgrade-test-password";
+  const registration = await page.request.post("/api/auth/register", {
+    headers: { "X-CSRF-Token": csrf },
+    data: {
+      name: "Furniture Upgrade",
+      email: `upgrade-${Date.now()}-${info.project.name}@example.com`,
+      password,
+    },
+  });
+  expect(registration.ok(), await registration.text()).toBe(true);
+  const doc = createDocument("Комната до обновления", 6000, 5000),
+    floor = doc.floors[0];
+  const previous = Object.values(ASSET_VERSIONS).find(
+    (asset) =>
+      asset.asset_id === "bed-double" &&
+      asset.generation_version !== assetById("bed-double")!.generation_version,
+  )!;
+  expect(previous).toBeDefined();
+  const bed = {
+    ...instantiate(
+      CATALOG.find((c) => c.id === "bed-double")!,
+      floor.id,
+      { x: 2200, y: 1900 },
+    ),
+    assetVersion: previous.generation_version,
+    contour: previous.footprints.collision[0].outer,
+    width: 1800,
+    depth: 2100,
+    angle: 45,
+  };
+  const chair = {
+    ...instantiate(
+      CATALOG.find((c) => c.id === "chair")!,
+      floor.id,
+      { x: 4400, y: 3500 },
+    ),
+    assetId: undefined,
+    assetVersion: undefined,
+    materialVariant: undefined,
+    contour: undefined,
+    color: "#050505",
+  };
+  const custom = {
+    ...chair,
+    id: crypto.randomUUID(),
+    catalogId: "private-object",
+    x: 1000,
+    y: 3600,
+    contour: [
+      { x: 0, y: 0 },
+      { x: 1, y: 0 },
+      { x: 0.4, y: 1 },
+    ],
+  };
+  doc.variants[0].items = [bed, chair, custom];
+  const response = await page.request.post("/api/projects", {
+    headers: { "X-CSRF-Token": csrf },
+    data: { document: doc },
+  });
+  expect(response.ok(), await response.text()).toBe(true);
+  const project = await response.json();
+  try {
+    await page.goto(`/project/${project.id}`);
+    await page
+      .getByRole("button", { name: "Обновить мебель", exact: true })
+      .click();
+    await expect(
+      page.locator(`.editor-canvas [data-item-id="${bed.id}"] image`),
+    ).toHaveAttribute(
+      "data-asset-version",
+      assetById("bed-double")!.generation_version,
+    );
+    await expect(
+      page.locator(`.editor-canvas [data-item-id="${chair.id}"] image`),
+    ).toHaveAttribute("data-material-variant", "graphite");
+    await page.getByTitle("Отменить (Ctrl+Z)").click();
+    await expect(
+      page.locator(`.editor-canvas [data-item-id="${bed.id}"] image`),
+    ).toHaveAttribute("data-asset-version", previous.generation_version);
+    await expect(
+      page.locator(`.editor-canvas [data-item-id="${chair.id}"] image`),
+    ).toHaveCount(0);
+    await page.getByTitle("Повторить (Ctrl+Shift+Z)").click();
+    await expect
+      .poll(
+        async () =>
+          (await (await page.request.get(`/api/projects/${project.id}`)).json())
+            .document.variants[0].items[0].assetVersion,
+      )
+      .toBe(assetById("bed-double")!.generation_version);
+    const saved = (
+      await (await page.request.get(`/api/projects/${project.id}`)).json()
+    ).document.variants[0].items;
+    expect(saved[0]).toMatchObject({
+      id: bed.id,
+      x: bed.x,
+      y: bed.y,
+      width: bed.width,
+      depth: bed.depth,
+      height: bed.height,
+      angle: 45,
+    });
+    expect(saved[2]).toEqual(custom);
+    await page.reload();
+    await expect(
+      page.getByRole("button", { name: "Обновить мебель", exact: true }),
+    ).toHaveCount(0);
+    await page.getByRole("button", { name: "3D", exact: true }).click();
+    await expect(page.locator(".three-host")).toHaveAttribute(
+      "data-assets-loaded",
+      "2",
+      { timeout: 40000 },
+    );
+    await expect(page.locator(".three-host")).toHaveAttribute(
+      "data-assets-failed",
+      "0",
+    );
+    const addedGLBs: string[] = [];
+    page.on("request", (request) => {
+      if (/\/model\.glb(?:\?|$)/.test(request.url()))
+        addedGLBs.push(request.url());
+    });
+    await page.getByRole("button", { name: "2D", exact: true }).click();
+    if (info.project.name === "mobile")
+      await page.getByRole("button", { name: "Мебель и свойства" }).click();
+    await page.getByRole("button", { name: /^Растение/ }).click();
+    await expect(page.locator(".editor-canvas [data-item-id]")).toHaveCount(4);
+    await page.evaluate(
+      () =>
+        new Promise((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(resolve)),
+        ),
+    );
+    expect(addedGLBs).toEqual([]);
+    if (await page.locator(".inspector .mobile-close").isVisible())
+      await page.locator(".inspector .mobile-close").click();
+    await page.getByRole("button", { name: "3D", exact: true }).click();
+    await expect(page.locator(".three-host")).toHaveAttribute(
+      "data-assets-loaded",
+      "3",
+      { timeout: 40000 },
+    );
+    expect(addedGLBs).toHaveLength(1);
+    await mkdir("artifacts", { recursive: true });
+    await page.screenshot({
+      path: `artifacts/furniture-upgrade-${info.project.name}.png`,
+    });
+  } finally {
+    const me = await (await page.request.get("/api/auth/me")).json();
+    expect(
+      (
+        await page.request.delete("/api/profile", {
+          headers: { "X-CSRF-Token": me.csrf },
+          data: { currentPassword: password },
+        })
+      ).ok(),
+    ).toBe(true);
+  }
+});
 test("asset factory: shared models, materials, technical view, exports and persistence", async ({
   page,
 }, info) => {

@@ -1,0 +1,12 @@
+{
+  "asset_id": "wardrobe",
+  "generation_version": "v1-0d0133b07bfa",
+  "files": {
+    "3d/model.glb": "e8ae680b0ddf85d1d9ba4137c3a4590b0e6fe65329e29fe45bf7e07f9288d506",
+    "validation/coordinates.png": "3505381dd3dc1b5079cbc5c36246194439f474b8c04d14b79bd5e08bb98b79e3",
+    "2d/original/top_view_1024.png": "020e62fbcca6276aa00c045d29acaaef937cb84541b5abe725da8461fcb00299",
+    "2d/sand/top_view_1024.png": "1260979fecb06335ccbc65f0a1c3a2e8f32a67b265d653ed3bbee9dc780255c4",
+    "2d/graphite/top_view_1024.png": "fe70f69d10ec3e4a54b396e0dfb0c95a00b54e9d4fe53c53c7c429f4709ef631",
+    "2d/walnut/top_view_1024.png": "531928634ac36ae913684adc68a3fe45f90a7c2150a77f487e6fd19409a31016"
+  }
+}

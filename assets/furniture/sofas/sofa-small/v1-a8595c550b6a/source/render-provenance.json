@@ -1,0 +1,12 @@
+{
+  "asset_id": "sofa-small",
+  "generation_version": "v1-a8595c550b6a",
+  "files": {
+    "3d/model.glb": "36148070b91872d8cbf082f95a92363843acee35e838aed2d6c695849066e2d5",
+    "validation/coordinates.png": "cdacfa1ad20ecaf6cbcf4b5bbbbdebc774b392496edf655be41f31d44ccc53a6",
+    "2d/original/top_view_1024.png": "c237abfd251aa220c29736318377fe7ff0a9cc18a361496cd3f8fa231404b835",
+    "2d/sand/top_view_1024.png": "96073cea8ddd6cffc81bac1f30fdb8b66ec1874f742f468f2a4bf78c44a36973",
+    "2d/graphite/top_view_1024.png": "5efd3cf99d48b155c86ffc071afe955d499f6dc8042333cfdde5de2ed11c2ce0",
+    "2d/walnut/top_view_1024.png": "386b448bdac7464ac88734d1fce0d9685353906298622bfa58bed88219e19fab"
+  }
+}

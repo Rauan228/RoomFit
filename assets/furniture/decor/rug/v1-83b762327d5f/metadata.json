@@ -1,0 +1,217 @@
+{
+  "asset_id": "rug",
+  "name": "Ковёр",
+  "category": "decor",
+  "catalog_category": "Декор",
+  "type": "rug",
+  "dimensions": {
+    "width_mm": 2000,
+    "depth_mm": 1400,
+    "height_mm": 10
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#cbb99e",
+      "roughness": 0.72,
+      "top_2d": "2d/original/top_view_512.webp",
+      "top_128": "2d/original/top_view_128.webp",
+      "top_256": "2d/original/top_view_256.webp"
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#c9b696",
+      "roughness": 0.78,
+      "top_2d": "2d/sand/top_view_512.webp",
+      "top_128": "2d/sand/top_view_128.webp",
+      "top_256": "2d/sand/top_view_256.webp"
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#555b61",
+      "roughness": 0.67,
+      "top_2d": "2d/graphite/top_view_512.webp",
+      "top_128": "2d/graphite/top_view_128.webp",
+      "top_256": "2d/graphite/top_view_256.webp"
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#927356",
+      "roughness": 0.5,
+      "top_2d": "2d/walnut/top_view_512.webp",
+      "top_128": "2d/walnut/top_view_128.webp",
+      "top_256": "2d/walnut/top_view_256.webp"
+    }
+  ],
+  "generator": "interior",
+  "style_revision": "reference-interiors-2026-10",
+  "generation_version": "v1-83b762327d5f",
+  "assets": {
+    "model_3d": "3d/model.glb",
+    "top_2d": "2d/original/top_view_512.webp",
+    "technical_2d": "2d/technical.svg",
+    "preview": "previews/isometric.webp",
+    "comparison": "comparison.jpg"
+  },
+  "top_frame_mm": {
+    "frame_width_mm": 2003.999948501587,
+    "frame_depth_mm": 1403.191328048706
+  },
+  "footprints": {
+    "visual": [
+      {
+        "outer": [
+          {
+            "x": 0.0002864,
+            "y": 0.9991164
+          },
+          {
+            "x": 0.0015,
+            "y": 1.0
+          },
+          {
+            "x": 0.9993815,
+            "y": 0.9995908
+          },
+          {
+            "x": 1,
+            "y": 0.9978571
+          },
+          {
+            "x": 0.9997136,
+            "y": 0.0008836
+          },
+          {
+            "x": 0.9985,
+            "y": 0.0
+          },
+          {
+            "x": 0.0006185,
+            "y": 0.0004092
+          },
+          {
+            "x": 0,
+            "y": 0.0021429
+          }
+        ],
+        "holes": []
+      }
+    ],
+    "collision": [
+      {
+        "outer": [
+          {
+            "x": 0,
+            "y": 0.0021429
+          },
+          {
+            "x": 0.0002864,
+            "y": 0.9991164
+          },
+          {
+            "x": 0.0015,
+            "y": 1.0
+          },
+          {
+            "x": 0.9993815,
+            "y": 0.9995908
+          },
+          {
+            "x": 0.9997136,
+            "y": 0.9991164
+          },
+          {
+            "x": 1,
+            "y": 0.9978571
+          },
+          {
+            "x": 0.9997136,
+            "y": 0.0008836
+          },
+          {
+            "x": 0.9985,
+            "y": 0.0
+          },
+          {
+            "x": 0.0006185,
+            "y": 0.0004092
+          }
+        ],
+        "holes": []
+      }
+    ],
+    "volumes": [
+      {
+        "min_height_mm": 0.0,
+        "max_height_mm": 9.091,
+        "footprints": [
+          {
+            "outer": [
+              {
+                "x": 0,
+                "y": 0.0021429
+              },
+              {
+                "x": 0.0002864,
+                "y": 0.9991164
+              },
+              {
+                "x": 0.0015,
+                "y": 1.0
+              },
+              {
+                "x": 0.9993815,
+                "y": 0.9995908
+              },
+              {
+                "x": 0.9997136,
+                "y": 0.9991164
+              },
+              {
+                "x": 1,
+                "y": 0.9978571
+              },
+              {
+                "x": 0.9997136,
+                "y": 0.0008836
+              },
+              {
+                "x": 0.9985,
+                "y": 0.0
+              },
+              {
+                "x": 0.0006185,
+                "y": 0.0004092
+              }
+            ],
+            "holes": []
+          }
+        ]
+      }
+    ],
+    "technical_features": [],
+    "clearance_zones": []
+  },
+  "validation_status": "approved",
+  "triangles": 1516,
+  "glb_bytes": 330196
+}

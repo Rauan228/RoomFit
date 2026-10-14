@@ -275,7 +275,9 @@ def main():
     }
     build(spec)
     bpy.context.view_layer.update()
-    vertices = [obj.matrix_world @ Vector(corner) for obj in OBJECTS for corner in obj.bound_box]
+    # Rotated/tapered legs have box corners that are not physical vertices. Normalize
+    # the actual evaluated geometry so the exported dimensions and floor contact agree.
+    vertices = [obj.matrix_world @ vertex.co for obj in OBJECTS for vertex in obj.data.vertices]
     lo = Vector(tuple(min(p[i] for p in vertices) for i in range(3)))
     hi = Vector(tuple(max(p[i] for p in vertices) for i in range(3)))
     dims = spec["dimensions"]
@@ -328,11 +330,19 @@ def main():
     scene.camera = camera
     render_info = {}
     primary = MATERIALS["primary"].node_tree.nodes.get("Principled BSDF")
+    def primary_variant(variant):
+        primary.inputs["Base Color"].default_value = rgb(variant["color"])
+        primary.inputs["Roughness"].default_value = variant["roughness"]
+        tint = MATERIALS["primary"].node_tree.nodes.get("RoomFit tint")
+        if tint:
+            tint.inputs[6].default_value = rgb(variant["color"])
+        roughness = MATERIALS["primary"].node_tree.nodes.get("RoomFit roughness")
+        if roughness:
+            roughness.inputs[1].default_value = variant["roughness"]
     for variant in spec["material_variants"]:
         folder = output / "2d" / variant["id"]
         folder.mkdir(parents=True, exist_ok=True)
-        primary.inputs["Base Color"].default_value = rgb(variant["color"])
-        primary.inputs["Roughness"].default_value = variant["roughness"]
+        primary_variant(variant)
         longest = 1024
         scene.render.resolution_x = round(longest * target.x / max(target.x, target.y))
         scene.render.resolution_y = round(longest * target.y / max(target.x, target.y))
@@ -375,8 +385,7 @@ def main():
     scene.view_settings.view_transform = "AgX"
     scene.cycles.samples = 24
     scene.cycles.use_denoising = True
-    primary.inputs["Base Color"].default_value = rgb(spec["material_variants"][0]["color"])
-    primary.inputs["Roughness"].default_value = spec["material_variants"][0]["roughness"]
+    primary_variant(spec["material_variants"][0])
     for view, location in {"front": (0, -max_dim * 3, target.z * .55), "side": (max_dim * 3, 0, target.z * .55), "isometric": (max_dim * 2.4, -max_dim * 2.8, max_dim * 2)}.items():
         camera.location = location
         camera.rotation_euler = (Vector((0, 0, target.z / 2)) - camera.location).to_track_quat("-Z", "Y").to_euler()

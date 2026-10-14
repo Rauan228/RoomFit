@@ -1,0 +1,56 @@
+{
+  "asset_id": "sofa",
+  "name": "Диван",
+  "category": "sofas",
+  "catalog_category": "Диваны",
+  "type": "sofa",
+  "dimensions": {
+    "width_mm": 2200,
+    "depth_mm": 950,
+    "height_mm": 850
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#819986",
+      "roughness": 0.72
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#c9b696",
+      "roughness": 0.78
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#555b61",
+      "roughness": 0.67
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#927356",
+      "roughness": 0.5
+    }
+  ],
+  "generator": "interior",
+  "style_revision": "reference-interiors-2026-10",
+  "generation_version": "v1-c0a670f09aba"
+}

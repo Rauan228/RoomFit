@@ -1,0 +1,12 @@
+{
+  "asset_id": "sofa-corner",
+  "generation_version": "v1-45e7fce1c411",
+  "files": {
+    "3d/model.glb": "cf0af55ddd909733f07c5b4bb154b0f201046b125c982c58a4a18cfb5f6d96b7",
+    "validation/coordinates.png": "073869abd7f833438806c90e836795e5cd6ba15aef50cda23c1451e579682c25",
+    "2d/original/top_view_1024.png": "bcc2e4f36f08e5f94aa62cb2263ce1e53802e74cf5448ddaf6f8dc1af87054c6",
+    "2d/sand/top_view_1024.png": "ecb617d8a103e2aedc735f70c315bf61e60de558d6238c7d2a91cae6a8363321",
+    "2d/graphite/top_view_1024.png": "4ad03f32e3468c03be59ac8fafd45c29763b4c233c4ab9dc4dc0b078fe4b8814",
+    "2d/walnut/top_view_1024.png": "f5f6b5605c8234985f448980b21bc7f39d3b5f465cdd20a28035384f197467df"
+  }
+}

@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { Euler, Vector3 } from "three";
-import { ASSET_MANIFEST, assetById, furnitureAsset } from "./assets";
+import {
+  ASSET_MANIFEST,
+  ASSET_VERSIONS,
+  assetById,
+  furnitureAsset,
+  upgradeFurnitureAsset,
+} from "./assets";
 import { CATALOG } from "./catalog";
 import {
   analyzeFloor,
@@ -18,6 +24,79 @@ const item = (id: string, point = { x: 2000, y: 1600 }) =>
     point,
   );
 describe("Synchronized asset instances", () => {
+  it("upgrades a legacy painted catalog model while preserving its identity and measured placement", () => {
+    const legacy = {
+      ...item("sofa"),
+      assetId: undefined,
+      assetVersion: undefined,
+      materialVariant: undefined,
+      contour: undefined,
+      color: "#050505",
+      width: 1950,
+      depth: 890,
+      height: 780,
+      angle: 45,
+      elevation: 25,
+      locked: true,
+    };
+    const upgraded = upgradeFurnitureAsset(legacy)!;
+    expect(upgraded).toMatchObject({
+      id: legacy.id,
+      catalogId: legacy.catalogId,
+      floorId: legacy.floorId,
+      x: legacy.x,
+      y: legacy.y,
+      angle: 45,
+      width: 1950,
+      depth: 890,
+      height: 780,
+      elevation: 25,
+      locked: true,
+    });
+    expect(upgraded.shopping).toEqual(legacy.shopping);
+    expect(furnitureAsset(upgraded)?.asset.generation_version).toBe(
+      assetById("sofa")!.generation_version,
+    );
+    expect(upgradeFurnitureAsset(upgraded)).toBeUndefined();
+  });
+  it("keeps private contours and private catalog items out of the stock-model upgrade", () => {
+    const custom = {
+      ...item("sofa"),
+      contour: [
+        { x: 0, y: 0 },
+        { x: 1, y: 0 },
+        { x: 0.4, y: 1 },
+      ],
+      color: "#912345",
+    };
+    expect(upgradeFurnitureAsset(custom)).toBeUndefined();
+    expect(
+      upgradeFurnitureAsset({
+        ...custom,
+        assetId: undefined,
+        catalogId: "private-object",
+      }),
+    ).toBeUndefined();
+  });
+  it("upgrades a previously approved contour and keeps the old pinned model available", () => {
+    const previous = Object.values(ASSET_VERSIONS).find(
+      (a) =>
+        a.asset_id === "sofa" &&
+        a.generation_version !== assetById("sofa")!.generation_version,
+    )!;
+    expect(previous).toBeDefined();
+    const saved = {
+      ...item("sofa"),
+      assetVersion: previous.generation_version,
+      contour: previous.footprints.collision[0].outer,
+    };
+    expect(furnitureAsset(saved)?.asset.generation_version).toBe(
+      previous.generation_version,
+    );
+    expect(upgradeFurnitureAsset(saved)?.assetVersion).toBe(
+      assetById("sofa")!.generation_version,
+    );
+  });
   it("counts an overlapping curved asset once in occupied area", () => {
     const doc = createDocument(),
       floor = doc.floors[0];

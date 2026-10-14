@@ -4,6 +4,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 from validation import validate, sha
 from jsonschema import validate as validate_schema
+from shapely.geometry import Polygon
 
 ROOT = Path(__file__).resolve().parents[1]
 FACTORY = Path(__file__).resolve().parent
@@ -19,6 +20,12 @@ def version(spec):
     inputs = json.dumps(spec, sort_keys=True).encode() + (FACTORY / "blender_generate.py").read_text(encoding="utf-8").encode() + (FACTORY / "validation.py").read_text(encoding="utf-8").encode()
     if spec.get("generator") == "appliance":
         inputs += (FACTORY / "blender_appliances.py").read_text(encoding="utf-8").encode()
+    if spec.get("generator") in ("interior", "interior-lamp", "interior-appliance"):
+        inputs += (FACTORY / "blender_interiors.py").read_text(encoding="utf-8").encode()
+    if spec.get("generator") == "interior-lamp":
+        inputs += (FACTORY / "blender_floor_lamp.py").read_text(encoding="utf-8").encode()
+    if spec.get("generator") == "interior-appliance":
+        inputs += (FACTORY / "blender_appliance_interiors.py").read_text(encoding="utf-8").encode()
     return "v1-" + hashlib.sha256(inputs).hexdigest()[:12]
 
 
@@ -49,6 +56,29 @@ def assert_immutable(folder, report):
         provenance = json.loads(path.read_text())
         if not provenance.get("files") or any(not (folder / file).is_file() or sha(folder / file) != digest for file, digest in provenance["files"].items()):
             raise RuntimeError("Approved asset output was modified: " + str(folder))
+
+
+def normalize_encoded_footprints(footprints, dimensions):
+    """Remove zero-width contacts introduced by rounding/clamping normalized coordinates."""
+    def repair(polygons):
+        result=[]
+        for polygon in polygons:
+            source=Polygon([(p["x"],p["y"]) for p in polygon["outer"]], [[(p["x"],p["y"]) for p in hole] for hole in polygon["holes"]])
+            if source.is_valid:
+                result.append(polygon)
+                continue
+            fixed=source.buffer(0)
+            if fixed.is_empty or abs(fixed.area-source.area)*dimensions["width_mm"]*dimensions["depth_mm"]>1:
+                raise RuntimeError("Normalized footprint requires a substantive geometry repair")
+            parts=[fixed] if fixed.geom_type=="Polygon" else list(fixed.geoms)
+            for part in parts:
+                result.append({"outer":[{"x":x,"y":y} for x,y in list(part.exterior.coords)[:-1]], "holes":[[{"x":x,"y":y} for x,y in list(hole.coords)[:-1]] for hole in part.interiors]})
+        return result
+    for name in ("visual","collision","technical_features"):
+        footprints[name]=repair(footprints[name])
+    for volume in footprints["volumes"]:
+        volume["footprints"]=repair(volume["footprints"])
+    return footprints
 
 
 def font(size):
@@ -99,9 +129,9 @@ def build(spec, blender, force=False):
     write_json(folder / "source/specification.json", spec)
     print("Generate: " + spec["asset_id"] + " / " + spec["generation_version"], flush=True)
     with (folder / "generation.log").open("w", encoding="utf-8") as log:
-        if spec.get("generator") not in (None, "appliance"):
+        if spec.get("generator") not in (None, "appliance", "interior", "interior-lamp", "interior-appliance"):
             raise ValueError("Unsupported geometry generator")
-        generator = "blender_appliances.py" if spec.get("generator") == "appliance" else "blender_generate.py"
+        generator = {"appliance": "blender_appliances.py", "interior": "blender_interiors.py", "interior-lamp": "blender_floor_lamp.py", "interior-appliance": "blender_appliance_interiors.py"}.get(spec.get("generator"), "blender_generate.py")
         command = [str(blender), "--background", "--factory-startup", "--python-exit-code", "1", "--python", str(FACTORY / generator), "--", str(folder / "source/specification.json"), str(folder)]
         device = os.getenv("ROOMFIT_CYCLES_DEVICE", "CPU")
         if device not in {"CPU", "CUDA", "OPTIX", "HIP", "ONEAPI", "METAL"}:
@@ -122,6 +152,8 @@ def build(spec, blender, force=False):
         Image.open(folder / "previews" / f"{view}.png").save(folder / "previews" / f"{view}.webp", quality=90, method=6)
     print("Validate: " + spec["asset_id"], flush=True)
     report, footprints = validate(spec, folder)
+    if spec.get("repair_normalized_footprints"):
+        footprints=normalize_encoded_footprints(footprints,spec["dimensions"])
     write_json(report_path, report)
     frames = json.loads((folder / "render-info.json").read_text())
     metadata = {**spec, "assets": {"model_3d": "3d/model.glb", "top_2d": "2d/original/top_view_512.webp", "technical_2d": "2d/technical.svg", "preview": "previews/isometric.webp", "comparison": "comparison.jpg"}, "top_frame_mm": frames["original"], "footprints": footprints, "validation_status": report["status"], "triangles": report["triangles"], "glb_bytes": report["glb_bytes"], "material_variants": [{**v, "top_2d": f'2d/{v["id"]}/top_view_512.webp', "top_128": f'2d/{v["id"]}/top_view_128.webp', "top_256": f'2d/{v["id"]}/top_view_256.webp'} for v in spec["material_variants"]]}

@@ -55,6 +55,7 @@ import {
   openingPlacement,
   openingPosition,
   wallPolygon,
+  upgradeFurnitureAsset,
   type Point,
   type Furniture,
   type CatalogItem,
@@ -178,6 +179,10 @@ export function Editor({
     [tool, setTool] = useState<Tool>(readOnly ? "pan" : "select"),
     [panel, setPanel] = useState("catalog"),
     [mobilePanel, setMobilePanel] = useState(false);
+  const upgrades = useMemo(
+    () => variant.items.filter((item) => upgradeFurnitureAsset(item)).length,
+    [variant.items],
+  );
   const [catalog, setCatalog] = useState<CatalogItem[]>([]),
     [personal, setPersonal] = useState<CatalogItem[]>([]),
     [error, setError] = useState(""),
@@ -1154,6 +1159,29 @@ export function Editor({
           {(analysis.totalArea / 1e6).toFixed(2)} м²
         </span>
         <div className="mode-buttons">
+          {!readOnly && upgrades > 0 && (
+            <button
+              className="asset-upgrade-button"
+              aria-label="Обновить мебель"
+              title="Обновить мебель в этом варианте. Положение и размеры сохранятся; действие можно отменить."
+              onClick={() => {
+                change((document) => {
+                  const current = document.variants.find(
+                    (v) => v.id === variant.id,
+                  )!;
+                  current.items = current.items.map(
+                    (item) => upgradeFurnitureAsset(item) || item,
+                  );
+                });
+                setHint(
+                  `Обновлена мебель: ${upgrades}. Проверь материалы в свойствах; изменение можно отменить.`,
+                );
+              }}
+            >
+              <WandSparkles size={16} />
+              <span>Обновить мебель</span>
+            </button>
+          )}
           <button
             title="Сравнить варианты"
             onClick={() => setDialog("compare")}

@@ -29,7 +29,7 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#e9e0d1",
+        "color": "#9d9690",
         "roughness": 0.72
       },
       {
@@ -41,7 +41,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -50,7 +50,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "bed-single",
@@ -82,7 +84,7 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#e9e0d1",
+        "color": "#9d9690",
         "roughness": 0.72
       },
       {
@@ -94,7 +96,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -103,7 +105,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "bed-kids",
@@ -135,7 +139,7 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#e9e0d1",
+        "color": "#9d9690",
         "roughness": 0.72
       },
       {
@@ -147,7 +151,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -156,7 +160,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "sofa",
@@ -200,7 +206,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -209,7 +215,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "sofa-small",
@@ -253,7 +261,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -262,7 +270,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "armchair",
@@ -306,7 +316,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -315,7 +325,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "desk",
@@ -359,7 +371,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -368,7 +380,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "table",
@@ -412,7 +426,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -421,7 +435,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "coffee",
@@ -465,7 +481,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -474,7 +490,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "chair",
@@ -518,7 +536,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -527,7 +545,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "wardrobe",
@@ -571,7 +591,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -580,7 +600,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "dresser",
@@ -624,7 +646,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -633,7 +655,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "nightstand",
@@ -677,7 +701,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -686,7 +710,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "shelf",
@@ -730,7 +756,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -739,7 +765,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "kitchen",
@@ -783,7 +811,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -792,7 +820,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "sink",
@@ -825,27 +855,29 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#cbb99e",
-        "roughness": 0.72
+        "roughness": 0.24
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.28
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
-        "roughness": 0.67
+        "color": "#555b61",
+        "roughness": 0.32
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
         "color": "#927356",
-        "roughness": 0.5
+        "roughness": 0.26
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "bath",
@@ -878,27 +910,29 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#cbb99e",
-        "roughness": 0.72
+        "roughness": 0.24
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.28
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
-        "roughness": 0.67
+        "color": "#555b61",
+        "roughness": 0.32
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
         "color": "#927356",
-        "roughness": 0.5
+        "roughness": 0.26
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "toilet",
@@ -931,27 +965,29 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#cbb99e",
-        "roughness": 0.72
+        "roughness": 0.24
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.28
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
-        "roughness": 0.67
+        "color": "#555b61",
+        "roughness": 0.32
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
         "color": "#927356",
-        "roughness": 0.5
+        "roughness": 0.26
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "fridge",
@@ -984,28 +1020,29 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#cbb99e",
-        "roughness": 0.72
+        "roughness": 0.24
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.28
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
-        "roughness": 0.67
+        "color": "#555b61",
+        "roughness": 0.32
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
         "color": "#927356",
-        "roughness": 0.5
+        "roughness": 0.26
       }
     ],
-    "generator": "appliance"
+    "generator": "interior-appliance",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "washer",
@@ -1038,28 +1075,29 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#cbb99e",
-        "roughness": 0.72
+        "roughness": 0.24
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.28
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
-        "roughness": 0.67
+        "color": "#555b61",
+        "roughness": 0.32
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
         "color": "#927356",
-        "roughness": 0.5
+        "roughness": 0.26
       }
     ],
-    "generator": "appliance"
+    "generator": "interior-appliance",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "stove",
@@ -1092,28 +1130,29 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#cbb99e",
-        "roughness": 0.72
+        "roughness": 0.24
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.28
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
-        "roughness": 0.67
+        "color": "#555b61",
+        "roughness": 0.32
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
         "color": "#927356",
-        "roughness": 0.5
+        "roughness": 0.26
       }
     ],
-    "generator": "appliance"
+    "generator": "interior-appliance",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "lamp",
@@ -1157,7 +1196,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -1166,7 +1205,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior-lamp",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "plant",
@@ -1198,7 +1239,7 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#639568",
+        "color": "#b5b0a4",
         "roughness": 0.72
       },
       {
@@ -1210,7 +1251,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -1219,7 +1260,10 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10",
+    "repair_normalized_footprints": true
   },
   {
     "asset_id": "rug",
@@ -1263,7 +1307,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -1272,7 +1316,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "sofa-corner",
@@ -1316,7 +1362,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -1325,7 +1371,9 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   },
   {
     "asset_id": "wall-shelf",
@@ -1369,7 +1417,7 @@
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#66716a",
+        "color": "#555b61",
         "roughness": 0.67
       },
       {
@@ -1378,6 +1426,8 @@
         "color": "#927356",
         "roughness": 0.5
       }
-    ]
+    ],
+    "generator": "interior",
+    "style_revision": "reference-interiors-2026-10"
   }
 ]

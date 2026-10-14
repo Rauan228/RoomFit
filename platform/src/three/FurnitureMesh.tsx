@@ -41,11 +41,13 @@ export default function FurnitureMesh({
   selected,
   status,
   onSelect,
+  active = true,
 }: {
   item: Furniture;
   selected: boolean;
   status?: string;
   onSelect: () => void;
+  active?: boolean;
 }) {
   const pose = furniturePose(item),
     resources = useSceneResources();
@@ -106,8 +108,13 @@ export default function FurnitureMesh({
         onSelect();
       }}
     >
-      {furnitureAsset(item) && item.height > 0 ? (
-        <AssetModel item={item} status={status} fallback={fallback} />
+      {furnitureAsset(item) && (item.height > 0 || item.type === "rug") ? (
+        <AssetModel
+          item={item}
+          status={status}
+          fallback={fallback}
+          active={active}
+        />
       ) : contour ? (
         <mesh
           geometry={contour}
@@ -129,12 +136,12 @@ export default function FurnitureMesh({
           />
         ))
       )}
-      {(selected || status) && (
+      {(selected || status === "error") && (
         <lineSegments
           geometry={outline}
           raycast={() => undefined}
           material={resources.line(
-            status === "error" ? "#c7553d" : selected ? "#d8ac63" : "#c7994d",
+            status === "error" ? "#c7553d" : "#d8ac63",
           )}
           position={[0, item.height / 2000, 0]}
           dispose={null}
