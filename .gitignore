@@ -26,3 +26,7 @@ api/data/
 *.thumbnail
 *.blend1
 /assets/furniture/**/generation.log
+# Private photo references and local task notes.
+/photos/
+/[1-5].png
+/prompt.txt

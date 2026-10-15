@@ -3,6 +3,7 @@ import base from "./playwright.config";
 export default defineConfig({
   ...base,
   testMatch: "photo-furniture.spec.ts",
+  testIgnore: [],
   timeout: 90000,
   use: { ...base.use, baseURL: "http://127.0.0.1:4193" },
   webServer: [

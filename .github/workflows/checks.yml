@@ -30,8 +30,12 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npm run test:api
+      - name: Validate furniture geometry and derivatives
+        run: api/.venv/bin/python -m pytest -q asset_factory/test_validation.py
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - name: Test photo furniture with isolated mock provider
+        run: npx playwright test --config playwright.photo.config.ts
       - run: npm run test:landing
       - uses: actions/upload-artifact@v4
         if: failure()

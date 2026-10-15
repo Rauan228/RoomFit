@@ -1,11 +1,17 @@
 import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./platform/tests",
+  // Photo generation has its own isolated API with a mocked, non-billable provider.
+  testIgnore: "**/photo-furniture.spec.ts",
   fullyParallel: false,
   workers: 1,
   timeout: 45000,
   expect: { timeout: 10000 },
-  use: { baseURL: "http://127.0.0.1:4181", trace: "retain-on-failure" },
+  use: {
+    baseURL: "http://127.0.0.1:4181",
+    channel: "chromium",
+    trace: "retain-on-failure",
+  },
   projects: [
     {
       name: "desktop",
