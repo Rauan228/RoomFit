@@ -33,6 +33,8 @@ from .database import (
     now,
 )
 from .validation import validate_document, validate_catalog
+from .photo_models import PhotoJob
+from .photo_routes import install_photo_routes, validate_references, validate_reference
 
 PRODUCTION = os.getenv("APP_ENV") == "production"
 SECRET = os.getenv("SECRET_KEY") or secrets.token_urlsafe(48)
@@ -184,15 +186,17 @@ def login_session(response, user, session):
     return {"user": public_user(user)}
 
 
-def checked_document(document):
+def checked_document(document, owner=None, session=None):
     try:
+        validate_references(document, session, owner)
         return validate_document(document)
     except (ValueError, KeyError, TypeError, OSError) as error:
         raise HTTPException(422, "Некорректный проект: " + str(error))
 
 
-def checked_catalog(data):
+def checked_catalog(data, owner=None, session=None):
     try:
+        validate_reference(data, session, owner)
         return validate_catalog(data)
     except (ValueError, KeyError, TypeError) as error:
         raise HTTPException(422, str(error))
@@ -240,6 +244,7 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
     allow_headers=["Content-Type", "X-CSRF-Token"],
 )
+install_photo_routes(app, require_user, db)
 
 
 @app.middleware("http")
@@ -266,7 +271,9 @@ async def guard(request, call_next):
             return JSONResponse(
                 {"detail": "Обнови страницу: защитный токен истёк"}, 403
             )
-        if request.headers.get("content-type", "").split(";")[0] != "application/json":
+        media_type = request.headers.get("content-type", "").split(";")[0]
+        photo_upload = request.method == "PUT" and request.url.path.startswith("/api/photo-furniture/jobs/") and "/images/" in request.url.path
+        if media_type != "application/json" and not (photo_upload and media_type in ("image/png", "image/jpeg", "image/webp")):
             return JSONResponse({"detail": "Требуется JSON"}, 415)
     response = await call_next(request)
     response.headers["Cache-Control"] = "no-store"
@@ -518,8 +525,11 @@ def delete_account(
     session.execute(delete(Session).where(Session.user_id == user.id))
     session.execute(delete(ResetToken).where(ResetToken.user_id == user.id))
     session.execute(delete(SupportTicket).where(SupportTicket.owner_id == user.id))
+    session.execute(delete(PhotoJob).where(PhotoJob.owner_id == user.id))
     session.delete(user)
     session.commit()
+    from .photo_storage import remove_owner
+    remove_owner(user.id)
     return {"ok": True}
 
 
@@ -547,7 +557,7 @@ def create_project(
     user: User = Depends(require_user),
     session: DBSession = Depends(db),
 ):
-    document = checked_document(data.document)
+    document = checked_document(data.document, user.id, session)
     limits_setting = session.get(Setting, "limits")
     limit = (limits_setting.value if limits_setting else {}).get("projects", 100)
     if (
@@ -582,7 +592,7 @@ def save_project(
     session: DBSession = Depends(db),
 ):
     project = owned(session, user, project_id)
-    document = checked_document(data.document)
+    document = checked_document(data.document, user.id, session)
     result = session.execute(
         update(Project)
         .where(
@@ -757,7 +767,7 @@ def revoke(
 
 
 @app.get("/api/shared/{token}")
-def shared(token: str, session: DBSession = Depends(db)):
+def shared(token: str, response: Response, session: DBSession = Depends(db)):
     if len(token) > 120:
         raise HTTPException(404, "Ссылка недействительна")
     record = session.scalar(
@@ -766,6 +776,7 @@ def shared(token: str, session: DBSession = Depends(db)):
     p = session.get(Project, record.project_id) if record else None
     if not p or p.deleted_at:
         raise HTTPException(404, "Ссылка недействительна или отозвана")
+    cookie(response, "roomfit_photo_share_" + p.id, token, min(86400, max(1, int((record.expires_at-now()).total_seconds()))))
     return {
         "name": p.name,
         "document": p.document,
@@ -793,7 +804,7 @@ def furniture(user: User = Depends(require_user), session: DBSession = Depends(d
 def create_furniture(
     data: dict, user: User = Depends(require_user), session: DBSession = Depends(db)
 ):
-    record = PersonalFurniture(owner_id=user.id, data=checked_catalog(data))
+    record = PersonalFurniture(owner_id=user.id, data=checked_catalog(data, user.id, session))
     session.add(record)
     session.commit()
     return {**record.data, "id": record.id}

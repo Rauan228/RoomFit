@@ -13,6 +13,7 @@ import {
   FileUp,
   ChevronRight,
   PanelsTopLeft,
+  Camera,
 } from "lucide-react";
 import {
   area,
@@ -213,6 +214,17 @@ export function Inspector(p: Props) {
             </button>
           ))}
         </div>
+        {!readOnly && (
+          <button
+            className="full custom-furniture photo-launch"
+            onClick={() => p.setDialog("photo")}
+          >
+            <Camera size={18} />{" "}
+            {category === "Моя мебель"
+              ? "Моя мебель · создать 3D по фото"
+              : "Создать мебель по фото"}
+          </button>
+        )}
         <details className="catalog-filter">
           <summary>Фильтр по размерам ({doc.units})</summary>
           <div className="two-columns">
@@ -884,42 +896,43 @@ export function Inspector(p: Props) {
                   1e6,
                 )}
               </div>
-              {furnitureAsset({ ...item, materialVariant: "original" }) && (
-                <Field label="Материал мебели">
-                  <select
-                    value={furnitureAsset(item)?.variant.id || "custom"}
-                    onChange={(event) =>
-                      patchItem((i) => {
-                        const asset = assetById(
-                          i.assetId || i.catalogId,
-                          i.assetVersion,
-                        )!;
-                        const variant = asset.material_variants.find(
-                          (v) => v.id === event.target.value,
-                        )!;
-                        i.assetId = asset.asset_id;
-                        i.assetVersion = asset.generation_version;
-                        i.materialVariant = variant.id;
-                        i.color = variant.color;
-                      })
-                    }
-                  >
-                    {!furnitureAsset(item) && (
-                      <option value="custom" disabled>
-                        Свой цвет / контур · упрощённый вид
-                      </option>
-                    )}
-                    {assetById(
-                      item.assetId || item.catalogId,
-                      item.assetVersion,
-                    )!.material_variants.map((variant) => (
-                      <option key={variant.id} value={variant.id}>
-                        {variant.name}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-              )}
+              {!item.photoAsset &&
+                furnitureAsset({ ...item, materialVariant: "original" }) && (
+                  <Field label="Материал мебели">
+                    <select
+                      value={furnitureAsset(item)?.variant.id || "custom"}
+                      onChange={(event) =>
+                        patchItem((i) => {
+                          const asset = assetById(
+                            i.assetId || i.catalogId,
+                            i.assetVersion,
+                          )!;
+                          const variant = asset.material_variants.find(
+                            (v) => v.id === event.target.value,
+                          )!;
+                          i.assetId = asset.asset_id;
+                          i.assetVersion = asset.generation_version;
+                          i.materialVariant = variant.id;
+                          i.color = variant.color;
+                        })
+                      }
+                    >
+                      {!furnitureAsset(item) && (
+                        <option value="custom" disabled>
+                          Свой цвет / контур · упрощённый вид
+                        </option>
+                      )}
+                      {assetById(
+                        item.assetId || item.catalogId,
+                        item.assetVersion,
+                      )!.material_variants.map((variant) => (
+                        <option key={variant.id} value={variant.id}>
+                          {variant.name}
+                        </option>
+                      ))}
+                    </select>
+                  </Field>
+                )}
               {!furnitureAsset(item) && (
                 <Field label="Цвет">
                   <input

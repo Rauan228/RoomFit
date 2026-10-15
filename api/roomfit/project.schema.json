@@ -358,6 +358,183 @@
             "items": {
               "type": "object",
               "properties": {
+                "photoAsset": {
+                  "type": "object",
+                  "properties": {
+                    "jobId": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "version": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 10000
+                    },
+                    "dimensions": {
+                      "type": "object",
+                      "properties": {
+                        "width_mm": {
+                          "type": "number",
+                          "minimum": 10,
+                          "maximum": 20000
+                        },
+                        "depth_mm": {
+                          "type": "number",
+                          "minimum": 10,
+                          "maximum": 20000
+                        },
+                        "height_mm": {
+                          "type": "number",
+                          "minimum": 10,
+                          "maximum": 20000
+                        }
+                      },
+                      "required": [
+                        "width_mm",
+                        "depth_mm",
+                        "height_mm"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "frame": {
+                      "type": "object",
+                      "properties": {
+                        "frame_width_mm": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 50000
+                        },
+                        "frame_depth_mm": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 50000
+                        }
+                      },
+                      "required": [
+                        "frame_width_mm",
+                        "frame_depth_mm"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "footprints": {
+                      "type": "object",
+                      "properties": {
+                        "visual": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "outer": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "x": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1
+                                    },
+                                    "y": {
+                                      "type": "number",
+                                      "minimum": 0,
+                                      "maximum": 1
+                                    }
+                                  },
+                                  "required": [
+                                    "x",
+                                    "y"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                "minItems": 3,
+                                "maxItems": 200
+                              },
+                              "holes": {
+                                "type": "array",
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "#/properties/variants/items/properties/items/items/properties/photoAsset/properties/footprints/properties/visual/items/properties/outer/items"
+                                  },
+                                  "minItems": 3,
+                                  "maxItems": 200
+                                },
+                                "maxItems": 8
+                              }
+                            },
+                            "required": [
+                              "outer",
+                              "holes"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "minItems": 1,
+                          "maxItems": 32
+                        },
+                        "collision": {
+                          "$ref": "#/properties/variants/items/properties/items/items/properties/photoAsset/properties/footprints/properties/visual"
+                        },
+                        "volumes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "min_height_mm": {
+                                "type": "number",
+                                "minimum": 0
+                              },
+                              "max_height_mm": {
+                                "type": "number",
+                                "exclusiveMinimum": 0
+                              },
+                              "footprints": {
+                                "$ref": "#/properties/variants/items/properties/items/items/properties/photoAsset/properties/footprints/properties/visual"
+                              }
+                            },
+                            "required": [
+                              "min_height_mm",
+                              "max_height_mm",
+                              "footprints"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "maxItems": 32
+                        }
+                      },
+                      "required": [
+                        "visual",
+                        "collision",
+                        "volumes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "triangles": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 60000
+                    },
+                    "glbBytes": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 12000000
+                    },
+                    "modelSha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    }
+                  },
+                  "required": [
+                    "jobId",
+                    "version",
+                    "dimensions",
+                    "frame",
+                    "footprints",
+                    "triangles",
+                    "glbBytes",
+                    "modelSha256"
+                  ],
+                  "additionalProperties": false
+                },
                 "id": {
                   "$ref": "#/properties/floors/items/properties/id"
                 },

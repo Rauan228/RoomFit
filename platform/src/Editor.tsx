@@ -81,6 +81,7 @@ import {
 import { downloadJSON, readUnderlay } from "./exports";
 import "./three/three.css";
 const Scene3D = lazy(() => import("./three/Scene3D"));
+const PhotoFurnitureDialog = lazy(() => import("./photo/PhotoFurnitureDialog"));
 export type Tool =
   | "select"
   | "pan"
@@ -1683,6 +1684,34 @@ export function Editor({
             setDialog("");
           }}
         />
+      )}
+      {dialog === "photo" && !readOnly && (
+        <Suspense
+          fallback={
+            <Modal title="Моя мебель" close={() => setDialog("")}>
+              <p role="status">Открываем создание мебели…</p>
+            </Modal>
+          }
+        >
+          <PhotoFurnitureDialog
+            close={() => {
+              setDialog("");
+              request<CatalogItem[]>("/furniture")
+                .then(setPersonal)
+                .catch((e) => setError(e.message));
+            }}
+            onSaved={(item, add) => {
+              setPersonal((items) => [
+                ...items.filter((existing) => existing.id !== item.id),
+                item,
+              ]);
+              if (add) {
+                addItem(item);
+                setDialog("");
+              }
+            }}
+          />
+        </Suspense>
       )}
       {dialog === "layers" && (
         <Modal title="Слои плана" close={() => setDialog("")}>

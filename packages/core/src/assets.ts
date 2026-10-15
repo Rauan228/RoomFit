@@ -1,6 +1,7 @@
 import manifest from "./asset-manifest.json" with { type: "json" };
 import versions from "./asset-versions.json" with { type: "json" };
 import type { Furniture, Point } from "./model";
+import { photoAssetMetadata } from "./photo-assets";
 
 export interface AssetPolygon {
   outer: Point[];
@@ -89,8 +90,29 @@ export function furnitureAsset(
     | "color"
     | "materialVariant"
     | "contour"
+    | "photoAsset"
   >,
 ) {
+  if (item.photoAsset) {
+    const asset = photoAssetMetadata(
+      item.photoAsset,
+      "Своя мебель",
+      "personal",
+    );
+    const canonical = asset.footprints.collision[0]?.outer;
+    if (
+      item.contour &&
+      (!canonical ||
+        item.contour.length !== canonical.length ||
+        item.contour.some(
+          (p, i) =>
+            Math.abs(p.x - canonical[i].x) > 0.00001 ||
+            Math.abs(p.y - canonical[i].y) > 0.00001,
+        ))
+    )
+      return;
+    return { asset, variant: asset.material_variants[0] };
+  }
   const asset = assetById(item.assetId || item.catalogId, item.assetVersion);
   if (!asset) return;
   // A custom contour or a legacy arbitrary paint does not silently become a different model.
@@ -143,6 +165,7 @@ const contourMatches = (a: Point[], b?: Point[]) =>
 
 /** Explicit, undoable upgrade. Private shapes and every placement/dimension remain intact. */
 export function upgradeFurnitureAsset(item: Furniture): Furniture | undefined {
+  if (item.photoAsset) return;
   const id = item.assetId || item.catalogId;
   const latest = assetById(id);
   if (!latest) return;

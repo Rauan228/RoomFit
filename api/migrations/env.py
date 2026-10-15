@@ -1,5 +1,6 @@
 from alembic import context
 from roomfit.database import Base, engine
+from roomfit import photo_models
 
 config = context.config
 target_metadata = Base.metadata

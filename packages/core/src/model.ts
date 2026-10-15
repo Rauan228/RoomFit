@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { photoAssetSchema } from "./photo-assets";
 export const uid = () => crypto.randomUUID();
 const id = z.string().uuid(),
   number = z.number().finite();
@@ -8,6 +9,7 @@ export const pointSchema = z.object({
 });
 const polygon = z.array(pointSchema).min(3).max(200);
 export const furnitureSchema = z.object({
+  photoAsset: photoAssetSchema.optional(),
   id,
   catalogId: z.string().max(100).optional(),
   assetId: z
@@ -174,6 +176,7 @@ export type Variant = ProjectDocument["variants"][number];
 export type Room = Floor["rooms"][number];
 export type CatalogItem = Pick<
   Furniture,
+  | "photoAsset"
   | "name"
   | "type"
   | "category"

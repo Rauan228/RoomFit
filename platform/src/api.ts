@@ -25,6 +25,21 @@ export class ApiError extends Error {
   }
 }
 let csrf = "";
+export async function uploadPhoto<T>(path: string, file: File): Promise<T> {
+  const response = await fetch(`/api${path}`, {
+    method: "PUT",
+    credentials: "same-origin",
+    headers: { "Content-Type": file.type, "X-CSRF-Token": csrf },
+    body: file,
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok)
+    throw new ApiError(
+      response.status,
+      data.detail || "Не удалось загрузить фото",
+    );
+  return data as T;
+}
 export async function request<T>(
   path: string,
   method = "GET",
