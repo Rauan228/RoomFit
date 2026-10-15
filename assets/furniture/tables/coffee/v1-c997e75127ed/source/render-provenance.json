@@ -1,0 +1,12 @@
+{
+  "asset_id": "coffee",
+  "generation_version": "v1-c997e75127ed",
+  "files": {
+    "3d/model.glb": "ca10e3950257492b6735c806ea5b21365ddbdb8bbb6ed8b210044d88e1292b6f",
+    "validation/coordinates.png": "f9734d30dc09e24149295989b3a2ae029fab897b6aa621ce6bb60ca634955993",
+    "2d/original/top_view_1024.png": "6e162ed435b36be5e7ca50ae4afe98a912903a38e7136f0f75d516676cf0468f",
+    "2d/sand/top_view_1024.png": "e9d7b03c194fa7578f627ad51e0488435ee8b7946282b273535fc19d105ba49e",
+    "2d/graphite/top_view_1024.png": "b4077d7d92f9c57e525dfd97aba447b833b1fc6b48a8af19f085d63c0788d316",
+    "2d/walnut/top_view_1024.png": "c5e42767fb7256a89b28501e6e553bfcf27cfff96c718af1e62d275548e0c95f"
+  }
+}

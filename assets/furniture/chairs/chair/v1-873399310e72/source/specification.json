@@ -1,0 +1,76 @@
+{
+  "asset_id": "chair",
+  "name": "Стул",
+  "category": "chairs",
+  "catalog_category": "Стулья",
+  "type": "chair",
+  "dimensions": {
+    "width_mm": 480,
+    "depth_mm": 560,
+    "height_mm": 860
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#a89584",
+      "roughness": 0.95
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#c9b696",
+      "roughness": 0.95
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#5a5e62",
+      "roughness": 0.93
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#8b6c50",
+      "roughness": 0.94
+    }
+  ],
+  "generator": "studio",
+  "style_revision": "studio-2026-10",
+  "primary_material": "upholstery",
+  "provenance": {
+    "geometry": "procedural, asset_factory/blender_studio.py",
+    "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+    "third_party_assets": [],
+    "visual_references": {
+      "files": [
+        "photos/стул кухонный/image copy 4.png",
+        "photos/стул кухонный/image.png"
+      ],
+      "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+    }
+  },
+  "seat_height_mm": 470,
+  "previous_catalog_dimensions_mm": {
+    "width_mm": 450,
+    "depth_mm": 500,
+    "height_mm": 850
+  },
+  "dimension_notes": "Габариты мягкого стула с охватывающей спинкой по референсу: сиденье 470 мм для стола высотой 750 мм.",
+  "generation_version": "v1-873399310e72"
+}

@@ -8,7 +8,8 @@ from shapely.geometry import Polygon
 
 ROOT = Path(__file__).resolve().parents[1]
 FACTORY = Path(__file__).resolve().parent
-OUTPUT = ROOT / "assets/furniture"
+OUTPUT = Path(os.getenv("ROOMFIT_ASSET_OUTPUT", ROOT / "assets/furniture"))
+STUDIO_TEXTURES = FACTORY / "textures/studio-v1"
 PILOT = ["sofa", "bed-double", "table", "wardrobe", "armchair", "sofa-corner", "wall-shelf"]
 
 
@@ -26,6 +27,14 @@ def version(spec):
         inputs += (FACTORY / "blender_floor_lamp.py").read_text(encoding="utf-8").encode()
     if spec.get("generator") == "interior-appliance":
         inputs += (FACTORY / "blender_appliance_interiors.py").read_text(encoding="utf-8").encode()
+    if spec.get("generator") in ("studio", "studio-rug"):
+        # Generator source, texture synthesis and every texture byte belong to the version.
+        inputs += (FACTORY / "blender_studio.py").read_text(encoding="utf-8").encode()
+        inputs += (FACTORY / "studio_textures.py").read_text(encoding="utf-8").encode()
+        for path in sorted(STUDIO_TEXTURES.iterdir()):
+            inputs += path.name.encode() + hashlib.sha256(path.read_bytes()).digest()
+    if spec.get("generator") == "studio-rug":
+        inputs += (FACTORY / "blender_studio_rug.py").read_text(encoding="utf-8").encode()
     return "v1-" + hashlib.sha256(inputs).hexdigest()[:12]
 
 
@@ -129,9 +138,9 @@ def build(spec, blender, force=False):
     write_json(folder / "source/specification.json", spec)
     print("Generate: " + spec["asset_id"] + " / " + spec["generation_version"], flush=True)
     with (folder / "generation.log").open("w", encoding="utf-8") as log:
-        if spec.get("generator") not in (None, "appliance", "interior", "interior-lamp", "interior-appliance"):
+        if spec.get("generator") not in (None, "appliance", "interior", "interior-lamp", "interior-appliance", "studio", "studio-rug"):
             raise ValueError("Unsupported geometry generator")
-        generator = {"appliance": "blender_appliances.py", "interior": "blender_interiors.py", "interior-lamp": "blender_floor_lamp.py", "interior-appliance": "blender_appliance_interiors.py"}.get(spec.get("generator"), "blender_generate.py")
+        generator = {"appliance": "blender_appliances.py", "interior": "blender_interiors.py", "interior-lamp": "blender_floor_lamp.py", "interior-appliance": "blender_appliance_interiors.py", "studio": "blender_studio.py", "studio-rug": "blender_studio_rug.py"}.get(spec.get("generator"), "blender_generate.py")
         command = [str(blender), "--background", "--factory-startup", "--python-exit-code", "1", "--python", str(FACTORY / generator), "--", str(folder / "source/specification.json"), str(folder)]
         device = os.getenv("ROOMFIT_CYCLES_DEVICE", "CPU")
         if device not in {"CPU", "CUDA", "OPTIX", "HIP", "ONEAPI", "METAL"}:
@@ -148,8 +157,9 @@ def build(spec, blender, force=False):
             copy = original.copy()
             copy.thumbnail((size, size), Image.Resampling.LANCZOS)
             copy.save(folder / "2d" / variant["id"] / f"top_view_{size}.webp", quality=88, method=6)
-    for view in ("front", "side", "isometric"):
-        Image.open(folder / "previews" / f"{view}.png").save(folder / "previews" / f"{view}.webp", quality=90, method=6)
+    for view in ("front", "side", "isometric", "back", "closeup"):
+        if (folder / "previews" / f"{view}.png").exists():
+            Image.open(folder / "previews" / f"{view}.png").save(folder / "previews" / f"{view}.webp", quality=90, method=6)
     print("Validate: " + spec["asset_id"], flush=True)
     report, footprints = validate(spec, folder)
     if spec.get("repair_normalized_footprints"):
@@ -266,6 +276,10 @@ def main():
                 write_export_provenance(folder)
             print(spec["asset_id"] + ": approved", flush=True)
     if args.command in ("publish", "generate"):
+        if os.getenv("ROOMFIT_ASSET_OUTPUT"):
+            # Trial output outside the repository is never published or archived.
+            print("Trial output in ROOMFIT_ASSET_OUTPUT: publication skipped.", flush=True)
+            return
         publish(specs)
 
 

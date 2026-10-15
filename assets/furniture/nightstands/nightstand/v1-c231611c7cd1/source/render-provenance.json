@@ -1,0 +1,12 @@
+{
+  "asset_id": "nightstand",
+  "generation_version": "v1-c231611c7cd1",
+  "files": {
+    "3d/model.glb": "a61fcaa199703dccf3f0eda3097209b6a2910fdec928fee623714c8bf8646f29",
+    "validation/coordinates.png": "43f3bfb7a31ee0ae384b74a839520268ff963fe6bfd6972327372e359aa0db36",
+    "2d/original/top_view_1024.png": "c722119a18107c3473b6efb747d6a6807cbb8c0441f5615b760fae77d7009f7d",
+    "2d/sand/top_view_1024.png": "3bd5ed7e0377a8cc9edc5d4749c2a4cee47c7cb54a1886c568ecec304237d5b1",
+    "2d/graphite/top_view_1024.png": "0262535bdf0a98cae471bb3d99697aed912b8fb14bb1440efc7e2b5a469419a0",
+    "2d/walnut/top_view_1024.png": "f9740b9dc1193c711e1249de4ec911912d3e06dc14d124aaf666f5747af56dd2"
+  }
+}

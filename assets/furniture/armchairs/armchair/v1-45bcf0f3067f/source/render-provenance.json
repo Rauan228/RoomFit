@@ -1,0 +1,12 @@
+{
+  "asset_id": "armchair",
+  "generation_version": "v1-45bcf0f3067f",
+  "files": {
+    "3d/model.glb": "1ebb1cb8aa42f2d3976f4da73133347f0007a8bf9fd617b48d890b607c19f489",
+    "validation/coordinates.png": "5a9ff6b6d16bf21caee3cae14f043d90769cd4ebbb6e4d656a43449176d1b9f3",
+    "2d/original/top_view_1024.png": "7d336cc58b18aceb08a053cda7e6c98ecd8b68524dba7ab36314f0ec22eec33b",
+    "2d/sand/top_view_1024.png": "d3e0ff9d35485658b3d3398c55e251be2f1b264c628e716246629426b27ee5d3",
+    "2d/graphite/top_view_1024.png": "c19aa3883ab27e0c902cd215062c7b8adc5d6531d0443b5471880a908f484244",
+    "2d/walnut/top_view_1024.png": "bf8b7327d15e9dfc2dee7f6c2151d9b22f17689cd902eb8e1c63dadb3b8e9aae"
+  }
+}

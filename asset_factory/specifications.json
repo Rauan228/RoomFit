@@ -6,9 +6,9 @@
     "catalog_category": "Кровати",
     "type": "bed",
     "dimensions": {
-      "width_mm": 1600,
-      "depth_mm": 2000,
-      "height_mm": 600
+      "width_mm": 1760,
+      "depth_mm": 2180,
+      "height_mm": 1100
     },
     "orientation": {
       "front": "+Z",
@@ -29,30 +29,54 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#9d9690",
-        "roughness": 0.72
+        "color": "#b3ada6",
+        "roughness": 0.9
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.9
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#5b5f63",
+        "roughness": 0.88
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.5
+        "color": "#8a6b52",
+        "roughness": 0.9
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "velvet",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": [],
+      "visual_references": {
+        "files": [
+          "photos/двухместные кровати/image copy.png",
+          "photos/двухместные кровати/image.png"
+        ],
+        "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+      }
+    },
+    "sleeping_area_mm": {
+      "width_mm": 1600,
+      "length_mm": 2000
+    },
+    "mattress_top_mm": 520,
+    "previous_catalog_dimensions_mm": {
+      "width_mm": 1600,
+      "depth_mm": 2000,
+      "height_mm": 600
+    },
+    "dimension_notes": "Наружные габариты мягкой рамы для матраса 160×200: боковины 75 мм, изголовье 110 мм, изножье 60 мм. Высота — изголовье 1100 мм, верх матраса 520 мм. Старая модель 1600×2000×600 описывала спальное место и была сплющена по высоте."
   },
   {
     "asset_id": "bed-single",
@@ -61,9 +85,9 @@
     "catalog_category": "Кровати",
     "type": "bed",
     "dimensions": {
-      "width_mm": 900,
-      "depth_mm": 2000,
-      "height_mm": 600
+      "width_mm": 970,
+      "depth_mm": 2130,
+      "height_mm": 860
     },
     "orientation": {
       "front": "+Z",
@@ -84,30 +108,53 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#9d9690",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": [],
+      "visual_references": {
+        "files": [
+          "photos/одноместные кровати/image copy.png"
+        ],
+        "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+      }
+    },
+    "sleeping_area_mm": {
+      "width_mm": 900,
+      "length_mm": 2000
+    },
+    "mattress_top_mm": 495,
+    "previous_catalog_dimensions_mm": {
+      "width_mm": 900,
+      "depth_mm": 2000,
+      "height_mm": 600
+    },
+    "dimension_notes": "Наружные габариты рамы из массива для матраса 90×200: стойки 60 мм, царги 30 мм. Высота — стойки изголовья 860 мм, верх матраса 495 мм."
   },
   {
     "asset_id": "bed-kids",
@@ -116,9 +163,9 @@
     "catalog_category": "Кровати",
     "type": "bed",
     "dimensions": {
-      "width_mm": 800,
-      "depth_mm": 1600,
-      "height_mm": 550
+      "width_mm": 850,
+      "depth_mm": 1650,
+      "height_mm": 660
     },
     "orientation": {
       "front": "+Z",
@@ -139,30 +186,53 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#9d9690",
-        "roughness": 0.72
+        "color": "#ece7df",
+        "roughness": 0.5
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#d9c8aa",
+        "roughness": 0.52
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#5c6166",
+        "roughness": 0.48
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#8f6e52",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "paint",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": [],
+      "visual_references": {
+        "files": [
+          "photos/одноместные кровати/image copy 4.png"
+        ],
+        "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+      }
+    },
+    "sleeping_area_mm": {
+      "width_mm": 800,
+      "length_mm": 1600
+    },
+    "mattress_top_mm": 370,
+    "previous_catalog_dimensions_mm": {
+      "width_mm": 800,
+      "depth_mm": 1600,
+      "height_mm": 550
+    },
+    "dimension_notes": "Наружные габариты кровати с бортиками для матраса 80×160: панели 20 мм. Высота — бортики и спинки 660 мм, верх матраса 370 мм."
   },
   {
     "asset_id": "sofa",
@@ -195,29 +265,35 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#819986",
-        "roughness": 0.72
+        "roughness": 0.95
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.95
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#5a5e62",
+        "roughness": 0.93
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.5
+        "color": "#8b6c50",
+        "roughness": 0.94
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "upholstery",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "sofa-small",
@@ -250,29 +326,35 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#cbb99e",
-        "roughness": 0.72
+        "roughness": 0.95
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.95
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#5a5e62",
+        "roughness": 0.93
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.5
+        "color": "#8b6c50",
+        "roughness": 0.94
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "upholstery",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "armchair",
@@ -305,29 +387,35 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#819986",
-        "roughness": 0.72
+        "roughness": 0.95
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.95
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#5a5e62",
+        "roughness": 0.93
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.5
+        "color": "#8b6c50",
+        "roughness": 0.94
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "upholstery",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "desk",
@@ -359,30 +447,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "table",
@@ -414,30 +508,43 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": [],
+      "visual_references": {
+        "files": [
+          "photos/кухонный стол/image copy.png",
+          "photos/кухонный стол/image copy 2.png"
+        ],
+        "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+      }
+    }
   },
   {
     "asset_id": "coffee",
@@ -469,30 +576,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "chair",
@@ -501,9 +614,9 @@
     "catalog_category": "Стулья",
     "type": "chair",
     "dimensions": {
-      "width_mm": 450,
-      "depth_mm": 500,
-      "height_mm": 850
+      "width_mm": 480,
+      "depth_mm": 560,
+      "height_mm": 860
     },
     "orientation": {
       "front": "+Z",
@@ -524,30 +637,50 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#a89584",
+        "roughness": 0.95
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.95
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#5a5e62",
+        "roughness": 0.93
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.5
+        "color": "#8b6c50",
+        "roughness": 0.94
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "upholstery",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": [],
+      "visual_references": {
+        "files": [
+          "photos/стул кухонный/image copy 4.png",
+          "photos/стул кухонный/image.png"
+        ],
+        "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+      }
+    },
+    "seat_height_mm": 470,
+    "previous_catalog_dimensions_mm": {
+      "width_mm": 450,
+      "depth_mm": 500,
+      "height_mm": 850
+    },
+    "dimension_notes": "Габариты мягкого стула с охватывающей спинкой по референсу: сиденье 470 мм для стола высотой 750 мм."
   },
   {
     "asset_id": "wardrobe",
@@ -579,30 +712,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "dresser",
@@ -634,30 +773,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "nightstand",
@@ -689,30 +834,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "shelf",
@@ -744,30 +895,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "kitchen",
@@ -799,30 +956,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "sink",
@@ -854,30 +1017,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.24
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.28
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.32
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.26
+        "color": "#7a5236",
+        "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "bath",
@@ -909,30 +1078,37 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.24
+        "color": "#eeece7",
+        "roughness": 0.3
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.28
+        "color": "#d8c9ae",
+        "roughness": 0.32
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.32
+        "color": "#505458",
+        "roughness": 0.28
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.26
+        "color": "#7c604a",
+        "roughness": 0.3
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "enamel",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    },
+    "repair_normalized_footprints": true
   },
   {
     "asset_id": "toilet",
@@ -964,30 +1140,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.24
+        "color": "#f3f1ec",
+        "roughness": 0.16
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.28
+        "color": "#e3d6c0",
+        "roughness": 0.18
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.32
+        "color": "#4b4e52",
+        "roughness": 0.15
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.26
+        "color": "#8a6c56",
+        "roughness": 0.16
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "ceramic",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "fridge",
@@ -1019,30 +1201,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.24
+        "color": "#eeece7",
+        "roughness": 0.3
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.28
+        "color": "#d8c9ae",
+        "roughness": 0.32
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.32
+        "color": "#505458",
+        "roughness": 0.28
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.26
+        "color": "#7c604a",
+        "roughness": 0.3
       }
     ],
-    "generator": "interior-appliance",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "enamel",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "washer",
@@ -1074,30 +1262,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.24
+        "color": "#eeece7",
+        "roughness": 0.3
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.28
+        "color": "#d8c9ae",
+        "roughness": 0.32
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.32
+        "color": "#505458",
+        "roughness": 0.28
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.26
+        "color": "#7c604a",
+        "roughness": 0.3
       }
     ],
-    "generator": "interior-appliance",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "enamel",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "stove",
@@ -1129,30 +1323,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.24
+        "color": "#eeece7",
+        "roughness": 0.3
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.28
+        "color": "#d8c9ae",
+        "roughness": 0.32
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.32
+        "color": "#505458",
+        "roughness": 0.28
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.26
+        "color": "#7c604a",
+        "roughness": 0.3
       }
     ],
-    "generator": "interior-appliance",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "enamel",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "lamp",
@@ -1184,30 +1384,37 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#ece4d6",
+        "roughness": 0.95
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#d6c3a3",
+        "roughness": 0.95
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#5d6064",
+        "roughness": 0.95
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.5
+        "color": "#9a7b5e",
+        "roughness": 0.95
       }
     ],
-    "generator": "interior-lamp",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "linen",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    },
+    "repair_normalized_footprints": true
   },
   {
     "asset_id": "plant",
@@ -1239,31 +1446,37 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#b5b0a4",
-        "roughness": 0.72
+        "color": "#d6cdbf",
+        "roughness": 0.8
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.8
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#55595d",
+        "roughness": 0.78
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.5
+        "color": "#8a6a50",
+        "roughness": 0.8
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10",
-    "repair_normalized_footprints": true
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "repair_normalized_footprints": true,
+    "primary_material": "stoneware",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "rug",
@@ -1295,30 +1508,36 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#d8cdbb",
+        "roughness": 0.97
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.97
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#5d6064",
+        "roughness": 0.97
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.5
+        "color": "#8f7258",
+        "roughness": 0.97
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio-rug",
+    "style_revision": "studio-2026-10",
+    "primary_material": "rug",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py + blender_studio_rug.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "sofa-corner",
@@ -1351,29 +1570,35 @@
         "id": "original",
         "name": "Оригинальный",
         "color": "#819986",
-        "roughness": 0.72
+        "roughness": 0.95
       },
       {
         "id": "sand",
         "name": "Песочный",
         "color": "#c9b696",
-        "roughness": 0.78
+        "roughness": 0.95
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#5a5e62",
+        "roughness": 0.93
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
-        "roughness": 0.5
+        "color": "#8b6c50",
+        "roughness": 0.94
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "upholstery",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   },
   {
     "asset_id": "wall-shelf",
@@ -1405,29 +1630,35 @@
       {
         "id": "original",
         "name": "Оригинальный",
-        "color": "#cbb99e",
-        "roughness": 0.72
+        "color": "#c4a684",
+        "roughness": 0.58
       },
       {
         "id": "sand",
         "name": "Песочный",
-        "color": "#c9b696",
-        "roughness": 0.78
+        "color": "#dcc3a0",
+        "roughness": 0.62
       },
       {
         "id": "graphite",
         "name": "Графитовый",
-        "color": "#555b61",
-        "roughness": 0.67
+        "color": "#4e4741",
+        "roughness": 0.52
       },
       {
         "id": "walnut",
         "name": "Тёплый орех",
-        "color": "#927356",
+        "color": "#7a5236",
         "roughness": 0.5
       }
     ],
-    "generator": "interior",
-    "style_revision": "reference-interiors-2026-10"
+    "generator": "studio",
+    "style_revision": "studio-2026-10",
+    "primary_material": "oak",
+    "provenance": {
+      "geometry": "procedural, asset_factory/blender_studio.py",
+      "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+      "third_party_assets": []
+    }
   }
 ]

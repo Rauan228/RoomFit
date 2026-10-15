@@ -1,0 +1,75 @@
+{
+  "asset_id": "sofa-small",
+  "generation_version": "v1-a2eae7e97738",
+  "status": "approved",
+  "checks": {
+    "renderer_provenance": true,
+    "dimensions": true,
+    "pivot": true,
+    "silhouettes": true,
+    "variant_geometry": true,
+    "orientation_not_mirrored": true,
+    "material": true,
+    "rotation": true,
+    "geometry_budget": true,
+    "valid_footprints": true,
+    "structural_parts_connected": true
+  },
+  "dimension_error_mm": 4e-05,
+  "pivot_error_mm": 0.0,
+  "material_error": 0.0,
+  "coordinate_pass_max_error": 0.011411,
+  "triangles": 18416,
+  "glb_bytes": 959156,
+  "model_sha256": "ebe9dd247ab4b1db74648b3d57a35e0b5f24bc910b58bc34729c4505450e99ba",
+  "variants": [
+    {
+      "id": "original",
+      "silhouette_iou": 0.99715,
+      "transparent_background": true,
+      "geometry_mask_sha256": "650459090feb3499b3e2d58f313ec3c6810a432a4f16b142a4587d8383d6170e"
+    },
+    {
+      "id": "sand",
+      "silhouette_iou": 0.99715,
+      "transparent_background": true,
+      "geometry_mask_sha256": "650459090feb3499b3e2d58f313ec3c6810a432a4f16b142a4587d8383d6170e"
+    },
+    {
+      "id": "graphite",
+      "silhouette_iou": 0.99715,
+      "transparent_background": true,
+      "geometry_mask_sha256": "650459090feb3499b3e2d58f313ec3c6810a432a4f16b142a4587d8383d6170e"
+    },
+    {
+      "id": "walnut",
+      "silhouette_iou": 0.99715,
+      "transparent_background": true,
+      "geometry_mask_sha256": "650459090feb3499b3e2d58f313ec3c6810a432a4f16b142a4587d8383d6170e"
+    }
+  ],
+  "rotations": [
+    {
+      "angle": 0,
+      "max_error_mm": 0.0
+    },
+    {
+      "angle": 45,
+      "max_error_mm": 0.0
+    },
+    {
+      "angle": 90,
+      "max_error_mm": 0.0
+    },
+    {
+      "angle": 180,
+      "max_error_mm": 0.0
+    },
+    {
+      "angle": 270,
+      "max_error_mm": 0.0
+    }
+  ],
+  "renderer": "Blender orthographic / transparent / no ground shadow",
+  "blender_version": "4.5.14 LTS"
+}

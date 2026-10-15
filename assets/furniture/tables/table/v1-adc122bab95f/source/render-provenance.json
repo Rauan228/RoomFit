@@ -1,0 +1,12 @@
+{
+  "asset_id": "table",
+  "generation_version": "v1-adc122bab95f",
+  "files": {
+    "3d/model.glb": "97f8fa913526541463418f5b3a0c1467c87dd4a6baf79c791c384d417e228b27",
+    "validation/coordinates.png": "dc693829a10a1dfcbe92d754d47f62e28c48aa417ac24ff0403dc771c029e50e",
+    "2d/original/top_view_1024.png": "c5d6d662b3b82ae577f9f0a13c10275085f5768673c4570ff0cb9bbfe4e9593b",
+    "2d/sand/top_view_1024.png": "570fc23abef4cbd8aaf31bac7a234adcaa233b0c86d844d52afb5ff5bd73ab5c",
+    "2d/graphite/top_view_1024.png": "fbe06e1c1f6d9c570ddf2c23225e122df1e828896ed0d1e71683228757a26c06",
+    "2d/walnut/top_view_1024.png": "027d7e6668947d671753ffab219a068498e5489cde074f5f3ecd625a8029bfc4"
+  }
+}

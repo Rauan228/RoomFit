@@ -1,0 +1,69 @@
+{
+  "asset_id": "table",
+  "name": "Обеденный стол",
+  "category": "tables",
+  "catalog_category": "Столы",
+  "type": "table",
+  "dimensions": {
+    "width_mm": 1400,
+    "depth_mm": 800,
+    "height_mm": 750
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#c4a684",
+      "roughness": 0.58
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#dcc3a0",
+      "roughness": 0.62
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#4e4741",
+      "roughness": 0.52
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#7a5236",
+      "roughness": 0.5
+    }
+  ],
+  "generator": "studio",
+  "style_revision": "studio-2026-10",
+  "primary_material": "oak",
+  "provenance": {
+    "geometry": "procedural, asset_factory/blender_studio.py",
+    "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+    "third_party_assets": [],
+    "visual_references": {
+      "files": [
+        "photos/кухонный стол/image copy.png",
+        "photos/кухонный стол/image copy 2.png"
+      ],
+      "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+    }
+  },
+  "generation_version": "v1-adc122bab95f"
+}

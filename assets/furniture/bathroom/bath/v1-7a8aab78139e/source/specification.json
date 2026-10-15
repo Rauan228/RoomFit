@@ -1,0 +1,63 @@
+{
+  "asset_id": "bath",
+  "name": "Ванна",
+  "category": "bathroom",
+  "catalog_category": "Сантехника",
+  "type": "bath",
+  "dimensions": {
+    "width_mm": 1700,
+    "depth_mm": 750,
+    "height_mm": 600
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#eeece7",
+      "roughness": 0.3
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#d8c9ae",
+      "roughness": 0.32
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#505458",
+      "roughness": 0.28
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#7c604a",
+      "roughness": 0.3
+    }
+  ],
+  "generator": "studio",
+  "style_revision": "studio-2026-10",
+  "primary_material": "enamel",
+  "provenance": {
+    "geometry": "procedural, asset_factory/blender_studio.py",
+    "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+    "third_party_assets": []
+  },
+  "repair_normalized_footprints": true,
+  "generation_version": "v1-7a8aab78139e"
+}

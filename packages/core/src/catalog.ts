@@ -8,16 +8,16 @@ import {
 } from "./model";
 import { assetCatalogFields } from "./assets";
 const entries: [string, string, string, number, number, number][] = [
-  ["bed-double", "Кровать двуспальная", "Кровати", 1600, 2000, 600],
-  ["bed-single", "Кровать односпальная", "Кровати", 900, 2000, 600],
-  ["bed-kids", "Детская кровать", "Кровати", 800, 1600, 550],
+  ["bed-double", "Кровать двуспальная", "Кровати", 1760, 2180, 1100],
+  ["bed-single", "Кровать односпальная", "Кровати", 970, 2130, 860],
+  ["bed-kids", "Детская кровать", "Кровати", 850, 1650, 660],
   ["sofa", "Диван", "Диваны", 2200, 950, 850],
   ["sofa-small", "Компактный диван", "Диваны", 1600, 900, 800],
   ["armchair", "Кресло", "Кресла", 800, 800, 900],
   ["desk", "Рабочий стол", "Столы", 1200, 600, 750],
   ["table", "Обеденный стол", "Столы", 1400, 800, 750],
   ["coffee", "Журнальный стол", "Столы", 800, 550, 450],
-  ["chair", "Стул", "Стулья", 450, 500, 850],
+  ["chair", "Стул", "Стулья", 480, 560, 860],
   ["wardrobe", "Шкаф", "Шкафы", 1800, 600, 2200],
   ["dresser", "Комод", "Комоды", 1000, 450, 900],
   ["nightstand", "Тумба", "Тумбы", 500, 400, 500],
@@ -66,6 +66,10 @@ export const TEMPLATE_NAMES = [
   "Студия",
   "Небольшая квартира",
 ];
+// Templates place stock beds against the wall from their actual outer depth.
+const catalogWidth = (id: string) => CATALOG.find((c) => c.id === id)!.width;
+const bedAgainstWall = (id: string) =>
+  CATALOG.find((c) => c.id === id)!.depth / 2;
 export function createTemplate(name: string): ProjectDocument {
   if (name === "Небольшая квартира") {
     const doc = createDocument(name, 4000, 6400),
@@ -78,7 +82,7 @@ export function createTemplate(name: string): ProjectDocument {
     doc.variants[0].items = [
       ["sofa", 2000, 5400],
       ["coffee", 2000, 4200],
-      ["bed-double", 5900, 1000],
+      ["bed-double", 5900, bedAgainstWall("bed-double")],
       ["wardrobe", 5300, 2900],
       ["kitchen", 5600, 3500],
       ["table", 5900, 5100],
@@ -112,9 +116,19 @@ export function createTemplate(name: string): ProjectDocument {
   const items =
     name === "Спальня" || name === "Детская"
       ? [
-          [name === "Детская" ? "bed-kids" : "bed-double", 2000, 1000],
+          [
+            name === "Детская" ? "bed-kids" : "bed-double",
+            2000,
+            bedAgainstWall(name === "Детская" ? "bed-kids" : "bed-double"),
+          ],
           ["wardrobe", 900, 2900],
-          ["nightstand", 900, 250],
+          [
+            "nightstand",
+            2000 -
+              catalogWidth(name === "Детская" ? "bed-kids" : "bed-double") / 2 -
+              270,
+            250,
+          ],
         ]
       : name === "Кухня"
         ? [

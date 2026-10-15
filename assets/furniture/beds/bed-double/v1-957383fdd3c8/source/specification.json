@@ -1,0 +1,80 @@
+{
+  "asset_id": "bed-double",
+  "name": "Кровать двуспальная",
+  "category": "beds",
+  "catalog_category": "Кровати",
+  "type": "bed",
+  "dimensions": {
+    "width_mm": 1760,
+    "depth_mm": 2180,
+    "height_mm": 1100
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#b3ada6",
+      "roughness": 0.9
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#c9b696",
+      "roughness": 0.9
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#5b5f63",
+      "roughness": 0.88
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#8a6b52",
+      "roughness": 0.9
+    }
+  ],
+  "generator": "studio",
+  "style_revision": "studio-2026-10",
+  "primary_material": "velvet",
+  "provenance": {
+    "geometry": "procedural, asset_factory/blender_studio.py",
+    "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+    "third_party_assets": [],
+    "visual_references": {
+      "files": [
+        "photos/двухместные кровати/image copy.png",
+        "photos/двухместные кровати/image.png"
+      ],
+      "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+    }
+  },
+  "sleeping_area_mm": {
+    "width_mm": 1600,
+    "length_mm": 2000
+  },
+  "mattress_top_mm": 520,
+  "previous_catalog_dimensions_mm": {
+    "width_mm": 1600,
+    "depth_mm": 2000,
+    "height_mm": 600
+  },
+  "dimension_notes": "Наружные габариты мягкой рамы для матраса 160×200: боковины 75 мм, изголовье 110 мм, изножье 60 мм. Высота — изголовье 1100 мм, верх матраса 520 мм. Старая модель 1600×2000×600 описывала спальное место и была сплющена по высоте.",
+  "generation_version": "v1-957383fdd3c8"
+}

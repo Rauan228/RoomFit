@@ -1,0 +1,12 @@
+{
+  "asset_id": "sink",
+  "generation_version": "v1-f9f13e08e210",
+  "files": {
+    "3d/model.glb": "02f552324a1c5f7925a23530d3c94b0a50ee252ae7d1d3c982bc39f95902ac78",
+    "validation/coordinates.png": "8f38791c664a7284de3265fc9e21b5a73864c4cfd4f21cf3ea3f207266f714f0",
+    "2d/original/top_view_1024.png": "19bfa6563db90e85f33a3d4ef7d0c3b70d7f2cf93215ae5eff384b24e31d0c6f",
+    "2d/sand/top_view_1024.png": "b563fd4f6a59023479f6acd7e53b6d70efe5fefb59cd4a640105f0835a591df2",
+    "2d/graphite/top_view_1024.png": "e24af83bcef750c9350788587562622a75d680e8fa6bfd4bbe63fc442131d8e4",
+    "2d/walnut/top_view_1024.png": "a27487e0b9ab1d5e103fa5b829a75f164d8f48380794ce14abe11185038924cb"
+  }
+}

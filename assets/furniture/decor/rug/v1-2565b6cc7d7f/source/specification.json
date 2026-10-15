@@ -1,0 +1,62 @@
+{
+  "asset_id": "rug",
+  "name": "Ковёр",
+  "category": "decor",
+  "catalog_category": "Декор",
+  "type": "rug",
+  "dimensions": {
+    "width_mm": 2000,
+    "depth_mm": 1400,
+    "height_mm": 10
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#d8cdbb",
+      "roughness": 0.97
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#c9b696",
+      "roughness": 0.97
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#5d6064",
+      "roughness": 0.97
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#8f7258",
+      "roughness": 0.97
+    }
+  ],
+  "generator": "studio-rug",
+  "style_revision": "studio-2026-10",
+  "primary_material": "rug",
+  "provenance": {
+    "geometry": "procedural, asset_factory/blender_studio.py + blender_studio_rug.py",
+    "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+    "third_party_assets": []
+  },
+  "generation_version": "v1-2565b6cc7d7f"
+}

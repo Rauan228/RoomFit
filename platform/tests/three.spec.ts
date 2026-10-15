@@ -128,7 +128,7 @@ test("lazy 3D, ray selection, shared properties, Undo and persistence", async ({
     if (info.project.name === "mobile") await page.touchscreen.tap(x, y);
     else await page.mouse.click(x, y);
     await expect(page.getByLabel("Ширина, см", { exact: true })).toHaveValue(
-      "160",
+      String(CATALOG[0].width / 10),
     );
     await page.getByLabel("Ширина, см", { exact: true }).fill("180");
     await page.getByLabel("Ширина, см", { exact: true }).press("Tab");
@@ -136,7 +136,7 @@ test("lazy 3D, ray selection, shared properties, Undo and persistence", async ({
       await page.locator(".inspector .mobile-close").click();
     await page.getByTitle("Отменить (Ctrl+Z)").click();
     await expect(page.getByLabel("Ширина, см", { exact: true })).toHaveValue(
-      "160",
+      String(CATALOG[0].width / 10),
     );
     await page.getByTitle("Повторить (Ctrl+Shift+Z)").click();
     await expect(page.getByLabel("Ширина, см", { exact: true })).toHaveValue(
@@ -337,7 +337,7 @@ test("lost graphics context allows returning to the unchanged 2D project", async
     expect(
       (await (await page.request.get(`/api/projects/${project.id}`)).json())
         .document.variants[0].items[0].width,
-    ).toBe(1600);
+    ).toBe(CATALOG[0].width);
   } finally {
     await cleanup(page, password);
   }

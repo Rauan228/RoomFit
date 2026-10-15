@@ -1,0 +1,79 @@
+{
+  "asset_id": "bed-single",
+  "name": "Кровать односпальная",
+  "category": "beds",
+  "catalog_category": "Кровати",
+  "type": "bed",
+  "dimensions": {
+    "width_mm": 970,
+    "depth_mm": 2130,
+    "height_mm": 860
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#c4a684",
+      "roughness": 0.58
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#dcc3a0",
+      "roughness": 0.62
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#4e4741",
+      "roughness": 0.52
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#7a5236",
+      "roughness": 0.5
+    }
+  ],
+  "generator": "studio",
+  "style_revision": "studio-2026-10",
+  "primary_material": "oak",
+  "provenance": {
+    "geometry": "procedural, asset_factory/blender_studio.py",
+    "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+    "third_party_assets": [],
+    "visual_references": {
+      "files": [
+        "photos/одноместные кровати/image copy.png"
+      ],
+      "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+    }
+  },
+  "sleeping_area_mm": {
+    "width_mm": 900,
+    "length_mm": 2000
+  },
+  "mattress_top_mm": 495,
+  "previous_catalog_dimensions_mm": {
+    "width_mm": 900,
+    "depth_mm": 2000,
+    "height_mm": 600
+  },
+  "dimension_notes": "Наружные габариты рамы из массива для матраса 90×200: стойки 60 мм, царги 30 мм. Высота — стойки изголовья 860 мм, верх матраса 495 мм.",
+  "generation_version": "v1-6085a8b9546c"
+}

@@ -9,6 +9,10 @@ import { useThree } from "@react-three/fiber";
 import {
   BoxGeometry,
   CylinderGeometry,
+  Group,
+  Mesh as MeshClass,
+  type BufferGeometry,
+  type Object3D,
   LineBasicMaterial,
   MeshStandardMaterial,
   RepeatWrapping,
@@ -20,6 +24,7 @@ import {
   type Texture,
 } from "three";
 import { GLTFLoader, type GLTF } from "three/addons/loaders/GLTFLoader.js";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import type { Room } from "@roomfit/core";
 
 class SceneResources {
@@ -56,6 +61,7 @@ class SceneResources {
         new GLTFLoader().load(
           url,
           (value) => {
+            value.scene = mergeByMaterial(value.scene);
             entry.value = value;
             if (!this.alive) disposeModel(value);
             this.report();
@@ -80,6 +86,16 @@ class SceneResources {
     variant: { id: string; color: string; roughness: number },
     collision = false,
   ) {
+    // Wood grain and weave are viewed at grazing angles: filter them anisotropically.
+    for (const map of [
+      original.map,
+      original.normalMap,
+      original.roughnessMap,
+    ])
+      if (map && map.anisotropy < 4) {
+        map.anisotropy = 4;
+        map.needsUpdate = true;
+      }
     if (original.userData.slot !== "primary" && !collision) return original;
     const key = `asset:${url}:${original.uuid}:${variant.id}:${collision}`;
     if (!this.materials.has(key)) {
@@ -169,6 +185,52 @@ class SceneResources {
     this.lines.forEach((m) => m.dispose());
     this.textures.forEach((texture) => texture.dispose());
   }
+}
+/**
+ * Factory GLBs keep every constructive part as its own node (the validator reads
+ * per-part volumes). For rendering, parts sharing a material are merged once per
+ * loaded file: one draw call per material instead of one per cushion, seam or leg.
+ */
+function mergeByMaterial(root: Object3D): Group {
+  root.updateMatrixWorld(true);
+  const groups = new Map<Material, BufferGeometry[]>();
+  const kept: Mesh[] = [];
+  root.traverse((object) => {
+    const mesh = object as Mesh;
+    if (!mesh.isMesh) return;
+    if (Array.isArray(mesh.material)) {
+      kept.push(mesh);
+      return;
+    }
+    const geometry = mesh.geometry.clone();
+    geometry.applyMatrix4(mesh.matrixWorld);
+    const list = groups.get(mesh.material) ?? [];
+    list.push(geometry);
+    groups.set(mesh.material, list);
+  });
+  const merged = new Group();
+  merged.name = root.name;
+  groups.forEach((geometries, material) => {
+    const geometry =
+      geometries.length === 1 ? geometries[0] : mergeGeometries(geometries);
+    if (!geometry) {
+      // Incompatible attribute sets: keep those parts as separate meshes.
+      geometries.forEach((g) => merged.add(new MeshClass(g, material)));
+      return;
+    }
+    if (geometry !== geometries[0]) geometries.forEach((g) => g.dispose());
+    merged.add(new MeshClass(geometry, material));
+  });
+  kept.forEach((mesh) => {
+    const copy = mesh.clone();
+    mesh.matrixWorld.decompose(copy.position, copy.quaternion, copy.scale);
+    merged.add(copy);
+  });
+  root.traverse((object) => {
+    const mesh = object as Mesh;
+    if (mesh.isMesh && !kept.includes(mesh)) mesh.geometry.dispose();
+  });
+  return merged;
 }
 function disposeModel(model: GLTF) {
   const geometries = new Set<Mesh["geometry"]>(),

@@ -1,0 +1,12 @@
+{
+  "asset_id": "dresser",
+  "generation_version": "v1-c95351940727",
+  "files": {
+    "3d/model.glb": "fb290f69cbabe77f992b7dc7fbbd9bde4e1308c76632d42be9e105e72de98e5b",
+    "validation/coordinates.png": "8fa3cd272748b46f93bd72b0b4d05e7f00962c897a8b3a18ac8e6a57c9f92a5a",
+    "2d/original/top_view_1024.png": "ab9ec6be8c885edd51b031f67dcb991b5eb49bfe05706b093d5664b76c2243fe",
+    "2d/sand/top_view_1024.png": "e2824ed873c0b3668ad889a534776d39d6aae62912a98515c5748b08b03256c6",
+    "2d/graphite/top_view_1024.png": "0012e32c84ce1e1e9744426697baf9e2d8007ff61676bebaf077b9c4276a9fae",
+    "2d/walnut/top_view_1024.png": "633197b423d182641d154488f8735f6ba7faf79dbe808fb891158abcd3016df9"
+  }
+}

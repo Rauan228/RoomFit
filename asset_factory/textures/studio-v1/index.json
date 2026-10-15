@@ -1,0 +1,71 @@
+{
+  "generator": "asset_factory/studio_textures.py",
+  "license": "CC0-1.0 (original procedural work by RoomFit Asset Factory)",
+  "sets": {
+    "oak": {
+      "albedo": "oak_albedo.jpg",
+      "normal": "oak_normal.jpg",
+      "roughness": "oak_roughness.jpg"
+    },
+    "endgrain": {
+      "albedo": "endgrain_albedo.jpg",
+      "normal": "endgrain_normal.jpg",
+      "roughness": "endgrain_roughness.jpg"
+    },
+    "upholstery": {
+      "albedo": "upholstery_albedo.jpg",
+      "normal": "upholstery_normal.jpg",
+      "roughness": "upholstery_roughness.jpg"
+    },
+    "velvet": {
+      "albedo": "velvet_albedo.jpg",
+      "normal": "velvet_normal.jpg",
+      "roughness": "velvet_roughness.jpg"
+    },
+    "linen": {
+      "albedo": "linen_albedo.jpg",
+      "normal": "linen_normal.jpg",
+      "roughness": "linen_roughness.jpg"
+    },
+    "knit": {
+      "albedo": "knit_albedo.jpg",
+      "normal": "knit_normal.jpg",
+      "roughness": "knit_roughness.jpg"
+    },
+    "rug": {
+      "albedo": "rug_albedo.jpg",
+      "normal": "rug_normal.jpg",
+      "roughness": "rug_roughness.jpg"
+    },
+    "stone": {
+      "albedo": "stone_albedo.jpg",
+      "normal": "stone_normal.jpg",
+      "roughness": "stone_roughness.jpg"
+    },
+    "stoneware": {
+      "albedo": "stoneware_albedo.jpg",
+      "normal": "stoneware_normal.jpg",
+      "roughness": "stoneware_roughness.jpg"
+    },
+    "soil": {
+      "albedo": "soil_albedo.jpg",
+      "normal": "soil_normal.jpg",
+      "roughness": "soil_roughness.jpg"
+    },
+    "leaf": {
+      "albedo": "leaf_albedo.jpg",
+      "normal": "leaf_normal.jpg",
+      "roughness": "leaf_roughness.jpg"
+    },
+    "powder": {
+      "normal": "powder_normal.jpg"
+    },
+    "paint": {
+      "normal": "paint_normal.jpg"
+    },
+    "brushed": {
+      "normal": "brushed_normal.jpg",
+      "roughness": "brushed_roughness.jpg"
+    }
+  }
+}

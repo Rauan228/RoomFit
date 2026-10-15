@@ -1,0 +1,63 @@
+{
+  "asset_id": "lamp",
+  "name": "Торшер",
+  "category": "lighting",
+  "catalog_category": "Освещение",
+  "type": "lamp",
+  "dimensions": {
+    "width_mm": 400,
+    "depth_mm": 400,
+    "height_mm": 1700
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#ece4d6",
+      "roughness": 0.95
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#d6c3a3",
+      "roughness": 0.95
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#5d6064",
+      "roughness": 0.95
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#9a7b5e",
+      "roughness": 0.95
+    }
+  ],
+  "generator": "studio",
+  "style_revision": "studio-2026-10",
+  "primary_material": "linen",
+  "provenance": {
+    "geometry": "procedural, asset_factory/blender_studio.py",
+    "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+    "third_party_assets": []
+  },
+  "repair_normalized_footprints": true,
+  "generation_version": "v1-9265186fe8fc"
+}

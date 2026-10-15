@@ -208,8 +208,16 @@ export function upgradeFurnitureAsset(item: Furniture): Furniture | undefined {
         );
       return distance(a.color) - distance(b.color);
     })[0];
+  // A model whose catalogue height changed meaning (e.g. a bed now measured to the
+  // top of its headboard) would be squashed if an untouched default height were kept.
+  // Only the exact old catalogue default is adapted; a height the user set is kept.
+  const defaultHeight =
+    previous &&
+    previous.dimensions.height_mm !== latest.dimensions.height_mm &&
+    Math.abs(item.height - previous.dimensions.height_mm) < 0.5;
   return {
     ...item,
+    height: defaultHeight ? latest.dimensions.height_mm : item.height,
     assetId: latest.asset_id,
     assetVersion: latest.generation_version,
     materialVariant: finish.id,

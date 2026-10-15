@@ -1,0 +1,12 @@
+{
+  "asset_id": "wall-shelf",
+  "generation_version": "v1-ad2df8eb6699",
+  "files": {
+    "3d/model.glb": "e4ff781ebf8f7c483cfd0456d64f63742b54803a2f560796dcb4bc5fc959ae76",
+    "validation/coordinates.png": "257070f1ccc0d7179a547e6d8617c994b78c88c8ea12b292ed879c8491155a1d",
+    "2d/original/top_view_1024.png": "5ea12130bef0dcb7711c4da86712deccd01d73efa8ec2ac0f1217f469e77801c",
+    "2d/sand/top_view_1024.png": "3bc73da4039e1c3a40e4c576ca78f01cf0d2861c1ef6ab987efce61496399a3a",
+    "2d/graphite/top_view_1024.png": "795096e61f0a0d2c3f9a19af46a54452552befe53ad34952d2a74cff3c05fba9",
+    "2d/walnut/top_view_1024.png": "2c9090de8030f147cb510d54004cbd4b2a684bed0bc9bf49458fef9c695803eb"
+  }
+}

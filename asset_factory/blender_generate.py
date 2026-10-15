@@ -44,6 +44,7 @@ def material(name, color, roughness=.7, metalness=0, weave=False):
 
 OBJECTS = []
 MATERIALS = {}
+STUDIO = False  # set by blender_studio.py: materials are created lazily by that generator
 
 
 def finish(obj, name, mat, bevel=0, collision=True, feature=None):
@@ -264,7 +265,7 @@ def main():
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
     global MATERIALS
-    MATERIALS = {
+    MATERIALS = {} if STUDIO else {
         "primary": material("primary", spec["material_variants"][0]["color"], weave="wood" if spec["type"] in ("desk", "table", "coffee", "wardrobe", "dresser", "nightstand", "shelf", "kitchen", "wall-shelf") else spec["type"] in ("sofa", "sofa-corner", "bed", "armchair", "chair", "rug")),
         "wood": material("wood", "#a38360", .52, weave="wood"),
         "linen": material("linen", "#eee8dc", .82, weave=True),
@@ -296,6 +297,15 @@ def main():
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
     scene.cycles.device = "CPU"
+    device = args[args.index("--cycles-device") + 1] if "--cycles-device" in args else "CPU"
+    if device != "CPU":
+        # GPU rendering changes only noise, never geometry, masks or the exported GLB.
+        prefs = bpy.context.preferences.addons["cycles"].preferences
+        prefs.compute_device_type = device
+        prefs.get_devices()
+        for item in prefs.devices:
+            item.use = item.type == device
+        scene.cycles.device = "GPU"
     scene.cycles.samples = 24
     scene.cycles.use_denoising = True
     scene.cycles.seed = 17
@@ -329,16 +339,19 @@ def main():
     camera.rotation_euler = (0, 0, 0)
     scene.camera = camera
     render_info = {}
-    primary = MATERIALS["primary"].node_tree.nodes.get("Principled BSDF")
     def primary_variant(variant):
-        primary.inputs["Base Color"].default_value = rgb(variant["color"])
-        primary.inputs["Roughness"].default_value = variant["roughness"]
-        tint = MATERIALS["primary"].node_tree.nodes.get("RoomFit tint")
-        if tint:
-            tint.inputs[6].default_value = rgb(variant["color"])
-        roughness = MATERIALS["primary"].node_tree.nodes.get("RoomFit roughness")
-        if roughness:
-            roughness.inputs[1].default_value = variant["roughness"]
+        # Every material in the primary slot (e.g. face and end grain) gets the finish.
+        for mat in [m for m in bpy.data.materials if m.get("slot") == "primary"]:
+            bsdf = mat.node_tree.nodes.get("Principled BSDF")
+            bsdf.inputs["Base Color"].default_value = rgb(variant["color"])
+            bsdf.inputs["Roughness"].default_value = variant["roughness"]
+            mat.diffuse_color = rgb(variant["color"])
+            tint = mat.node_tree.nodes.get("RoomFit tint")
+            if tint:
+                tint.inputs[6].default_value = rgb(variant["color"])
+            roughness = mat.node_tree.nodes.get("RoomFit roughness")
+            if roughness:
+                roughness.inputs[1].default_value = variant["roughness"]
     for variant in spec["material_variants"]:
         folder = output / "2d" / variant["id"]
         folder.mkdir(parents=True, exist_ok=True)
@@ -386,11 +399,23 @@ def main():
     scene.cycles.samples = 24
     scene.cycles.use_denoising = True
     primary_variant(spec["material_variants"][0])
-    for view, location in {"front": (0, -max_dim * 3, target.z * .55), "side": (max_dim * 3, 0, target.z * .55), "isometric": (max_dim * 2.4, -max_dim * 2.8, max_dim * 2)}.items():
+    if STUDIO:
+        # Review previews only: a shadow-catcher floor grounds the object. It is created
+        # after the top views and the coordinate pass and is never exported.
+        bpy.ops.mesh.primitive_plane_add(size=max_dim * 12, location=(0, 0, 0))
+        catcher = bpy.context.object
+        catcher.name = "Preview shadow catcher"
+        catcher.is_shadow_catcher = True
+        scene.cycles.samples = 64
+    views = {"front": (0, -max_dim * 3, target.z * .55), "side": (max_dim * 3, 0, target.z * .55), "isometric": (max_dim * 2.4, -max_dim * 2.8, max_dim * 2)}
+    if STUDIO:
+        views.update({"back": (-max_dim * 1.2, max_dim * 3, target.z * .75), "closeup": (max_dim * .9, -max_dim * 1.15, target.z * .9 + max_dim * .35)})
+    for view, location in views.items():
         camera.location = location
-        camera.rotation_euler = (Vector((0, 0, target.z / 2)) - camera.location).to_track_quat("-Z", "Y").to_euler()
-        camera.data.ortho_scale = max_dim * 1.55
-        scene.render.resolution_x = scene.render.resolution_y = 512
+        aim = Vector((0, 0, target.z / 2)) if view != "closeup" else Vector((target.x * .12, -target.y * .1, target.z * .62))
+        camera.rotation_euler = (aim - camera.location).to_track_quat("-Z", "Y").to_euler()
+        camera.data.ortho_scale = max_dim * (1.55 if view != "closeup" else .62)
+        scene.render.resolution_x = scene.render.resolution_y = 512 if view != "closeup" else 768
         scene.render.filepath = str(output / "previews" / (view + ".png"))
         bpy.ops.render.render(write_still=True)
     bpy.ops.object.select_all(action="DESELECT")
@@ -398,7 +423,7 @@ def main():
     for obj in OBJECTS:
         obj.select_set(True)
     (output / "3d").mkdir(parents=True, exist_ok=True)
-    bpy.ops.export_scene.gltf(filepath=str(output / "3d" / "model.glb"), export_format="GLB", use_selection=True, export_yup=True, export_extras=True, export_materials="EXPORT", export_texcoords=True, export_normals=True, export_cameras=False, export_lights=False)
+    bpy.ops.export_scene.gltf(filepath=str(output / "3d" / "model.glb"), export_format="GLB", use_selection=True, export_yup=True, export_extras=True, export_materials="EXPORT", export_texcoords=True, export_normals=True, export_cameras=False, export_lights=False, **({"export_image_format": "JPEG", "export_jpeg_quality": 88, "export_image_quality": 88} if STUDIO else {}))
     bpy.ops.wm.save_as_mainfile(filepath=str(output / "source" / "model.blend"), compress=True)
     print("ROOMFIT_ASSET_GENERATED=" + spec["asset_id"])
 

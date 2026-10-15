@@ -23,6 +23,7 @@ import { Logo, Field, ErrorBox, Loading, Modal } from "./components";
 import { Dashboard } from "./Dashboard";
 import { EditorPage, SharedPage } from "./Editor";
 import { Admin } from "./Admin";
+import { FurnitureCatalog, FurnitureDetail } from "./FurnitureCatalog";
 import {
   initializeAnalytics,
   starterQuery,
@@ -88,6 +89,8 @@ export function App() {
             element={user ? <EditorPage /> : <Navigate to="/login" replace />}
           />
           <Route path="/share/:token" element={<SharedPage />} />
+          <Route path="/furniture" element={<FurnitureCatalog />} />
+          <Route path="/furniture/:id" element={<FurnitureDetail />} />
           <Route
             path="/settings"
             element={user ? <Settings /> : <Navigate to="/login" replace />}

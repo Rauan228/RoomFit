@@ -97,6 +97,31 @@ describe("Synchronized asset instances", () => {
       assetById("sofa")!.generation_version,
     );
   });
+  it("adapts only an untouched catalogue height when a model's overall height changed", () => {
+    const latest = assetById("bed-double")!;
+    const previous = Object.values(ASSET_VERSIONS).find(
+      (a) =>
+        a.asset_id === "bed-double" &&
+        a.dimensions.height_mm !== latest.dimensions.height_mm,
+    );
+    if (!previous) return;
+    const saved = {
+      ...item("bed-double"),
+      assetVersion: previous.generation_version,
+      contour: previous.footprints.collision[0].outer,
+      width: previous.dimensions.width_mm,
+      depth: previous.dimensions.depth_mm,
+      height: previous.dimensions.height_mm,
+    };
+    expect(upgradeFurnitureAsset(saved)).toMatchObject({
+      width: previous.dimensions.width_mm,
+      depth: previous.dimensions.depth_mm,
+      height: latest.dimensions.height_mm,
+    });
+    expect(
+      upgradeFurnitureAsset({ ...saved, height: 640 })?.height,
+    ).toBe(640);
+  });
   it("counts an overlapping curved asset once in occupied area", () => {
     const doc = createDocument(),
       floor = doc.floors[0];

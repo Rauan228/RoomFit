@@ -1,0 +1,79 @@
+{
+  "asset_id": "bed-kids",
+  "name": "Детская кровать",
+  "category": "beds",
+  "catalog_category": "Кровати",
+  "type": "bed",
+  "dimensions": {
+    "width_mm": 850,
+    "depth_mm": 1650,
+    "height_mm": 660
+  },
+  "orientation": {
+    "front": "+Z",
+    "back": "-Z",
+    "left": "-X",
+    "right": "+X",
+    "up": "+Y",
+    "pivot": "bottom_center",
+    "units": "meters"
+  },
+  "resizing": "scalable",
+  "installation": "floor",
+  "elevation_mm": 0,
+  "clearance_mm": 0,
+  "license": "CC0-1.0",
+  "author": "RoomFit Asset Factory",
+  "material_variants": [
+    {
+      "id": "original",
+      "name": "Оригинальный",
+      "color": "#ece7df",
+      "roughness": 0.5
+    },
+    {
+      "id": "sand",
+      "name": "Песочный",
+      "color": "#d9c8aa",
+      "roughness": 0.52
+    },
+    {
+      "id": "graphite",
+      "name": "Графитовый",
+      "color": "#5c6166",
+      "roughness": 0.48
+    },
+    {
+      "id": "walnut",
+      "name": "Тёплый орех",
+      "color": "#8f6e52",
+      "roughness": 0.5
+    }
+  ],
+  "generator": "studio",
+  "style_revision": "studio-2026-10",
+  "primary_material": "paint",
+  "provenance": {
+    "geometry": "procedural, asset_factory/blender_studio.py",
+    "textures": "procedural, asset_factory/studio_textures.py (asset_factory/textures/studio-v1)",
+    "third_party_assets": [],
+    "visual_references": {
+      "files": [
+        "photos/одноместные кровати/image copy 4.png"
+      ],
+      "use": "форма и материалы; фотографии не входят в ассет и не публикуются"
+    }
+  },
+  "sleeping_area_mm": {
+    "width_mm": 800,
+    "length_mm": 1600
+  },
+  "mattress_top_mm": 370,
+  "previous_catalog_dimensions_mm": {
+    "width_mm": 800,
+    "depth_mm": 1600,
+    "height_mm": 550
+  },
+  "dimension_notes": "Наружные габариты кровати с бортиками для матраса 80×160: панели 20 мм. Высота — бортики и спинки 660 мм, верх матраса 370 мм.",
+  "generation_version": "v1-63889d119cdc"
+}
