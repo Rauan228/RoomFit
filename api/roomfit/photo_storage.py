@@ -16,7 +16,12 @@ MIME = {"image/jpeg": "JPEG", "image/png": "PNG", "image/webp": "WEBP"}
 def root():
     path = Path(os.getenv("ROOMFIT_PHOTO_STORAGE", "data/photo-furniture")).resolve()
     path.mkdir(parents=True, exist_ok=True)
-    (path / ".roomfit-private-storage").touch(exist_ok=True)
+    marker=path / ".roomfit-private-storage"
+    if not marker.exists():
+        try:
+            marker.touch(mode=0o600,exist_ok=False)
+        except FileExistsError:
+            pass
     return path
 
 
